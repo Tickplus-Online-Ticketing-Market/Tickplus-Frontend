@@ -1,4 +1,4 @@
-import "../../Assets/HomePage/css/App.css";
+import "../../Assets/HomePage/css/Homepage.css";
 import Home from "./Home";
 import About from "./About";
 import Work from "./Work";

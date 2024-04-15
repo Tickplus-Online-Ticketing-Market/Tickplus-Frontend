@@ -14,7 +14,7 @@ const Navbar = () => {
         <Link to="#">Events</Link>
         <Link to="#">Tickets</Link>
         <Link to="#">Community</Link>
-        <Link to="#">Secondary Market</Link>
+        <Link to="/secondary-market">Secondary Market</Link>
         <Link to="#">Sponsors</Link>
         <Link to="#">
           <button className="primary-button">Sign In</button>
