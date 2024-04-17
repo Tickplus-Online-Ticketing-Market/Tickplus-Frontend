@@ -28,7 +28,7 @@ body {
 }
 
 body {
-  background-color: var(--secondary);
+  background-color: var(--background);
 }
 
 nav {
@@ -96,6 +96,7 @@ nav {
   color: var(--accent);
   line-height: 5rem;
   max-width: 600px;
+  font-weight: 600;
 }
 .primary-text {
   font-size: clamp(1rem, 3vw, 1.5rem);

@@ -8,9 +8,9 @@ export default function Layout() {
     <div className="flex flex-row bg-neutral-100 h-screen w-screen overflow-hidden">
       <Sidebar />
 
-      <div className="flex-1 h-screen w-4/5">
+      <div className="flex-1 h-screen w-4/5 overflow-auto">
         <Header />
-        <div className="p-0">{<Outlet />}</div>
+        <div className="p-0  overflow-hidden">{<Outlet />}</div>
       </div>
     </div>
   );
