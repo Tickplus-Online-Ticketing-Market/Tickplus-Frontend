@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import moment from "moment";
 
 import { HiSearch } from "react-icons/hi";
-import { MdAddCircle, MdAttachMoney, MdDateRange } from "react-icons/md";
+import { MdAddCircle } from "react-icons/md";
 import { FaEye, FaTrashAlt } from "react-icons/fa";
 import { MdEditSquare } from "react-icons/md";
-import { FaTicket } from "react-icons/fa6";
 
 import currentLoggedinUser from "./lib/helpers/getCurrentLoggedinUser";
-import ticketDesign from "../../Assets/SecondaryMarket/img/Ticket Design Size Example.png";
+import { CreateModal } from "./CreateAuctionListingModal";
+import { RetriveMyAuctionListingsData } from "./RetriveMyAuctionListingsData";
 
 export default function MyAuctionListings() {
   const [showModal, setShowModal] = useState(false);
@@ -49,28 +48,6 @@ function DataValidation({ data }) {
     );
     return <TableDraw tableData={filteredData} />;
   }
-}
-
-function RetriveMyAuctionListingsData() {
-  const [auctionListings, setAuctionListings] = useState(null);
-
-  useEffect(() => {
-    fetchAuctionListings();
-  }, []);
-
-  const fetchAuctionListings = async () => {
-    try {
-      const res = await axios.get(
-        "http://localhost:3030/secondary-market/my-auction-listings"
-      );
-      setAuctionListings(res.data.auctionListings);
-    } catch (error) {
-      console.error("Error fetching Auction Listings:", error);
-      setAuctionListings([]);
-    }
-  };
-
-  return auctionListings || []; // Return an empty array if data is not yet fetched
 }
 
 function TableDraw({ tableData }) {
@@ -167,137 +144,3 @@ function TableRowDraw({ item }) {
     </tr>
   );
 }
-
-const CreateModal = ({ visible, onClose }) => {
-  if (!visible) return null;
-
-  const handleOnClose = (e) => {
-    if (e.target.id === "container") onClose();
-  };
-
-  return (
-    <div
-      id="container"
-      onClick={handleOnClose}
-      className="fixed inset-0 bg-text bg-opacity-30 backdrop-blur-sm flex justify-center items-center"
-    >
-      <div className="bg-white p-0 rounded-2xl flex flex-row max-w-[70%] h-[80%] overflow-hidden">
-        <div class=" flex-[0.9] flex-col gap-4 bg-accent p-6 rounded-2xl">
-          <div class="relative overflow-hidden bg-cover bg-no-repeat aspect-video">
-            <img class="rounded-lg" src={ticketDesign} alt="" />
-          </div>
-          <div className=" my-6 flex-col items-center justify-center">
-            <h3 className="mb-2 text-lg font-bold leading-tight text-white text-center">
-              Extreme Music event
-            </h3>
-            <p className="mb-2 text-base text-neutral-600 dark:text-neutral-200 text-justify text-secondary">
-              Some quick example text.
-            </p>
-          </div>
-        </div>
-        <div class="w-fit flex-1 p-10">
-          <form class=" items-center align-middle w-fit">
-            <input
-              type="hidden"
-              id="spectatorId"
-              name="spectatorId"
-              value={currentLoggedinUser.currentUserRoleId}
-            />
-            <input
-              type="hidden"
-              id="auctionStatus"
-              name="auctionStatus"
-              value="Active"
-            />
-            <input
-              type="hidden"
-              id="startDate"
-              name="startDate"
-              value={new Date().toISOString()}
-            />
-
-            <div className=" bg-background px-4 flex flex-row justify-start items-center border-[2.4px] border-primary rounded-full gap-2 text-primary">
-              <span className="text-xl">{<HiSearch />}</span>
-              <input
-                type="text"
-                placeholder="Search tickets by Ticket Number ..."
-                className=" text-start bg-background focus:outline-none active:outline-none h-8 w-96 text-text placeholder-primary border-none bg-none pb-0.5 italic"
-              />
-            </div>
-            <div class="grid grid-cols-3 gap-y-10 my-20 justify-around">
-              <div>
-                <h5 className=" font-medium leading-tight text-text py-4">
-                  Ticket Number
-                </h5>
-              </div>
-              <div className="col-span-2 bg-background px-4 flex flex-row justify-start items-center border-[2.4px] border-primary rounded-full gap-2 text-primary">
-                <span className="text-xl">{<FaTicket />}</span>
-                <input
-                  type="text"
-                  required
-                  placeholder="Ticket Number"
-                  className=" text-start bg-background focus:outline-none active:outline-none h-8 w-96 text-text placeholder-primary border-none bg-none pb-0.5"
-                />
-              </div>
-
-              <div>
-                <h5 className=" font-medium leading-tight text-text py-4">
-                  Starting Price
-                </h5>
-              </div>
-              <div className="col-span-2 bg-background px-4 flex flex-row justify-start items-center border-[2.4px] border-primary rounded-full gap-2 text-primary">
-                <span className="text-xl">{<MdAttachMoney />}</span>
-                <input
-                  type="text"
-                  required
-                  placeholder="Starting Price"
-                  className=" text-start bg-background focus:outline-none active:outline-none h-8 w-96 text-text placeholder-primary border-none bg-none pb-0.5"
-                />
-              </div>
-
-              <div>
-                <h5 className=" font-medium leading-tight text-text py-4">
-                  Auction Duration
-                </h5>
-              </div>
-              <div className="col-span-2 bg-background px-4 flex flex-row justify-start items-center border-[2.4px] border-primary rounded-full gap-2 text-primary">
-                <span className="text-xl">{<MdDateRange />}</span>
-                <select
-                  type="select"
-                  required
-                  placeholder="Auction Duration"
-                  className=" text-start bg-background focus:outline-none active:outline-none h-8 w-96 text-text placeholder-primary border-none bg-none pb-0.5"
-                >
-                  <option value={2}>2 days</option>
-                  <option value={3}>3 days</option>
-                  <option value={7}>7 days</option>
-                  <option value={14}>14 days</option>
-                  <option value={21}>21 days</option>
-                  <option value={30}>30 days</option>
-                </select>
-              </div>
-
-              <div className="col-span-2 max-h-6">
-                <button
-                  type="submit"
-                  class="text-white bg-primary hover:bg-background hover:text-primary border-primary border-[2.4px] focus:outline-none font-medium rounded-full px-10 py-2 text-center inline-flex items-center"
-                >
-                  Publish Listing
-                </button>
-              </div>
-              <div className="max-h-6">
-                <button
-                  type="button"
-                  class="hover:text-white hover:bg-accent bg-background text-accent border-accent border-[2.4px] focus:outline-none font-medium rounded-full px-10 py-2 text-center inline-flex items-center"
-                  onClick={handleOnClose}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
-};
