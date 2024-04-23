@@ -1,8 +1,8 @@
 import React from "react";
 import Layout from "../Components/SecondaryMarket/shared/Layout";
-import Dashboard from "../Components/SecondaryMarket/Dashboard";
+import Dashboard from "../Components/SecondaryMarket/Dashboard/Dashboard";
 import MyBids from "../Components/SecondaryMarket/MyBids";
-import MyAuctionListings from "../Components/SecondaryMarket/MyAuctionListings";
+import MyAuctionListings from "../Components/SecondaryMarket/MyAuctionListings/MyAuctionListings";
 import TransactionHistory from "../Components/SecondaryMarket/TransactionHistory";
 
 const secondaryMarketRoutes = [

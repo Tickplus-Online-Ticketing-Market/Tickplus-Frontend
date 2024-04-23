@@ -4,7 +4,7 @@ import DashboardTicketCarousel from "./DashboardTicketCarousel";
 import { MdAddCircle } from "react-icons/md";
 import { HiSearch } from "react-icons/hi";
 
-import TableDraw from "./shared/TableDraw";
+import TableDraw from "../shared/TableDraw";
 
 export default function Dashboard() {
   return (

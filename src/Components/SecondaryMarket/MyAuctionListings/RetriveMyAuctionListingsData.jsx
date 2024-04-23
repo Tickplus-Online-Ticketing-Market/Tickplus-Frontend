@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export function RetriveMyAuctionListingsData() {
+export function RetriveMyAuctionListingsData(spectatorId) {
   const [auctionListings, setAuctionListings] = useState(null);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ export function RetriveMyAuctionListingsData() {
   const fetchAuctionListings = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3030/secondary-market/my-auction-listings"
+        `http://localhost:3030/secondary-market/my-auction-listings/my/${spectatorId}`
       );
       setAuctionListings(res.data.auctionListings);
     } catch (error) {

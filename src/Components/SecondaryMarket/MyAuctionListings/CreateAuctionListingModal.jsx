@@ -3,10 +3,11 @@ import axios from "axios";
 import { HiSearch } from "react-icons/hi";
 import { MdAttachMoney, MdDateRange } from "react-icons/md";
 import { FaTicket } from "react-icons/fa6";
-import currentLoggedinUser from "./lib/helpers/getCurrentLoggedinUser";
-import ticketDesign from "../../Assets/SecondaryMarket/img/Ticket Design Size Example.png";
+import { toast } from "react-toastify";
+import currentLoggedinUser from "../lib/helpers/getCurrentLoggedinUser";
+import ticketDesign from "../../../Assets/SecondaryMarket/img/Ticket Design Size Example.png";
 
-export function CreateModal({ visible, onClose }) {
+export function CreateAuctionModal({ visible, onClose }) {
   if (!visible) return null;
 
   const handleOnClose = (e) => {
@@ -52,10 +53,11 @@ export function CreateModal({ visible, onClose }) {
         auctionStatus: "Active",
       });
 
+      toast.success("Auction Listing Created");
+
       onClose();
     } catch (error) {
-      console.error("Error creating auction listing:", error);
-      // Handle error, show error message to user
+      toast.error("Auction Listing Not Created");
     }
   };
 

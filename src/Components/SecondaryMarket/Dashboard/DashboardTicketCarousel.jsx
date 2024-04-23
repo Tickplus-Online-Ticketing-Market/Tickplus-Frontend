@@ -1,7 +1,7 @@
-import React from 'react'
-import Carousel from 'react-multi-carousel'
-import 'react-multi-carousel/lib/styles.css'
-import TicketCard from './shared/TicketCard'
+import React from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import TicketCard from "../shared/TicketCard";
 
 export default function Products() {
   const responsive = {
@@ -29,7 +29,7 @@ export default function Products() {
       items: 3,
       partialVisibilityGutter: 30,
     },
-  }
+  };
   return (
     <div className="">
       <Carousel
@@ -78,5 +78,5 @@ export default function Products() {
         </div>
       </Carousel>
     </div>
-  )
+  );
 }
