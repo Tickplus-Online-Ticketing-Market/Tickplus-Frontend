@@ -3,23 +3,38 @@ import moment from "moment";
 import { FaEye, FaTrashAlt } from "react-icons/fa";
 import { MdEditSquare } from "react-icons/md";
 import { DeleteAuctionModal } from "./DeleteAuctionListingModal";
+import { UpdateAuctionModal } from "./UpdateAuctionListingModal";
+import { ViewAuctionModal } from "./ViewAuctionListingModal";
 
 export function TableDraw({ tableData }) {
+  const [showViewModal, setShowViewModal] = useState(false);
+  const [showUpdateModal, setShowUpdateeModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [auctionID, setauctionID] = useState(false);
+  const [auctionID, setauctionID] = useState("");
+
+  const handleView = (id) => {
+    setauctionID(id);
+    setShowViewModal(true);
+  };
+
+  const handleUpdate = (id) => {
+    setauctionID(id);
+    setShowUpdateeModal(true);
+  };
 
   const handleDelete = (id) => {
-    setShowDeleteModal(true);
     setauctionID(id);
+    setShowDeleteModal(true);
   };
 
   const handleOnClose = () => {
+    setShowViewModal(false);
+    setShowUpdateeModal(false);
     setShowDeleteModal(false);
     setauctionID("");
   };
 
   const TableRowDraw = ({ item }) => {
-    const [showModal, setShowModal] = useState(false);
     const rowDataStyles =
       "inline-flex items-center gap-1 text-xs font-semibold text-text text-center";
     return (
@@ -46,10 +61,13 @@ export function TableDraw({ tableData }) {
         </td>
         <td className="px-6 py-4">
           <div className="flex justify-end gap-4 text-primary content-baseline">
-            <button className="text-[1.55rem]" x-data="{ tooltip: 'View' }">
+            <button
+              className="text-[1.55rem]"
+              onClick={() => handleView(item._id)}
+            >
               {<FaEye />}
             </button>
-            <button className="text-2xl" x-data="{ tooltip: 'Edit' }">
+            <button className="text-2xl" onClick={() => handleUpdate(item._id)}>
               {<MdEditSquare />}
             </button>
             <button
@@ -118,6 +136,16 @@ export function TableDraw({ tableData }) {
           ))}
         </tbody>
       </table>
+      <ViewAuctionModal
+        auctionID={auctionID}
+        onClose={() => handleOnClose()}
+        visible={showViewModal}
+      />
+      <UpdateAuctionModal
+        auctionID={auctionID}
+        onClose={() => handleOnClose()}
+        visible={showUpdateModal}
+      />
       <DeleteAuctionModal
         auctionID={auctionID}
         onClose={() => handleOnClose()}

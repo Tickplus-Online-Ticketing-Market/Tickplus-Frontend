@@ -9,6 +9,7 @@ export function DeleteAuctionModal({ visible, onClose, auctionID }) {
 
   const handleOnClose = (e) => {
     if (e.target.id === "container") onClose();
+    if (e.target.id === "cancel-btn") onClose();
   };
 
   const deleteAuctionListing = async (e) => {
@@ -53,6 +54,7 @@ export function DeleteAuctionModal({ visible, onClose, auctionID }) {
           <div className=" mx-2">
             <button
               type="button"
+              id="cancel-btn"
               className="hover:text-white hover:bg-accent bg-background text-accent border-accent border-[2.4px] focus:outline-none font-medium rounded-full px-10 py-2 text-center inline-flex items-center"
               onClick={handleOnClose}
             >

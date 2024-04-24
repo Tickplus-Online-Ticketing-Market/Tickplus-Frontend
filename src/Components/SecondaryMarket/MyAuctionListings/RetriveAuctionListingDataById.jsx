@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
 import axios from "axios";
+import { toast } from "react-toastify";
 
-export function RetriveMyAuctionListingsData(spectatorId) {
+export function RetriveAuctionListingsDataById(auctionID) {
   const [auctionListings, setAuctionListings] = useState(null);
 
   useEffect(() => {
@@ -12,9 +12,9 @@ export function RetriveMyAuctionListingsData(spectatorId) {
   const fetchAuctionListings = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3030/secondary-market/my-auction-listings/my/${spectatorId}`
+        `http://localhost:3030/secondary-market/my-auction-listings/${auctionID}`
       );
-      setAuctionListings(res.data.auctionListings);
+      setAuctionListings(res.data.auctionListing);
     } catch (error) {
       toast.error("Cannot Connect to Database");
       setAuctionListings([]);

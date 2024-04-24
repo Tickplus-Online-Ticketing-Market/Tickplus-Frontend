@@ -1,64 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { HiSearch } from "react-icons/hi";
 import { MdAttachMoney, MdDateRange } from "react-icons/md";
 import { FaTicket } from "react-icons/fa6";
 import { toast } from "react-toastify";
-import currentLoggedinUser from "../lib/helpers/getCurrentLoggedinUser";
 import ticketDesign from "../../../Assets/SecondaryMarket/img/Ticket Design Size Example.png";
+import { RetriveAuctionListingsDataById } from "./RetriveAuctionListingDataById";
 
-export function CreateAuctionModal({ visible, onClose }) {
+export function UpdateAuctionModal({ visible, onClose, auctionID }) {
   if (!visible) return null;
+
+  const data = RetriveAuctionListingsDataById(auctionID);
+  const [updateForm, setUpdateForm] = useState(data);
+
+  console.log(updateForm);
 
   const handleOnClose = (e) => {
     if (e.target.id === "container") onClose();
     if (e.target.id === "cancel-btn") onClose();
   };
 
-  const [createForm, setCreateForm] = useState({
-    ticketId: "",
-    spectatorId: currentLoggedinUser.currentUserRoleId,
-    startingPrice: "",
-    startDate: new Date().toISOString(),
-    auctionDays: 2,
-    winningBid: "No Bids Placed",
-    auctionStatus: "Active",
-  });
-
-  const updateCreateFormField = (e) => {
+  const updateFormField = (e) => {
     const { name, value } = e.target;
 
-    setCreateForm({
-      ...createForm,
+    setUpdateForm({
+      ...updateForm,
       [name]: value,
     });
   };
 
-  const createAuctionListing = async (e) => {
+  const updateAuctionListing = async (e) => {
     e.preventDefault();
-    console.log(createForm);
 
     try {
-      const res = await axios.post(
-        "http://localhost:3030/secondary-market/my-auction-listings",
-        createForm
+      const res = await axios.put(
+        `http://localhost:3030/secondary-market/my-auction-listings/${auctionID}`,
+        updateForm
       );
 
-      setCreateForm({
-        ticketId: "",
-        spectatorId: currentLoggedinUser.currentUserRoleId,
-        startingPrice: "",
-        startDate: new Date().toISOString(),
-        auctionDays: 2,
-        winningBid: "No Bids Placed",
-        auctionStatus: "Active",
-      });
-
-      toast.success("Auction Listing Created");
+      toast.success("Auction Listing Updated");
 
       onClose();
     } catch (error) {
-      toast.error("Auction Listing Not Created");
+      toast.error("Auction Listing Not Updated");
     }
   };
 
@@ -94,23 +78,23 @@ export function CreateAuctionModal({ visible, onClose }) {
             />
           </div>
           <form
-            onSubmit={createAuctionListing}
+            onSubmit={updateAuctionListing}
             className="items-center align-middle w-fit"
           >
             <input
               type="hidden"
               name="spectatorId"
-              value={createForm.spectatorId}
+              value={updateForm.spectatorId}
             />
             <input
               type="hidden"
               name="auctionStatus"
-              value={createForm.auctionStatus}
+              value={updateForm.auctionStatus}
             />
             <input
               type="hidden"
               name="startDate"
-              value={createForm.startDate}
+              value={updateForm.startDate}
             />
 
             <div className="grid grid-cols-3 gap-y-10 my-20 justify-around">
@@ -129,8 +113,8 @@ export function CreateAuctionModal({ visible, onClose }) {
                   required
                   placeholder="Ticket Number"
                   className="text-start bg-background focus:outline-none active:outline-none h-8 w-96 text-text placeholder-primary border-none bg-none pb-0.5"
-                  value={createForm.ticketId}
-                  onChange={updateCreateFormField}
+                  value={updateForm.ticketId}
+                  onChange={updateFormField}
                 />
               </div>
 
@@ -149,8 +133,8 @@ export function CreateAuctionModal({ visible, onClose }) {
                   required
                   placeholder="Starting Price"
                   className="text-start bg-background focus:outline-none active:outline-none h-8 w-96 text-text placeholder-primary border-none bg-none pb-0.5"
-                  value={createForm.startingPrice}
-                  onChange={updateCreateFormField}
+                  value={updateForm.startingPrice}
+                  onChange={updateFormField}
                 />
               </div>
 
@@ -167,10 +151,9 @@ export function CreateAuctionModal({ visible, onClose }) {
                   name="auctionDays"
                   type="select"
                   required
-                  placeholder="Auction Duration"
                   className="text-start bg-background focus:outline-none active:outline-none h-8 w-96 text-text placeholder-primary border-none bg-none pb-0.5"
-                  value={createForm.auctionDays}
-                  onChange={updateCreateFormField}
+                  value={updateForm.auctionDays}
+                  onChange={updateFormField}
                 >
                   <option value={2}>2 days</option>
                   <option value={3}>3 days</option>
@@ -186,7 +169,7 @@ export function CreateAuctionModal({ visible, onClose }) {
                   type="submit"
                   className="text-white bg-primary hover:bg-background hover:text-primary border-primary border-[2.4px] focus:outline-none font-medium rounded-full px-10 py-2 text-center inline-flex items-center"
                 >
-                  Publish Listing
+                  Update Listing
                 </button>
               </div>
               <div className="max-h-6">
