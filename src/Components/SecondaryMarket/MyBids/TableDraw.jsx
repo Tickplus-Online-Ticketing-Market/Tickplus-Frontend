@@ -2,38 +2,38 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { FaEye, FaTrashAlt } from "react-icons/fa";
 import { MdEditSquare } from "react-icons/md";
-import { DeleteAuctionModal } from "./DeleteAuctionListingModal";
-import { UpdateAuctionModal } from "./UpdateAuctionListingModal";
-import { ViewAuctionModal } from "./ViewAuctionListingModal";
-import { RetriveMyAuctionListingsData } from "./RetriveMyAuctionListingsData";
+import { DeleteBidModal } from "./DeleteMyBids";
+import { UpdateBidModal } from "./UpdateMyBids";
+import { ViewBidModal } from "./ViewMyBids";
+import { RetriveMyBids } from "./RetriveMyBids";
 import currentLoggedinUser from "../lib/helpers/getCurrentLoggedinUser";
 
 export function TableDraw({ tableData }) {
   const [showViewModal, setShowViewModal] = useState(false);
-  const [showUpdateModal, setShowUpdateeModal] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [auctionID, setauctionID] = useState("");
+  const [auctionID, setAuctionID] = useState("");
 
   const handleView = (id) => {
-    setauctionID(id);
+    setAuctionID(id);
     setShowViewModal(true);
   };
 
   const handleUpdate = (id) => {
-    setauctionID(id);
-    setShowUpdateeModal(true);
+    setAuctionID(id);
+    setShowUpdateModal(true);
   };
 
   const handleDelete = (id) => {
-    setauctionID(id);
+    setAuctionID(id);
     setShowDeleteModal(true);
   };
 
   const handleOnClose = () => {
     setShowViewModal(false);
-    setShowUpdateeModal(false);
+    setShowUpdateModal(false);
     setShowDeleteModal(false);
-    setauctionID("");
+    setAuctionID("");
   };
 
   const TableRowDraw = ({ item }) => {
@@ -84,13 +84,14 @@ export function TableDraw({ tableData }) {
     );
   };
 
-  if (tableData === null || tableData.length == 0) {
+  if (!tableData || tableData.length === 0) {
     return (
       <div className="flex justify-center p-10">
         No Auction Listings to Show!
       </div>
     );
   }
+
   return (
     <div className="overflow-hidden rounded-2xl border-none shadow-md m-5">
       <table className="w-full border-collapse bg-white text-left text-gray-500">
@@ -138,17 +139,17 @@ export function TableDraw({ tableData }) {
           ))}
         </tbody>
       </table>
-      <ViewAuctionModal
+      <ViewBidModal
         auctionID={auctionID}
         onClose={() => handleOnClose()}
         visible={showViewModal}
       />
-      <UpdateAuctionModal
+      <UpdateBidModal
         auctionID={auctionID}
         onClose={() => handleOnClose()}
         visible={showUpdateModal}
       />
-      <DeleteAuctionModal
+      <DeleteBidModal
         auctionID={auctionID}
         onClose={() => handleOnClose()}
         visible={showDeleteModal}
