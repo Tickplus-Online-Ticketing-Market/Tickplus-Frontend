@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { HiSearch } from "react-icons/hi";
 import { MdAttachMoney, MdDateRange } from "react-icons/md";
 import { FaTicket } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import ticketDesign from "../../../Assets/SecondaryMarket/img/Ticket Design Size Example.png";
+import { RetriveBidById } from "./RetriveMyBidsById";
 
-export function UpdateAuctionModal({ visible, onClose, auctionID }) {
+export function UpdateBidModal({ visible, onClose, auctionID }) {
   if (!visible) return null;
 
   const [inputs, setInputs] = useState({});
@@ -20,7 +22,7 @@ export function UpdateAuctionModal({ visible, onClose, auctionID }) {
         );
         setInputs(res.data.auctionListing);
       } catch (error) {
-        toast.error("Could Not Connect to Database!");
+        console.error("Error fetching data:", error);
       }
     };
     fetchHandler();
@@ -40,12 +42,11 @@ export function UpdateAuctionModal({ visible, onClose, auctionID }) {
 
   const updateAuctionListing = async (e) => {
     e.preventDefault();
-    console.log(inputs);
 
     try {
       const res = await axios.put(
         `http://localhost:3030/secondary-market/my-auction-listings/${auctionID}`,
-        inputs
+        updateForm
       );
 
       toast.success("Auction Listing Updated");
@@ -77,6 +78,16 @@ export function UpdateAuctionModal({ visible, onClose, auctionID }) {
           </div>
         </div>
         <div className="w-fit flex-1 p-10">
+          <div className="bg-background px-4 flex flex-row justify-start items-center border-[2.4px] border-primary rounded-full gap-2 text-primary">
+            <span className="text-xl">
+              <HiSearch />
+            </span>
+            <input
+              type="text"
+              placeholder="Search tickets by Ticket Number ..."
+              className="text-start bg-background focus:outline-none active:outline-none h-8 w-96 text-text placeholder-primary border-none bg-none pb-0.5 italic"
+            />
+          </div>
           <form
             onSubmit={updateAuctionListing}
             className="items-center align-middle w-fit"
@@ -92,13 +103,6 @@ export function UpdateAuctionModal({ visible, onClose, auctionID }) {
               value={inputs.auctionStatus}
             />
             <input type="hidden" name="startDate" value={inputs.startDate} />
-            <input type="hidden" name="winningBid" value={inputs.winningBid} />
-            <input
-              type="hidden"
-              name="auctionStatus"
-              value={inputs.auctionStatus}
-            />
-            <input type="hidden" name="ticketId" value={inputs.ticketId} />
 
             <div className="grid grid-cols-3 gap-y-10 my-20 justify-around">
               <div>
@@ -110,9 +114,15 @@ export function UpdateAuctionModal({ visible, onClose, auctionID }) {
                 <span className="text-xl">
                   <FaTicket />
                 </span>
-                <h5 className="font-medium leading-tight text-text py-4">
-                  {inputs.ticketId}
-                </h5>
+                <input
+                  name="ticketId"
+                  type="text"
+                  required
+                  placeholder="Ticket Number"
+                  className="text-start bg-background focus:outline-none active:outline-none h-8 w-96 text-text placeholder-primary border-none bg-none pb-0.5"
+                  value={inputs.ticketId}
+                  onChange={handleChange}
+                />
               </div>
 
               <div>
@@ -160,6 +170,7 @@ export function UpdateAuctionModal({ visible, onClose, auctionID }) {
                   <option value={30}>30 days</option>
                 </select>
               </div>
+
               <div className="col-span-2 max-h-6">
                 <button
                   type="submit"

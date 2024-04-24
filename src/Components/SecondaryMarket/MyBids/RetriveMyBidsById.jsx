@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export function RetriveAuctionListingsDataById(auctionID) {
+export function RetriveBidById(auctionID) {
   const [auctionListings, setAuctionListings] = useState(null);
 
   useEffect(() => {

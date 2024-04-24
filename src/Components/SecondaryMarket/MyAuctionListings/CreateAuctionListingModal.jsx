@@ -36,7 +36,6 @@ export function CreateAuctionModal({ visible, onClose }) {
 
   const createAuctionListing = async (e) => {
     e.preventDefault();
-    console.log(createForm);
 
     try {
       const res = await axios.post(
@@ -127,6 +126,8 @@ export function CreateAuctionModal({ visible, onClose }) {
                   name="ticketId"
                   type="text"
                   required
+                  maxlength="10"
+                  minLength="10"
                   placeholder="Ticket Number"
                   className="text-start bg-background focus:outline-none active:outline-none h-8 w-96 text-text placeholder-primary border-none bg-none pb-0.5"
                   value={createForm.ticketId}
