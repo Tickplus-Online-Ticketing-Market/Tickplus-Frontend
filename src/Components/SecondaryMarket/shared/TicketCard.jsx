@@ -15,10 +15,12 @@ export default function TicketCard() {
         >
           Place Bid
         </button>
-        <h5 className="mb-2 text-xl font-medium leading-tight text-text">
-          Card title
+        <h5 className="mb-2 text-xl font-medium leading-tight text-text mt-4">
+          Awesome Music Event
         </h5>
-        <p className="mb-2 text-sm text-text">Some quick example text.</p>
+        <p className="mb-2 text-sm text-text">
+          Explore Music Concerts events Happening in your area
+        </p>
       </div>
     </div>
   );

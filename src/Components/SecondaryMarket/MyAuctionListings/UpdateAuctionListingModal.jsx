@@ -4,6 +4,7 @@ import { MdAttachMoney, MdDateRange } from "react-icons/md";
 import { FaTicket } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import ticketDesign from "../../../Assets/SecondaryMarket/img/Ticket Design Size Example.png";
+import ExampleQRcode from "../../../Assets/SecondaryMarket/img/Example-QR-code.jpg";
 
 export function UpdateAuctionModal({ visible, onClose, auctionID }) {
   if (!visible) return null;
@@ -69,11 +70,25 @@ export function UpdateAuctionModal({ visible, onClose, auctionID }) {
           </div>
           <div className="my-6 flex-col items-center justify-center">
             <h3 className="mb-2 text-lg font-bold leading-tight text-white text-center">
-              Extreme Music event
+              Taylor Swift: The Eras Tour
             </h3>
             <p className="mb-2 text-base text-neutral-600 dark:text-neutral-200 text-justify text-secondary">
-              Some quick example text.
+              Tickets On Sale Available Now - Eras Tour | Tickets 2024. Taylor
+              Swift performs hit songs in a once-in-a-lifetime concert
+              experience.
             </p>
+
+            <div className="flex col-span-2">
+              <div className="p-4">
+                <img
+                  className="rounded-lg"
+                  src={ExampleQRcode}
+                  alt="ExampleQRcode"
+                  width={150}
+                />
+              </div>
+              <div></div>
+            </div>
           </div>
         </div>
         <div className="w-fit flex-1 p-10">
