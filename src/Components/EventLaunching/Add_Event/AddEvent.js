@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import './events.css';
+import '../Promotional/events.css'
 import Sidebar from "../SideBar/Sidebar";
 import NavBar from "../NavBar/NavBar";
 
@@ -19,6 +19,7 @@ const AddEvent = () => {
   const [error, setError] = useState("");                 // Define a state variable 'error' to store error messages
 
 
+  
 
   const handleChange = (e) => {                          //updates the 'inputs' state based on user input
     const { name, value } = e.target;

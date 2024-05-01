@@ -5,8 +5,6 @@ import "./consultation.css";
 import Sidebar from "../SideBar/Sidebar";
 import NavBar from "../NavBar/NavBar";
 import ConsultationCard from "./ConsultationCard";
-import events from "../../EventLaunching/"
-
 
 const RequesConsultant = () => {
   const navigate = useNavigate();          // navigate  a different location application.
