@@ -20,8 +20,8 @@ const Counter = () => {
         <div>
             <div>{count}</div>
             <div>
-                <button onClick={decrement} className='bg-primary bg-opacity-50 text-background h-[2rem] w-[2rem] rounded hover:scale-95 transition text-xl mr-1'>-</button>
-                <button onClick={increment} className='bg-primary bg-opacity-50 text-background h-[2rem] w-[2rem] rounded hover:scale-95 transition text-xl mr-1'>+</button>
+                <button onClick={decrement} className='bg-primary bg-opacity-50 text-background h-[1.5rem] w-[1.5rem] rounded hover:scale-95 transition text-xl mr-1'>-</button>
+                <button onClick={increment} className='bg-primary bg-opacity-50 text-background h-[1.5rem] w-[1.5rem] rounded hover:scale-95 transition text-xl mr-1'>+</button>
             </div>
         </div>
     );

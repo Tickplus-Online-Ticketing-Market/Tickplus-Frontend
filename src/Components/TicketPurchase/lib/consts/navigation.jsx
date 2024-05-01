@@ -1,6 +1,6 @@
 import { FaShoppingCart } from "react-icons/fa";
+import { MdOutlineTravelExplore } from "react-icons/md";
 import { IoTicketSharp } from "react-icons/io5";
-import { MdFreeCancellation } from "react-icons/md";
 import { HiReceiptRefund } from "react-icons/hi2";
 import { MdContactSupport } from "react-icons/md";
 import { RiLogoutBoxRFill } from "react-icons/ri";
@@ -9,9 +9,15 @@ import { IoHome } from "react-icons/io5";
 
 export const DASHBOARD_SIDEBAR_LINKS = [
 	{
+		key: 'extickets',
+		label: 'Explore Tickets',
+		path: '/',
+		icon: <MdOutlineTravelExplore />
+	},
+	{
 		key: 'wishlist',
 		label: 'Wishlist',
-		path: '/',
+		path: '/w',
 		icon: <FaShoppingCart />
 	},
 	{
@@ -20,12 +26,6 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		path: '/mt',
 		icon: <IoTicketSharp />
 
-	},
-	{
-		key: 'cancellations',
-		label: 'Cancellations',
-		path: '/can',
-		icon: <MdFreeCancellation />
 	},
 	{
 		key: 'refundrequests',
