@@ -1,0 +1,56 @@
+.con_ful_box_sponc {
+  background-color: rgba(135, 207, 235, 0.493);
+  border-radius: 4px;
+  padding: 25px;
+}
+.card_conone_sponc {
+  display: flex;
+  background-color: rgba(135, 207, 235, 0.66);
+  justify-content: center;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  text-transform: capitalize;
+  padding: 10px;
+  border: 1px solid rgba(255, 0, 0, 0.488);
+}
+.img_card_cn_sponc {
+  width: 220px;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+.detais_side_sponc {
+  margin-top: 20px;
+}
+.cord_name_sponc {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 20px;
+  color: #ff7738;
+}
+
+.con_id_sponc {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+.con_details_sponc {
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+.phone_con_sponc {
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+.gmail_con_sponc {
+  font-size: 15px;
+}
+.div_con_box_sponc {
+  display: flex;
+  gap: 25px;
+}
+.spn_btn_new{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+}
