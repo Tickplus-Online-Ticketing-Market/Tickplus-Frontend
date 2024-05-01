@@ -1,12 +1,22 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "./Components/HomePage/HomePage";
+// App.js
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// Admin-Event Adding
+import AddEvent from "./Components/EventLaunching/Add_Event/AddEvent";
+import Promotional from "./Components/EventLaunching/Promotional/Promotional";
 
-export default function App() {
+function App() {
   return (
-    <Router>
-      <Routes>
-        <Route index element={<HomePage />} />
-      </Routes>
-    </Router>
+    <div>
+      <Router>
+        <Routes>
+          <Route exact path="/addevent" element={<AddEvent />} />
+          <Route exact path="/promo" element={<Promotional />} />
+
+        </Routes>
+      </Router>
+    </div>
   );
 }
+
+export default App;

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import "../../events.css";
+// import './events.css';
 import Sidebar from "../SideBar/Sidebar";
 import NavBar from "../NavBar/NavBar";
 
@@ -20,6 +19,7 @@ const AddEvent = () => {
   const [error, setError] = useState("");                 // Define a state variable 'error' to store error messages
 
 
+
   const handleChange = (e) => {                          //updates the 'inputs' state based on user input
     const { name, value } = e.target;
     setInputs((prevState) => ({
@@ -31,7 +31,7 @@ const AddEvent = () => {
   const handleSubmit = async (e) => {                    //handles form submission
     e.preventDefault();                                  // Prevent the default form submission behavior
     try {
-      await axios.post("http://localhost:3001/events/", inputs);      //  add a new event using the 'inputs'
+   //   await axios.post("http://localhost:3001/events/", inputs);      //  add a new event using the 'inputs'
       alert("Event added successfully.");                             
 
       window.location.reload(); // Navigate to events page after successful submission
