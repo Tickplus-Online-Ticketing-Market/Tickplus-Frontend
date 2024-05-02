@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import TicketCard from "../shared/TicketCard";
+import TicketCard from "./TicketCard";
+import { RetriveActiveAuctionListingsData } from "./RetriveActiveuctionListingsData";
 
-export default function Products() {
+export default function DashboardTicketCarousel() {
+  const [auctionData, setAuctionData] = useState([]);
+
+  useEffect(() => {
+    RetriveActiveAuctionListingsData()
+      .then((data) => {
+        setAuctionData(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   const responsive = {
     desktop: {
       breakpoint: {
@@ -30,6 +44,15 @@ export default function Products() {
       partialVisibilityGutter: 30,
     },
   };
+
+  if (auctionData === null || auctionData.length == 0) {
+    return (
+      <div className="flex justify-center p-10 text-white">
+        No Auction Listings to Show!
+      </div>
+    );
+  }
+
   return (
     <div className="">
       <Carousel
@@ -61,21 +84,9 @@ export default function Products() {
         slidesToSlide={1}
         swipeable
       >
-        <div>
-          <TicketCard />
-        </div>
-        <div>
-          <TicketCard />
-        </div>
-        <div>
-          <TicketCard />
-        </div>
-        <div>
-          <TicketCard />
-        </div>
-        <div>
-          <TicketCard />
-        </div>
+        {auctionData.map((item) => (
+          <TicketCard key={item.id} item={item} />
+        ))}
       </Carousel>
     </div>
   );

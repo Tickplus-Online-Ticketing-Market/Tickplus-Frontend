@@ -13,9 +13,7 @@ export function UpdateAuctionModal({ visible, onClose, auctionID }) {
 
   useEffect(() => {
     const fetchHandler = async () => {
-      //fetch exissting data from
       try {
-        // form allows users to input or update name, status, and code, as
         const res = await axios.get(
           `http://localhost:3030/secondary-market/my-auction-listings/${auctionID}`
         );
@@ -105,6 +103,11 @@ export function UpdateAuctionModal({ visible, onClose, auctionID }) {
               type="hidden"
               name="auctionStatus"
               value={inputs.auctionStatus}
+            />
+            <input
+              type="hidden"
+              name="remainingDays"
+              value={inputs.remainingDays}
             />
             <input type="hidden" name="startDate" value={inputs.startDate} />
             <input type="hidden" name="winningBid" value={inputs.winningBid} />

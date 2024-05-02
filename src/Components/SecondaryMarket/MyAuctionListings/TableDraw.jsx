@@ -5,8 +5,6 @@ import { MdEditSquare } from "react-icons/md";
 import { DeleteAuctionModal } from "./DeleteAuctionListingModal";
 import { UpdateAuctionModal } from "./UpdateAuctionListingModal";
 import { ViewAuctionModal } from "./ViewAuctionListingModal";
-import { RetriveMyAuctionListingsData } from "./RetriveMyAuctionListingsData";
-import currentLoggedinUser from "../lib/helpers/getCurrentLoggedinUser";
 
 export function TableDraw({ tableData }) {
   const [showViewModal, setShowViewModal] = useState(false);
@@ -53,7 +51,12 @@ export function TableDraw({ tableData }) {
           <span className={rowDataStyles}>{item.auctionDays}</span>
         </td>
         <td className="px-6 py-4 text-center">
-          <span className={rowDataStyles}>{item.startingPrice}</span>
+          <span className={rowDataStyles}>{item.remainingDays}</span>
+        </td>
+        <td className="px-6 py-4 text-center">
+          <span className={rowDataStyles}>
+            Rs. {item.startingPrice.toFixed(2)}
+          </span>
         </td>
         <td className="px-6 py-4 text-center">
           <span className={rowDataStyles}>{item.winningBid}</span>
@@ -69,7 +72,15 @@ export function TableDraw({ tableData }) {
             >
               {<FaEye />}
             </button>
-            <button className="text-2xl" onClick={() => handleUpdate(item._id)}>
+            <button
+              className={`text-2xl ${
+                item.auctionStatus === "Completed"
+                  ? "text-text cursor-not-allowed"
+                  : ""
+              }`}
+              onClick={() => handleUpdate(item._id)}
+              disabled={item.auctionStatus === "Completed"}
+            >
               {<MdEditSquare />}
             </button>
             <button
@@ -111,6 +122,13 @@ export function TableDraw({ tableData }) {
             >
               Auction Days
             </th>
+            <th
+              scope="col"
+              className="px-6 py-4 font-bold text-primary text-center"
+            >
+              Remaining Days
+            </th>
+
             <th
               scope="col"
               className="px-6 py-4 font-bold text-primary text-center"

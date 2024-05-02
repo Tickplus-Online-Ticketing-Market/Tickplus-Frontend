@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdAddCircle } from "react-icons/md";
 import currentLoggedinUser from "../lib/helpers/getCurrentLoggedinUser";
 import { ToastContainer } from "react-toastify";
@@ -10,6 +10,18 @@ import { AuctionListingSearch as SearchBox } from "./AuctionListingSearch";
 
 export default function MyAuctionListings() {
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [auctionData, setAuctionData] = useState([]);
+
+  useEffect(() => {
+    RetriveMyAuctionListingsData(currentLoggedinUser.currentUserRoleId)
+      .then((data) => {
+        setAuctionData(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [showCreateModal]);
 
   return (
     <div className=" overflow-auto">
@@ -25,11 +37,7 @@ export default function MyAuctionListings() {
         </button>
       </div>
 
-      <TableDraw
-        tableData={RetriveMyAuctionListingsData(
-          currentLoggedinUser.currentUserRoleId
-        )}
-      />
+      <TableDraw tableData={auctionData} />
       <CreateAuctionModal
         onClose={() => setShowCreateModal(false)}
         visible={showCreateModal}

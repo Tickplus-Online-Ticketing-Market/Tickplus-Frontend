@@ -1,5 +1,11 @@
 import { HiOutlineQuestionMarkCircle, HiOutlineCog } from "react-icons/hi";
-import { FaHome, FaCrown, FaMoneyCheckAlt, FaMoneyBill } from "react-icons/fa";
+import {
+  FaHome,
+  FaCrown,
+  FaMoneyCheckAlt,
+  FaMoneyBill,
+  FaChartLine,
+} from "react-icons/fa";
 
 export const DASHBOARD_SIDEBAR_LINKS = [
   {
@@ -25,6 +31,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     label: "Transaction History",
     path: "/secondary-market/transaction-history",
     icon: <FaMoneyBill />,
+  },
+  {
+    key: "analytics",
+    label: "Analytics",
+    path: "/secondary-market/analytics",
+    icon: <FaChartLine />,
   },
 ];
 

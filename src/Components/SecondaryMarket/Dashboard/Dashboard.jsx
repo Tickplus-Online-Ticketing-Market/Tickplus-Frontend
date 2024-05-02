@@ -1,8 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import DashboardTicketCarousel from "./DashboardTicketCarousel";
-import { MdAddCircle } from "react-icons/md";
-import { HiSearch } from "react-icons/hi";
 import Barcharts from "./Chart01";
 import Piecharts from "./Chart02";
 

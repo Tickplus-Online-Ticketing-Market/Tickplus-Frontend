@@ -126,6 +126,11 @@ export function CreateAuctionModal({ visible, onClose }) {
               name="startDate"
               value={createForm.startDate}
             />
+            <input
+              type="hidden"
+              name="remainingDays"
+              value={createForm.auctionDays}
+            />
 
             <div className="grid grid-cols-3 gap-y-10 my-20 justify-around">
               <div>
