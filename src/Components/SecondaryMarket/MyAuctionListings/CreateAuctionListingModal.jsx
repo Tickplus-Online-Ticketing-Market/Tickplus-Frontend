@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { HiSearch } from "react-icons/hi";
-import { MdAttachMoney, MdDateRange } from "react-icons/md";
-import { FaTicket } from "react-icons/fa6";
+import { FaRupeeSign, FaClock, FaTicket } from "react-icons/fa6";
+import { FaCheck } from "react-icons/fa";
+import { MdDateRange } from "react-icons/md";
 import { toast } from "react-toastify";
 import currentLoggedinUser from "../lib/helpers/getCurrentLoggedinUser";
 import ticketDesign from "../../../Assets/SecondaryMarket/img/Ticket Design Size Example.png";
@@ -22,6 +23,7 @@ export function CreateAuctionModal({ visible, onClose }) {
     startingPrice: "",
     startDate: new Date().toISOString(),
     auctionDays: 2,
+    remainingDays: 2,
     winningBid: "No Bids Placed",
     auctionStatus: "Active",
   });
@@ -50,6 +52,7 @@ export function CreateAuctionModal({ visible, onClose }) {
         startingPrice: "",
         startDate: new Date().toISOString(),
         auctionDays: 2,
+        remainingDays: 2,
         winningBid: "No Bids Placed",
         auctionStatus: "Active",
       });
@@ -162,7 +165,7 @@ export function CreateAuctionModal({ visible, onClose }) {
               </div>
               <div className="col-span-2 bg-background px-4 flex flex-row justify-start items-center border-[2.4px] border-primary rounded-full gap-2 text-primary">
                 <span className="text-xl">
-                  <MdAttachMoney />
+                  <FaRupeeSign />
                 </span>
                 <input
                   name="startingPrice"
@@ -182,7 +185,7 @@ export function CreateAuctionModal({ visible, onClose }) {
               </div>
               <div className="col-span-2 bg-background px-4 flex flex-row justify-start items-center border-[2.4px] border-primary rounded-full gap-2 text-primary">
                 <span className="text-xl">
-                  <MdDateRange />
+                  <FaClock />
                 </span>
                 <select
                   name="auctionDays"

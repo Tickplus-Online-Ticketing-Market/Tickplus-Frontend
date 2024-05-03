@@ -1,7 +1,8 @@
 import React from "react";
 import moment from "moment";
-import { MdAttachMoney, MdDateRange } from "react-icons/md";
-import { FaTicket } from "react-icons/fa6";
+import { FaRupeeSign, FaClock, FaTicket } from "react-icons/fa6";
+import { FaCheck } from "react-icons/fa";
+import { MdDateRange } from "react-icons/md";
 import ticketDesign from "../../../Assets/SecondaryMarket/img/Ticket Design Size Example.png";
 import { RetriveAuctionListingsDataById } from "./RetriveAuctionListingDataById";
 import ExampleQRcode from "../../../Assets/SecondaryMarket/img/Example-QR-code.jpg";
@@ -81,7 +82,7 @@ export function ViewAuctionModal({ visible, onClose, auctionID }) {
               </div>
               <div className="col-span-2 bg-background px-4 flex flex-row justify-start items-center border-[2.4px] border-primary rounded-full gap-2 text-primary">
                 <span className="text-xl">
-                  <MdAttachMoney />
+                  <FaRupeeSign />
                 </span>
                 <input
                   name="startingPrice"
@@ -100,7 +101,7 @@ export function ViewAuctionModal({ visible, onClose, auctionID }) {
               </div>
               <div className="col-span-2 bg-background px-4 flex flex-row justify-start items-center border-[2.4px] border-primary rounded-full gap-2 text-primary">
                 <span className="text-xl">
-                  <MdDateRange />
+                  <FaClock />
                 </span>
                 <input
                   name="auctionDays"
@@ -118,7 +119,7 @@ export function ViewAuctionModal({ visible, onClose, auctionID }) {
               </div>
               <div className="col-span-2 bg-background px-4 flex flex-row justify-start items-center border-[2.4px] border-primary rounded-full gap-2 text-primary">
                 <span className="text-xl">
-                  <FaTicket />
+                  <MdDateRange />
                 </span>
                 <input
                   name="startDate"
@@ -137,7 +138,7 @@ export function ViewAuctionModal({ visible, onClose, auctionID }) {
               </div>
               <div className="col-span-2 bg-background px-4 flex flex-row justify-start items-center border-[2.4px] border-primary rounded-full gap-2 text-primary">
                 <span className="text-xl">
-                  <FaTicket />
+                  <FaCheck />
                 </span>
                 <input
                   name="auctionStatus"

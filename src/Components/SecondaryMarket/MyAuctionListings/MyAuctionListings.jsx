@@ -5,23 +5,27 @@ import { ToastContainer } from "react-toastify";
 
 import { CreateAuctionModal } from "./CreateAuctionListingModal";
 import { RetriveMyAuctionListingsData } from "./RetriveMyAuctionListingsData";
-import { TableDraw } from "./TableDraw";
+import TableDraw from "./TableDraw";
 import { AuctionListingSearch as SearchBox } from "./AuctionListingSearch";
 
 export default function MyAuctionListings() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [auctionData, setAuctionData] = useState([]);
+  const [tableUpdate, setTableUpdate] = useState(false);
+  const getChanges = (data) => {
+    setTableUpdate(data);
+  };
 
   useEffect(() => {
     RetriveMyAuctionListingsData(currentLoggedinUser.currentUserRoleId)
       .then((data) => {
         setAuctionData(data);
-        console.log(data);
+        setTableUpdate(false);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, [showCreateModal]);
+  }, [showCreateModal, tableUpdate]);
 
   return (
     <div className=" overflow-auto">
@@ -37,7 +41,7 @@ export default function MyAuctionListings() {
         </button>
       </div>
 
-      <TableDraw tableData={auctionData} />
+      <TableDraw tableData={auctionData} onUpdate={getChanges} />
       <CreateAuctionModal
         onClose={() => setShowCreateModal(false)}
         visible={showCreateModal}

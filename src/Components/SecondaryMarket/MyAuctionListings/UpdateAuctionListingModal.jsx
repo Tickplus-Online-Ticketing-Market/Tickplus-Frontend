@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { MdAttachMoney, MdDateRange } from "react-icons/md";
-import { FaTicket } from "react-icons/fa6";
+import { FaRupeeSign, FaClock, FaTicket } from "react-icons/fa6";
+import { FaCheck } from "react-icons/fa";
+import { MdDateRange } from "react-icons/md";
 import { toast } from "react-toastify";
 import ticketDesign from "../../../Assets/SecondaryMarket/img/Ticket Design Size Example.png";
 import ExampleQRcode from "../../../Assets/SecondaryMarket/img/Example-QR-code.jpg";
@@ -140,7 +141,7 @@ export function UpdateAuctionModal({ visible, onClose, auctionID }) {
               </div>
               <div className="col-span-2 bg-background px-4 flex flex-row justify-start items-center border-[2.4px] border-primary rounded-full gap-2 text-primary">
                 <span className="text-xl">
-                  <MdAttachMoney />
+                  <FaRupeeSign />
                 </span>
                 <input
                   name="startingPrice"
@@ -160,7 +161,7 @@ export function UpdateAuctionModal({ visible, onClose, auctionID }) {
               </div>
               <div className="col-span-2 bg-background px-4 flex flex-row justify-start items-center border-[2.4px] border-primary rounded-full gap-2 text-primary">
                 <span className="text-xl">
-                  <MdDateRange />
+                  <FaClock />
                 </span>
                 <select
                   name="auctionDays"

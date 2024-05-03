@@ -6,7 +6,7 @@ import { DeleteAuctionModal } from "./DeleteAuctionListingModal";
 import { UpdateAuctionModal } from "./UpdateAuctionListingModal";
 import { ViewAuctionModal } from "./ViewAuctionListingModal";
 
-export function TableDraw({ tableData }) {
+const TableDraw = (prpos) => {
   const [showViewModal, setShowViewModal] = useState(false);
   const [showUpdateModal, setShowUpdateeModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -32,6 +32,7 @@ export function TableDraw({ tableData }) {
     setShowUpdateeModal(false);
     setShowDeleteModal(false);
     setauctionID("");
+    prpos.onUpdate(true);
   };
 
   const TableRowDraw = ({ item }) => {
@@ -95,7 +96,7 @@ export function TableDraw({ tableData }) {
     );
   };
 
-  if (tableData === null || tableData.length == 0) {
+  if (prpos.tableData === null || prpos.tableData.length == 0) {
     return (
       <div className="flex justify-center p-10">
         No Auction Listings to Show!
@@ -151,7 +152,7 @@ export function TableDraw({ tableData }) {
           </tr>
         </thead>
         <tbody className="divide-white divide-y-4 border-t-4 border-t-white">
-          {tableData.map((item) => (
+          {prpos.tableData.map((item) => (
             <TableRowDraw key={item.id} item={item} />
           ))}
         </tbody>
@@ -173,4 +174,6 @@ export function TableDraw({ tableData }) {
       />
     </div>
   );
-}
+};
+
+export default TableDraw;
