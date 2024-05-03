@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { CreateAuctionModal } from "./CreateBidModal";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import TicketCard from "./TicketCard";
@@ -6,6 +7,17 @@ import { RetriveActiveAuctionListingsData } from "./RetriveActiveuctionListingsD
 
 export default function DashboardTicketCarousel() {
   const [auctionData, setAuctionData] = useState([]);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [biddingAuction, setBiddingAuction] = useState([]);
+
+  const bidPlaceClicked = (auctionID) => {
+    setShowCreateModal(true);
+
+    const auction = auctionData.find((auction) => auction._id === auctionID);
+    if (auction) {
+      setBiddingAuction(auction);
+    }
+  };
 
   useEffect(() => {
     RetriveActiveAuctionListingsData()
@@ -85,9 +97,18 @@ export default function DashboardTicketCarousel() {
         swipeable
       >
         {auctionData.map((item) => (
-          <TicketCard key={item.id} item={item} />
+          <TicketCard
+            key={item.id}
+            item={item}
+            onBtnClicked={bidPlaceClicked}
+          />
         ))}
       </Carousel>
+      <CreateAuctionModal
+        onClose={() => setShowCreateModal(false)}
+        visible={showCreateModal}
+        biddingAuction={biddingAuction}
+      />
     </div>
   );
 }
