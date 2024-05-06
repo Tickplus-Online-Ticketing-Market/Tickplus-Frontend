@@ -1,29 +1,25 @@
-import React, {  useState } from "react";
-import tick from "../../Assets/CommunityManagement/tickplus.png"
+import React, { useState } from "react";
+import tick from "../../Assets/CommunityManagement/tickplus.png";
 // Sample post data
 
 const dummyPost = {
-  title:["topic"],
+  title: ["topic"],
   body: ["description"],
-  
+
   files: [
     {
       type: "image/jpeg",
       url: "https://via.placeholder.com/300",
     },
   ],
-  comments: [
-    
-  ],
+  comments: [],
 };
 
 export default function Post({ visible, onClose }) {
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState(dummyPost.comments);
   const [reactCount, setReactCount] = useState(0);
-  ;
-
-
+  // This is Post page
 
   const handleAddComment = () => {
     if (newComment.trim() !== "") {
@@ -49,8 +45,6 @@ export default function Post({ visible, onClose }) {
 
   if (!visible) return null;
 
- 
-
   return (
     <div
       onClick={handleOnClose}
@@ -59,7 +53,6 @@ export default function Post({ visible, onClose }) {
       {/* post content */}
       <div className="absolute inset-0 flex justify-center items-center bg-background bg-opacity-20 backdrop-blur-sm">
         <div className="p-8 bg-accent rounded-lg shadow-lg flex w-3/4 h-3/4 relative">
-          
           {/* Heart react */}
           <div className="flex items-center">
             <button
@@ -72,8 +65,7 @@ export default function Post({ visible, onClose }) {
           </div>
 
           <div className="flex-1 flex flex-col justify-center items-center">
-
-          <img src={tick} alt="logo" />
+            <img src={tick} alt="logo" />
             {/* {dummyPost.files
               .filter((file) => file.type.startsWith("image/"))
               .map((file, index) => (
@@ -91,15 +83,14 @@ export default function Post({ visible, onClose }) {
 
           {/* Right side description */}
           <div className="flex-1 pl-8">
-          <div >
-            <h2 className="text-2xl text-primary font-bold mb-6">
-              {dummyPost.title}
-            </h2>
+            <div>
+              <h2 className="text-2xl text-primary font-bold mb-6">
+                {dummyPost.title}
+              </h2>
 
-            <div className="text-background mb-6">
-              {dummyPost.body}</div>
-              </div>
-    
+              <div className="text-background mb-6">{dummyPost.body}</div>
+            </div>
+
             {/* Comments */}
             <div className="mb-6">
               <h3 className="text-xl text-primary font-bold mb-2">Comments</h3>
@@ -132,4 +123,3 @@ export default function Post({ visible, onClose }) {
     </div>
   );
 }
-
