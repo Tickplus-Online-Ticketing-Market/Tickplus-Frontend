@@ -13,25 +13,25 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'mytickets',
 		label: 'My Tickets',
-		path: '/',
+		path: '/ticket-launching',
 		icon: <HiOutlineTicket />
 	},
 	{
 		key: 'createtickets',
 		label: 'Create Tickets',
-		path: '/Createtickets',
+		path: '/ticket-launching/create-tickets',
 		icon: <HiOutlineFolderAdd />
 	},
 	{
 		key: 'viewtickets',
 		label: 'View Tickets',
-		path: '/Viewtickets',
+		path: '/ticket-launching/view-tickets',
 		icon: <HiOutlineNewspaper />
 	},
 	{
 		key: 'ticketpublishedhistory',
 		label: 'Ticket Published History',
-		path: '/Ticketphistory',
+		path: '/ticket-launching/Ticket-history',
 		icon: <HiOutlineSearchCircle />
 	},
 ]

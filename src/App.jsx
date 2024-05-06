@@ -21,8 +21,8 @@ function App() {
         <Route path="Createtickets" element={<Createtickets />} />
         <Route path="Viewtickets" element={<Viewtickets />} />
         <Route path="Ticketphistory" element={<Ticketphistory />} />
-        <Route path="/CreateTickets/Createtickets2" element={<Createtickets2 />} />
-        <Route path="/CreateTickets/CreateTickets2/Ticketfoam" element={<Ticketfoam />} />
+        <Route path="/ticket-launching/create-tickets/create-tickets2" element={<Createtickets2 />} />
+        <Route path="/ticket-launching/create-tickets/create-tickets2/ticket-foam" element={<Ticketfoam />} />
       </Route>
     </Routes>
     </Router>

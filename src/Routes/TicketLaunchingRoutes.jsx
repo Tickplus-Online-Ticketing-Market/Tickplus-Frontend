@@ -4,6 +4,7 @@ import Dashboard from "../Components/TicketLaunching/Dashboard";
 import CreateTickets from "../Components/TicketLaunching/Createtickets";
 import Viewtickets from "../Components/TicketLaunching/Viewtickets";
 import Ticketphistory from "../Components/TicketLaunching/Ticketphistory";
+import Createtickets2 from "../Components/TicketLaunching/Createtickets2";
 
 const ticketLaunchingRoutes = [
   {
@@ -25,6 +26,10 @@ const ticketLaunchingRoutes = [
       {
         path: "/ticket-launching/Ticket-history",
         element: <Ticketphistory />,
+      },
+      {
+        path: "/ticket-launching/create-tickets/create-tickets2",
+        element: <Createtickets2 />,
       },
     ],
   },
