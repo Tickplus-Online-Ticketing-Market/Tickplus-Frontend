@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Logo from "../../Assets/HomePage/img/Logo.svg";
 import { Link } from "react-router-dom";
 
@@ -13,7 +13,7 @@ const Navbar = () => {
       <div className="navbar-links-container">
         <Link to="#">Events</Link>
         <Link to="#">Tickets</Link>
-        <Link to="#">Community</Link>
+        <Link to="/community-page">Community</Link>
         <Link to="#">Secondary Market</Link>
         <Link to="#">Sponsors</Link>
         <Link to="#">
