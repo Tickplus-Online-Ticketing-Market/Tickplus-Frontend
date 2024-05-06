@@ -3,15 +3,20 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {},
-    colors: {
-      text: "#48525b",
-      background: "#fafafa",
-      primary: "#ff7637",
-      secondary: "#d8e7ee",
-      accent: "#122128",
-      white: "#ffffff",
-      black: "#000000",
+    colors:{
+      black: '#000000',
+      reject: '#ff0000',
+      accept: '#00FF00',
+      logout: '#FF0000',
+      text: '#48525b',
+      background: '#fafafa',
+      tbg: '#57666f',
+      primary: '#ff7637',
+      secondary: '#a9c1c1',
+      accent: '#122128',
+      gray: '#808080',
     },
+    
     fontSize: {
       sm: "0.600rem",
       base: "0.8rem",
