@@ -12,7 +12,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-links-container">
         <Link to="#">Events</Link>
-        <Link to="#">Tickets</Link>
+        <Link to="/ticket-launching">Tickets</Link>
         <Link to="#">Community</Link>
         <Link to="#">Secondary Market</Link>
         <Link to="#">Sponsors</Link>
