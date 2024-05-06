@@ -1,39 +1,35 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { FaEye, FaTrashAlt } from "react-icons/fa";
-import { MdEditSquare } from "react-icons/md";
-import { DeleteBidModal } from "./DeleteMyBids";
-import { UpdateBidModal } from "./UpdateMyBids";
-import { ViewBidModal } from "./ViewMyBids";
-import { RetriveMyBids } from "./RetriveMyBids";
-import currentLoggedinUser from "../lib/helpers/getCurrentLoggedinUser";
+import { FaTrashAlt } from "react-icons/fa";
+import DeleteBidModal from "./DeleteBidModal";
 
-export function TableDraw({ tableData }) {
+const TableDraw = (prpos) => {
   const [showViewModal, setShowViewModal] = useState(false);
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [showUpdateModal, setShowUpdateeModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [auctionID, setAuctionID] = useState("");
+  const [bidID, setBidID] = useState("");
 
   const handleView = (id) => {
-    setAuctionID(id);
+    setBidID(id);
     setShowViewModal(true);
   };
 
   const handleUpdate = (id) => {
-    setAuctionID(id);
-    setShowUpdateModal(true);
+    setBidID(id);
+    setShowUpdateeModal(true);
   };
 
   const handleDelete = (id) => {
-    setAuctionID(id);
+    setBidID(id);
     setShowDeleteModal(true);
   };
 
   const handleOnClose = () => {
     setShowViewModal(false);
-    setShowUpdateModal(false);
+    setShowUpdateeModal(false);
     setShowDeleteModal(false);
-    setAuctionID("");
+    setBidID("");
+    prpos.onUpdate(true);
   };
 
   const TableRowDraw = ({ item }) => {
@@ -45,33 +41,21 @@ export function TableDraw({ tableData }) {
           <span className={rowDataStyles}>{item.ticketId}</span>
         </td>
         <td className="px-6 py-4 text-center">
+          <span className={rowDataStyles}>{item.auctionId}</span>
+        </td>
+        <td className="px-6 py-4 text-center">
           <span className={rowDataStyles}>
-            {moment(item.startDate).format("MMMM Do YYYY")}
+            {moment(item.bidDate).format("MMMM Do YYYY")}
           </span>
         </td>
         <td className="px-6 py-4 text-center">
-          <span className={rowDataStyles}>{item.auctionDays}</span>
+          <span className={rowDataStyles}>Rs. {item.bidValue.toFixed(2)}</span>
         </td>
         <td className="px-6 py-4 text-center">
-          <span className={rowDataStyles}>{item.startingPrice}</span>
-        </td>
-        <td className="px-6 py-4 text-center">
-          <span className={rowDataStyles}>{item.winningBid}</span>
-        </td>
-        <td className="px-6 py-4 text-center">
-          <span className={rowDataStyles}>{item.auctionStatus}</span>
+          <span className={rowDataStyles}>{item.bidStatus}</span>
         </td>
         <td className="px-6 py-4">
           <div className="flex justify-end gap-4 text-primary content-baseline">
-            <button
-              className="text-[1.55rem]"
-              onClick={() => handleView(item._id)}
-            >
-              {<FaEye />}
-            </button>
-            <button className="text-2xl" onClick={() => handleUpdate(item._id)}>
-              {<MdEditSquare />}
-            </button>
             <button
               className="text-[1.25rem]"
               onClick={() => handleDelete(item._id)}
@@ -84,14 +68,9 @@ export function TableDraw({ tableData }) {
     );
   };
 
-  if (!tableData || tableData.length === 0) {
-    return (
-      <div className="flex justify-center p-10">
-        No Auction Listings to Show!
-      </div>
-    );
+  if (prpos.tableData === null || prpos.tableData.length == 0) {
+    return <div className="flex justify-center p-10">No Bids to Show!</div>;
   }
-
   return (
     <div className="overflow-hidden rounded-2xl border-none shadow-md m-5">
       <table className="w-full border-collapse bg-white text-left text-gray-500">
@@ -104,25 +83,19 @@ export function TableDraw({ tableData }) {
               scope="col"
               className="px-6 py-4 font-bold text-primary text-center"
             >
-              Start Date
+              Auction ID
             </th>
             <th
               scope="col"
               className="px-6 py-4 font-bold text-primary text-center"
             >
-              Auction Days
+              Bid Date
             </th>
             <th
               scope="col"
               className="px-6 py-4 font-bold text-primary text-center"
             >
-              Starting Price
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-4 font-bold text-primary text-center"
-            >
-              Winning Bid
+              Bid Price
             </th>
             <th
               scope="col"
@@ -134,26 +107,18 @@ export function TableDraw({ tableData }) {
           </tr>
         </thead>
         <tbody className="divide-white divide-y-4 border-t-4 border-t-white">
-          {tableData.map((item) => (
+          {prpos.tableData.map((item) => (
             <TableRowDraw key={item.id} item={item} />
           ))}
         </tbody>
       </table>
-      <ViewBidModal
-        auctionID={auctionID}
-        onClose={() => handleOnClose()}
-        visible={showViewModal}
-      />
-      <UpdateBidModal
-        auctionID={auctionID}
-        onClose={() => handleOnClose()}
-        visible={showUpdateModal}
-      />
       <DeleteBidModal
-        auctionID={auctionID}
+        bidID={bidID}
         onClose={() => handleOnClose()}
         visible={showDeleteModal}
       />
     </div>
   );
-}
+};
+
+export default TableDraw;

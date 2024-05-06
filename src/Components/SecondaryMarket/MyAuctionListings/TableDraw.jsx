@@ -60,7 +60,11 @@ const TableDraw = (prpos) => {
           </span>
         </td>
         <td className="px-6 py-4 text-center">
-          <span className={rowDataStyles}>{item.winningBid}</span>
+          <span className={rowDataStyles}>
+            {item.winningBid === "No Bids Placed"
+              ? item.winningBid
+              : `Rs. ${parseFloat(item.winningBid).toFixed(2)}`}
+          </span>
         </td>
         <td className="px-6 py-4 text-center">
           <span className={rowDataStyles}>{item.auctionStatus}</span>

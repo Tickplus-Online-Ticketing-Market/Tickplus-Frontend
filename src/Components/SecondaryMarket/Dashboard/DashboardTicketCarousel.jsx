@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CreateAuctionModal } from "./CreateBidModal";
+import CreateBidModal from "../MyBids/CreateBidModal";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import TicketCard from "./TicketCard";
@@ -104,7 +104,7 @@ export default function DashboardTicketCarousel() {
           />
         ))}
       </Carousel>
-      <CreateAuctionModal
+      <CreateBidModal
         onClose={() => setShowCreateModal(false)}
         visible={showCreateModal}
         biddingAuction={biddingAuction}

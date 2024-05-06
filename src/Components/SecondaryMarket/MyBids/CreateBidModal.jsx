@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { HiSearch } from "react-icons/hi";
 import { FaRupeeSign, FaClock, FaTicket, FaCrown } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import currentLoggedinUser from "../lib/helpers/getCurrentLoggedinUser";
 import ticketDesign from "../../../Assets/SecondaryMarket/img/Ticket Design Size Example.png";
 
-export function CreateAuctionModal({ visible, onClose, biddingAuction }) {
+export default function CreateBidModal({ visible, onClose, biddingAuction }) {
   if (!visible) return null;
 
   const handleOnClose = (e) => {
@@ -14,16 +13,17 @@ export function CreateAuctionModal({ visible, onClose, biddingAuction }) {
     if (e.target.id === "cancel-btn") onClose();
   };
 
-  let minimumBid;
+  let minimumBid = 0;
   if (biddingAuction.winningBid === "No Bids Placed") {
     minimumBid = biddingAuction.startingPrice;
   } else {
-    minimumBid = biddingAuction.winningBid;
+    minimumBid = parseFloat(biddingAuction.winningBid);
   }
   minimumBid += 100;
 
   const [createForm, setCreateForm] = useState({
     auctionId: biddingAuction._id,
+    ticketId: biddingAuction.ticketId,
     spectatorId: currentLoggedinUser.currentUserRoleId,
     bidValue: minimumBid,
     bidDate: new Date().toISOString(),
@@ -39,28 +39,30 @@ export function CreateAuctionModal({ visible, onClose, biddingAuction }) {
     });
   };
 
-  const createAuctionListing = async (e) => {
+  const createbid = async (e) => {
     e.preventDefault();
+    console.log(createForm);
 
     try {
       const res = await axios.post(
-        "http://localhost:3030/secondary-market/bid",
+        "http://localhost:3030/secondary-market/my-bids",
         createForm
       );
 
       setCreateForm({
         auctionId: biddingAuction._id,
         spectatorId: currentLoggedinUser.currentUserRoleId,
+        ticketId: biddingAuction.ticketId,
         bidValue: minimumBid,
         bidDate: new Date().toISOString(),
         bidStatus: "Winning",
       });
 
-      toast.success("Auction Listing Created");
+      toast.success("Bid Placed");
 
       onClose();
     } catch (error) {
-      toast.error("Auction Listing Not Created");
+      toast.error("Bid Not Placed");
     }
   };
 
@@ -88,7 +90,9 @@ export function CreateAuctionModal({ visible, onClose, biddingAuction }) {
 
               <div className="flex items-center m-4">
                 Winning Bid :&nbsp;
-                {biddingAuction.winningBid}
+                {biddingAuction.winningBid === "No Bids Placed"
+                  ? biddingAuction.winningBid
+                  : `Rs. ${parseFloat(biddingAuction.winningBid).toFixed(2)}`}
               </div>
 
               <div className="flex items-center m-4">
@@ -100,9 +104,10 @@ export function CreateAuctionModal({ visible, onClose, biddingAuction }) {
         </div>
         <div className="w-fit flex-1 p-10 pt-20">
           <form
-            onSubmit={createAuctionListing}
+            onSubmit={createbid}
             className="items-center align-middle w-fit"
           >
+            <input type="hidden" name="ticketId" value={createForm.ticketId} />
             <input
               type="hidden"
               name="spectatorId"
@@ -146,7 +151,6 @@ export function CreateAuctionModal({ visible, onClose, biddingAuction }) {
                   name="bidValue"
                   type="text"
                   required
-                  min={minimumBid}
                   placeholder="Bid Value"
                   className="text-start bg-background focus:outline-none active:outline-none h-8 w-96 text-text placeholder-primary border-none bg-none pb-0.5"
                   value={createForm.bidValue}

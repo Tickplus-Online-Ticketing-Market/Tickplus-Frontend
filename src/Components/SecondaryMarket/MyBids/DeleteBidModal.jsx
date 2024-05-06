@@ -4,7 +4,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export function DeleteBidModal({ visible, onClose, auctionID }) {
+export default function DeleteBidModal({ visible, onClose, bidID }) {
   if (!visible) return null;
 
   const handleOnClose = (e) => {
@@ -12,17 +12,17 @@ export function DeleteBidModal({ visible, onClose, auctionID }) {
     if (e.target.id === "cancel-btn") onClose();
   };
 
-  const deleteAuctionListing = async (e) => {
+  const deleteBidListing = async (e) => {
     try {
       const res = await axios.delete(
-        `http://localhost:3030/secondary-market/my-auction-listings/${auctionID}`
+        `http://localhost:3030/secondary-market/my-bids/${bidID}`
       );
 
-      toast.success("Auction Listing Deleted");
+      toast.success("Bid Deleted");
 
       onClose();
     } catch (error) {
-      toast.error("Auction Listing Not Deleted");
+      toast.error("Bid Not Deleted");
     }
   };
 
@@ -46,7 +46,7 @@ export function DeleteBidModal({ visible, onClose, auctionID }) {
             <button
               type="button"
               className="text-white bg-primary hover:bg-background hover:text-primary border-primary border-[2.4px] focus:outline-none font-medium rounded-full px-10 py-2 text-center inline-flex items-center"
-              onClick={deleteAuctionListing}
+              onClick={deleteBidListing}
             >
               Delete Listing
             </button>

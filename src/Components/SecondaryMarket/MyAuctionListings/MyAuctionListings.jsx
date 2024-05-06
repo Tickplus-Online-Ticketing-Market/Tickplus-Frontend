@@ -29,7 +29,7 @@ export default function MyAuctionListings() {
 
   return (
     <div className=" overflow-auto">
-      <div className=" overflow-auto flex flex-row justify-between bg-gray-200 border-none mx-6 my-5">
+      <div className=" overflow-auto flex flex-row justify-between bg-gray-200 border-none mx-6 my-5  min-h-10 max-h-12">
         <SearchBox />
         <button
           type="button"

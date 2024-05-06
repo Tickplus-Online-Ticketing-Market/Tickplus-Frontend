@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DashboardTicketCarousel from "./DashboardTicketCarousel";
 import Barcharts from "./Chart01";
 import Piecharts from "./Chart02";
+import { ToastContainer } from "react-toastify";
 
 export default function Dashboard() {
   return (
@@ -14,6 +15,7 @@ export default function Dashboard() {
         <Barcharts />
         <Piecharts />
       </div>
+      <ToastContainer />
     </div>
   );
 }
