@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes,Route } from 'react-router-dom'
 import Layout from './Components/TicketPurchase/shared/Layout';
-import Wishlist from './Components/TicketPurchase/Wishlist';
 import ExploreTickets from './Components/TicketPurchase/ExploreTickets';
+import Wishlist from './Components/TicketPurchase/Wishlist';
 import MyTransactions from './Components/TicketPurchase/MyTransactions';
 import RefundRequests from './Components/TicketPurchase/RefundRequests';
 import FinanceStatus from './Components/TicketPurchase/FinanceStatus';

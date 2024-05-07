@@ -13,8 +13,14 @@ const [wishes, setWishes] = useState(null);
 
     
     const fetchWishes = async() => {
-    const res = await axios.get("http://localhost:3030/wl/wishes");
-    setWishes(res.data.wishes);
+        let res = [];
+    try {
+        res = await axios.get("http://localhost:3030/wl/wishes");
+        setWishes(res.data.wishes);
+    } catch (error) {
+        console.log(error);
+    }
+    
   
 }
     const [showMyModel06, setShowMyModel06] = useState(false);
