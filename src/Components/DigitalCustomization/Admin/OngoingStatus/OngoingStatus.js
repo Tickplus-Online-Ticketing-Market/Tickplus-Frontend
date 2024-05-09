@@ -4,8 +4,6 @@ import { useParams } from "react-router";
 import { useNavigate } from "react-router";
 import Sidebar from "../SideBar/Sidebar";
 import NavBar from "../NavBar/NavBar";
-
-//form after clicking accept
 function OngoingStatus() {
   const [inputs, setInputs] = useState({});
   const history = useNavigate();
@@ -13,7 +11,7 @@ function OngoingStatus() {
   useEffect(() => {
     const fetchHandler = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/request/${id}`);
+        const response = await axios.get(`http://localhost:3030/digital-customization/${id}`);
         setInputs(response.data.reques);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -23,7 +21,7 @@ function OngoingStatus() {
   }, [id]);
   const sendRequest = async () => {
     await axios
-      .put(`http://localhost:8080/request/${id}`, {
+      .put(`http://localhost:3030/digital-customization/${id}`, {
         name: String(inputs.name),
         phone: String(inputs.phone),
         message: String(inputs.message),
@@ -101,7 +99,7 @@ function OngoingStatus() {
             >
               <option value="">Select</option>
               <option value="notyet">Not YET</option>
-              <option value="compleate">Compleate</option>
+              <option value="compleate">Complete</option>
             </select>
 
             <br></br>

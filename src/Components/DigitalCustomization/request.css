@@ -1,242 +1,274 @@
-/* General Styling */
-body {
-  font-family: "Roboto", sans-serif;
-  color: #48525b;
-  background-color: #f5f7fa; /* Light background for better contrast */
+.dash_button_set {
+  display: flex;
+  margin-bottom: 25px;
+  justify-content: space-between;
 }
-
-/* Scrollbar Styles */
+/* Hide scrollbar track */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 8px; /* Width of the scrollbar */
 }
 
+/* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f1f1f1; /* Color of the scrollbar track */
 }
 
+/* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #112027; /* Dark color for the scrollbar handle */
+  background: #112027; /* Color of the scrollbar handle */
 }
 
+/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #112027; /* Consistent hover effect */
+  background: #112027; /* Color of the scrollbar handle on hover */
 }
 
-/* Container Styling */
 .children_div_admin {
   margin-left: 230px;
   padding: 25px;
+  font-family: "Roboto", sans-serif;
 }
 
-/* Button Styles */
+.dash_button_set {
+  display: flex;
+  justify-content: space-between;
+}
+
 .btn_dash_admin {
-  background-color: #ff7738; /* Consistent primary color */
+  background-color: #ff7738;
   color: white;
   border: 2px solid #ff7738;
   font-size: 20px;
+  cursor: pointer;
   border-radius: 25px;
-  padding: 8px 16px; /* Increased padding for comfort */
+  padding: 3px 15px;
   text-decoration: none;
   font-weight: bold;
   text-transform: capitalize;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  transition: background-color 0.3s; /* Smooth hover effect */
-  cursor: pointer;
 }
-
-.btn_dash_admin:hover {
-  background-color: white;
-  color: #112027; /* Change on hover */
-  border: 2px solid #112027;
-}
-
 .btn_dash_admin_cen {
   background-color: #ff7738;
   color: white;
-  border-radius: 25px;
-  padding: 8px 16px; /* Same padding as .btn_dash_admin */
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border: 2px solid #ff7738;
+  font-size: 20px;
   cursor: pointer;
   display: flex;
+  margin: 25px auto;
   justify-content: center;
+  border-radius: 25px;
+  padding: 3px 15px;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: capitalize;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
 .btn_dash_admin_dlt {
   background-color: red;
   color: white;
-  border-radius: 25px; /* Consistent radius */
-  padding: 8px 16px; /* Same padding as other buttons */
+  border: 2px solid red;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 3px 10px;
   font-weight: bold;
+  text-transform: capitalize;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
-
-.btn_dash_admin_dlt:hover {
+.btn_dash_admin:hover {
   background-color: white;
-  color: red;
-  border: 2px solid red; /* Consistent hover effect */
+  color: #112027;
+  border: 2px solid #112027;
 }
 
-.spce_btnd {
-  background-color: green; /* Appropriately sized button */
-  color: white;
-  border-radius: 100%;
-  padding: 8px; /* Consistent padding */
-  border: none;
-  font-size: 40px;
-}
-
-.btn_dash_admin_dlt_tic {
-  background-color: red;
-  color: white;
-  border-radius: 100%; /* Round shape for small buttons */
-  padding: 5px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* Table Styles */
-.table_details_admin {
-  border-collapse: collapse; /* Remove gaps between cells */
-  width: 100%;
-}
-
-.table_details_admin .admin_tbl_th,
-.table_details_admin .admin_tbl_td {
-  border: 2px solid #2f4045; /* Consistent border color */
-  padding: 12px; /* Consistent padding */
-}
-
-.table_details_admin .admin_tbl_th {
-  background-color: #2f4045;
-  color: white;
-  font-size: 18px; /* Consistent text size */
-  text-transform: uppercase; /* Capitalize text */
-}
-
-/* Search Input Styling */
 .serch_inpt {
   width: 250px;
-  padding: 8px 12px; /* Consistent padding */
-  font-size: 16px; /* Adjusted font size */
-  border-radius: 25px; 
-  border: 2px solid #ff7738; 
-  transition: border-color 0.3s; /* Smooth transition */
+  padding: 3px 10px;
+  font-size: 18px;
+  border-radius: 25px;
+  margin: 0 10px 0 0;
+  border: 2px solid #ff7738;
 }
-
-.serch_inpt:focus {
-  outline: none; /* Remove focus outline */
-  border-color: #112027; /* Change border color on focus */
+.lft {
+  margin-left: 25px;
 }
-
-/* Topic and Heading Styles */
-.topic_admin {
+.topic_inventory {
   text-align: center;
-  font-size: 40px; 
-  margin: 25px 0; /* Consistent spacing */
+  margin-bottom: 25px;
+  font-size: 40px;
 }
 
 .sub_topic_inventory {
   color: #112027;
 }
+.tbl_con_admin {
+  margin-top: 25px;
+  padding: 0 10px;
+}
 
-/* Summary Section */
 .summry_admindsh {
   background-color: #112027;
+  padding: 20px 15px;
   border-radius: 5px;
-  padding: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+  width: 300px;
+  margin-bottom: 25px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Form Styles with Smaller Form */
+.item_summry_box {
+  font-size: 25px;
+  color: white;
+}
+.table_details_admin {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.table_details_admin .admin_tbl_th,
+.table_details_admin .admin_tbl_td {
+  border: 2px solid #2f4045;
+  padding: 8px;
+}
+
+.table_details_admin .admin_tbl_th {
+  background-color: #2f4045;
+  color: white;
+  font-size: 18px;
+}
+
+.img_admin_tbl {
+  width: 150px;
+  height: 150px;
+  padding: 0;
+  border-radius: 5px;
+  margin: 0;
+}
+/*Add Item*/
+.item_full_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px 0;
+  font-family: "Roboto", sans-serif;
+}
 .item_form_admin {
-  border: 2px solid #112027;  /* Solid border */
-  padding: 25px;  /* Reduced padding */
-  border-radius: 20px;  /* Increased border-radius for a softer look */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);  /* Lighter shadow */
-  width: 400px;  /* Decrease form width for a smaller form */
-  margin: 30px auto;  /* Center the form with margin */
+  border: 2px solid #112027;
+  padding: 25px;
+  border-radius: 5px;
+  width: 450px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
-
-/* Input Styles with Consistent Padding */
+.form_box_item_lable {
+  font-weight: bold;
+  text-transform: capitalize;
+  font-size: 18px;
+}
 .form_box_item_input {
-  padding: 6px 10px;  /* Reduced padding to fit the smaller form */
-  font-size: 14px;  /* Smaller font size */
-  border-radius: 15px;  /* Smaller border-radius to match form size */
-  border: 2px solid #112027;  /* Consistent border */
+  width: 95%;
+  font-size: 17px;
+  padding: 3px 10px;
+  border-radius: 3px;
+  margin: 8px 0;
+  border: 1.5px solid #112027;
+}
+.admin_form_cneter_btn {
+  background-color: #112027;
+  color: white;
+  border: 2px solid #112027;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 3px 10px;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 20px auto 0 auto;
+  display: flex;
+  text-transform: capitalize;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.topic_admin {
+  margin: 25px 0;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+}
+.icon_detail_accept {
+  font-weight: bold;
+  text-align: center;
+}
+.spce_btnd {
+  margin-left: 25px;
+  background-color: green;
+  color: white;
+  padding: 5px;
+  width: 50px;
+  height: 50px;
+  border: 0;
+  text-decoration: none;
+  color: white;
+  font-size: 40px;
+  border-radius: 100%;
+}
+.btn_dash_admin_dlt_tic {
+  margin-left: 25px;
+  background-color: red;
+  color: white;
+  padding: 5px;
+  width: 40px;
+  height: 38px;
+  font-weight: bold;
+  font-size: 25px;
+  cursor: pointer;
+  border-radius: 100%;
+  border: 0;
+}
+.link_reoe {
+  text-decoration: none;
+  color: white;
 }
 
-/* Submit Button with Orange Background */
-.admin_form_submit_btn {
-  background-color: #ff7738;  /* Orange background */
-  color: white;  /* White text for contrast */
-  border: none;  /* No border */
-  border-radius: 15px;  /* Smaller border-radius for consistency */
-  padding: 10px 20px;  /* Adequate padding for a comfortable click area */
-  font-weight: bold;  /* Bold font */
-  text-transform: capitalize;  /* Capitalize text */
-  cursor: pointer;  /* Pointer cursor on hover */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);  /* Consistent shadow */
-  transition: background-color 0.3s;  /* Smooth transition on hover */
+.btn_dash_admin_updt {
+  margin-left: 25px;
+  background-color: green;
+  color: white;
+  padding: 5px;
+  border: 0;
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 5px;
 }
-
-/* Hover Effect for Submit Button */
-.admin_form_submit_btn:hover {
-  background-color: white;  /* Change to white on hover */
-  color: #112027;  /* Darker text on hover */
+.btn_dash_admin_dlt {
+  margin-left: 25px;
+  background-color: red;
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0;
 }
-
-/* Data Card */
 .data_card {
   background-color: #2f4045;
   color: white;
-  padding: 15px; 
-  border-radius: 8px; 
+  font-size: 20px;
+  padding: 15px;
+  width: 350px;
+  border-radius: 8px;
 }
-/* General Button Styling */
-.button {
-  padding: 8px 16px;  /* Padding for comfortable interaction */
-  font-size: 16px;  /* Standard font size */
-  border-radius: 25px;  /* Rounded corners for a softer look */
-  font-weight: bold;  /* Bold font for emphasis */
-  text-transform: capitalize;  /* Capitalize text */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);  /* Subtle shadow for depth */
-  cursor: pointer;  /* Pointer cursor for interactivity */
-  transition: all 0.3s;  /* Smooth transitions for hover effects */
+.dataitem {
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
 }
+.barchart {
+  height: 300px;
+}
+.tblposte{
+  width: 80px;
+  height: 80px;
 
-/* Accept Button Styling */
-.button-accept {
-  background-color: #ff7738;  /* Green background for "Accept" */
-  color: white;  /* White text for contrast */
-  border: 2px solid #ff7738;  /* Matching border color */
-}
-
-/* Decline Button Styling */
-.button-decline {
-  background-color: #ff7738;  /* Red background for "Decline" */
-  color: white;  /* White text for contrast */
-  border: 2px solid #ff7738;  /* Matching border color */
-}
-
-/* Hover Effects */
-.button:hover {
-  background-color: white;  /* Change to white on hover */
-  color: #112027;  /* Darker text on hover */
-  border: 2px solid #112027;  /* Border color on hover */
-}
-
-.button-accept:hover {
-  background-color: white;  /* Change to white on hover */
-  color: #4CAF50;  /* Green text on hover */
-  border: 2px solid #4CAF50;  /* Border changes to green */
-}
-
-.button-decline:hover {
-  background-color: white;  /* Change to white on hover */
-  color: #ff7738;  /* Red text on hover */
-  border: 2px solid #ff7738;  /* Border changes to red */
 }

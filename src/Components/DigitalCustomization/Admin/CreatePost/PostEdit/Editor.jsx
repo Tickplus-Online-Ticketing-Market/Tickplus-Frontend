@@ -8,8 +8,6 @@ import { Controlled as ControlledEditor } from 'react-codemirror2';
 import { Box, Typography, Button, styled } from '@mui/material';
 import { CloseFullscreen } from '@mui/icons-material';
 
-
-//customizable/editorble  code editor interface 
 const Container = styled(Box)`
     flex-grow: 1;
     flex-basis: 0;

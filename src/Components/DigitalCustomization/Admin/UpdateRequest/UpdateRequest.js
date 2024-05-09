@@ -12,7 +12,7 @@ function UpdateRequest() {
   useEffect(() => {
     const fetchHandler = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/request/${id}`);
+        const response = await axios.get(`http://localhost:3030/digital-customization/${id}`);
         setInputs(response.data.reques);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -22,7 +22,7 @@ function UpdateRequest() {
   }, [id]);
   const sendRequest = async () => {
     await axios
-      .put(`http://localhost:8080/request/${id}`, {
+      .put(`http://localhost:3030/digital-customization/${id}`, {
         name: String(inputs.name),
         phone: String(inputs.phone),
         message: String(inputs.message),
@@ -42,7 +42,7 @@ function UpdateRequest() {
 
     sendRequest().then(() => {
       window.alert("Status Add successfully!");
-      history("/compleatereq");
+      history("/digital-customization/compleatereq");
     });
   };
   return (

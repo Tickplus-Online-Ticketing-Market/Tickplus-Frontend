@@ -6,9 +6,6 @@ import Sidebar from "../SideBar/Sidebar";
 import Home from "./PostEdit/Home";
 import DataProvider from "./PostEdit/context/DataProvider";
 import NavBar from "../NavBar/NavBar";
-
-//updating the code 
-
 function UpdatePost() {
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState();
@@ -16,9 +13,9 @@ function UpdatePost() {
   const id = useParams().id;
 
   useEffect(() => {
-    const fetchHandler = async () => {   //fetch exissting data from
-      try {                              // form allows users to input or update name, status, and code, as      
-        const response = await axios.get(`http://localhost:8080/request/${id}`);
+    const fetchHandler = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3030/digital-customization/${id}`);
         setInputs(response.data.reques);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -27,12 +24,12 @@ function UpdatePost() {
     fetchHandler();
   }, [id]);
 
-  const photoUpload = async () => {   //upload images
-    const formData = new FormData();//form data is an array by append new data added to it
+  const photoUpload = async () => {
+    const formData = new FormData();
     formData.append("file", file);
 
     await axios
-      .post(`http://localhost:8080/request/${id}`, formData)
+      .post(`http://localhost:3030/digital-customization/${id}`, formData)
       .then((res) => {
       })
       .catch((err) => {
@@ -40,9 +37,9 @@ function UpdatePost() {
       });
   };
 
-  const sendRequest = async () => { //allows updating
+  const sendRequest = async () => {
     await axios
-      .put(`http://localhost:8080/request/${id}`, { //update the already existing data
+      .put(`http://localhost:3030/digital-customization/${id}`, {
         name: String(inputs.name),
         phone: String(inputs.phone),
         code: String(inputs.code),
@@ -50,21 +47,21 @@ function UpdatePost() {
       })
       .then((res) => res.data);
   };
-  const handleChange = (e) => { 
+  const handleChange = (e) => {
     setInputs((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
-  const handleSubmit = async (e) => {  //handle submissin
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(inputs);
 
-    photoUpload(); //update photos
+    photoUpload();
 
-    sendRequest().then(() => {     //update the request on the backend with the data from the inputs state.
+    sendRequest().then(() => {
       window.alert("Status Add successfully!");
-      history("/compleatereq");
+      history("/digital-customization/compleatereq");
     });
   };
   return (
@@ -114,7 +111,7 @@ function UpdatePost() {
                 value={inputs.code}
                 onChange={handleChange}
                 name="code"
-                required//allows to select a file from outside
+                required
               />
                           <input type="file" onChange={(e) => setFile(e.target.files[0])} />
               <br></br>

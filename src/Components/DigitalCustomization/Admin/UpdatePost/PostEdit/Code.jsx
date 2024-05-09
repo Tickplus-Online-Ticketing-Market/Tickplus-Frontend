@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-//components     //Structured enviroment for compiler
+//components
 import Editor from "./Editor";
 
 import { Box, styled } from "@mui/material";
@@ -47,3 +47,4 @@ const Code = () => {
 };
 
 export default Code;
+

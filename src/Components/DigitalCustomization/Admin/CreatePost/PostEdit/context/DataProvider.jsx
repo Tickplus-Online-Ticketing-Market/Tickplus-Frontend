@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 
-//this part helps to read and update this state without direct prop passing
+
 export const DataContext = createContext(null);
 
 const DataProvider = ({ children }) => {

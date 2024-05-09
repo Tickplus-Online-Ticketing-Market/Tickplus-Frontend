@@ -6,9 +6,8 @@ import "../../request.css";
 import Sidebar from "../SideBar/Sidebar";
 import NavBar from "../NavBar/NavBar";
 
-const URL = "http://localhost:8080/request";
+const URL = "http://localhost:3030/digital-customization";
 
-//one that with the create button
 const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);
 };
@@ -83,14 +82,14 @@ function OnGoing() {
               </div>
             ) : (
               <tbody>
-                {reques.map((item, index) => (      //map send all the details of the each id(disply array)
-                  <tr className="admin_tbl_tr" key={index}>     
+                {reques.map((item, index) => (
+                  <tr className="admin_tbl_tr" key={index}>
                     <td className="admin_tbl_td">{item._id}</td>
                     <td className="admin_tbl_td">{item.name}</td>
                     <td className="admin_tbl_td">{item.phone}</td>
                     <td className="admin_tbl_td">
                       <Link
-                        to={`/createpost/${item._id}`} //link to the compiler
+                        to={`/digital-customization/createpost/${item._id}`}
                         className="btn_dash_admin"
                       >
                         Create

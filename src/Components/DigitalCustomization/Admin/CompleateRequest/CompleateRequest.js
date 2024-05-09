@@ -7,9 +7,9 @@ import "../../request.css";
 import Sidebar from "../SideBar/Sidebar";
 import NavBar from "../NavBar/NavBar";
 
-const URL = "http://localhost:8080/request";
+const URL = "http://localhost:3030/digital-customization";
 
-const fetchHandler = async () => {   //display data from request form/backend
+const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);
 };
 
@@ -19,7 +19,7 @@ function CompleateRequest() {
   useEffect(() => {
     fetchHandler().then((data) => {
       const acceptedRequests = data.reques.filter(
-        (item) => item.onstatus === "Done"  //to keep only the once with onstatus done
+        (item) => item.onstatus === "Done"
       );
       setRequest(acceptedRequests);
     });
@@ -35,7 +35,7 @@ function CompleateRequest() {
 
   /*Delete Function */
   const history = useNavigate();
-  const deleteHandler = async (_id) => { //delete a request by its id
+  const deleteHandler = async (_id) => {
     // Define _id as a parameter
     const confirmed = window.confirm(
       "Are you sure you want to delete this Details?"
@@ -45,7 +45,7 @@ function CompleateRequest() {
       try {
         await axios.delete(`${URL}/${_id}`); // Correct URL construction
         window.alert("delete successfully!");
-        history("/compleatereq");
+        history("/digital-customization/compleatereq");
         window.location.reload(); // Reload the page
       } catch (error) {
         // Handle deletion error if needed
@@ -58,7 +58,7 @@ function CompleateRequest() {
       <Sidebar />
       <NavBar />
       <div className="child_clas">
-        <h1 className="topic_admin">Completed Request</h1>
+        <h1 className="topic_admin">Compleate Request</h1>
         <div>
           <div className="dash_button_set">
             <button className="btn_dash_admin" onClick={handlePrint}>
@@ -84,7 +84,7 @@ function CompleateRequest() {
                     <td className="admin_tbl_td">{item.phone}</td>
                     <td className="admin_tbl_td">
                       <img
-                        src={`http://localhost:8080/${item.profilePicture}`}
+                        src={`http://localhost:3030/${item.profilePicture}`}
                         alt="POSTER"
                         className="tblposte"
                       />
@@ -93,14 +93,14 @@ function CompleateRequest() {
                       {/* Pass item._id to deleteHandler */}
 
                       <Link
-                        to={`/updatepost/${item._id}`} //to update
+                        to={`/digital-customization/updatepost/${item._id}`}
                         className="btn_dash_admin_updt"
                       >
                         Update
                       </Link>
 
                       <button
-                        onClick={() => deleteHandler(item._id)}//item it is in deletation handler
+                        onClick={() => deleteHandler(item._id)}
                         className="btn_dash_admin_dlt"
                       >
                         Delete

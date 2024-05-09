@@ -5,32 +5,24 @@ import { useNavigate } from "react-router";
 import "../../request.css";
 import Sidebar from "../SideBar/Sidebar";
 import NavBar from "../NavBar/NavBar";
-//form after accepting
-
 function AccceptRequest() {
-  const [inputs, setInputs] = useState({}); //initialize the empty object
-  const history = useNavigate(); //history("/requestdetails")
+  const [inputs, setInputs] = useState({});
+  const history = useNavigate();
   const id = useParams().id;
-
-  useEffect(() => {  //execute the code when id dependency changes
-    //data fetching
+  useEffect(() => {
     const fetchHandler = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/request/${id}`);
-        setInputs(response.data.reques);//disply retrived data only show the one that we want them to show
+        const response = await axios.get(`http://localhost:3030/digital-customization/${id}`);
+        setInputs(response.data.reques);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchHandler();
   }, [id]);
-
-  //PUT for updating existing resources   creating new resource-post
-
-
   const sendRequest = async () => {
-    await axios      //PUT update curruntly avilable data
-      .put(`http://localhost:8080/request/${id}`, {   //PUT sends an object containing STRING name phone msg status
+    await axios
+      .put(`http://localhost:3030/digital-customization/${id}`, {
         name: String(inputs.name),
         phone: String(inputs.phone),
         message: String(inputs.message),
@@ -40,8 +32,8 @@ function AccceptRequest() {
   };
   const handleChange = (e) => {
     setInputs((prevState) => ({
-      ...prevState, //creating new object without reffecting exissting 
-      [e.target.name]: e.target.value, //e updates the inputs state based on the name attribute 
+      ...prevState,
+      [e.target.name]: e.target.value,
     }));
   };
   const handleSubmit = async (e) => {
@@ -57,7 +49,6 @@ function AccceptRequest() {
     <div>
       <Sidebar />
       <NavBar />
-      //after accepting the form
       <div className="child_clas">
         <h1 className="topic_admin">Accept Request</h1>
         <div className="item_full_box">
