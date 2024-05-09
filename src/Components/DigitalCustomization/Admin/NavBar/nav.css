@@ -1,0 +1,45 @@
+.nav_bar_main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #bbdeee, #aacccd); /* Gradient for subtle transition */
+  width: 84%; /* Already specified width */
+  padding: 10px 30px; /* Uniform padding */
+  border-radius: 10px; /* Rounded corners for a softer look */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin-left: auto; /* Right-align the bar */
+}
+
+.bell_nav {
+  font-size: 35px;
+  margin-right: 20px;
+  color: #2a2a2a; /* Dark color for contrast */
+  transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.bell_nav:hover {
+  color: #ff7738; /* Hover effect to match other icons */
+}
+
+.user_icon_nav {
+  font-size: 35px;
+  color: #ff7738; /* Consistent color with hover */
+  transition: transform 0.3s; /* Smooth transition for hover effect */
+}
+
+.user_icon_nav:hover {
+  transform: scale(1.1); /* Hover effect to add a bit of scale */
+}
+
+.topic_nav_bar {
+  font-size: 1.2em; /* Slightly larger font for emphasis */
+  color: #ff7738; /* Consistent theme color */
+  text-transform: capitalize; /* Ensure capitalization */
+  font-weight: bold; /* Bold text for emphasis */
+  text-align: center; /* Center text alignment */
+  transition: text-shadow 0.3s; /* Smooth transition for hover effect */
+}
+
+.topic_nav_bar:hover {
+  text-shadow: 0 2px 10px rgba(255, 119, 56, 0.5); /* Hover effect with shadow */
+}
