@@ -6,7 +6,6 @@ import { ToastContainer } from "react-toastify";
 import RetriveMyBidsData from "./RetriveBidData";
 import CreateBidModal from "./CreateBidModal";
 import TableDraw from "./TableDraw";
-import { AuctionListingSearch as SearchBox } from "../MyAuctionListings/AuctionListingSearch";
 
 export default function MyAuctionListings() {
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -29,9 +28,7 @@ export default function MyAuctionListings() {
 
   return (
     <div className=" overflow-auto">
-      <div className=" overflow-auto flex flex-row justify-between bg-gray-200 border-none mx-6 my-5 min-h-10 max-h-12">
-        <SearchBox />
-      </div>
+      <div className=" overflow-auto flex flex-row justify-between bg-gray-200 border-none mx-6 my-5 min-h-10 max-h-12"></div>
 
       <TableDraw tableData={auctionData} onUpdate={getChanges} />
       <CreateBidModal
