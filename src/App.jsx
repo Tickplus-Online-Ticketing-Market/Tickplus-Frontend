@@ -7,6 +7,7 @@ import Promotional from "./Components/EventLaunching/Promotional/Promotional";
 import Consultation from "./Components/EventLaunching/Consultation/Consultation";
 import AdminEvents from "./Components/EventLaunching/Event/Events";
 import Sponsorship from "./Components/EventLaunching/Sponsorship/Sponsorship";
+import Analyze from "./Components/EventLaunching/Analyze/Analyze";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
           <Route exact path="/promo" element={<Promotional />} />
           <Route exact path="/consalt" element={<Consultation />} />
           <Route exact path="/spons" element={<Sponsorship />} />
+          <Route exact path="/analyze" element={<Analyze />} />
+
         </Routes>
       </Router>
     </div>
