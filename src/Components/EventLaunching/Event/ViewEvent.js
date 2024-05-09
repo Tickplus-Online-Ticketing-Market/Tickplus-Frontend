@@ -29,7 +29,7 @@ const ViewEvent = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/events/${id}`);
+        const response = await axios.get(`http://localhost:3030/events/${id}`);
         setEvent(response.data.event);
         setFormData(response.data.event);
         setLoading(false);
@@ -49,7 +49,7 @@ const ViewEvent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3001/events/${id}`, formData);
+      await axios.put(`http://localhost:3030/events/${id}`, formData);
       alert("Event updated successfully.");
       setEditMode(false);
       setEditCount((prevCount) => prevCount + 1);
@@ -64,7 +64,7 @@ const ViewEvent = () => {
     );
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:3001/events/${id}`);
+        await axios.delete(`http://localhost:3030/events/${id}`);
         alert("Event deleted successfully.");
         
         window.location.replace("/");

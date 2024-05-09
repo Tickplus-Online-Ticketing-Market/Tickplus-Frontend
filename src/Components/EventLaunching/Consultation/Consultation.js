@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-//import axios from "axios";
+import axios from "axios";
 import "./consultation.css";
 import Sidebar from "../SideBar/Sidebar";
 import NavBar from "../NavBar/NavBar";
@@ -31,7 +31,7 @@ const RequesConsultant = () => {
   const handleSubmit = async (e) => {                    //handles form submission
     e.preventDefault();                                  // Prevent the default form submission behavior
     try {
-     // await axios.post("http://localhost:3001/consultant/", inputs);      //  add a new event using the 'inputs'
+      await axios.post("http://localhost:3030/consultant/", inputs);      //  add a new event using the 'inputs'
       alert("Request sended successfully.");                             
 
       window.location.reload(); // Navigate to events page after successful submission

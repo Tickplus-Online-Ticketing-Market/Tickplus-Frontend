@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import '../Promotional/events.css'
 import Sidebar from "../SideBar/Sidebar";
 import NavBar from "../NavBar/NavBar";
+import axios from "axios";
 
 const AddEvent = () => {
   const navigate = useNavigate();          // navigate  a different location application.
@@ -28,11 +29,11 @@ const AddEvent = () => {
       [name]: value,
     }));
   };
-
+ 
   const handleSubmit = async (e) => {                    //handles form submission
     e.preventDefault();                                  // Prevent the default form submission behavior
     try {
-   //   await axios.post("http://localhost:3001/events/", inputs);      //  add a new event using the 'inputs'
+     await axios.post("http://localhost:3030/events", inputs);      //  add a new event using the 'inputs'
       alert("Event added successfully.");                             
 
       window.location.reload(); // Navigate to events page after successful submission

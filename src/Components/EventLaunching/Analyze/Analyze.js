@@ -21,7 +21,7 @@ function Analyze() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/events");
+        const response = await axios.get("http://localhost:3030/events");
         const events = response.data.events;
         setEventCount(events.length);
         const totalEditCount = events.reduce(

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-//import axios from "axios";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import Sidebar from "../SideBar/Sidebar";
 import NavBar from "../NavBar/NavBar";
@@ -63,9 +63,9 @@ const Events = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-     //   const response = await axios.get("http://localhost:3001/events");
-      //  setEvents(response.data.events);
-        //setEventCount(response.data.events.length);
+        const response = await axios.get("http://localhost:3030/events");
+        setEvents(response.data.events);
+        setEventCount(response.data.events.length);
       } catch (error) {
         setAlertMessage("Error fetching events.");
       }
