@@ -8,8 +8,6 @@ export default function BuyModel({ visible, onClose }) {
 
     if(!visible) return null;
 
-
-
     return (
         <div
             id='container'
