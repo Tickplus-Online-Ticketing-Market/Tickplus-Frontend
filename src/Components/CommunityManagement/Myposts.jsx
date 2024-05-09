@@ -26,19 +26,17 @@ export default function Myposts() {
 
   const deletePost = async (postId) => {
     try {
-       await axios.delete(`http://localhost:5000/note/${postId}`);
+      await axios.delete(`http://localhost:5000/note/${postId}`);
 
       toast.success("Post Deleted");
 
       fetchPosts();
     } catch (error) {
       toast.error("Post Not Deleted");
-      
     }
   };
 
   const handleDelete = (postId) => {
-    
     deletePost(postId);
   };
 
@@ -54,9 +52,7 @@ export default function Myposts() {
           </p>
           <div className="flex gap-4">
             {/* <Link to={`/Updatepost/${post._id}`}> */}
-            <button
-              className="px-4 py-1 mt-4 bg-primary w-full rounded-md font-bold hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary-dark"
-            >
+            <button className="px-4 py-1 mt-4 bg-primary w-full rounded-md font-bold hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary-dark">
               Edit post
             </button>
             {/* </Link> */}
@@ -75,7 +71,7 @@ export default function Myposts() {
   return (
     <div>
       <div className="flex justify-between items-center">
-        <Link to="/Createpost">
+        <Link to="/community-page/my-posts/create-post">
           <button className="px-3 py-2 ml-4 bg-primary text-white rounded-3xl hover:bg-primary-dark">
             Create Post
           </button>
@@ -92,7 +88,10 @@ export default function Myposts() {
           />
         </div>
       </div>
-      <div className="mt-4 ml-4 grid grid-cols-3 gap-4 " style={{height: "800" }}>
+      <div
+        className="mt-4 ml-4 grid grid-cols-3 gap-4 "
+        style={{ height: "800" }}
+      >
         {posts.map((post, index) => (
           <Card key={index} post={post} />
         ))}

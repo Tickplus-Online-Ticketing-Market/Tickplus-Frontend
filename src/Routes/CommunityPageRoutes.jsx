@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../Components/CommunityManagement/shared/Layout";
 import Community from "../Components/CommunityManagement/Community";
 import Myposts from "../Components/CommunityManagement/Myposts";
+import Createpost from "../Components/CommunityManagement/Createpost";
 
 const CommunityPageRoutes = [
   {
@@ -16,6 +17,10 @@ const CommunityPageRoutes = [
         path: "/community-page/my-posts",
         element: <Myposts />,
       },
+      {
+        path: "/community-page/my-posts/create-post",
+        element: <Createpost />,
+      }
     ],
   },
 ];
