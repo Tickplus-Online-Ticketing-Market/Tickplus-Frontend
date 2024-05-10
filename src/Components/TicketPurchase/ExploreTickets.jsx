@@ -8,6 +8,7 @@ import { IoHeartSharp } from "react-icons/io5";
 export default function ExploreTickets() {
   const [tickets, setTickets] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showMyModel01, setShowMyModel01] = useState(false);
 
   useEffect(() => {
     fetchAllTickets();
@@ -26,15 +27,20 @@ export default function ExploreTickets() {
     setSearchTerm(event.target.value);
   };
 
-  const filteredTickets = tickets.filter((ticket) =>
-    ticket.eventName.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleAddToWishlist = async (ticket) => {
+    try {
+      console.log(ticket)
+      await axios.post("http://localhost:3030/tpp/wishes", ticket);
+      window.alert('Ticket added to wishlist successfully!');
+    } catch (error) {
+      console.error('Error adding to wishlist:', error);
+      window.alert('Failed to add ticket to wishlist. Please try again later.');
+    }
+  };
 
   const TicketCard = ({ ticket }) => {
-
     return (
       <div className="w-[49.25%] bg-secondary bg-opacity-100 h-[12rem] rounded-xl flex justify-between items-center mb-4">
-
         {/* Image div */}
         <div className="bg-accent rounded-xl h-[12rem] w-[60%]">
           <img src="./images/tick+1.png" alt="" />
@@ -61,24 +67,23 @@ export default function ExploreTickets() {
             </button>
             <button 
               type="button" 
-              onClick={() => setShowMyModel01(true)} 
+              onClick={() => handleAddToWishlist(ticket)} 
               className='bg-accent text-primary h-[2.5rem] w-[3rem] rounded hover:scale-95 transition text-xl mr-1'
             >
               <div className='ml-[1rem] mr-[1rem]'>
+                {/*Add to Wishlist Button*/}
                 <IoHeartSharp />
               </div>
             </button>
           </div>
         </div>
-
-        
-
       </div>
     );
   };
 
-  const [showMyModel01, setShowMyModel01] = useState(false);
-  const handleOnClose01 = () => setShowMyModel01(false);
+  const handleCloseModal = () => {
+    setShowMyModel01(false);
+  };
 
   return (
     <div>
@@ -101,9 +106,9 @@ export default function ExploreTickets() {
         </div>
       </div>
       <div className="flex flex-wrap justify-between">
-        {filteredTickets.map((ticket) => <TicketCard key={ticket._id} ticket={ticket} />)}
+        {tickets.map((ticket) => <TicketCard key={ticket._id} ticket={ticket} />)}
       </div>
-      <BuyModel onClose={handleOnClose01} visible={showMyModel01}/>
+      <BuyModel onClose={handleCloseModal} visible={showMyModel01}/>
     </div>
   );
 }
