@@ -4,6 +4,7 @@ import Dashboard from "../Components/SecondaryMarket/Dashboard/Dashboard";
 import MyBids from "../Components/SecondaryMarket/MyBids/MyBids";
 import MyAuctionListings from "../Components/SecondaryMarket/MyAuctionListings/MyAuctionListings";
 import TransactionHistory from "../Components/SecondaryMarket/TransactionHistory";
+import Analytics from "../Components/SecondaryMarket/Analytics/Analytics";
 
 const secondaryMarketRoutes = [
   {
@@ -25,6 +26,10 @@ const secondaryMarketRoutes = [
       {
         path: "/secondary-market/transaction-history",
         element: <TransactionHistory />,
+      },
+      {
+        path: "/secondary-market/analytics",
+        element: <Analytics />,
       },
     ],
   },
