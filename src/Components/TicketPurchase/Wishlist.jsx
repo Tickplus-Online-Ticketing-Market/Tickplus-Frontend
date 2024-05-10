@@ -5,7 +5,6 @@ import BuyModel from './models/BuyModel';
 
 export default function Wishlist() {
   const [showMyModel01, setShowMyModel01] = useState(false);
-
   const handleOnClose01 = () => setShowMyModel01(false);
 
   return (

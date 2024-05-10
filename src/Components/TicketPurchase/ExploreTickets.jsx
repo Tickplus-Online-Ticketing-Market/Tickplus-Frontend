@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Counter from './collectors/Counter';
+import BuyModel from './models/BuyModel';
 import { MdOutlineTravelExplore } from 'react-icons/md';
 import { HiOutlineSearch } from 'react-icons/hi';
-import { FaShoppingCart } from 'react-icons/fa';
+import { IoHeartSharp } from "react-icons/io5";
 
 export default function ExploreTickets() {
   const [tickets, setTickets] = useState([]);
@@ -30,76 +30,55 @@ export default function ExploreTickets() {
     ticket.eventName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleAddToWishlist = async (eventId, eventName, unitPrice, qty) => {
-    try {
-      const unitPriceNumber = parseFloat(unitPrice);
-      const qtyNumber = parseInt(qty);
-
-      const totalCost = unitPriceNumber * qtyNumber;
-
-      if (isNaN(totalCost) || totalCost <= 0) {
-        console.error('Invalid totalCost:', totalCost);
-        return;
-      }
-
-      await axios.post("http://localhost:3030/tpp/wishes", {
-        eventId: String(eventId),
-        eventName: String(eventName),
-        totalCost: totalCost,
-      });
-
-      console.log('Item added to wishlist:', { eventId, eventName, totalCost });
-    } catch (error) {
-      console.error('Error adding to wishlist:', error);
-    }
-  };
-
   const TicketCard = ({ ticket }) => {
-    const [qty, setQty] = useState(0);
-
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      handleAddToWishlist(ticket.eventId, ticket.eventName, ticket.unitPrice, qty);
-    };
 
     return (
-      <div className="bg-background relative overflow-x-auto shadow-md sm:rounded-lg px-5 py-5">
-        <div className="bg-accent bg-opacity-100 h-[17rem] rounded-xl flex justify-between items-center">
-          <div className="bg-accent rounded-xl h-[15rem] w-[35rem]">
-            <img src="./images/tick+1.png" alt="" />
-          </div>
+      <div className="w-[49.25%] bg-secondary bg-opacity-100 h-[12rem] rounded-xl flex justify-between items-center mb-4">
 
-          <div div={ticket._id} className="pl-[5rem] mr-[5rem]">
-            <div className="mr-[12rem] flex items-center mb-1 mt-10 text-primary text-sm">
-              <p>Event ID - {ticket.eventId}</p>
-            </div>
-            <div className="mr-[12rem] flex items-center mb-2 text-primary text-2xl">
-              <p>{ticket.eventName}</p>
-            </div>
-            <div className="mr-[12rem] flex items-center mb-2 text-primary text-sm">
-              <p>{ticket.unitPrice} LKR</p>
-            </div>
-            <div className="mr-[12rem] flex items-center mb-2 text-primary text-sm">
-              <form onSubmit={handleSubmit}>
-                <p className="text-background">
-                  Add to Wishlist!{' '}
-                  <Counter value={qty} onChange={(value) => setQty(value)} />
-                </p>
-                <button
-                  type="submit"
-                  className="bg-primary text-background h-[3rem] w-[3.25rem] rounded hover:scale-95 transition text-xl mt-1"
-                >
-                  <div className="flex items-center justify-center">
-                    <FaShoppingCart />
-                  </div>
-                </button>
-              </form>
-            </div>
+        {/* Image div */}
+        <div className="bg-accent rounded-xl h-[12rem] w-[60%]">
+          <img src="./images/tick+1.png" alt="" />
+        </div>
+
+        {/* Details div */}
+        <div div={ticket._id} className="pl-[2rem] mr-[5rem] mb-[2.5rem] mt-[2.5rem] w-[25%]">
+          <div className="flex items-center mb-2 text-accent text-sm font-bold">
+            <p>Event ID - {ticket.eventId}</p>
+          </div>
+          <div className="flex items-center mb-2 text-accent text-2xl font-bold">
+            <p>{ticket.eventName}</p>
+          </div>
+          <div className="flex items-center mb-2 text-primary text-2xl font-bold">
+            <p>{ticket.unitPrice} LKR</p>
+          </div>
+          <div className='flex justify-center'>
+            <button 
+              type="button" 
+              onClick={() => setShowMyModel01(true)} 
+              className='bg-primary text-background h-[2.5rem] w-[6rem] rounded hover:scale-95 transition text-xl mr-1'
+            >
+              Buy
+            </button>
+            <button 
+              type="button" 
+              onClick={() => setShowMyModel01(true)} 
+              className='bg-accent text-primary h-[2.5rem] w-[3rem] rounded hover:scale-95 transition text-xl mr-1'
+            >
+              <div className='ml-[1rem] mr-[1rem]'>
+                <IoHeartSharp />
+              </div>
+            </button>
           </div>
         </div>
+
+        
+
       </div>
     );
   };
+
+  const [showMyModel01, setShowMyModel01] = useState(false);
+  const handleOnClose01 = () => setShowMyModel01(false);
 
   return (
     <div>
@@ -121,9 +100,10 @@ export default function ExploreTickets() {
           />
         </div>
       </div>
-      <div>
+      <div className="flex flex-wrap justify-between">
         {filteredTickets.map((ticket) => <TicketCard key={ticket._id} ticket={ticket} />)}
       </div>
+      <BuyModel onClose={handleOnClose01} visible={showMyModel01}/>
     </div>
   );
 }

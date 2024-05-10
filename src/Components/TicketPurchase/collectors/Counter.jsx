@@ -18,10 +18,10 @@ const Counter = () => {
 
     return (
         <div>
-            <div>{count}</div>
-            <div>
-                <button onClick={decrement} className='bg-primary bg-opacity-50 text-background h-[1.5rem] w-[1.5rem] rounded hover:scale-95 transition text-xl mr-1'>-</button>
-                <button onClick={increment} className='bg-primary bg-opacity-50 text-background h-[1.5rem] w-[1.5rem] rounded hover:scale-95 transition text-xl mr-1'>+</button>
+            <div className='flex justify-center'>
+                <button onClick={decrement} className='flex items-center justify-center bg-primary bg-opacity-50 text-background h-[1.5rem] w-[2rem] rounded hover:scale-95 transition text-xl mr-1'>-</button>
+                    <div className='text-secondary text-xl mr-2.5 ml-2'>{count}</div>
+                <button onClick={increment} className='flex items-center justify-center bg-primary bg-opacity-50 text-background h-[1.5rem] w-[2rem] rounded hover:scale-95 transition text-xl flex items-center'>+</button>
             </div>
         </div>
     );
