@@ -23,14 +23,14 @@ const Sidebar = ({ children }) => {
                 <img src={Logo} alt="Logo" className="nav_logo" />
               </div>
               <p
-                onClick={() => (window.location.href = "/")}
+                onClick={() => (window.location.href = "/events")}
                 className="nav_item"
               >
                 <HiOutlineClipboardList />
                 My Events
               </p>
               <p
-                onClick={() => (window.location.href = "/promo")}
+                onClick={() => (window.location.href = "/events/promo")}
                 className="nav_item"
               >
                 <HiOutlineFilm />
@@ -38,20 +38,20 @@ const Sidebar = ({ children }) => {
               </p>
               <p
                 className="nav_item"
-                onClick={() => (window.location.href = "/consalt")}
+                onClick={() => (window.location.href = "/events/consalt")}
               >
                 <HiUsers />
                 Consultation Services
               </p>
               <p
                 className="nav_item"
-                onClick={() => (window.location.href = "/spons")}
+                onClick={() => (window.location.href = "/events/spons")}
               >
                 <RiMoneyDollarCircleFill />
                 Sponsorship
               </p>
               <p
-                onClick={() => (window.location.href = "/analyze")}
+                onClick={() => (window.location.href = "/events/analyze")}
                 className="nav_item"
               >
                 <IoStatsChart />

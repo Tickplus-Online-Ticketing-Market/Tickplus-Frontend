@@ -1,91 +1,10 @@
-// import React, { useRef } from 'react';
-// import { HiLocationMarker, HiClock, HiCalendar } from 'react-icons/hi';
-// import { IoPerson, IoTicket } from 'react-icons/io5';
-// import {toPng} from 'html-to-image';
-
-// function Template() {
-//   const templateRef = useRef(null);
-
-//   const downloadTemplate = () => {
-//     const node =templateRef.current;
-
-//     toPng(templateRef.current,{cacheBust:true,height:1000})
-//     .then(dataUrl =>{
-//         console.log("Captured Image:",dataUrl);
-
-
-//         const Link= document.createElement("a");
-//         Link.download ="my_name_image.png";
-//         Link.href=dataUrl;
-//         Link.click();
-    
-//     })
-//     .catch(error =>{
-//         console.error("Error capturing screenshot:",error);
-
-//     });
-//   };
-
-//   return (
-//     <div>
-//       <div
-//         ref={templateRef}
-//         className="flex items-center bg-cyan-950 p-2 rounded-xl h-[17rem] w-[full] mb-4">
-//         <div className="flex-1 py-4 flex flex-col gap-0.5">
-//           <p className="text-center text-white" style={{ fontSize: '16px', marginTop: '18px' }}>
-//             Event Name
-//           </p>
-//           <p className="text-white mb-4" style={{ fontSize: '14px' }}>
-//             Event Description: Event Description Event Description Event Description
-//           </p>
-//           <div className="flex items-center">
-//             <HiCalendar size={26} style={{ color: 'white' }} />
-//             <p className="text-white ml-6" style={{ fontSize: '14px' }}>
-//               Event Date
-//             </p>
-//           </div>
-//           <div className="flex items-center">
-//             <HiClock size={26} style={{ color: 'white' }} />
-//             <p className="text-white ml-6" style={{ fontSize: '14px' }}>
-//               Event Time
-//             </p>
-//           </div>
-//           <div className="flex items-center">
-//             <HiLocationMarker size={26} style={{ color: 'white' }} />
-//             <p className="text-white ml-6" style={{ fontSize: '14px' }}>
-//               Event Venue
-//             </p>
-//           </div>
-//           <div className="flex items-center">
-//             <IoPerson size={26} style={{ color: 'white' }} />
-//             <p className="text-white ml-6" style={{ fontSize: '14px' }}>
-//               Event Artist
-//             </p>
-//           </div>
-//           <div className="flex items-center">
-//             <IoTicket size={26} style={{ color: 'white' }} />
-//             <p className="text-white ml-6" style={{ fontSize: '14px' }}>
-//               Event Ticket
-//             </p>
-//           </div>
-//           <button
-//             onClick={downloadTemplate}
-//             className="bg-gray-700 text-white  px-4 py-2 rounded-md ml-4"
-//             style={{ fontSize: '10px' }} >
-//             Download Template
-//           </button>
-//         </div>
-        
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Template;
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState,useEffect } from 'react';
 import { HiLocationMarker, HiClock, HiCalendar } from 'react-icons/hi';
 import { IoPerson, IoTicket } from 'react-icons/io5';
 import { toPng } from 'html-to-image';
+import axios from "axios";
+import { useParams} from "react-router-dom";
+
 
 function Template() {
   const templateRef = useRef(null);
@@ -96,7 +15,26 @@ function Template() {
   const [eventVenue, setEventVenue] = useState('');
   const [eventArtist, setEventArtist] = useState('');
   const [eventTicketRange, setEventTicketRange] = useState('');
-  const [downloadCount, setDownloadCount] = useState(0);
+  const [downloadCount, setDownloadCount] = useState(0); 
+  const { id } = useParams();
+  const currentUser = 1234;
+  
+
+  useEffect(() => {
+    const fetchTemplateCount = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3030/events/report/${currentUser}`);
+        setDownloadCount(response.data.report); 
+        
+      } catch (error) {
+       
+      }
+    };
+
+    fetchTemplateCount();
+  }, [id]);
+
+
 
   const handleEventNameChange = (e) => {
     setEventName(e.target.value);
@@ -120,7 +58,7 @@ function Template() {
     setEventTicketRange(e.target.value);
   };
 
-  const downloadTemplate = () => {
+  const downloadTemplate = async () => {
     toPng(templateRef.current, { cacheBust: true, height: 1000 })
       .then(dataUrl => {
         console.log("Captured Image:", dataUrl);
@@ -130,13 +68,21 @@ function Template() {
         link.href = dataUrl;
         link.click();
 
-        setDownloadCount(prevCount => prevCount + 1); // Update download count
+        
       })
       .catch(error => {
         console.error("Error capturing screenshot:", error);
       });
+
+      try {
+        const response = await axios.put(`http://localhost:3030/events/report/${currentUser}`); 
+        
+      } catch (error) {
+       
+      }
   };
 
+  
   return (
     <div>
       <div
@@ -235,11 +181,7 @@ function Template() {
             </p>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <p className="text-white" style={{ fontSize: '14px', color: 'white' }}>
-              Downloaded {downloadCount} times
-            </p>
-          </div>
+         
 
           <button
             onClick={downloadTemplate}
@@ -248,6 +190,10 @@ function Template() {
           >
             Download Template
           </button>
+
+          <div>
+           <p style={{ color: 'red' }}>Download Count: {downloadCount.temp_count}</p>
+         </div>
         </div>
       </div>
     </div>

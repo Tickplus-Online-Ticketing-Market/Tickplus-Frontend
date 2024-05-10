@@ -15,13 +15,16 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route exact path="/addevent" element={<AddEvent />} />
-          <Route exact path="/" element={<AdminEvents />} />
-          <Route exact path="/admin-events/:id" element={<ViewEvent />} />
-          <Route exact path="/promo" element={<Promotional />} />
-          <Route exact path="/consalt" element={<Consultation />} />
-          <Route exact path="/spons" element={<Sponsorship />} />
-          <Route exact path="/analyze" element={<Analyze />} />
+      
+           
+          <Route exact path="/" element={<AddEvent />} />
+          <Route exact path="/events/addevent" element={<AddEvent />} />
+          <Route exact path="/events" element={<AdminEvents />} />
+          <Route exact path="/events/admin-events/:id" element={<ViewEvent />} />
+          <Route exact path="/events/promo" element={<Promotional />} />
+          <Route exact path="/events/consalt" element={<Consultation />} />
+          <Route exact path="/events/spons" element={<Sponsorship />} />
+          <Route exact path="/events/analyze" element={<Analyze />} />
 
         </Routes>
       </Router>

@@ -34,7 +34,7 @@ const Event = ({ event }) => {
   return (
     <tr className="admin_tbl_tr">
       <td>
-        <Link className="idviewbtn" to={`/admin-events/${_id}`}>
+        <Link className="idviewbtn" to={`/events/admin-events/${_id}`}>
           {_id.substring(0, 5)}
         </Link>
       </td>

@@ -3,7 +3,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts'
 
 const data = [
 	{ name: 'Default template Usage', value: 2 },
-  { name: 'Custom template Usage', value: 8 },
+    { name: 'Custom template Usage', value: 8 },
 
 ]
 
