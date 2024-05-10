@@ -46,6 +46,11 @@ function Analyze() {
     { name: "Default", users: 1},
     { name: "Customized", users: 2 },
   ];
+  const data1 = [
+   
+    { name: "Default", users: 1},
+    { name: "Customized", users: 2 },
+  ];
 
   return (
     <div>
@@ -99,7 +104,7 @@ function Analyze() {
                   <Pie
                     dataKey="users"
                     isAnimationActive={false}
-                    data={data}
+                    data={data1}
                     cx={200}
                     cy={150}
                     outerRadius={80}

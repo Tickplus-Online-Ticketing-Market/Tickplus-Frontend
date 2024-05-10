@@ -21,7 +21,7 @@ const ViewEvent = () => {
     time: "",
     price: "",
   });
-  const [editCount, setEditCount] = useState(0);
+ 
 
 
 
@@ -52,7 +52,6 @@ const ViewEvent = () => {
       await axios.put(`http://localhost:3030/events/${id}`, formData);
       alert("Event updated successfully.");
       setEditMode(false);
-      setEditCount((prevCount) => prevCount + 1);
     } catch (error) {
       // Handle error
     }
@@ -198,7 +197,6 @@ const ViewEvent = () => {
               <p className="card_details">About: {about}</p>
               <p className="card_details">Time: {time} </p>
               <p className="card_details">Price: ${price}</p>
-              <p className="card_details">Edit Count: {editCount}</p>
               <div className="btn_controlset">
                 <button className="btn_con_set" onClick={handleDelete}>
                   Delete
