@@ -72,10 +72,10 @@ export default function RefundRequests() {
                     Contact E-mail 
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Reason
+                    Contact Number
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Additional Note
+                    Reason
                   </th>
                   <th scope="col" className="px-6 py-3">
            
@@ -88,8 +88,8 @@ export default function RefundRequests() {
                     <td className="px-6 py-3 text-background">{refund.event}</td>
                     <td className="px-6 py-3 text-background">{refund.tCode}</td>
                     <td className="px-6 py-4 text-background">{refund.email}</td>
+                    <td className="px-6 py-4 text-background">{refund.mobile}</td>
                     <td className="px-6 py-4 text-background">{refund.reason}</td>
-                    <td className="px-6 py-4 text-background">{refund.addNote}</td>
                     <td className="px-6 py-4 text-primary items-center">
                       <button type="button" onClick={() => handleUpdateRefund(refund._id) } className="bg-secondary text-accent px-3 py-2 rounded hover:scale-95 transition text-xl mr-5">Update Refund</button>
                       <button type="button" onClick={() => deleteRefund(refund._id)} className="bg-primary text-background px-3 py-2 rounded hover:scale-95 transition text-xl">Delete</button>

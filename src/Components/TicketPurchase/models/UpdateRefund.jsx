@@ -6,8 +6,8 @@ export default function UpdateRefund({ visible, onClose, refundId }) {
         event: '',
         tCode: '',
         email: '',
+        mobile: '',
         reason: '',
-        addNote: ''
     });
 
     const handleInputChange = (e) => {
@@ -23,6 +23,7 @@ export default function UpdateRefund({ visible, onClose, refundId }) {
             const response = await axios.put(`http://localhost:3030/tpp/refs/${refundId}`, formData);
             if (response.status === 200) {
                 alert('Refund updated successfully!');
+                onClose(); // Close the modal after successful update
             }
         } catch (error) {
             console.error('Error updating refund:', error);
@@ -71,7 +72,7 @@ export default function UpdateRefund({ visible, onClose, refundId }) {
                     <div className='flex justify-center pr-[2.5rem]'>
                         <input
                             type="text"
-                            placeholder='Event'
+                            placeholder={formData.event}
                             className='text-xl text-text focus:outline-none active:outlines-none h-10 w-[20rem] border-2 border-primary rounded-lg pl-5 mb-5'
                             name="event"
                             value={formData.event}
@@ -82,7 +83,7 @@ export default function UpdateRefund({ visible, onClose, refundId }) {
                     <div className='flex justify-center pr-[2.5rem]'>
                         <input
                             type="text"
-                            placeholder='Ticket Code'
+                            placeholder={formData.tCode}
                             className='text-xl text-text focus:outline-none active:outlines-none h-10 w-[20rem] border-2 border-primary rounded-lg pl-5 mb-5'
                             name="tCode"
                             value={formData.tCode}
@@ -93,32 +94,34 @@ export default function UpdateRefund({ visible, onClose, refundId }) {
                     <div className='flex justify-center pr-[2.5rem]'>
                         <input
                             type="email"
-                            placeholder='Contact E-mail'
+                            placeholder={formData.email}
                             className='text-xl text-text focus:outline-none active:outlines-none h-10 w-[20rem] border-2 border-primary rounded-lg pl-5 mb-5'
                             name="email"
                             value={formData.email}
                             onChange={handleInputChange}
-                            pattern="[a-zA-Z0-9._%+-]+@gmail.com"
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                             required
                         />
                     </div>
                     <div className='flex justify-center pr-[2.5rem]'>
                         <input
                             type="text"
-                            placeholder='Reason'
+                            placeholder={formData.mobile}
                             className='text-xl text-text focus:outline-none active:outlines-none h-10 w-[20rem] border-2 border-primary rounded-lg pl-5 mb-5'
-                            name="reason"
-                            value={formData.reason}
+                            name="mobile"
+                            value={formData.mobile}
                             onChange={handleInputChange}
+                            pattern="[0-9]{10}"
+                            required
                         />
                     </div>
                     <div className='flex justify-center pr-[2.5rem]'>
                         <input
                             type="text"
-                            placeholder='Additional Note'
+                            placeholder={formData.reason}
                             className='text-xl text-text focus:outline-none active:outlines-none h-10 w-[20rem] border-2 border-primary rounded-lg pl-5 mb-5'
-                            name="addNote"
-                            value={formData.addNote}
+                            name="reason"
+                            value={formData.reason}
                             onChange={handleInputChange}
                         />
                     </div>
