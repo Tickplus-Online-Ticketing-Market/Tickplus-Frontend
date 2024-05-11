@@ -36,35 +36,35 @@ const renderCustomizedLabel = ({
   );
 };
 
-export default function Piecharts() {
+export default function Piecharts({ data }) {
   return (
-    <div className="w-[20rem] h-[22rem] bg-background p-4 rounded-lg     flex flex-col">
-      <strong className="text-gray-700 font-medium">
-        Various Auction Prices
-      </strong>
-      <div className="mt-3 w-full flex-1 text-xs">
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart width={400} height={300}>
-            <Pie
-              data={data}
-              cx="50%"
-              cy="45%"
-              labelLine={false}
-              label={renderCustomizedLabel}
-              outerRadius={105}
-              fill="#fafafa"
-              dataKey="value"
-            >
-              {data.map((_, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
-            </Pie>
-            <Legend />
-          </PieChart>
-        </ResponsiveContainer>
+    <div className=" overflow-hidden">
+      <div className="text-gray-700 m-4 font-bold">Auction Status Data</div>
+      <div className="w-[20rem] h-[22rem] bg-[#eeeeee] rounded-2xl flex flex-col">
+        <div className="w-full flex-1 text-xs p-4">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart width={400} height={300}>
+              <Pie
+                data={data}
+                cx="50%"
+                cy="45%"
+                labelLine={false}
+                label={renderCustomizedLabel}
+                outerRadius={105}
+                fill="#fafafa"
+                dataKey="value"
+              >
+                {data.map((_, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+              <Legend />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );

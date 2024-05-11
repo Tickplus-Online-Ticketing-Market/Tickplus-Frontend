@@ -43,7 +43,7 @@ const TableDraw = (prpos) => {
   }
   return (
     <div className="overflow-hidden rounded-2xl border-none shadow-md m-5">
-      <table className="w-full border-collapse bg-white text-left text-gray-500">
+      <table className="w-full border-collapse bg-white text-left text-gray-500 text-lg">
         <thead className="bg-accent">
           <tr>
             <th scope="col" className="px-6 py-4 font-bold text-primary">
@@ -76,7 +76,7 @@ const TableDraw = (prpos) => {
             </th>
           </tr>
         </thead>
-        <tbody className="divide-white divide-y-4 border-t-4 border-t-white">
+        <tbody className="divide-white divide-y-4 border-t-4 border-t-white text-[0.9rem] font-semibold">
           {prpos.tableData.map((item) => (
             <TableRowDraw key={item.id} item={item} />
           ))}

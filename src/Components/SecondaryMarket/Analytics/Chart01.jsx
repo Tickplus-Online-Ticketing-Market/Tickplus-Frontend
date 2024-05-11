@@ -53,34 +53,36 @@ const data = [
   },
 ];
 
-export default function Barcharts() {
+export default function Barcharts({ data }) {
   return (
-    <div className="h-[22rem] bg-background p-4 rounded-lg  shadow-xl flex flex-col flex-1">
-      <strong className="text-text1 font-bold text-lg">
+    <div className=" overflow-hidden">
+      <div className="text-gray-700 m-4 font-bold w-[800px]">
         Our Secondary Market Auction Gave More Value to Our Customers
-      </strong>
-      <div className="mt-3 w-full flex-1 text-xs">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-              top: 20,
-              right: 10,
-              left: -10,
-              bottom: 0,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3 0 0" vertical={false} />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="Market" fill="#122128" />
-            <Bar dataKey="Sold" fill="#ff7637" />
-          </BarChart>
-        </ResponsiveContainer>
+      </div>
+      <div className="h-[22rem] bg-[#eeeeee] rounded-2xl flex flex-col">
+        <div className="w-full flex-1 text-xs p-4">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+              width={800}
+              height={200}
+              data={data}
+              margin={{
+                top: 20,
+                right: 10,
+                left: 10,
+                bottom: 0,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3 0 0" vertical={false} />
+              <XAxis dataKey="ticketId" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="startingPrice" fill="#122128" />
+              <Bar dataKey="winningBid" fill="#ff7637" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );
