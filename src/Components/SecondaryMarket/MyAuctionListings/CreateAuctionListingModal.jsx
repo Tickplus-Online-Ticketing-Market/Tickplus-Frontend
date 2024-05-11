@@ -100,16 +100,6 @@ export function CreateAuctionModal({ visible, onClose }) {
           </div>
         </div>
         <div className="w-fit flex-1 p-10">
-          <div className="bg-background px-4 flex flex-row justify-start items-center border-[2.4px] border-primary rounded-full gap-2 text-primary">
-            <span className="text-xl">
-              <HiSearch />
-            </span>
-            <input
-              type="text"
-              placeholder="Search tickets by Ticket Number ..."
-              className="text-start bg-background focus:outline-none active:outline-none h-8 w-96 text-text placeholder-primary border-none bg-none pb-0.5 italic"
-            />
-          </div>
           <form
             onSubmit={createAuctionListing}
             className="items-center align-middle w-fit"
