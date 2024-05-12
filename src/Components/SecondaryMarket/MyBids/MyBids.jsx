@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
 import currentLoggedinUser from "../lib/helpers/getCurrentLoggedinUser";
 import { ToastContainer } from "react-toastify";
 import { HiSearch } from "react-icons/hi";
@@ -9,6 +10,7 @@ import CreateBidModal from "./CreateBidModal";
 import TableDraw from "./TableDraw";
 
 export default function MyAuctionListings() {
+  const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [bidData, setBidData] = useState([]);
   const [tableUpdate, setTableUpdate] = useState(false);
@@ -19,6 +21,7 @@ export default function MyAuctionListings() {
   };
 
   useEffect(() => {
+    setLoading(true);
     RetriveMyBidsData(currentLoggedinUser.currentUserRoleId)
       .then((data) => {
         setBidData(data);
@@ -26,8 +29,11 @@ export default function MyAuctionListings() {
       })
       .catch((error) => {
         console.error(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-  }, [showCreateModal, tableUpdate, searchQuery]);
+  }, [showCreateModal, tableUpdate]);
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -55,6 +61,14 @@ export default function MyAuctionListings() {
 
   return (
     <div className=" overflow-auto">
+      <div
+        id="loading-bg"
+        className={`fixed inset-0 bg-white bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-[5000] ${
+          !loading && "hidden"
+        }`}
+      >
+        <PulseLoader color="#ff7637" loading={loading} />
+      </div>
       <div className=" overflow-visible flex flex-row justify-between bg-gray-200 border-none mx-6 my-5  min-h-10 max-h-12">
         <div className=" bg-background px-4 flex flex-row justify-between items-center border-[2.4px] border-primary rounded-full gap-2 text-primary">
           <span className="text-xl">{<HiSearch />}</span>

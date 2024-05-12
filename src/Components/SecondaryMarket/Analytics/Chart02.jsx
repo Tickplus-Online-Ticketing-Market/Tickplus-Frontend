@@ -9,7 +9,7 @@ const data = [
 ];
 
 const RADIAN = Math.PI / 180;
-const COLORS = ["#ff7637", "#122128", "#48525b"];
+const COLORS = ["#ff7637", "#122128", "#48525b", "#000"];
 
 const renderCustomizedLabel = ({
   cx,

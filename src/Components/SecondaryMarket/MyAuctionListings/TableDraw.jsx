@@ -79,12 +79,16 @@ const TableDraw = (prpos) => {
             </button>
             <button
               className={`text-2xl ${
-                item.auctionStatus === "Completed"
+                item.auctionStatus === "Completed" ||
+                item.auctionStatus === "Cancelled"
                   ? "text-text cursor-not-allowed"
                   : ""
               }`}
               onClick={() => handleUpdate(item._id)}
-              disabled={item.auctionStatus === "Completed"}
+              disabled={
+                item.auctionStatus === "Completed" ||
+                item.auctionStatus === "Cancelled"
+              }
             >
               {<MdEditSquare />}
             </button>

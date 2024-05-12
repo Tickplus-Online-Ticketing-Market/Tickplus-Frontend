@@ -10,49 +10,6 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  {
-    name: "TIK1458369",
-    Market: 270,
-    Sold: 550,
-  },
-  {
-    name: "TIK7894526",
-    Market: 100,
-    Sold: 80,
-  },
-  {
-    name: "TIK7895541",
-    Market: 270,
-    Sold: 350,
-  },
-  {
-    name: "TIK1458369",
-    Market: 450,
-    Sold: 580,
-  },
-  {
-    name: "TIK1458369",
-    Market: 899,
-    Sold: 640,
-  },
-  {
-    name: "TIK1458369",
-    Market: 466,
-    Sold: 550,
-  },
-  {
-    name: "TIK1458369",
-    Market: 270,
-    Sold: 795,
-  },
-  {
-    name: "TIK1458369",
-    Market: 270,
-    Sold: 456,
-  },
-];
-
 export default function Barcharts({ data }) {
   return (
     <div className=" overflow-hidden">
