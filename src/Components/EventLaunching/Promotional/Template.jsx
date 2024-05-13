@@ -18,7 +18,7 @@ function Template() {
   const [downloadCount, setDownloadCount] = useState(0); 
   const { id } = useParams();
   const currentUser = 1234;
-  
+
 
   useEffect(() => {
     const fetchTemplateCount = async () => {
@@ -34,7 +34,7 @@ function Template() {
     fetchTemplateCount();
   }, [id]);
 
-
+ 
 
   const handleEventNameChange = (e) => {
     setEventName(e.target.value);
@@ -192,7 +192,7 @@ function Template() {
           </button>
 
           <div>
-           <p style={{ color: 'red' }}>Download Count: {downloadCount.temp_count}</p>
+           <p style={{ color: 'red' }}>Download Count: {1}</p>
          </div>
         </div>
       </div>
