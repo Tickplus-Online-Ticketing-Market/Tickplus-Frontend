@@ -3,12 +3,12 @@ import axios from 'axios';
 import { MdOutlineTravelExplore } from 'react-icons/md';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { IoHeartSharp } from 'react-icons/io5';
-import BuyModel from './models/BuyModel';
+import PaymentModel from './models/PaymentModel'; // Import WishlistBuy from BuyModel.jsx
 
 export default function ExploreTickets() {
   const [tickets, setTickets] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [showMyModel01, setShowMyModel01] = useState(false);
+  const [showMyModel02, setShowMyModel02] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState(null); // State to store the selected ticket
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function ExploreTickets() {
 
   const handleBuyTicket = (ticket) => {
     setSelectedTicket(ticket);
-    setShowMyModel01(true);
+    setShowMyModel02(true);
   };
 
   const TicketCard = ({ ticket }) => {
@@ -91,7 +91,7 @@ export default function ExploreTickets() {
               className="bg-accent text-primary h-[2.5rem] w-[3rem] rounded hover:scale-95 transition text-xl mr-1"
             >
               <div className="ml-[1rem] mr-[1rem]">
-                {/*Add to Wishlist Button*/}
+                {/* Add to Wishlist Button */}
                 <IoHeartSharp />
               </div>
             </button>
@@ -102,7 +102,7 @@ export default function ExploreTickets() {
   };
 
   const handleCloseModal = () => {
-    setShowMyModel01(false);
+    setShowMyModel02(false);
   };
 
   // Filter tickets based on searchTerm
@@ -135,8 +135,8 @@ export default function ExploreTickets() {
           <TicketCard key={ticket._id} ticket={ticket} />
         ))}
       </div>
-      {/* Pass selectedTicket and handleCloseModal to BuyModel */}
-      <BuyModel ticket={selectedTicket} onClose={handleCloseModal} visible={showMyModel01} />
+      {/* Pass selectedTicket and handleCloseModal to WishlistBuy */}
+      <PaymentModel selectedItem={selectedTicket} onClose={handleCloseModal} visible={showMyModel02} />
     </div>
   );
 }

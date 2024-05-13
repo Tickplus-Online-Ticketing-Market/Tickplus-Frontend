@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ImHeart } from "react-icons/im";
 import { ImBin } from "react-icons/im";
-import WishlistBuy from './models/WishlistBuy';
+import WishlistBuy from './models/PaymentModel';
 import axios from 'axios';
 
 export default function Wishlist() {
