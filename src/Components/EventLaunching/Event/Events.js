@@ -41,7 +41,7 @@ const Event = ({ event }) => {
       <td>{name}</td>
       <td>{new Date(date).toLocaleDateString()}</td>
       <td>{artist}</td>
-      <td>{time} minutes</td>
+      <td>{time} </td>
       <td>${price}</td>
       <td>{isExpired ? "Expired" : remainingTime}</td>
       <td>
