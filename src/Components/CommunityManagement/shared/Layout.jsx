@@ -2,6 +2,8 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import Header from './Header'
+import { ToastContainer } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css"
 
 export default function Layout() {
   return (
@@ -9,7 +11,10 @@ export default function Layout() {
         <Sidebar />
         <div className='flex flex-col flex-1'>
           <Header />
-          <div className= 'p-4 overflow-auto'>{<Outlet />}</div>
+          <div className= 'p-4 overflow-auto'>
+            {<ToastContainer/>}
+            {<Outlet />}
+          </div>
         </div>  
     </div>
   )

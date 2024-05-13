@@ -3,6 +3,7 @@ import Layout from "../Components/CommunityManagement/shared/Layout";
 import Community from "../Components/CommunityManagement/Community";
 import Myposts from "../Components/CommunityManagement/Myposts";
 import Createpost from "../Components/CommunityManagement/Createpost";
+import Updatepost from "../Components/CommunityManagement/Updatepost";
 
 const CommunityPageRoutes = [
   {
@@ -20,7 +21,11 @@ const CommunityPageRoutes = [
       {
         path: "/community-page/my-posts/create-post",
         element: <Createpost />,
-      }
+      },
+      {
+        path: "/community-page/my-posts/update-post/:id",
+        element: <Updatepost />,
+      },
     ],
   },
 ];

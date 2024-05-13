@@ -65,7 +65,7 @@ export default function CreatePost() {
     } else {
       try {
         
-        await axios.post("http://localhost:5000/Createpost", postData);
+        await axios.post("http://localhost:5000/community-page/posts", postData);
 
         // erase the form fields
         setPostData({

@@ -1,25 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import tick from "../../Assets/CommunityManagement/tickplus.png";
-// Sample post data
 
-const dummyPost = {
-  title: ["topic"],
-  body: ["description"],
-
-  files: [
-    {
-      type: "image/jpeg",
-      url: "https://via.placeholder.com/300",
-    },
-  ],
-  comments: [],
-};
-
-export default function Post({ visible, onClose }) {
+export default function Post({ visible, onClose, post }) {
   const [newComment, setNewComment] = useState("");
-  const [comments, setComments] = useState(dummyPost.comments);
+  const [comments, setComments] = useState([]);
   const [reactCount, setReactCount] = useState(0);
-  // This is Post page
 
   const handleAddComment = () => {
     if (newComment.trim() !== "") {
@@ -43,7 +28,21 @@ export default function Post({ visible, onClose }) {
     }
   };
 
-  if (!visible) return null;
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [onClose]);
+
+  if (!visible || !post) return null;
 
   return (
     <div
@@ -66,41 +65,19 @@ export default function Post({ visible, onClose }) {
 
           <div className="flex-1 flex flex-col justify-center items-center">
             <img src={tick} alt="logo" />
-            {/* {dummyPost.files
-              .filter((file) => file.type.startsWith("image/"))
-              .map((file, index) => (
-                <div key={index} className="mb-4">
-                  
-                   <img
-                    src={file.url}
-                    alt={`Image ${index + 1}`}
-                    className="w-full h-auto rounded-md"
-                    style={{ maxWidth: "100%", maxHeight: "100%" }}
-                  />
-                </div> 
-              ))} */}
+            {/* Render post content */}
+            <h2 className="text-2xl text-primary font-bold mb-2">{post.title}</h2>
+            <div className="text-background mb-6">{post.body}</div>
           </div>
 
-          {/* Right side description */}
+          {/* Comments */}
           <div className="flex-1 pl-8">
-            <div>
-              <h2 className="text-2xl text-primary font-bold mb-6">
-                {dummyPost.title}
-              </h2>
-
-              <div className="text-background mb-6">{dummyPost.body}</div>
-            </div>
-
-            {/* Comments */}
-            <div className="mb-6">
-              <h3 className="text-xl text-primary font-bold mb-2">Comments</h3>
-              {comments.map((comment) => (
-                <div key={comment.id} className="mb-2 text-background">
-                  <strong>{comment.user}</strong>: {comment.content}
-                </div>
-              ))}
-            </div>
-
+            <h3 className="text-xl text-primary font-bold mb-2">Comments</h3>
+            {comments.map((comment) => (
+              <div key={comment.id} className="mb-2 text-background">
+                <strong>{comment.user}</strong>: {comment.content}
+              </div>
+            ))}
             {/* Add comment */}
             <div className="mb-4">
               <input
