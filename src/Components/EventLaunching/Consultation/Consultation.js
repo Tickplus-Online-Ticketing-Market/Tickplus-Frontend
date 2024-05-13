@@ -26,11 +26,12 @@ const RequesConsultant = () => {
       [name]: value,
     }));
   };
-
+  const currentUser = 1234;
   const handleSubmit = async (e) => {                    //handles form submission
     e.preventDefault();                                  // Prevent the default form submission behavior
     try {
-      await axios.post("http://localhost:3030/consultant/", inputs);      //  add a new event using the 'inputs'
+      //await axios.post("http://localhost:3030/consultant/", inputs);      //  add a new event using the 'inputs'
+      await axios.put(`http://localhost:3030/events/requestreport/${currentUser}`); 
       alert("Request sended successfully.");                             
 
       window.location.reload(); // Navigate to events page after successful submission
@@ -39,6 +40,8 @@ const RequesConsultant = () => {
       // Handle error and provide feedback to the user
     }
   };
+  
+
 
   return (
     <div>
@@ -104,7 +107,7 @@ const RequesConsultant = () => {
             
             {error && <p className="event-error-message">{error}</p>}
            
-                <button type="submit" className="admin_form_cneter_btn " >
+                <button type="submit" className="admin_form_cneter_btn " onClick={handleSubmit} >
               Request 
             </button>
           

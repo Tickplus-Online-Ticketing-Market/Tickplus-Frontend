@@ -3,7 +3,6 @@ import { HiLocationMarker, HiClock, HiCalendar } from 'react-icons/hi';
 import { IoPerson, IoTicket } from 'react-icons/io5';
 import { toPng } from 'html-to-image';
 import axios from "axios";
-import { useParams} from "react-router-dom";
 
 
 function Template() {
@@ -15,24 +14,8 @@ function Template() {
   const [eventVenue, setEventVenue] = useState('');
   const [eventArtist, setEventArtist] = useState('');
   const [eventTicketRange, setEventTicketRange] = useState('');
-  const [downloadCount, setDownloadCount] = useState(0); 
-  const { id } = useParams();
   const currentUser = 1234;
 
-
-  useEffect(() => {
-    const fetchTemplateCount = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3030/events/report/${currentUser}`);
-        setDownloadCount(response.data.report); 
-        
-      } catch (error) {
-       
-      }
-    };
-
-    fetchTemplateCount();
-  }, [id]);
 
  
 
@@ -191,9 +174,7 @@ function Template() {
             Download Template
           </button>
 
-          <div>
-           <p style={{ color: 'red' }}>Download Count: {1}</p>
-         </div>
+         
         </div>
       </div>
     </div>

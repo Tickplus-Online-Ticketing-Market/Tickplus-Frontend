@@ -13,10 +13,48 @@ import {
   Bar,
 } from "recharts";
 import axios from "axios";
+import { useParams} from "react-router-dom";
 
 function Analyze() {
   const [eventCount, setEventCount] = useState(0);
   const [totalEditCount, setTotalEditCount] = useState(0);
+  const [downloadCount, setDownloadCount] = useState(0); 
+  const [requestCount, setRequestCount] = useState(0); 
+
+  const { id } = useParams();
+  const currentUser = 1234;
+
+//fetch template count
+
+  useEffect(() => {
+    const fetchTemplateCount = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3030/events/report/${currentUser}`);
+        setDownloadCount(response.data.temp_count); 
+        
+      } catch (error) {
+       
+      }
+    };
+
+    fetchTemplateCount();
+  }, [id]);
+  
+//fetch request count
+
+  useEffect(() => {
+    const fetchRequestCount = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3030/events/requestreport/${currentUser}`);
+        setRequestCount(response.data.req_count); 
+        
+      } catch (error) {
+       
+      }
+    };
+
+    fetchRequestCount();
+  }, [id]);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -43,13 +81,13 @@ function Analyze() {
 
   const data = [
     { name: "Launched", users: eventCount },
-    { name: "Default", users: 1},
-    { name: "Customized", users: 2 },
+    { name: "Default", users: downloadCount},
+    { name: "Customized", users: requestCount },
   ];
   const data1 = [
    
-    { name: "Default", users: 1},
-    { name: "Customized", users: 2 },
+    { name: "Default template usage", users: downloadCount},
+    { name: "Customization service usage", users: requestCount },
   ];
 
   return (
@@ -60,8 +98,8 @@ function Analyze() {
         <div className="Numbers">
           <div style={{ display: 'flex' }}>
             <div style={boxStyle}>Total No of events:<br />{eventCount}</div>
-            <div style={boxStyle}>Total No of default template Usage:<br />1</div>
-            <div style={boxStyle}>Total No of Consultation service Usage:<br />2</div>
+            <div style={boxStyle}>Total No of default template Usage:<br />{downloadCount}</div>
+            <div style={boxStyle}>Total No of Consultation service Usage:<br />{requestCount}</div>
           </div>
         </div>
         <div className="tbl_pernt">
