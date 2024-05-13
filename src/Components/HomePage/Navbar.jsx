@@ -16,7 +16,7 @@ const Navbar = () => {
         <Link to="#">Community</Link>
         <Link to="/secondary-market">Secondary Market</Link>
         <Link to="#">Sponsors</Link>
-        <Link to="#">
+        <Link to="/user/login">
           <button className="primary-button">Sign In</button>
         </Link>
       </div>
