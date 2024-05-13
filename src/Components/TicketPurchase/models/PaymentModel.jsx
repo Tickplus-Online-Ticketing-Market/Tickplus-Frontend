@@ -11,13 +11,14 @@ export default function WishlistBuy({ visible, onClose, selectedItem }) {
         }
     };
 
+    //Cal Total Cost
     useEffect(() => {
         if (selectedItem !== null) {
             setTotalCost(selectedItem.unitPrice * count);
         } else {
             console.log("No item data");
         }
-    }, [count, selectedItem]); // Include selectedItem in the dependency array
+    }, [count, selectedItem]); 
 
     if (!visible || !selectedItem) return null;
     
@@ -33,6 +34,8 @@ export default function WishlistBuy({ visible, onClose, selectedItem }) {
             return prevCount;
         });
     };
+
+    //Payment Functions and Validations
     
     return (
         <div
@@ -41,7 +44,7 @@ export default function WishlistBuy({ visible, onClose, selectedItem }) {
             className='fixed inset-0 bg-text bg-opacity-50 backdrop-blur-sm flex justify-center items-center'>
 
             <div className='bg-background h-[30rem] w-[50rem] rounded-xl flex justify-between items-center'>
-                {/* Calculation */}
+                {/*Data read from Mother Component*/}
                 <div className='bg-accent rounded-xl h-[30rem] w-[50%]'>
                     <div className='mt-[2rem] mr-[2rem] ml-[2rem] mb-[2rem]'>
                         <img src="./images/tick+1.png" alt=""/>
@@ -69,10 +72,17 @@ export default function WishlistBuy({ visible, onClose, selectedItem }) {
                         </div>
                     </div>
                 </div> 
+                
                 <div className='bg-background rounded-xl h-[30rem] w-[50%]'>
                     <p className="text-accent font-bold text-base flex flex-col justify-center items-center mt-10">Total cost</p>
                     <p className="text-primary font-bold text-2xl flex flex-col justify-center items-center">{totalCost} LKR</p>
-                </div>    
+                </div> 
+
+                {/*Payment Gateway*/} 
+                <div>
+                    
+
+                </div>  
             </div>  
         </div>
     );
