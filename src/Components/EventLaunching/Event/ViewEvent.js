@@ -183,18 +183,24 @@ const ViewEvent = () => {
           </div>
         ) : (
           <div className="view_post">
-            <div className="img_box_view">
+            <div >
+
+              <br></br>
+              <div>
+                
+               
               <img
                 src={image}
                 alt={name}
                 style={{ width: "100%", height: "300px" }}
               />
+              </div>  
+              <p className="card_details" style={{ color: 'blue' }}>{about}</p>
               <p className="card_details">Venue: {venue}</p>
               <p className="card_details">
                 Date: {new Date(date).toLocaleDateString()}
               </p>
               <p className="card_details">Artist: {artist}</p>
-              <p className="card_details">About: {about}</p>
               <p className="card_details">Time: {time} </p>
               <p className="card_details">Price: ${price}</p>
               <div className="btn_controlset">

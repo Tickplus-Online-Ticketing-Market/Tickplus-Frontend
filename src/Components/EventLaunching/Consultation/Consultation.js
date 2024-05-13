@@ -13,7 +13,6 @@ const RequesConsultant = () => {
   const [inputs, setInputs] = useState({
     organizer_name:"",
     oranizer_Conatct:"",
-    event_ID: "",
     event_Details: "",
    
   });
@@ -86,18 +85,6 @@ const RequesConsultant = () => {
                 value={inputs.oganizer_Conatct}
                 onChange={handleChange}
                 required                                 //form validation
-              />
-            </div>
-            <div>
-              <label className="ev_lbl">Event Id:</label>
-              <input
-                className="form_box_item_input"
-                type="number"
-                name="event_ID"
-                value={inputs.event_ID}
-                onChange={handleChange}
-                required                                 //form validation
-
               />
             </div>
             <div>

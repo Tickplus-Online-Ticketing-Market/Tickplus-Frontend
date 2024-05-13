@@ -92,7 +92,7 @@ const Events = () => {
         <div className="child_clas">
           <div className="dash_button_set">
             <button
-              onClick={() => (window.location.href = "/addevent")}
+              onClick={() => (window.location.href = "events/addevent")}
               className="btn_dash_admin"
             >
               Add New Event

@@ -17,7 +17,7 @@ function App() {
         <Routes>
       
            
-          <Route exact path="/" element={<AddEvent />} />
+        
           <Route exact path="/events/addevent" element={<AddEvent />} />
           <Route exact path="/events" element={<AdminEvents />} />
           <Route exact path="/events/admin-events/:id" element={<ViewEvent />} />
