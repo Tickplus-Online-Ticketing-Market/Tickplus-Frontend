@@ -10,17 +10,21 @@ export default function ExploreTickets() {
   const [searchTerm, setSearchTerm] = useState('');
   const [showMyModel02, setShowMyModel02] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchAllTickets();
+    setLoading(false);
   }, []);
 
   const fetchAllTickets = async () => {
     try {
       const res = await axios.get('http://localhost:3030/tpp/ticks');
       setTickets(res.data.Tickets);
+      setLoading(false);
     } catch (error) {
       console.error('Error fetching tickets:', error);
+      setLoading(false);
     }
   };
 
@@ -55,6 +59,7 @@ export default function ExploreTickets() {
     };
 
     return (
+      
       <div
         className={`w-[49.25%] bg-secondary bg-opacity-100 h-[12rem] rounded-xl flex justify-between items-center mb-4`}
         onMouseEnter={handleMouseEnter}
@@ -112,8 +117,8 @@ export default function ExploreTickets() {
   return (
     <div>
       <div className="bg-background h-[8rem] px-4 flex justify-between items-center">
-        <div className="flex items-center">
-          <div className="text-primary text-4xl px-3">
+        <div className={{ transform: loading ? 'translateY(100%)' : 'translateY(0)', transition: 'transform 0.5s ease-in-out' }}>
+          <div className="text-primary text-4xl px-3 flex items-center">
             <MdOutlineTravelExplore />
           </div>
           <div className="text-primary text-4xl font-bold">Explore Tickets</div>

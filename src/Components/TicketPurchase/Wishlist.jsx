@@ -69,7 +69,7 @@ export default function Wishlist() {
                 <tr className='bg-primary bg-opacity-40 sm:rounded-base pb-2 rounded'>
                   <td className="px-6 py-4 text-background">{item.eventId}</td>
                   <td className="px-6 py-4 text-background">{item.eventName}</td>
-                  <td className="px-6 py-4 text-background">{item.unitPrice}</td>
+                  <td className="px-6 py-4 text-background">{item.unitPrice}.00 LKR</td>
                   <td className="px-6 py-4 text-primary items-center">
                     <button 
                       type="button" 

@@ -32,6 +32,10 @@ export default function FinanceStatus() {
     <div className=''>
       <div style={{ transform: loading ? 'translateY(100%)' : 'translateY(0)', transition: 'transform 0.5s ease-in-out' }}>
         <div className='relative'>
+
+            <div>
+              <Grid />
+            </div>
           
             <span className='text-3xl bg-background text-primary flex justify-center mt-[5rem] mb-[2rem] font-bold'>Refund Requests</span>
             <div className="bg-accent relative overflow-x-auto shadow-md sm:rounded-lg px-5 py-5">
@@ -78,9 +82,7 @@ export default function FinanceStatus() {
                 </tbody>
               </table>
             </div>
-            <div>
-              <Grid />
-            </div>  
+              
         </div>
       </div>
     </div>
