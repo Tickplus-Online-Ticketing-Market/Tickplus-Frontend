@@ -64,8 +64,8 @@
   border: 2px solid #2f4045;
 }
 .img{
-  height: 120px;
-  width: 100%;
+  height: 160px;
+  width: 90%;
   border-radius: 3px;
   margin: 8px 0;
 }
@@ -89,8 +89,8 @@
 .fulcard{
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-content: center;
+  justify-content: right;
+  align-content: right;
   flex-wrap: wrap;
   padding: 0;
   gap: 35px;
@@ -452,4 +452,9 @@ text-decoration: underline;
   background-color: orange; 
   color: rgb(0, 0, 0); 
   border-radius: 10px;
+}
+.box{
+  justify-content: right;
+  align-items: center;
+  
 }

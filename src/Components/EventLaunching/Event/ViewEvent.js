@@ -210,7 +210,7 @@ const ViewEvent = () => {
                 <button className="btn_con_set" onClick={() => setEditMode(true)}>
                   Edit
                 </button>
-                <Link to={`/`}>
+                <Link to={`/events`}>
                   <button className="btn_con_set">Back</button>
                 </Link>
               </div>
