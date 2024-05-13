@@ -6,7 +6,7 @@ export default function WishlistBuy({ visible, onClose, selectedItem }) {
     const [count, setCount] = useState(0);
     const [totalCost, setTotalCost] = useState(0);
 
-    //Payment Variables
+    // Payment Variables
     const [customerName, setCustomerName] = useState('');
     const [cardType, setCardType] = useState('');
     const [cardNumber, setCardNumber] = useState('');
@@ -16,27 +16,27 @@ export default function WishlistBuy({ visible, onClose, selectedItem }) {
     const [errors, setErrors] = useState({});
 
     const handleOnClose02 = (e) => {
-        if (e.target.id === 'container') {     
+        if (e.target.id === 'container') {
             onClose();
             setCount(0);
         }
     };
 
-    //Cal Total Cost
+    // Cal Total Cost
     useEffect(() => {
         if (selectedItem !== null) {
             setTotalCost(selectedItem.unitPrice * count);
         } else {
             console.log("No item data");
         }
-    }, [count, selectedItem]); 
+    }, [count, selectedItem]);
 
     if (!visible || !selectedItem) return null;
-    
+
     const increment = () => {
         setCount(prevCount => prevCount + 1);
     };
-    
+
     const decrement = () => {
         setCount(prevCount => {
             if (prevCount > 1) {
@@ -46,47 +46,67 @@ export default function WishlistBuy({ visible, onClose, selectedItem }) {
         });
     };
 
-    //Payment validation functions
-    const handleSubmit = (e) => {
+    // Payment validation functions
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const validationErrors = validateForm();
         if (Object.keys(validationErrors).length === 0) {
-          console.log({
-            customerName,
-            cardType,
-            cardNumber,
-            expireDate: `${expireMonth}/${expireYear}`,
-            cvv
-          });
+            try {
+                const response = await fetch('http://localhost:3030/tpp/pays', {
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        eventId: selectedItem.eventId,
+                        eventName: selectedItem.eventName,
+                        unitPrice: selectedItem.unitPrice,
+                        count,
+                        totalCost,
+                        customerName,
+                    }),
+                });
+                if (response.ok) {
+                    console.log('Payment successfully saved!');
+                    alert('Payment successfully saved!');
+                    // Optionally, you can perform further actions after the payment is saved
+                } else {
+                    console.error('Failed to save payment.');
+                    alert('Failed to save payment.');
+                }
+            } catch (error) {
+                console.error('Error saving payment:', error);
+                alert('Error saving payment:', error.message);
+            }
         } else {
-          setErrors(validationErrors);
+            setErrors(validationErrors);
         }
-      };
-    
-      const validateForm = () => {
+    };
+
+    const validateForm = () => {
         const errors = {};
         if (!customerName.trim()) {
-          errors.customerName = 'Customer name is required';
+            errors.customerName = 'Customer name is required';
         }
         if (!cardType.trim()) {
-          errors.cardType = 'Card type is required';
+            errors.cardType = 'Card type is required';
         }
         if (!cardNumber.trim() || cardNumber.replace(/ /g, '').length !== 16 || isNaN(cardNumber)) {
-          errors.cardNumber = 'Card number must be 16 digits';
+            errors.cardNumber = 'Need 16 digits';
         }
         if (!expireMonth || !expireYear) {
-          errors.expireDate = 'Expiration date is required';
+            errors.expireDate = 'Expiration date is required';
         }
         if (!cvv.trim() || cvv.length !== 3 || isNaN(cvv)) {
-          errors.cvv = 'CVV must be 3 digits';
+            errors.cvv = 'CVV must be 3 digits';
         }
         return errors;
-      };
-    
-      const formatCardNumber = (value) => {
+    };
+
+    const formatCardNumber = (value) => {
         const formattedValue = value.replace(/\D/g, '');
         return formattedValue.replace(/(\d{4})/g, '$1 ').trim();
-      };
+    };
 
     return (
         <div
@@ -98,7 +118,7 @@ export default function WishlistBuy({ visible, onClose, selectedItem }) {
                 {/*Data read from Mother Component*/}
                 <div className='bg-accent rounded-xl h-[30rem] w-[50%]'>
                     <div className='mt-[2rem] mr-[2rem] ml-[2rem] mb-[2rem]'>
-                        <img src="./images/tick+1.png" alt=""/>
+                        <img src="./images/tick+1.png" alt="" />
                     </div>
                     <div className='font-bold mt-[5rem] mr-[2rem] ml-[2rem] flex flex-col h-full'>
                         <div className="flex text-secondary items-center mb-2 text-sm">
@@ -112,18 +132,18 @@ export default function WishlistBuy({ visible, onClose, selectedItem }) {
                         </div>
                         <div className="flex text-primary justify-center mb-2 text-2xl">
                             <p>Quantity
-                            <div>
-                                <div className='flex justify-center'>
-                                    <button onClick={decrement} className='flex items-center justify-center bg-primary bg-opacity-50 text-background h-[1.5rem] w-[2rem] rounded hover:scale-95 transition text-xl mr-1'>-</button>
+                                <div>
+                                    <div className='flex justify-center'>
+                                        <button onClick={decrement} className='flex items-center justify-center bg-primary bg-opacity-50 text-background h-[1.5rem] w-[2rem] rounded hover:scale-95 transition text-xl mr-1'>-</button>
                                         <div className='text-secondary text-xl mr-2.5 ml-2'>{count}</div>
-                                    <button onClick={increment} className='flex items-center justify-center bg-primary bg-opacity-50 text-background h-[1.5rem] w-[2rem] rounded hover:scale-95 transition text-xl flex items-center'>+</button>
+                                        <button onClick={increment} className='flex items-center justify-center bg-primary bg-opacity-50 text-background h-[1.5rem] w-[2rem] rounded hover:scale-95 transition text-xl flex items-center'>+</button>
+                                    </div>
                                 </div>
-                            </div>
                             </p>
                         </div>
                     </div>
-                </div> 
-                
+                </div>
+
                 <div className='bg-background rounded-xl h-[30rem] w-[50%]'>
                     <p className="text-accent font-bold text-base flex flex-col justify-center items-center mt-10">Total cost</p>
                     <p className="text-primary font-bold text-2xl flex flex-col justify-center items-center">{totalCost} LKR</p>
@@ -132,87 +152,87 @@ export default function WishlistBuy({ visible, onClose, selectedItem }) {
                         <form onSubmit={handleSubmit} className="bg-background rounded px-8 w-96">
                             <div className="mb-4">
                                 <label htmlFor="customerName" className="block text-primary text-sm font-bold mb-2">Customer Name</label>
-                                    <input
-                                        type="text"
-                                        id="customerName"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.customerName && 'border-primary'}`}
-                                        placeholder="Enter Card Holder Name"
-                                        value={customerName}
-                                        onChange={(e) => setCustomerName(e.target.value)}
-                                        required
-                                    />
-                                    {errors.customerName && <p className="text-primary text-sm">{errors.customerName}</p>}
+                                <input
+                                    type="text"
+                                    id="customerName"
+                                    className={`shadow appearance-none border rounded w-full py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.customerName && 'border-primary'}`}
+                                    placeholder="Enter Card Holder Name"
+                                    value={customerName}
+                                    onChange={(e) => setCustomerName(e.target.value)}
+                                    required
+                                />
+                                {errors.customerName && <p className="text-primary text-sm">{errors.customerName}</p>}
                             </div>
                             <div className="mb-4">
                                 <label htmlFor="cardType" className="block text-primary text-sm font-bold mb-2">Choose Card Type</label>
-                                    <select
-                                        id="cardType"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.cardType && 'border-primary'}`}
-                                        value={cardType}
-                                        onChange={(e) => setCardType(e.target.value)}
-                                        required
-                                    >
-                                        <option value="">Select Card Type</option>
-                                        <option value="visa">Visa</option>
-                                        <option value="mastercard">Mastercard</option>
-                                    </select>
-                                    {errors.cardType && <p className="text-primary text-sm">{errors.cardType}</p>}
+                                <select
+                                    id="cardType"
+                                    className={`shadow appearance-none border rounded w-full py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.cardType && 'border-primary'}`}
+                                    value={cardType}
+                                    onChange={(e) => setCardType(e.target.value)}
+                                    required
+                                >
+                                    <option value="">Select Card Type</option>
+                                    <option value="visa">Visa</option>
+                                    <option value="mastercard">Mastercard</option>
+                                </select>
+                                {errors.cardType && <p className="text-primary text-sm">{errors.cardType}</p>}
                             </div>
                             <div className="mb-4 flex items-center">
                                 <label htmlFor="cardNumber" className="block text-primary text-sm font-bold mr-2">Card Number</label>
-                                    <input
-                                        type="text"
-                                        id="cardNumber"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.cardNumber && 'border-primary'}`}
-                                        placeholder="Enter card number"
-                                        value={formatCardNumber(cardNumber)}
-                                        onChange={(e) => setCardNumber(e.target.value)}
-                                        maxLength={19}
-                                        required
-                                    />
-                                    {cardType === 'visa' && <img src={visaImage} alt="Visa" className="w-10 h-6 ml-2" />}
-                                    {cardType === 'mastercard' && <img src={mastercardImage} alt="Mastercard" className="w-10 h-6 ml-2" />}
-                                    {errors.cardNumber && <p className="text-primary text-sm">{errors.cardNumber}</p>}
+                                <input
+                                    type="text"
+                                    id="cardNumber"
+                                    className={`shadow appearance-none border rounded w-full py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.cardNumber && 'border-primary'}`}
+                                    placeholder="Enter card number"
+                                    value={formatCardNumber(cardNumber)}
+                                    onChange={(e) => setCardNumber(e.target.value)}
+                                    maxLength={19}
+                                    required
+                                />
+                                {cardType === 'visa' && <img src={visaImage} alt="Visa" className="w-10 h-6 ml-2" />}
+                                {cardType === 'mastercard' && <img src={mastercardImage} alt="Mastercard" className="w-10 h-6 ml-2" />}
+                                {errors.cardNumber && <p className="text-primary text-sm">{errors.cardNumber}</p>}
                             </div>
                             <div className="mb-4 flex items-center">
                                 <label htmlFor="expireMonth" className="block text-primary text-sm font-bold mr-2">Expiration Month</label>
-                                    <input
-                                        type="text"
-                                        id="expireMonth"
-                                        className={`shadow appearance-none border rounded w-16 py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.expireDate && 'border-primary'}`}
-                                        placeholder="MM"
-                                        value={expireMonth}
-                                        onChange={(e) => setExpireMonth(e.target.value)}
-                                        maxLength={2}
-                                        required
-                                    />
-                                    <span className="mx-2">/</span>
-                                    <label htmlFor="expireYear" className="block text-primary text-sm font-bold mr-2">Expiration Year</label>
-                                    <input
-                                        type="text"
-                                        id="expireYear"
-                                        className={`shadow appearance-none border rounded w-16 py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.expireDate && 'border-primary'}`}
-                                        placeholder="YY"
-                                        value={expireYear}
-                                        onChange={(e) => setExpireYear(e.target.value)}
-                                        maxLength={2}
-                                        required
-                                    />
-                                    {errors.expireDate && <p className="text-primary text-sm">{errors.expireDate}</p>}
-                                    </div>
+                                <input
+                                    type="text"
+                                    id="expireMonth"
+                                    className={`shadow appearance-none border rounded w-16 py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.expireDate && 'border-primary'}`}
+                                    placeholder="MM"
+                                    value={expireMonth}
+                                    onChange={(e) => setExpireMonth(e.target.value)}
+                                    maxLength={2}
+                                    required
+                                />
+                                <span className="mx-2">/</span>
+                                <label htmlFor="expireYear" className="block text-primary text-sm font-bold mr-2">Expiration Year</label>
+                                <input
+                                    type="text"
+                                    id="expireYear"
+                                    className={`shadow appearance-none border rounded w-16 py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.expireDate && 'border-primary'}`}
+                                    placeholder="YY"
+                                    value={expireYear}
+                                    onChange={(e) => setExpireYear(e.target.value)}
+                                    maxLength={2}
+                                    required
+                                />
+                                {errors.expireDate && <p className="text-primary text-sm">{errors.expireDate}</p>}
+                            </div>
                             <div className="mb-4 flex items-center">
                                 <label htmlFor="cvv" className="block text-primary text-sm font-bold mr-2">CVV</label>
-                                    <input
-                                        type="text"
-                                        id="cvv"
-                                        className={`shadow appearance-none border rounded w-16 py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.cvv && 'border-primary'}`}
-                                        placeholder="CVV"
-                                        value={cvv}
-                                        onChange={(e) => setCvv(e.target.value)}
-                                        maxLength={3}
-                                        required
-                                    />
-                                    {errors.cvv && <p className="text-primary text-sm">{errors.cvv}</p>}
+                                <input
+                                    type="text"
+                                    id="cvv"
+                                    className={`shadow appearance-none border rounded w-16 py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.cvv && 'border-primary'}`}
+                                    placeholder="CVV"
+                                    value={cvv}
+                                    onChange={(e) => setCvv(e.target.value)}
+                                    maxLength={3}
+                                    required
+                                />
+                                {errors.cvv && <p className="text-primary text-sm">{errors.cvv}</p>}
                             </div>
                             <div className="flex items-center justify-between">
                                 <button
@@ -224,8 +244,8 @@ export default function WishlistBuy({ visible, onClose, selectedItem }) {
                             </div>
                         </form>
                     </div>
-                </div> 
-            </div>  
+                </div>
+            </div>
         </div>
     );
 }

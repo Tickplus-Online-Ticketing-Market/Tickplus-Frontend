@@ -26,13 +26,13 @@ const handleOnClose08 = ()=>setShowMyModel08(false)
                   Event
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Transaction ID
+                  Date/Time
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Payment Method 
+                  Quantity
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Status
+                  Total Cost
                 </th>
               </tr>
           </thead>
