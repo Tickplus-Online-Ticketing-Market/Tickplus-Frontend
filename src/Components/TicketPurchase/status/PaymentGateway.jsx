@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import visaImage from './visa.png';
-import mastercardImage from './mastercard.png';
+import visaImage from '../../../Assets/TicketPurchase/visa.png.png';
+import mastercardImage from '../../../Assets/TicketPurchase/mastercard.jpg.jpg';
 
 export default function PaymentGateway() {
   const [customerName, setCustomerName] = useState('');
@@ -55,26 +55,26 @@ export default function PaymentGateway() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-96">
+    <div className="flex justify-center items-center bg-background">
+      <form onSubmit={handleSubmit} className="bg-background shadow-md rounded px-8 w-96">
         <div className="mb-4">
-          <label htmlFor="customerName" className="block text-gray-700 text-sm font-bold mb-2">Customer Name</label>
+          <label htmlFor="customerName" className="block text-primary text-sm font-bold mb-2">Customer Name</label>
           <input
             type="text"
             id="customerName"
-            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.customerName && 'border-red-500'}`}
-            placeholder="Enter your name"
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.customerName && 'border-primary'}`}
+            placeholder="Enter Card Holder Name"
             value={customerName}
             onChange={(e) => setCustomerName(e.target.value)}
             required
           />
-          {errors.customerName && <p className="text-red-500 text-xs italic">{errors.customerName}</p>}
+          {errors.customerName && <p className="text-primary text-sm">{errors.customerName}</p>}
         </div>
         <div className="mb-4">
-          <label htmlFor="cardType" className="block text-gray-700 text-sm font-bold mb-2">Choose Card Type</label>
+          <label htmlFor="cardType" className="block text-primary text-sm font-bold mb-2">Choose Card Type</label>
           <select
             id="cardType"
-            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.cardType && 'border-red-500'}`}
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.cardType && 'border-primary'}`}
             value={cardType}
             onChange={(e) => setCardType(e.target.value)}
             required
@@ -83,14 +83,14 @@ export default function PaymentGateway() {
             <option value="visa">Visa</option>
             <option value="mastercard">Mastercard</option>
           </select>
-          {errors.cardType && <p className="text-red-500 text-xs italic">{errors.cardType}</p>}
+          {errors.cardType && <p className="text-primary text-sm">{errors.cardType}</p>}
         </div>
         <div className="mb-4 flex items-center">
-          <label htmlFor="cardNumber" className="block text-gray-700 text-sm font-bold mr-2">Card Number</label>
+          <label htmlFor="cardNumber" className="block text-primary text-sm font-bold mr-2">Card Number</label>
           <input
             type="text"
             id="cardNumber"
-            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.cardNumber && 'border-red-500'}`}
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.cardNumber && 'border-primary'}`}
             placeholder="Enter card number"
             value={formatCardNumber(cardNumber)}
             onChange={(e) => setCardNumber(e.target.value)}
@@ -99,51 +99,52 @@ export default function PaymentGateway() {
           />
           {cardType === 'visa' && <img src={visaImage} alt="Visa" className="w-10 h-6 ml-2" />}
           {cardType === 'mastercard' && <img src={mastercardImage} alt="Mastercard" className="w-10 h-6 ml-2" />}
-          {errors.cardNumber && <p className="text-red-500 text-xs italic">{errors.cardNumber}</p>}
+          {errors.cardNumber && <p className="text-primary text-sm">{errors.cardNumber}</p>}
         </div>
         <div className="mb-4 flex items-center">
-          <label htmlFor="expireDate" className="block text-gray-700 text-sm font-bold mr-2">Expiration Date</label>
-          <select
+          <label htmlFor="expireMonth" className="block text-primary text-sm font-bold mr-2">Expiration Month</label>
+          <input
+            type="text"
             id="expireMonth"
-            className="shadow appearance-none border rounded w-20 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className={`shadow appearance-none border rounded w-16 py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.expireDate && 'border-primary'}`}
+            placeholder="MM"
             value={expireMonth}
             onChange={(e) => setExpireMonth(e.target.value)}
+            maxLength={2}
             required
-          >
-            <option value="">Month</option>
-            {/* Add months here if needed */}
-          </select>
-          <span className="mx-1">/</span>
-          <select
+          />
+          <span className="mx-2">/</span>
+          <label htmlFor="expireYear" className="block text-primary text-sm font-bold mr-2">Expiration Year</label>
+          <input
+            type="text"
             id="expireYear"
-            className="shadow appearance-none border rounded w-20 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className={`shadow appearance-none border rounded w-16 py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.expireDate && 'border-primary'}`}
+            placeholder="YY"
             value={expireYear}
             onChange={(e) => setExpireYear(e.target.value)}
+            maxLength={2}
             required
-          >
-            <option value="">Year</option>
-            {/* Add years here if needed */}
-          </select>
-          {errors.expireDate && <p className="text-red-500 text-xs italic">{errors.expireDate}</p>}
+          />
+          {errors.expireDate && <p className="text-primary text-sm">{errors.expireDate}</p>}
         </div>
         <div className="mb-4 flex items-center">
-          <label htmlFor="cvv" className="block text-gray-700 text-sm font-bold mr-2">CVV</label>
+          <label htmlFor="cvv" className="block text-primary text-sm font-bold mr-2">CVV</label>
           <input
             type="text"
             id="cvv"
-            className={`shadow appearance-none border rounded w-16 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.cvv && 'border-red-500'}`}
+            className={`shadow appearance-none border rounded w-16 py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline ${errors.cvv && 'border-primary'}`}
             placeholder="CVV"
             value={cvv}
             onChange={(e) => setCvv(e.target.value)}
             maxLength={3}
             required
           />
-          {errors.cvv && <p className="text-red-500 text-xs italic">{errors.cvv}</p>}
+          {errors.cvv && <p className="text-primary text-sm">{errors.cvv}</p>}
         </div>
         <div className="flex items-center justify-between">
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-primary hover:bg-blue-700 text-accent font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Pay Now
           </button>
