@@ -53,7 +53,7 @@ export default function RefundRequests() {
         <div className='bg-background h-[8rem] px-4 flex justify-between items-center'>
           <div className='flex items-center'>
             <div className='text-primary text-4xl px-3'><HiReceiptRefund/></div>
-            <div className='text-primary text-4xl '>Refund Request</div>
+            <div className='text-primary text-4xl font-bold'>Refund Requests</div>
           </div>
         </div>
 

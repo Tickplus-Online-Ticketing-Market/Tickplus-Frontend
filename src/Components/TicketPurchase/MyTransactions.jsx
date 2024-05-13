@@ -13,7 +13,7 @@ const handleOnClose08 = ()=>setShowMyModel08(false)
       <div className='bg-background h-[8rem] px-4 flex justify-between items-center'>
           <div className='flex items-center'>
             <div className='text-primary text-4xl px-3'><IoTicketSharp/></div>
-            <div className='text-primary text-4xl '>My Tickets</div>
+            <div className='text-primary text-4xl font-bold'>My Tickets</div>
           </div>
       </div>
 

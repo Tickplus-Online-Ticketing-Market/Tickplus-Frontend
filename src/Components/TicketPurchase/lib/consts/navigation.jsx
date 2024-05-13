@@ -1,4 +1,4 @@
-import { FaShoppingCart } from "react-icons/fa";
+import { ImHeart } from "react-icons/im";
 import { MdOutlineTravelExplore } from "react-icons/md";
 import { IoTicketSharp } from "react-icons/io5";
 import { HiReceiptRefund } from "react-icons/hi2";
@@ -18,7 +18,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		key: 'wishlist',
 		label: 'Wishlist',
 		path: '/w',
-		icon: <FaShoppingCart />
+		icon: <ImHeart />
 	},
 	{
 		key: 'mytransactions',
