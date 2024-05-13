@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useState} from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { MdEditSquare } from "react-icons/md";
 
@@ -7,9 +7,10 @@ import { MdEditSquare } from "react-icons/md";
 import { RQ_HISTORY_SAMPLE_DATA } from "./RqHistoryData";
 import Barcharts from "./Barcharts";
 
+import MyModal from "./MyModal3";
+
 export default function Requesthistory({ recentOrderData }) {
-
-
+  
   
   return (
     <div className="overflow-hidden rounded-2xl border-none shadow-md m-5">
@@ -58,6 +59,10 @@ export default function Requesthistory({ recentOrderData }) {
   );
 }
 function TableRowDraw({ item }) {
+  
+  const [showMyModal, setShowMyModal] = useState(false);
+  const handleOnClose = () => setShowMyModal(false);
+
   return (
     <tr class=" bg-tbg hover:bg-secondary">
       <td class="px-6 py-4">
@@ -105,15 +110,18 @@ function TableRowDraw({ item }) {
       <td class="px-6 py-4">
         <div className="flex justify-end gap-4 text-primary content-baseline">
       
-          <button className="text-2xl" x-data="{ tooltip: 'Edit' }" >
+          <button onClick={() => setShowMyModal(true)} className="text-2xl" x-data="{ tooltip: 'Edit' }" >
             {<MdEditSquare />}
           </button>
           <button className="text-[1.25rem]" x-data="{ tooltip: 'Delete' }">
             {<FaTrashAlt />}
           </button>
         </div>
-      </td>
+       
+        <MyModal onClose={handleOnClose} visible={showMyModal} addNote={item.addNote} />
 
+      </td>
+      
     </tr>
 
   );

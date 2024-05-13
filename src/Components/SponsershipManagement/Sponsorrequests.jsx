@@ -2,26 +2,33 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import axios from "axios";
 
-import { FaEye} from "react-icons/fa";
-import { IoIosCheckmarkCircle,
-         IoIosCloseCircle
-        } from "react-icons/io";
+import { FaEye, FaTrashAlt } from "react-icons/fa";
+import { IoIosCheckmarkCircle, IoIosCloseCircle } from "react-icons/io";
+
 
 import MyModal from "./MyModal";
 
 export default function Sponsorrequests({ requests: requestsData }) {
 
   const [requests, setRequests] = useState(null);
+  const [acceptedRequests, setAcceptedRequests] = useState(() => {
+    const storedAcceptedRequests = localStorage.getItem('acceptedRequests');
+    return storedAcceptedRequests ? JSON.parse(storedAcceptedRequests) : [];
+  });
 
   useEffect(() => {
     fetchRequests();
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem('acceptedRequests', JSON.stringify(acceptedRequests));
+  }, [acceptedRequests]);
+
   const fetchRequests = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/requests' );
+      const res = await axios.get('http://localhost:3000/sponsorship/requests');
       setRequests(res.data.requests);
-      console.log(res)
+      console.log(res);
     } catch (error) {
       toast.error("Cannot Connect to Database");
       setRequests([]);
@@ -30,28 +37,30 @@ export default function Sponsorrequests({ requests: requestsData }) {
 
   const deleteRequest = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/requests/${id}` );
-
+      await axios.delete(`http://localhost:3000/sponsorship/requests/${id}`);
       toast.success("Deleted");
-      fetchRequests()
-      } catch (error) {
+      fetchRequests();
+    } catch (error) {
       toast.error("Cannot delete");
       setRequests([]);
     }
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     console.log("Deleting item with ID:", id);
-    deleteRequest(id)
+    deleteRequest(id);
   };
 
-  function TableRowDraw({ item, onDelete }) {
+  const handleAccept = async (id) => {
+    console.log("Accepting item with ID:", id);
+    setAcceptedRequests(prev => [...prev, id]);
+  };
 
+  function TableRowDraw({ item }) {
 
     const [showMyModal, setShowMyModal] = useState(false);
     const handleOnClose = () => setShowMyModal(false);
- 
-  
+
     return (
       <tr className="bg-tbg hover:bg-secondary text-black">
         <td className="flex gap-3 px-6 py-4 font-normal text-black">
@@ -83,31 +92,33 @@ export default function Sponsorrequests({ requests: requestsData }) {
         </td>
         <td className="px-6 py-4">
           <div className="flex justify-end gap-4 content-baseline">
-          <button onClick={() => setShowMyModal(true)} className="text-[1.55rem] text-accent" x-data="{ tooltip: 'View' }" >
-          <FaEye onClick={() => setShowMyModal(true)} />
+            <button onClick={() => setShowMyModal(true)} className="text-[1.55rem] text-accent" x-data="{ tooltip: 'View' }" >
+              <FaEye />
             </button>
-  
-            <button
-            type="button"
-            class="text-primary text-base font-bold bg-accent hover:bg-accept hover:text-background border-primary border-[2.4px] focus:outline-none font-medium rounded-full px-3 py-1 text-center inline-flex items-center">
-            <span className=" text-xl me-1">{<IoIosCheckmarkCircle />}</span>
-            Accept
-          </button>
-  
-          <button onClick={() => handleDelete(item._id)}
-            type="button"
-            class="text-primary text-base font-bold bg-accent hover:bg-reject hover:text-background border-primary border-[2.4px] focus:outline-none font-medium rounded-full px-3 py-1 text-center inline-flex items-center">
-            <span className=" text-xl me-1">{<IoIosCloseCircle />}</span>
-            Reject
-          </button>
-  
+
+            {acceptedRequests.includes(item._id) ? (
+              <span className="text-primary text-base font-bold bg-accent  border-primary border-[2.4px] focus:outline-none font-medium px-3 py-1 text-center inline-flex items-center">
+                <span className=" text-xl me-1">{<IoIosCheckmarkCircle />}</span>
+                Accepted
+              </span>
+            ) : (
+              <button onClick={() => handleAccept(item._id)} type="button" className="text-primary text-base font-bold bg-accent hover:bg-accept hover:text-background border-primary border-[2.4px] focus:outline-none font-medium rounded-full px-3 py-1 text-center inline-flex items-center">
+                <span className=" text-xl me-1">{<IoIosCheckmarkCircle />}</span>
+                Accept
+              </button>
+            )}
+
+            <button onClick={() => handleDelete(item._id)} type="button" className="text-primary text-base font-bold bg-accent hover:bg-reject hover:text-background border-primary border-[2.4px] focus:outline-none font-medium rounded-full px-3 py-1 text-center inline-flex items-center">
+              <span className=" text-xl me-1">{acceptedRequests.includes(item._id) ? <FaTrashAlt /> : <IoIosCloseCircle />}</span>
+              {acceptedRequests.includes(item._id) ? "Delete" : "Reject"}
+            </button>
+
           </div>
           <MyModal onClose={handleOnClose} visible={showMyModal} addNote={item.addNote} />
         </td>
       </tr>
     );
   }
-  
 
   return (
     <div className="overflow-hidden rounded-2xl border-none shadow-md m-5">
@@ -133,11 +144,11 @@ export default function Sponsorrequests({ requests: requestsData }) {
           </tr>
         </thead>
         <tbody className="divide-background divide-y-4 border-t-4 border-t-background">
-        {requests && requests.length > 0 ? (
-          requests.map((item, index) => (
-        <TableRowDraw key={index} item={item} />
-  ))
-) : (
+          {requests && requests.length > 0 ? (
+            requests.map((item, index) => (
+              <TableRowDraw key={index} item={item} />
+            ))
+          ) : (
             <tr>
               <td colSpan="6" className="px-6 py-4 text-center">
                 No requests found.
@@ -149,4 +160,3 @@ export default function Sponsorrequests({ requests: requestsData }) {
     </div>
   );
 }
-

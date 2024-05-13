@@ -1,5 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "tailwindcss/tailwind.css";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
@@ -12,7 +14,9 @@ export default function Layouts(){
             <Sidebar />
              <div className="flex-1 overflow-autoflex-1 h-screen w-4/5 overflow-auto">
                 <Header />   
-            <div className="p-4 overflow-hidden">{<Outlet/>}</div>
+            <div className="p-4 overflow-hidden">
+                <ToastContainer />
+                {<Outlet/>}</div>
             </div>
             
         </div>
