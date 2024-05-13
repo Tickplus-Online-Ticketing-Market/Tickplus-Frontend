@@ -1,0 +1,82 @@
+.from_sub {
+  width: 700px;
+  background: #0b1418;
+  color: white;
+  padding: 25px;
+  margin-right: 40px;
+  border-radius: 5px;
+}
+.lbl_pro {
+  font-weight: bold;
+  font-size: 20px;
+}
+.inpt_pro {
+  width: 100%;
+  color: white;
+  background: #0b1418;
+  margin: 2px 0 10px 0;
+  font-size: 25px;
+  border: 0;
+  border-bottom: 2px solid slategray;
+}
+.probtn {
+  margin: 20px 0 0 0;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  padding: 8px 0;
+  border-radius: 3px;
+  background-color: slategray;
+  border: 2px solid slategray;
+  font-size: 20px;
+  width: 100%;
+}
+
+.topic_detils_pro {
+  font-size: 20px;
+  color: white;
+}
+.topic_detils_pro_sub {
+  color: #ff7738;
+  font-size: 15px;
+  margin: 8px 0;
+  text-align: left;
+}
+.dis_box_one {
+  flex: 1;
+}
+.dis_box_two {
+  flex: 1;
+}
+.dis_box_main {
+  display: flex;
+  border-radius: 4px;
+}
+
+.dis_box_two {
+  align-items: center;
+  text-align: center;
+  height: 110vh;
+  justify-content: center;
+  display: flex;
+}
+.boxdis_left {
+  text-transform: capitalize;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: rgb(114, 204, 240);
+}
+.pargrp_box {
+  font-size: 20px;
+  font-weight: bolder;
+  margin-bottom: 25px;
+}
+.subpara_bc {
+  color: #ff7738;
+  font-size: 25px;
+  font-weight: bolder;
+}
+.icon_from_pro{
+    margin-bottom: 10px;
+    font-size: 30px;
+}
