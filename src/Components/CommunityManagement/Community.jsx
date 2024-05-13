@@ -22,17 +22,35 @@ export default function Community() {
         throw new Error("Failed to fetch posts");
       }
       const data = await response.json();
-      setPosts(data.notes);
+      setPosts(data.posts);
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
   };
 
-  
+  const handleSearchInputChange = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+  };
+
+  useEffect(() => {
+    // Filter posts based on the search query
+    const filtered = posts.filter((post) =>
+      post.title.toLowerCase().includes(searchQuery)
+    );
+    setFilteredPosts(filtered);
+  }, [searchQuery, posts]);
+
+  const handleOnClose = () => setShowPost(false);
+
+  const handleClick = (post) => {
+    setShowPost(true);
+    setSelectedPost(post);
+  };
 
   return (
     <div>
-      {/* search bar and create button */}
+      {/* search bar */}
       <div className="flex justify-between items-center">
         <div className="relative ml-auto">
           <HiOutlineSearch
@@ -51,7 +69,7 @@ export default function Community() {
 
       {/* Display filtered posts */}
       <div className="mt-4 ml-4 grid grid-cols-3 gap-4">
-        {posts.map((post, index) => (
+        {filteredPosts.map((post, index) => (
           <div key={index} className="max-w-sm bg-accent text-background border border-gray-200 rounded-lg">
             <div className="p-5">
               <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
