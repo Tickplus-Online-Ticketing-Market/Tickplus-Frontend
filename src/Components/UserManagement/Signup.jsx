@@ -27,7 +27,7 @@ export default function Signup() {
   });
 
   //function to submit data
-  const submit = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     try {
       if (form.password.length < 6) {
@@ -37,28 +37,32 @@ export default function Signup() {
       } else if (!captchaVal) {
         toast.error("Fill the captcha");
       } else {
-        await axios.post("http://localhost:8000/signup", form).then((res) => {
-          if (res.data === "exist") {
-            toast.error("Email already exists");
-          } else if (res.data === "notexist") {
-            //make a cookie for email. it expires after 2 years
-            Cookies.set("email", form.email, { expires: 730 });
+        await axios
+          .post("http://localhost:3030/user/new-user", form)
+          .then((res) => {
             toast.success("Successfully registered");
-          }
-        });
+            if (res.data === "exist") {
+              toast.error("Email already exists");
+            } else if (res.data === "notexist") {
+              //make a cookie for email. it expires after 2 years
+              Cookies.set("email", form.email, { expires: 730 });
+            }
+            navigate("/user");
+          });
       }
     } catch (e) {
+      toast.error("Something went wrong!");
       console.log(e);
     }
   };
 
   return (
     <div className="mb-6 bg-primary bg-opacity-100 w-2/3 rounded-2xl p-8 h-3/4">
-      <h1 class="text-accent text-center text-4xl mb-1 font-bold title-font">
+      <h1 class="text-accent text-center text-3xl font-bold title-font">
         Registration
       </h1>
-      <form action="POST" method="/login" onSubmit={submit}>
-        <div class="grid grid-cols-6 gap-4 p-8 w-full">
+      <form action="POST" method="/login" onSubmit={handleRegister}>
+        <div class="grid grid-cols-6 gap-4 px-8 py-4 w-full">
           <div class="col-span-3">
             <label
               for="username"
@@ -91,7 +95,7 @@ export default function Signup() {
               onChange={(e) => {
                 setForm({ ...form, [e.target.name]: e.target.value });
               }}
-              type="contact-number"
+              type="tel"
               id="contactnumber"
               name="contactnumber"
               maxLength={10}
@@ -133,7 +137,6 @@ export default function Signup() {
               class="w-full bg-background rounded text-xl outline-none text-accent py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
             />
           </div>
-
           <div class="col-span-2">
             <label
               for="confirmpassword"
@@ -153,7 +156,7 @@ export default function Signup() {
               class="w-full bg-background rounded text-xl outline-none text-accent py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
             />
           </div>
-          <div class="col-span-3">
+          <div class="col-span-2">
             <label
               for="address"
               class="leading-7 text-xl font-bold text-accent"
@@ -166,13 +169,13 @@ export default function Signup() {
               onChange={(e) => {
                 setForm({ ...form, [e.target.name]: e.target.value });
               }}
-              type="address"
+              type="text"
               id="address"
               name="address"
               class="w-full bg-background rounded text-xl outline-none text-accent py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
             />
           </div>
-          <div class="">
+          <div class="col-span-2">
             <label
               for="dateofbirth"
               class="leading-7 text-xl font-bold text-accent"
@@ -191,15 +194,7 @@ export default function Signup() {
               class="w-full bg-background rounded text-xl outline-none text-accent py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
             />
           </div>
-          <div class="col-span-4 ...">01</div>
-          <div class="col-start-2 col-span-4 ...">01</div>
-          <div class="col-start-2 col-span-4 ...">01</div>
-        </div>
-
-        <section class="text-text body-font rounded-lg relative grid place-items-center ml-20 mr-20 mt-10 ">
-          <div class="lg:w-1/3 md:w-1/2 bg-primary rounded-lg p-8 flex flex-col  mt-10 md:mt-0 relative z-10 shadow-md">
-            <div class="relative mb-4"></div>
-
+          <div class="col-span-2">
             <div class="relative mb-4">
               <label for="role" class="leading-7 text-xl font-bold text-accent">
                 User Category
@@ -220,35 +215,33 @@ export default function Signup() {
                 <option value="consultant">Consultant</option>
               </select>
             </div>
-
-            {/* npm i react-google-recaptcha */}
+          </div>
+          <div class="col-span-6 flex justify-center">
             <ReCAPTCHA
-              className="mb-5 ml-4"
+              className=" scale-75 font-bold rounded-2xl"
               sitekey="6LeSS8IpAAAAAMHnocgqeqzVLiS5J6w5koF_1h48"
               onChange={(value) => {
                 setCaptchaVal(value);
               }}
             />
-
-            <input
-              class="text-background cursor-pointer bg-accent border-0 ml-10 mr-10 py-2 px-6 focus:outline-none
-             hover:bg-secondary rounded text-lg"
-              type="submit"
-              value="Submit"
-            />
-
-            <p className="text-xl text-background mt-3">
-              {" "}
-              Already have an account?{" "}
-            </p>
-
-            {/* redirect user to the signup page */}
-            <p className="text-xl mt-3 font-bold hover:underline text-accent">
-              {" "}
-              <Link to={"/user/login"}> Login </Link>{" "}
-            </p>
           </div>
-        </section>
+          <div class="col-span-6 flex justify-center">
+            <input
+              class="text-background cursor-pointer bg-accent border-0 py-3 px-16 focus:outline-none hover:bg-secondary rounded text-lg"
+              type="submit"
+              value="Create Account"
+            />
+          </div>
+          <div class="col-span-6 flex justify-center">
+            <div className="text-xl">Already have an account?</div>
+            <Link
+              className="text-xl font-bold hover:underline text-accent ml-2"
+              to={"/user/login"}
+            >
+              Click here to Login
+            </Link>
+          </div>
+        </div>
       </form>
     </div>
   );
