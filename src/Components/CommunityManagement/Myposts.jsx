@@ -51,11 +51,11 @@ export default function Myposts() {
             {post.body}
           </p>
           <div className="flex gap-4">
-            {/* <Link to={`/Updatepost/${post._id}`}> */}
+            <Link to={`/Updatepost/${post._id}`}>
             <button className="px-4 py-1 mt-4 bg-primary w-full rounded-md font-bold hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary-dark">
               Edit post
             </button>
-            {/* </Link> */}
+            </Link>
             <button
               onClick={() => handleDelete(post._id)}
               className="px-4 py-1 mt-4 bg-primary w-full rounded-md font-bold hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary-dark"
@@ -76,17 +76,7 @@ export default function Myposts() {
             Create Post
           </button>
         </Link>
-        <div className="relative ml-auto">
-          <HiOutlineSearch
-            fontSize={20}
-            className="text-text-normal absolute left-3 top-1.5"
-          />
-          <input
-            type="text"
-            placeholder="Search...."
-            className="h-8 w-64 px-4 pl-11 border border-background rounded-3xl focus:outline-none focus:border-primary"
-          />
-        </div>
+        
       </div>
       <div
         className="mt-4 ml-4 grid grid-cols-3 gap-4 "

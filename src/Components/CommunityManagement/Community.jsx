@@ -4,10 +4,9 @@ import Post from "./Post";
 
 export default function Community() {
   const [showPost, setShowPost] = useState(false);
-  const handleOnClose = () => setShowPost(false);
   const [posts, setPosts] = useState([]);
-
-  
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredPosts, setFilteredPosts] = useState([]);
 
   useEffect(() => {
     fetchPosts();
@@ -20,18 +19,34 @@ export default function Community() {
         throw new Error("Failed to fetch posts");
       }
       const data = await response.json();
+      console.log("Fetched posts:", data.notes); // Log fetched posts
       setPosts(data.notes);
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
   };
 
-  
+  const handleSearchInputChange = (e) => {
+    const query = e.target.value;
+    console.log("Search query:", query); // Log search query
+    setSearchQuery(query);
+  };
+
+  useEffect(() => {
+    // Filter posts based on the search query
+    const filtered = posts.filter((post) =>
+      post.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    console.log("Filtered posts:", filtered); // Log filtered posts
+    setFilteredPosts(filtered);
+  }, [searchQuery, posts]);
+
+  const handleOnClose = () => setShowPost(false);
 
   return (
     <div>
-      {/* search bar and create button */}
-      <div className="flex justify-between items-center">
+      {/* Search bar */}
+      <div className="flex justify-between items-center mb-4">
         <div className="relative ml-auto">
           <HiOutlineSearch
             fontSize={20}
@@ -41,12 +56,15 @@ export default function Community() {
             type="text"
             placeholder="Search...."
             className="h-8 w-64 px-4 pl-11 border border-background rounded-3xl focus:outline-none focus:border-primary"
+            value={searchQuery}
+            onChange={handleSearchInputChange}
           />
         </div>
       </div>
 
+      {/* Display filtered posts */}
       <div className="mt-4 ml-4 grid grid-cols-3 gap-4">
-        {posts.map((post, index) => (
+        {filteredPosts.map((post, index) => (
           <div key={index} className="max-w-sm bg-accent text-background border border-gray-200 rounded-lg">
             <div className="p-5">
               <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -64,13 +82,9 @@ export default function Community() {
             </div>
           </div>
         ))}
-        
       </div>
 
       <Post onClose={handleOnClose} visible={showPost} />
     </div>
   );
 }
-
-
-
