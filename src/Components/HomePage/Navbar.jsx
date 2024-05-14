@@ -15,7 +15,7 @@ const Navbar = () => {
                 <Link to="/ticket-launching">Tickets</Link>
                 <Link to="/community-page">Community</Link>
                 <Link to="/secondary-market">Secondary Market</Link>
-                <Link to="#">Sponsors</Link>
+                <Link to="/sponsorship-management">Sponsorship Management</Link>
                 <Link to="/user/login">
                     <button className="primary-button">Sign In</button>
                 </Link>

@@ -8,13 +8,15 @@ import UserManagementRoutes from './Routes/UserManagementRoutes'
 import secondaryMarketRoutes from './Routes/SecondaryMarketRoutes'
 import ticketLaunchingRoutes from './Routes/TicketLaunchingRoutes'
 import CommunityPageRoutes from './Routes/CommunityPageRoutes'
+import SponsorshipManagementRoutes from './Routes/SponsorshipManagementRoutes'
 
 const allRoutes = [
     ...homePageRoutes,
     ...UserManagementRoutes,
     ...secondaryMarketRoutes,
     ...ticketLaunchingRoutes,
-    ...CommunityPageRoutes
+    ...CommunityPageRoutes,
+    ...SponsorshipManagementRoutes
 ]
 const router = createBrowserRouter(allRoutes)
 
