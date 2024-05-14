@@ -26,7 +26,7 @@ export default function Sponsorrequests({ requests: requestsData }) {
 
   const fetchRequests = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/sponsorship/requests');
+      const res = await axios.get('http://localhost:3030/sponsorship/requests');
       setRequests(res.data.requests);
       console.log(res);
     } catch (error) {
@@ -37,7 +37,7 @@ export default function Sponsorrequests({ requests: requestsData }) {
 
   const deleteRequest = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/sponsorship/requests/${id}`);
+      await axios.delete(`http://localhost:3030/sponsorship/requests/${id}`);
       toast.success("Deleted");
       fetchRequests();
     } catch (error) {

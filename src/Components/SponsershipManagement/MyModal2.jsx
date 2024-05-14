@@ -58,7 +58,7 @@ export default function MyModal2({ visible, onClose, setRequests }) {
     
     try {
       // Create the request
-      const response = await axios.post('http://localhost:3000/sponsorship/requests', formData);
+      const response = await axios.post('http://localhost:3030/sponsorship/requests', formData);
       const newRequest = response.data;
 
       // Update the list of requests 

@@ -1,12 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Eventcover from "./../../Assets/SponsershipManagement/eventcover.jpg";
 import { HiSearch } from "react-icons/hi";
 import MyModal2 from "./MyModal2";
-import { RQ_HISTORY_SAMPLE_DATA } from "./RqHistoryData";
+import axios from "axios";
+import { toast } from 'react-toastify';
 
 export default function Dashboard() {
+  const [events, setEvents] = useState([]);
   const [showMyModal, setShowMyModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    // Fetch data from backend when component mounts
+    fetchEvents();
+  }, []);
+
+  const fetchEvents = async () => {
+    try {
+      const res = await axios.get('http://localhost:3030/sponsorship/events');
+      setEvents(res.data.events);
+      console.log(res);
+    } catch (error) {
+      toast.error("Cannot Connect to Database");
+      setEvents([]);
+    }
+  };
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
@@ -15,9 +33,10 @@ export default function Dashboard() {
   const handleOnClose = () => setShowMyModal(false);
 
   // Filter events based on search term
-  const filteredEvents = RQ_HISTORY_SAMPLE_DATA.filter((event) =>
-    event.ename.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+const filteredEvents = events.filter((event) =>
+  event.eName && event.eName.toLowerCase().includes(searchTerm.toLowerCase())
+);
+
 
   return (
     <div className="overflow-y-visible">
@@ -41,7 +60,7 @@ export default function Dashboard() {
       {/* Grid layout for event cards */}
       <div className="grid grid-cols-3 gap-4 p-6">
         {filteredEvents.map((event) => (
-          <div key={event.id} className="bg-accent rounded-lg shadow-lg">
+          <div key={event._id} className="bg-accent rounded-lg shadow-lg">
             <div className="overflow-hidden bg-cover bg-no-repeat aspect-video">
               <img className="rounded-t-lg" src={Eventcover} alt="" />
             </div>
@@ -54,12 +73,12 @@ export default function Dashboard() {
                 Make A Request
               </button>
               <h5 className="mb-2 text-2xl font-bold leading-tight text-primary">
-                {event.ename}
+                {event.eName}
               </h5>
               <div className="flex justify-between items-center">
                 <div className="text-primary">
                   <div className="mb-2 text-base">
-                    Event ID: {event.eid}
+                    Event ID: {event.eId}
                   </div>
                   <div className="mb-2 text-base">
                     Date: {event.date}
