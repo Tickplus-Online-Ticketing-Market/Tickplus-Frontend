@@ -14,12 +14,15 @@
   border: 1px solid rgba(255, 0, 0, 0.488);
 }
 .img_card_cn_sponc {
-  width: 220px;
+  height: 200px;
+  width: 200px;
   margin-right: 20px;
   border-radius: 5px;
+  padding-top: 20px;
 }
 .detais_side_sponc {
   margin-top: 20px;
+  padding-left: 20px;
 }
 .cord_name_sponc {
   font-weight: bold;

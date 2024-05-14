@@ -15,30 +15,32 @@ function ConsultationCard() {
                  <p className="cord_name">Name: Mr. Perera</p>
                  <p className="con_details">
                 <strong> Qualifications</strong>
-                <ul>
-                     <li>Proficient in graphic design software such as Adobe Creative Suite
-                             <ul>
+               
+                     <li>Proficient in graphic design software such as 
+                              <li>Adobe Creative Suite</li>
                                <li>Photoshop</li>
                                <li>Illustrator</li>
                                <li>InDesign</li>
-                               </ul>
+                               
                       </li>
                       <li>Strong understanding of design principles</li>
                       <li>Excellent communication skills to interact with clients</li>
                       <li>Attention to detail and accuracy in design work</li>
-                 </ul>
+                 
               
                 </p>
+                <p className="con_details">
                 <strong> Previous Work </strong>
-                     <ul>
+               
+                    
                       <li> Naada</li> 
                       <li> Wiramaya</li>
                       <li> Thaala</li>
-                     </ul>
+                  
                 <strong> Conatct Us</strong>
                      <li>  Phone Number: 078459632</li> 
                      <li>  Email: perera@gmail.com</li> 
-
+                </p>
             </div>
         </div>
 

@@ -10,9 +10,9 @@
   justify-content: center;
   border-radius: 5px;
   text-transform: capitalize;
-  padding: 10px;
+  /* padding: 10px; */
   border: 1px solid rgba(255, 0, 0, 0.488);
-  height: 500px;
+  height: 600px;
 }
 
 .img_card_cn {
@@ -29,6 +29,7 @@
   margin-bottom: 2px;
   font-size: 20px;
   color: #ff7738;
+  text-align: center;
 }
 
 .con_id {
@@ -38,8 +39,15 @@
 }
 .con_details {
  margin-bottom: 2px;
-  font-size: 15px;
+  font-size: 14px;
+  text-align: center;
 }
+.con_details1 {
+  margin-bottom: 2px;
+   font-size: 14px;
+   text-align: center;
+
+ }
 .phone_con {
  margin-bottom: 2px;
   font-size: 15px;

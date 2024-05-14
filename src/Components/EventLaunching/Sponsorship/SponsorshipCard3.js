@@ -15,7 +15,7 @@ function SponsorshipCard3() {
               />
             </div>
             <div className="detais_side_sponc">
-              <p className="cord_name_sponc">Name: Mr.Natalie</p>
+              <p className="cord_name_sponc">Name: Mr.John</p>
               <p className="con_id_sponc">Sponsorship ID: SID1234</p>
               <p className="con_details_sponc">
               "Discover how partnering with us can elevate your brand and connect you with a diverse audience passionate about our event's mission."      
@@ -26,7 +26,7 @@ function SponsorshipCard3() {
 
               </p>
               <p className="phone_con_sponc">Phone Number : 0782345726</p>
-              <p className="gmail_con_sponc">Email : natalie@gmail.com</p>
+              <p className="gmail_con_sponc">Email : john@gmail.com</p>
             </div>
           </div>
         </div>
