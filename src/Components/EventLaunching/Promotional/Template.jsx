@@ -131,34 +131,37 @@ function Template() {
               style={{ width: '300px' }}
             />
           </div>
+        
 
-          <div className="flex items-center p-2 rounded-xl h-[30rem] mb-4" style={{ backgroundColor: '#ADD8E6', width: '310px' }}>
-
-          <p style={{ fontSize: '16px', marginTop: '18px', color: 'white', marginLeft: '150px' }}>
+        
+        
+          <div className="flex items-center p-2 rounded-xl h-[30rem] mb-4" style={{ backgroundColor: '#ADD8E6', width: '310px' ,borderRadius:'10px'}}>
+         <p>  </p>
+          <p style={{ fontSize: '16px', marginTop: '25px', color: 'Blue', marginLeft: '130px' }}>
            {eventName}
            </p>
 
-          <p className="text-white mb-4" style={{ fontSize: '14px'  , color: 'white'}}>
+          <p className="text-white mb-4" style={{ fontSize: '14px'  , color: 'Black',marginLeft: '10px'}}>
             {eventDescription}
           </p>
 
-            <p style={{ fontSize: '16px', marginTop: '18px', color: 'white', marginLeft: '25px' }}>
+            <p style={{ fontSize: '16px', marginTop: '18px', color: 'black', marginLeft: '25px' }}>
               <HiLocationMarker size={24} className="mr-2" />
               {eventVenue}
             </p>
-            <p style={{ fontSize: '16px', marginTop: '18px', color: 'white', marginLeft: '25px' }}>
+            <p style={{ fontSize: '16px', marginTop: '18px', color: 'black', marginLeft: '25px' }}>
               <HiClock size={24} className="mr-2" />
               {eventTime}
             </p>
-            <p style={{ fontSize: '16px', marginTop: '18px', color: 'white', marginLeft: '25px' }}>
+            <p style={{ fontSize: '16px', marginTop: '18px', color: 'black', marginLeft: '25px' }}>
               <HiCalendar size={24} className="mr-2" />
               {eventDate}
             </p>
-            <p style={{ fontSize: '16px', marginTop: '18px', color: 'white', marginLeft: '25px' }}>
+            <p style={{ fontSize: '16px', marginTop: '18px', color: 'black', marginLeft: '25px' }}>
               <IoPerson size={24} className="mr-2" />
               {eventArtist}
             </p>
-            <p style={{ fontSize: '16px', marginTop: '18px', color: 'white', marginLeft: '25px' }}>
+            <p style={{ fontSize: '16px', marginTop: '18px', color: 'black', marginLeft: '25px' }}>
               <IoTicket size={24} className="mr-2" />
               {eventTicketRange}
             </p>

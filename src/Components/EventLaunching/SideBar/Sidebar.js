@@ -10,6 +10,7 @@ import {
   HiOutlineQuestionMarkCircle,
   HiOutlineCog,
 } from "react-icons/hi";
+import { IoLogInOutline } from "react-icons/io5";
 
 import Logo from "./img/logo.png";
 const Sidebar = ({ children }) => {
@@ -57,6 +58,7 @@ const Sidebar = ({ children }) => {
                 <IoStatsChart />
                 Analyze
               </p>
+             
               <div className="botmcon">
                 <p className="nav_item">
                   <HiOutlineQuestionMarkCircle />
@@ -66,6 +68,11 @@ const Sidebar = ({ children }) => {
                   <HiOutlineCog />
                   Settings
                 </p>
+                 <p className="nav_item">
+                  <IoLogInOutline/>
+                  Log Out
+                </p>
+                
               </div>
             </div>
           </div>
