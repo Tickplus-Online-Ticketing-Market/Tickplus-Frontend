@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const PhoneInput = ({ onChange }) => {
-  const [countryCode, setCountryCode] = useState('+1'); // Default country code
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [countryCode, setCountryCode] = useState("+1"); // Default country code
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   useEffect(() => {
     const formattedPhoneNumber = `${countryCode}-${phoneNumber}`;
@@ -19,16 +19,19 @@ const PhoneInput = ({ onChange }) => {
   };
 
   return (
-    <div className='flex gap-3'>
+    <div className="flex gap-3">
       {/* Country Code Dropdown */}
       <div className="mb-4 pl-4">
-        <label htmlFor="countryCode" className="block text-sm font-medium text-gray-600">
+        <label
+          htmlFor="countryCode"
+          className="block text-base font-medium text-gray-600"
+        >
           Country Code
         </label>
         <select
           id="countryCode"
           name="countryCode"
-          className="mt-1 block w-36 p-2 border-gray-300 rounded-md shadow-lg focus:outline-none text-sm"
+          className="mt-1 block w-36 p-2 border-gray-300 rounded-md shadow-lg focus:outline-none text-base"
           value={countryCode}
           onChange={handleCountryCodeChange}
         >
@@ -38,17 +41,20 @@ const PhoneInput = ({ onChange }) => {
           {/* Add more country codes as needed */}
         </select>
       </div>
-      
+
       {/* Phone Number Input */}
       <div>
-        <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-600">
+        <label
+          htmlFor="phoneNumber"
+          className="block text-base font-medium text-gray-600"
+        >
           Phone Number
         </label>
         <input
           type="text"
           id="phoneNumber"
           name="phoneNumber"
-          className="mt-1 block w-72 p-2 border-gray-300 rounded-md shadow-lg text-sm"
+          className="mt-1 block w-72 p-2 border-gray-300 rounded-md shadow-lg text-base"
           placeholder="eg : 71XXXXXXX"
           maxLength={10}
           minLength={10}

@@ -1,42 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-const Ticketphistory = ({ tickets }) => {
-  console.log("Tickets in Ticketphistory:", tickets);
+const Ticketphistory = () => {
+  const [events, setEvents] = useState([]);
 
-  if (!tickets || !Array.isArray(tickets) || tickets.length === 0) {
-    return (
-      <div>
-        <h1 className="text-2xl font-bold text-boxf mb-4">Your Ticket Published History is here...</h1>
-        <div className="p-4 bg-accent rounded-lg h-screen">
-          <p className=' text-background'>No tickets available</p>
-        </div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:3030/ticket-launching/ticketfoam/published"
+        );
+        setEvents(res.data.ticketfoam.reverse());
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold text-boxf mb-4">Your Ticket Published History is here...</h1>
-      <div className="p-4 bg-accent rounded-lg h-screen">
-        <div className="gap-4">
-          <table className="min-w-full rounded-xl">
-            <thead className='bg-box4 text-background m-6 border border-background'>
-              <tr className="text-left m-6 p-6">
-                <th className="px-4 py-2 font-bold text-lg">Event Name</th>
-                <th className="px-4 py-2 font-bold text-lg">Status</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {tickets.map((ticket, index) => (
-                <tr key={index} className="bg-box5">
-                  <td className="px-4 py-4 m-4 text-accent">{ticket.eventname}</td>
-                  <td className="px-4 py-4 text-accent">{ticket.status}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+    <div className="p-2 bg-gray-900 min-h-screen">
+      <h1 className="text-3xl font-bold text-primary mb-4">
+        Your Ticket History is here...
+      </h1>
+      <div className="h-10">
+        {events.length > 0 ? (
+          events.map((record, index) => (
+            <div
+              key={index}
+              className="bg-box4 p-4 rounded-lg flex items-center justify-between mb-3"
+            >
+              <span className="text-background font-bold mr-3">
+                {index + 1}.
+              </span>
+              <span className="text-background text-base flex justify-center">
+                {record.eventname}
+              </span>
+              <span className="text-background text-base flex items-center">
+                {record.created_at}
+              </span>
+              <span className="text-background text-base">
+                {record.ticketStatus}
+              </span>
+            </div>
+          ))
+        ) : (
+          <p className="text-background">No history available</p>
+        )}
       </div>
     </div>
   );

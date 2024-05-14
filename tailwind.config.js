@@ -11,6 +11,8 @@ module.exports = {
       accent: "#122128",
       white: "#ffffff",
       black: "#000000",
+      box4: "#48525B",
+      red: "#DE1E1E",
     },
     fontSize: {
       sm: "0.600rem",
