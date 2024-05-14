@@ -4,6 +4,7 @@ import ExploreTickets from "../Components/TicketPurchase/ExploreTickets";
 import Wishlist from "../Components/TicketPurchase/Wishlist";
 import MyTransactions from "../Components/TicketPurchase/MyTransactions";
 import RefundRequest from "../Components/TicketPurchase/RefundRequests";
+import FinanceStatus from "../Components/TicketPurchase/FinanceStatus"
 
 
 
@@ -13,7 +14,7 @@ const ticketPurchaseRoutes = [
     element: <Layout />,
     children: [
       {
-        path: "/ticket-purchase/",
+        path: "/ticket-purchase",
         element: <ExploreTickets />,
       },
       {
@@ -27,6 +28,10 @@ const ticketPurchaseRoutes = [
       {
         path: "/ticket-purchase/refund-request",
         element: <RefundRequest />,
+      },
+      {
+        path: "/ticket-purchase/stat",
+        element: <FinanceStatus />,
       },
     ],
   },

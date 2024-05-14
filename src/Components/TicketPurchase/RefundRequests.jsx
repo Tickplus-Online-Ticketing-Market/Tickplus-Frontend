@@ -85,8 +85,8 @@ export default function RefundRequests() {
               <tbody>
                 {refunds.map((refund, index) => (
                   <tr key={index} className="bg-text">
-                    <td className="px-6 py-3 text-background">{refund.event}</td>
-                    <td className="px-6 py-3 text-background">{refund.tCode}</td>
+                    <td className="px-6 py-3 text-background">{refund.customerName}</td>
+                    <td className="px-6 py-3 text-background">{refund.eventName}/({refund.eventId})</td>
                     <td className="px-6 py-4 text-background">{refund.email}</td>
                     <td className="px-6 py-4 text-background">{refund.mobile}</td>
                     <td className="px-6 py-4 text-background">{refund.reason}</td>
@@ -101,7 +101,7 @@ export default function RefundRequests() {
           </div>
         </div>  
       </div>
-      <UpdateRefund refundId={selectedRefundId} onClose={handleOnClose25} visible={showMyModel25}/>
+      <UpdateRefund refundId={selectedRefundId} onClose={handleOnClose25} visible={showMyModel25} refunds={refunds} />
     </div>
   );
 }

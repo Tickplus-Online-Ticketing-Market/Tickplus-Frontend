@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 
-export default function ApplyRefund({ visible, onClose }) {
+export default function ApplyRefund({ visible, onClose, transaction }) {
     const [formData, setFormData] = useState({
-        event: '',
-        tCode: '',
         email: '',
         mobile: '',
         reason: ''
@@ -15,8 +13,8 @@ export default function ApplyRefund({ visible, onClose }) {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = () => {
-        if (!formData.event || !formData.tCode || !formData.email) {
+    const handleSubmit = async () => {
+        if (!formData.email || !formData.mobile) {
             setErrorMessage('Please fill in all required fields!');
             return;
         }
@@ -28,71 +26,62 @@ export default function ApplyRefund({ visible, onClose }) {
             setErrorMessage('Please provide a valid mobile number!');
             return;
         }
-        
-        fetch('http://localhost:3030/tpp/refs', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(response => {
+
+        const requestData = {
+            ...transaction,
+            ...formData,   
+        };
+
+        try {
+            const response = await fetch('http://localhost:3030/tpp/refs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            });
             if (response.ok) {
                 alert('Refund request submitted successfully!');
-                onClose();
+                setFormData({ email: '', mobile: '', reason: '' }); // Clear form fields
+                onClose(); // Close the modal after successful submission
             } else {
-                throw new Error('Failed to submit refund request.');
+                setErrorMessage('Failed to submit refund request. Please try again later.');
             }
-        })
-        .catch(error => {
+        } catch (error) {
             console.error('Error submitting refund request:', error);
-            alert('Failed to submit refund request. Please try again later.');
-        });
+            setErrorMessage('Failed to submit refund request. Please try again later.');
+        }
     };
 
     const handleOnClose08 = (e) => {
         if (e.target.id === 'container') onClose();
     };
 
-    if (!visible) return null;
+    if (!visible || !transaction) return null;
 
     return (
         <div
             id='container'
             onClick={handleOnClose08}
             className='fixed inset-0 bg-text bg-opacity-50 backdrop-blur-sm flex justify-center items-center'>
-            <div className='bg-background bg-opacity-100 h-[40rem] w-[60rem] rounded-xl flex justify-between items-center'>
-                <div className='bg-accent rounded-xl h-[40rem] w-[35rem] '>
+            <div className='bg-background bg-opacity-100 h-[30rem] w-[60rem] rounded-xl flex justify-between items-center'>
+                <div className='bg-accent rounded-xl h-[30rem] w-[35rem] '>
                     <img src="./images/tick+1.png" alt="" />
+                    <div className='font-bold mt-[5rem] mr-[2rem] ml-[2rem] flex flex-col h-full'>
+                        <div className="flex text-secondary items-center mb-2 text-xl">Purchase by Mr/Ms- {transaction.customerName}</div>
+                        <div className="flex text-secondary items-center mb-2 text-xl">Event Name/Event ID - {transaction.eventName}/({transaction.eventId})</div>
+                        <div className="flex text-secondary items-center mb-2 text-xl">UnitPrice x Count - {transaction.unitPrice} x {transaction.count}</div>
+                        <div className="flex text-secondary items-center mb-2 text-xl">Total Cost - {transaction.totalCost} LKR</div>
+                    </div>
                 </div>
+                
                 <div>
-                <span className='flex justify-center pr-[2.5rem] mb-2 text-accent text-2xl font-bold'>Request a Refund</span>
-                    <p className='flex justify-center pr-[2.5rem] text-primary text-xl font-bold'>Terms & Conditions apply!</p>
-                    <p className='flex justify-center pr-[2.5rem] text-primary text-base'>Only <div className='font-bold'> 75%</div> of the value will be refunded.</p>
-                    <p className='flex justify-center pr-[2.5rem] text-primary text-base'>Request should made before one week on event date.</p>
-                    <span className='flex justify-center pr-[2.5rem] text-primary text-base'>Organizers will Contact via contact details.</span>
+                    <span className='flex justify-center pr-[2.5rem] mb-2 text-accent text-2xl font-bold'>Request a Refund</span>
+                    <span className='flex justify-center pr-[2.5rem] text-primary text-xl font-bold'>Terms & Conditions apply!</span>
+                    <span className='flex justify-center pr-[2.5rem] text-primary text-base'>Only <span className='font-bold'> 75%</span> of the value will be refunded.</span>
+                    <span className='flex justify-center pr-[2.5rem] text-primary text-base'>Organizers will contact via provided contact details.</span>
                     <span className='flex justify-center pr-[2.5rem] text-primary text-base font-bold'>Please provide valid contact details!</span>
                     <span className='flex justify-center pr-[2.5rem] mb-5 text-primary text-base font-bold'></span>
-                    <div className='flex justify-center pr-[2.5rem]'>
-                        <input
-                            type="text"
-                            name="event"
-                            placeholder='Event Name/Ticket Code*'
-                            value={formData.event}
-                            onChange={handleInputChange}
-                            className='text-xl text-text focus:outline-none active:outlines-none h-10 w-[20rem] border-2 border-accent rounded-lg pl-5 mb-5'
-                        />
-                    </div>
-                    <div className='flex justify-center pr-[2.5rem]'>
-                        <input
-                            type="text"
-                            name="tCode"
-                            placeholder='Customer name*'
-                            value={formData.tCode}
-                            onChange={handleInputChange}
-                            className='text-xl text-text focus:outline-none active:outlines-none h-10 w-[20rem] border-2 border-accent rounded-lg pl-5 mb-5'
-                        />
-                    </div>
                     <div className='flex justify-center pr-[2.5rem]'>
                         <input
                             type="email"

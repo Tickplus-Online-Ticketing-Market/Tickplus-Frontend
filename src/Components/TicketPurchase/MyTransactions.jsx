@@ -4,6 +4,7 @@ import ApplyRefund from './models/ApplyRefund';
 
 export default function MyTransactions() {
     const [transactions, setTransactions] = useState([]);
+    const [selectedTransaction, setSelectedTransaction] = useState(null);
     const [showMyModel08, setShowMyModel08] = useState(false);
     const handleOnClose08 = () => setShowMyModel08(false);
 
@@ -26,6 +27,11 @@ export default function MyTransactions() {
         fetchTransactions();
     }, []);
 
+    const handleApplyRefund = (transaction) => {
+        setSelectedTransaction(transaction);
+        setShowMyModel08(true);
+    };
+
     return (
         <div className='font-Poppins'>
             <div>
@@ -40,6 +46,7 @@ export default function MyTransactions() {
                     <table className="w-full text-xl text-center rtl:text-right text-primary">
                         <thead className="text-xl text-background font-bold">
                             <tr>
+                                <th scope="col" className="px-6 py-3 ">Payment Done by</th>
                                 <th scope="col" className="px-6 py-3">Event (EventId)</th>
                                 <th scope="col" className="px-6 py-3">Date/Time</th>
                                 <th scope="col" className="px-6 py-3">Quantity</th>
@@ -51,6 +58,9 @@ export default function MyTransactions() {
                             {transactions.map((transaction, index) => (
                                 <React.Fragment key={transaction._id}>
                                     <tr className="bg-text bg-opacity-40 sm:rounded-base pb-2 rounded" key={transaction._id}>
+                                    <th scope="row" className="px-6 py-4 font-xl text-background">
+                                            {transaction.customerName}
+                                        </th>
                                         <th scope="row" className="px-6 py-4 font-xl text-background">
                                             {transaction.eventName} ({transaction.eventId})
                                         </th>
@@ -58,13 +68,13 @@ export default function MyTransactions() {
                                             {transaction.date} - {transaction.time}h
                                         </td>
                                         <td className="px-6 py-4 text-background">
-                                            {transaction.unitPrice} * {transaction.count}
+                                            {transaction.unitPrice} x {transaction.count}
                                         </td>
                                         <td className="px-6 py-4 text-background">
                                             {transaction.totalCost} LKR
                                         </td>
                                         <td className="px-6 py-4 text-primary items-center">
-                                            <button type="button" onClick={() => setShowMyModel08(true)} className="bg-accent text-primary h-[3rem] w-[10rem] rounded hover:scale-95 transition text-xl ml-1">Apply Refund</button>
+                                            <button type="button" onClick={() => handleApplyRefund(transaction)} className="bg-accent text-primary h-[3rem] w-[10rem] rounded hover:scale-95 transition text-xl ml-1">Apply Refund</button>
                                         </td>
                                     </tr>
                                     {index < transactions.length - 1 && (
@@ -78,7 +88,7 @@ export default function MyTransactions() {
                     </table>
                 </div>
             </div>
-            <ApplyRefund onClose={handleOnClose08} visible={showMyModel08} />
+            {selectedTransaction && <ApplyRefund onClose={handleOnClose08} visible={showMyModel08} transaction={selectedTransaction} />}
         </div>
     )
 }

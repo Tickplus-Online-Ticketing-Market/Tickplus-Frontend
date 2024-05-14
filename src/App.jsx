@@ -14,15 +14,13 @@ function App() {
 
         <Routes>
 
-            <Route path="/" element={<Layout/>}>
+            <Route path="/ticket-purchase" element={<Layout/>}>
               <Route index element={<ExploreTickets/>}/>
-              <Route path="w" element={<Wishlist/>}/>
-              <Route path="mt" element={<MyTransactions/>}/>
-              <Route path="rr" element={<RefundRequests/>}/>
-              <Route path="fs" element={<FinanceStatus/>}/>
+              <Route path="/ticket-purchase/wishlist" element={<Wishlist/>}/>
+              <Route path="/ticket-purchase/my-transactions" element={<MyTransactions/>}/>
+              <Route path="/ticket-purchase/refund-request" element={<RefundRequests/>}/>
+              <Route path="/ticket-purchase/stat" element={<FinanceStatus/>}/>
             </Route>
-            
-
             <Route path="fs" element={<FinanceStatus/>}></Route>
 
         </Routes>

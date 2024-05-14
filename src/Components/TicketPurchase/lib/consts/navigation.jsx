@@ -11,26 +11,32 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'extickets',
 		label: 'Explore Tickets',
-		path: '/',
+		path: '/ticket-purchase',
 		icon: <MdOutlineTravelExplore />
 	},
 	{
 		key: 'wishlist',
 		label: 'Wishlist',
-		path: '/w',
+		path: '/ticket-purchase/wishlist',
 		icon: <ImHeart />
 	},
 	{
 		key: 'mytransactions',
 		label: 'My Tickets',
-		path: '/mt',
+		path: '/ticket-purchase/my-transactions',
 		icon: <IoTicketSharp />
 
 	},
 	{
 		key: 'refundrequests',
-		label: 'Refund Requests',
-		path: '/rr',
+		label: 'Refunds',
+		path: '/ticket-purchase/refund-request',
+		icon: <HiReceiptRefund />
+	},
+	{
+		key: 'paymentanlysis',
+		label: 'Payment Analysis',
+		path: '/ticket-purchase/stat',
 		icon: <HiReceiptRefund />
 	},
 	

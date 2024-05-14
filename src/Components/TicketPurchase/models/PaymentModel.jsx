@@ -20,7 +20,6 @@ export default function PaymentModel({ visible, onClose, selectedItem }) {
     const [cardImage, setCardImage] = useState(null);
     const [paymentSuccess, setPaymentSuccess] = useState(false);
 
-    // Reset form when component is re-opened
     useEffect(() => {
         if (visible) {
             setCount(0);

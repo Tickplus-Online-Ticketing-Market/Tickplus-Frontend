@@ -1,14 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function UpdateRefund({ visible, onClose, refundId }) {
+export default function UpdateRefund({ visible, onClose, refundId, refunds }) {
     const [formData, setFormData] = useState({
-        event: '',
-        tCode: '',
         email: '',
         mobile: '',
         reason: '',
     });
+
+    useEffect(() => {
+        const fetchRefundData = async () => {
+            try {
+                const selectedRefund = refunds.find(refund => refund._id === refundId);
+                if (selectedRefund) {
+                    setFormData({
+                        email: selectedRefund.email,
+                        mobile: selectedRefund.mobile,
+                        reason: selectedRefund.reason
+                    });
+                }
+            } catch (error) {
+                console.error('Error fetching refund data:', error);
+            }
+        };
+
+        if (visible && refundId && refunds.length) {
+            fetchRefundData();
+        }
+    }, [visible, refundId, refunds]);
 
     const handleInputChange = (e) => {
         setFormData({
@@ -18,7 +37,6 @@ export default function UpdateRefund({ visible, onClose, refundId }) {
     };
 
     const handleUpdateRefund = async () => {
-        console.log("Refund ID : ",refundId)
         try {
             const response = await axios.put(`http://localhost:3030/tpp/refs/${refundId}`, formData);
             if (response.status === 200) {
@@ -37,24 +55,6 @@ export default function UpdateRefund({ visible, onClose, refundId }) {
         }
     };
 
-    useEffect(() => {
-        const fetchRefundData = async () => {
-            try {
-                const response = await axios.get(`http://localhost:3030/tpp/refs/${refundId}`);
-                if (response.status === 200) {
-                    const refundData = response.data;
-                    setFormData(refundData);
-                }
-            } catch (error) {
-                console.error('Error fetching refund data:', error);
-            }
-        };
-
-        if (visible && refundId) {
-            fetchRefundData();
-        }
-    }, [visible, refundId]);
-
     if (!visible) return null;
 
     return (
@@ -65,7 +65,7 @@ export default function UpdateRefund({ visible, onClose, refundId }) {
         >
             <div className='bg-background bg-opacity-100 h-[40rem] w-[60rem] rounded-xl flex justify-between items-center'>
                 <div className='bg-accent rounded-xl h-[40rem] w-[35rem] '>
-                    <img src="./images/tick+1.png" alt="" />
+                    {/* Image content */}
                 </div>
                 <div>
                     <span className='flex justify-center pr-[2.5rem] mb-2 text-accent text-xl font-bold'>Update Refund Request</span>
@@ -76,33 +76,11 @@ export default function UpdateRefund({ visible, onClose, refundId }) {
                     <span className='flex justify-center pr-[2.5rem] mb-5 text-primary text-base font-bold'></span>
                     <div className='flex justify-center pr-[2.5rem]'>
                         <input
-                            type="text"
-                            placeholder="Event Name/Ticket Code"
-                            className='text-xl text-text focus:outline-none active:outlines-none h-10 w-[20rem] border-2 border-accent rounded-lg pl-5 mb-5'
-                            name="event"
-                            value={formData.event} // Display existing data
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
-                    <div className='flex justify-center pr-[2.5rem]'>
-                        <input
-                            type="text"
-                            placeholder="Customer name"
-                            className='text-xl text-text focus:outline-none active:outlines-none h-10 w-[20rem] border-2 border-accent rounded-lg pl-5 mb-5'
-                            name="tCode"
-                            value={formData.tCode} // Display existing data
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
-                    <div className='flex justify-center pr-[2.5rem]'>
-                        <input
                             type="email"
                             placeholder="Contact E-mail"
                             className='text-xl text-text focus:outline-none active:outlines-none h-10 w-[20rem] border-2 border-accent rounded-lg pl-5 mb-5'
                             name="email"
-                            value={formData.email} // Display existing data
+                            value={formData.email}
                             onChange={handleInputChange}
                             pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                             required
@@ -114,7 +92,7 @@ export default function UpdateRefund({ visible, onClose, refundId }) {
                             placeholder="Contact Number"
                             className='text-xl text-text focus:outline-none active:outlines-none h-10 w-[20rem] border-2 border-accent rounded-lg pl-5 mb-5'
                             name="mobile"
-                            value={formData.mobile} // Display existing data
+                            value={formData.mobile}
                             onChange={handleInputChange}
                             pattern="[0-9]{10}"
                             required
@@ -126,7 +104,7 @@ export default function UpdateRefund({ visible, onClose, refundId }) {
                             placeholder="Reason/Add Note"
                             className='text-xl text-text focus:outline-none active:outlines-none h-10 w-[20rem] border-2 border-accent rounded-lg pl-5 mb-5'
                             name="reason"
-                            value={formData.reason} // Display existing data
+                            value={formData.reason}
                             onChange={handleInputChange}
                         />
                     </div>
