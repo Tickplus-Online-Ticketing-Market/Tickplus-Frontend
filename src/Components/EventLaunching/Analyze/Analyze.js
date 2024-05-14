@@ -106,10 +106,10 @@ function Analyze() {
           <div>
             <strong style={{ color: 'White', fontSize: '24px' }}>Usage Analyze</strong>
           </div>
-          <div className="charts" style={{ display: 'flex', marginTop: '100px' }}>
-            <div style={{ textAlign: "center", marginRight: '90px' }}>
+          <div className="charts" style={{ display: 'flex', marginTop: '60px' }}>
+            <div style={{ textAlign: "left", marginRight: '90px' }}>
               <div className="App">
-                <p style={{ color: '#ffffff', fontSize: '20px', marginBottom: '30px', paddingLeft: '90px' }}>Organizer Activity Analyze</p>
+                <p style={{ color: '#ffffff', fontSize: '20px', marginBottom: '30px' }}>Organizer Activity Analyze</p>
                 <BarChart
                   width={400}
                   height={300}

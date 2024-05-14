@@ -10,6 +10,7 @@ import AdminEvents from "./Components/EventLaunching/Event/Events";
 import Sponsorship from "./Components/EventLaunching/Sponsorship/Sponsorship";
 import Analyze from "./Components/EventLaunching/Analyze/Analyze";
 import ViewEvents from "./Components/EventLaunching/HomePageViewEvents/ViewEvents";
+import HomePage from "./Components/HomePage/HomePage";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <Routes>
       
            
-      
+         <Route exact path="/" element={<HomePage />} />
           <Route exact path="/events/addevent" element={<AddEvent />} />
           <Route exact path="/events" element={<AdminEvents />} />
           <Route exact path="/events/admin-events/:id" element={<ViewEvent />} />
