@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Checkbox = ({ isChecked, onChange }) => {
   return (
@@ -9,7 +9,9 @@ const Checkbox = ({ isChecked, onChange }) => {
         onChange={onChange}
         className="h-5 w-5 text-accent border-gray-300 rounded"
       />
-      <label className="text-sm text-gray-600">I agree to terms and conditions</label>
+      <label className="text-base text-gray-600">
+        I agree to terms and conditions
+      </label>
     </div>
   );
 };

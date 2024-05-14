@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
     "classnames": "^2.5.1",
+    "data-fns": "^1.1.0",
     "jodit": "^4.2.10",
     "jodit-react": "^4.1.2",
     "quill": "^2.0.1",
@@ -24,6 +25,7 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.5",
     "recharts": "^2.12.6",
+    "toastify": "^2.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
