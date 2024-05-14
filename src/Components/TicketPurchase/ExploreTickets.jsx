@@ -86,14 +86,14 @@ export default function ExploreTickets() {
             <button
               type="button"
               onClick={() => handleBuyTicket(ticket)} // Pass the ticket to the handleBuyTicket function
-              className="bg-primary text-background h-[2.5rem] w-[6rem] rounded hover:scale-95 transition text-xl mr-1"
+              className="bg-primary text-accent h-[2.5rem] w-[6rem] rounded hover:scale-95 transition text-xl mr-1 font-bold"
             >
               Buy
             </button>
             <button
               type="button"
               onClick={() => handleAddToWishlist(ticket)}
-              className="bg-accent text-primary h-[2.5rem] w-[3rem] rounded hover:scale-95 transition text-xl mr-1"
+              className="bg-accent text-primary h-[2.5rem] w-[3rem] rounded hover:scale-95 transition text-xl mr-1 font-bold"
             >
               <div className="ml-[1rem] mr-[1rem]">
                 <IoHeartSharp />

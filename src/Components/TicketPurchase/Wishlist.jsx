@@ -67,10 +67,10 @@ export default function Wishlist() {
             {wishlist.map((item, index) => (
               <React.Fragment key={item._id}>
                 <tr className='bg-primary bg-opacity-40 sm:rounded-base pb-2 rounded'>
-                  <td className="px-6 py-4 text-background">{item.eventId}</td>
+                  <td className="px-6 py-4 text-secondary">{item.eventId}</td>
                   <td className="px-6 py-4 text-background">{item.eventName}</td>
-                  <td className="px-6 py-4 text-background">{item.unitPrice}.00 LKR</td>
-                  <td className="px-6 py-4 text-primary items-center">
+                  <td className="px-6 py-4 text-secondary">{item.unitPrice}.00 LKR</td>
+                  <td className="px-6 py-4 items-center">
                     <button 
                       type="button" 
                       onClick={() => handleBuyClick(item)} // Pass item data to handleBuyClick

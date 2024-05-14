@@ -192,9 +192,9 @@ export default function PaymentModel({ visible, onClose, selectedItem }) {
                                         value={customerName}
                                         onChange={(e) => setCustomerName(e.target.value)}
                                         required
-                                    />
-                                    {errors.customerName && <p className="text-primary text-sm">{errors.customerName}</p>}
+                                    />                                   
                                 </div>
+                                {errors.customerName && <p className="text-red text-sm">{errors.customerName}</p>}
                                 <div className="mb-4 flex items-center">
                                     <label htmlFor="cardNumber" className="block text-primary text-sm font-bold mr-2">Card Number</label>
                                     <input
@@ -208,7 +208,7 @@ export default function PaymentModel({ visible, onClose, selectedItem }) {
                                         required
                                     />
                                     {cardImage && <img src={cardImage} alt="Card Type" className="w-10 h-6 ml-2" />}
-                                    {errors.cardNumber && <p className="text-primary text-sm">{errors.cardNumber}</p>}
+                                    {errors.cardNumber && <p className="text-red text-sm">{errors.cardNumber}</p>}
                                 </div>
                                 <div className="mb-4 flex items-center">
                                     <label htmlFor="expireMonth" className="block text-primary text-sm font-bold mr-2">Expiration Month</label>
@@ -233,9 +233,9 @@ export default function PaymentModel({ visible, onClose, selectedItem }) {
                                         onChange={(e) => setExpireYear(e.target.value)}
                                         maxLength={2}
                                         required
-                                    />
-                                    {errors.expireDate && <p className="text-primary text-sm">{errors.expireDate}</p>}
+                                    />                                  
                                 </div>
+                                {errors.expireDate && <p className="text-red text-sm mb-2">{errors.expireDate}</p>}
                                 <div className="mb-4 flex items-center">
                                     <label htmlFor="cvv" className="block text-primary text-sm font-bold mr-2">CVV</label>
                                     <input
@@ -247,10 +247,10 @@ export default function PaymentModel({ visible, onClose, selectedItem }) {
                                         onChange={(e) => setCvv(e.target.value)}
                                         maxLength={3}
                                         required
-                                    />
-                                    {errors.cvv && <p className="text-primary text-sm">{errors.cvv}</p>}
+                                    />    
                                 </div>
-                                <div className="flex flex-col justify-center items-center mt-[3rem]">
+                                {errors.cvv && <p className="text-red text-sm">{errors.cvv}</p>}
+                                <div className="flex flex-col justify-center items-center mt-[1.5rem]">
                                     <button
                                         type="submit"
                                         className="bg-primary hover:bg-blue-700 text-accent font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

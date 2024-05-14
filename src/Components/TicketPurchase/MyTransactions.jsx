@@ -15,7 +15,8 @@ export default function MyTransactions() {
                 const response = await fetch('http://localhost:3030/tpp/pays');
                 if (response.ok) {
                     const data = await response.json();
-                    setTransactions(data.pays);
+                    // Reverse the order of transactions
+                    setTransactions(data.pays.reverse());
                 } else {
                     console.error('Failed to fetch transactions');
                 }
@@ -44,14 +45,13 @@ export default function MyTransactions() {
 
                 <div className="bg-accent font-bold relative overflow-x-auto shadow-md sm:rounded-lg px-5 py-5">
                     <table className="w-full text-xl text-center rtl:text-right text-primary">
-                        <thead className="text-xl text-background font-bold">
+                        <thead className="text-xl font-bold">
                             <tr>
-                                <th scope="col" className="px-6 py-3 ">Payment Done by</th>
-                                <th scope="col" className="px-6 py-3">Event (EventId)</th>
-                                <th scope="col" className="px-6 py-3">Date/Time</th>
-                                <th scope="col" className="px-6 py-3">Quantity</th>
-                                <th scope="col" className="px-6 py-3">Total Cost</th>
-                                <th scope="col" className="px-6 py-3">Actions</th>
+                                <th scope="col" className="px-6 py-3 text-background">Payment Done by</th>
+                                <th scope="col" className="px-6 py-3 text-primary">Event (EventId)</th>
+                                <th scope="col" className="px-6 py-3 text-background">Date/Time</th>
+                                <th scope="col" className="px-6 py-3 text-primary">Quantity</th>
+                                <th scope="col" className="px-6 py-3 text-background">Total Cost</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,19 +61,19 @@ export default function MyTransactions() {
                                     <th scope="row" className="px-6 py-4 font-xl text-background">
                                             {transaction.customerName}
                                         </th>
-                                        <th scope="row" className="px-6 py-4 font-xl text-background">
+                                        <th scope="row" className="px-6 py-4 font-xl text-primary">
                                             {transaction.eventName} ({transaction.eventId})
                                         </th>
                                         <td className="px-6 py-3 text-background">
                                             {transaction.date} - {transaction.time}h
                                         </td>
-                                        <td className="px-6 py-4 text-background">
+                                        <td className="px-6 py-4 text-primary">
                                             {transaction.unitPrice} x {transaction.count}
                                         </td>
                                         <td className="px-6 py-4 text-background">
                                             {transaction.totalCost} LKR
                                         </td>
-                                        <td className="px-6 py-4 text-primary items-center">
+                                        <td className="px-6 py-4  items-center">
                                             <button type="button" onClick={() => handleApplyRefund(transaction)} className="bg-accent text-primary h-[3rem] w-[10rem] rounded hover:scale-95 transition text-xl ml-1">Apply Refund</button>
                                         </td>
                                     </tr>

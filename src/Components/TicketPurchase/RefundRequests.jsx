@@ -84,13 +84,13 @@ export default function RefundRequests() {
               </thead>
               <tbody>
                 {refunds.map((refund, index) => (
-                  <tr key={index} className="bg-text">
+                  <tr key={index} className="bg-text font-bold">
                     <td className="px-6 py-3 text-background">{refund.customerName}</td>
-                    <td className="px-6 py-3 text-background">{refund.eventName}/({refund.eventId})</td>
+                    <td className="px-6 py-3 text-background">{refund.eventName}({refund.eventId})</td>
                     <td className="px-6 py-4 text-background">{refund.email}</td>
                     <td className="px-6 py-4 text-background">{refund.mobile}</td>
                     <td className="px-6 py-4 text-background">{refund.reason}</td>
-                    <td className="px-6 py-4 text-primary items-center">
+                    <td className="px-6 py-4 items-center">
                       <button type="button" onClick={() => handleUpdateRefund(refund._id) } className="bg-secondary text-accent px-3 py-2 rounded hover:scale-95 transition text-xl mr-5">Update Refund</button>
                       <button type="button" onClick={() => deleteRefund(refund._id)} className="bg-primary text-background px-3 py-2 rounded hover:scale-95 transition text-xl">Delete</button>
                     </td>
