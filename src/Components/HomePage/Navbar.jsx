@@ -30,7 +30,7 @@ const Navbar = () => {
                     <Link to="/digital-customization" className="text-white hover:text-gray-300">
                         Customize
                     </Link>
-                    <Link to="/ticket-purshase" className="text-white hover:text-gray-300">
+                    <Link to="/ticket-purchase" className="text-white hover:text-gray-300">
                         Buy Tickets
                     </Link>
                     <Link to="/user/login">

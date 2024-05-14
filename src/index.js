@@ -10,6 +10,7 @@ import ticketLaunchingRoutes from './Routes/TicketLaunchingRoutes'
 import CommunityPageRoutes from './Routes/CommunityPageRoutes'
 import SponsorshipManagementRoutes from './Routes/SponsorshipManagementRoutes'
 import DigitalCustomizationRoutes from './Routes/DigitalCustomizationRoutes'
+import ticketPurchaseRoutes from './Routes/TicketPurchaseRoutes'
 
 const allRoutes = [
     ...homePageRoutes,
@@ -18,7 +19,8 @@ const allRoutes = [
     ...ticketLaunchingRoutes,
     ...CommunityPageRoutes,
     ...SponsorshipManagementRoutes,
-    ...DigitalCustomizationRoutes
+    ...DigitalCustomizationRoutes,
+    ...ticketPurchaseRoutes
 ]
 const router = createBrowserRouter(allRoutes)
 
