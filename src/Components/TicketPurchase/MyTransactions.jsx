@@ -6,6 +6,7 @@ export default function MyTransactions() {
     const [transactions, setTransactions] = useState([]);
     const [selectedTransaction, setSelectedTransaction] = useState(null);
     const [showMyModel08, setShowMyModel08] = useState(false);
+    const [loading, setLoading] = useState(true);
     const handleOnClose08 = () => setShowMyModel08(false);
 
     useEffect(() => {
@@ -17,11 +18,14 @@ export default function MyTransactions() {
                     const data = await response.json();
                     // Reverse the order of transactions
                     setTransactions(data.pays.reverse());
+                    setLoading(false); // Update loading state when data is fetched
                 } else {
                     console.error('Failed to fetch transactions');
+                    setLoading(false); // Update loading state even if there's an error
                 }
             } catch (error) {
                 console.error('Error fetching transactions:', error);
+                setLoading(false); // Update loading state even if there's an error
             }
         };
 
@@ -35,20 +39,22 @@ export default function MyTransactions() {
 
     return (
         <div className='font-Poppins'>
-            <div>
-                <div className='bg-background h-[8rem] px-4 flex justify-between items-center'>
-                    <div className='flex items-center'>
-                        <div className='text-accent text-4xl px-3'><IoTicketSharp /></div>
-                        <div className='text-accent text-4xl font-bold'>My Tickets</div>
+            <div style={{ transition: 'transform 0.5 ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(0)' }}>
+                <div className={`bg-background h-[8rem] px-4 flex justify-between items-center`}>
+                    <div>
+                        <div className="text-accent text-4xl px-3 flex items-center">
+                            <IoTicketSharp />
+                        </div>
+                        <div className="text-accent text-4xl font-bold">My Tickets</div>
                     </div>
                 </div>
 
-                <div className="bg-accent font-bold relative overflow-x-auto shadow-md sm:rounded-lg px-5 py-5">
+                <div className="bg-accent font-bold relative overflow-x-auto shadow-md sm:rounded-lg px-5 py-5" style={{ transition: 'transform 1s ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(10%)' }}>
                     <table className="w-full text-xl text-center rtl:text-right text-primary">
                         <thead className="text-xl font-bold">
                             <tr>
                                 <th scope="col" className="px-6 py-3 text-background">Payment Done by</th>
-                                <th scope="col" className="px-6 py-3 text-primary">Event (EventId)</th>
+                                <th scope="col" className="px-6 py-3 text-primary">Event (EventID)</th>
                                 <th scope="col" className="px-6 py-3 text-background">Date/Time</th>
                                 <th scope="col" className="px-6 py-3 text-primary">Quantity</th>
                                 <th scope="col" className="px-6 py-3 text-background">Total Cost</th>
@@ -58,14 +64,15 @@ export default function MyTransactions() {
                             {transactions.map((transaction, index) => (
                                 <React.Fragment key={transaction._id}>
                                     <tr className="bg-text bg-opacity-40 sm:rounded-base pb-2 rounded" key={transaction._id}>
-                                    <th scope="row" className="px-6 py-4 font-xl text-background">
+                                    <th scope="row" className="px-4 py-4 font-xl text-background">
                                             {transaction.customerName}
                                         </th>
                                         <th scope="row" className="px-6 py-4 font-xl text-primary">
-                                            {transaction.eventName} ({transaction.eventId})
+                                            {transaction.eventName}<div className='text-sm'>({transaction.eventId})</div> 
                                         </th>
                                         <td className="px-6 py-3 text-background">
-                                            {transaction.date} - {transaction.time}h
+                                            <div>{transaction.date}</div>
+                                            {transaction.time}h  
                                         </td>
                                         <td className="px-6 py-4 text-primary">
                                             {transaction.unitPrice} x {transaction.count}

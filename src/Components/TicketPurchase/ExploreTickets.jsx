@@ -1,3 +1,4 @@
+// ExploreTickets.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MdOutlineTravelExplore } from 'react-icons/md';
@@ -14,17 +15,16 @@ export default function ExploreTickets() {
 
   useEffect(() => {
     fetchAllTickets();
-    setLoading(false);
   }, []);
 
   const fetchAllTickets = async () => {
     try {
       const res = await axios.get('http://localhost:3030/tpp/ticks');
       setTickets(res.data.Tickets);
-      setLoading(false);
+      setLoading(false); // Set loading to false after fetching tickets
     } catch (error) {
       console.error('Error fetching tickets:', error);
-      setLoading(false);
+      setLoading(false); // Set loading to false in case of error
     }
   };
 
@@ -59,7 +59,6 @@ export default function ExploreTickets() {
     };
 
     return (
-      
       <div
         className={`w-[49.25%] bg-secondary bg-opacity-100 h-[12rem] rounded-xl flex justify-between items-center mb-4`}
         onMouseEnter={handleMouseEnter}
@@ -116,8 +115,8 @@ export default function ExploreTickets() {
 
   return (
     <div>
-      <div className="bg-background h-[8rem] px-4 flex justify-between items-center">
-        <div className={{ transform: loading ? 'translateY(100%)' : 'translateY(0)', transition: 'transform 0.5s ease-in-out' }}>
+      <div className={`bg-background h-[8rem] px-4 flex justify-between items-center ${loading ? 'translate-y-full' : 'translate-y-0'} transition-transform duration-500 ease-in-out`}>
+        <div>
           <div className="text-primary text-4xl px-3 flex items-center">
             <MdOutlineTravelExplore />
           </div>

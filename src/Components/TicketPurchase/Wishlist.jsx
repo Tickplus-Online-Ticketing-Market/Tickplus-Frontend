@@ -1,3 +1,4 @@
+// Wishlist.jsx
 import React, { useState, useEffect } from 'react';
 import { ImHeart } from "react-icons/im";
 import { ImBin } from "react-icons/im";
@@ -8,6 +9,7 @@ export default function Wishlist() {
   const [showMyModel02, setShowMyModel02] = useState(false);
   const [wishlist, setWishlist] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const handleOnClose02 = () => setShowMyModel02(false);
 
@@ -16,8 +18,10 @@ export default function Wishlist() {
       try {
         const response = await axios.get("http://localhost:3030/tpp/wishes");
         setWishlist(response.data.wishes);
+        setLoading(false); // Update loading state when data is fetched
       } catch (error) {
         console.error("Error fetching wishlist:", error);
+        setLoading(false); // Update loading state even if there's an error
       }
     };
 
@@ -47,41 +51,43 @@ export default function Wishlist() {
 
   return (
     <div>
-      <div className='bg-background h-[8rem] px-4 flex justify-between items-center'>
-        <div className='flex items-center'>
-          <div className='text-accent text-4xl px-3'><ImHeart /></div>
-          <div className='text-accent text-4xl font-bold'>Wishlist</div>
+      <div className={`bg-background h-[8rem] px-4 flex justify-between items-center`}>
+        <div>
+          <div className="text-primary text-4xl px-3 flex items-center">
+            <ImHeart />
+          </div>
+          <div className="text-primary text-4xl font-bold">Wishlist</div>
         </div>
       </div>
         
-      <div className="bg-accent font-bold relative overflow-x-auto shadow-md sm:rounded-lg px-5 py-5">
+      <div className="bg-secondary font-bold relative overflow-x-auto shadow-md sm:rounded-lg px-5 py-5" style={{ transition: 'transform 0.5s ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(0)' }}>
         <table className="w-full text-xl text-center rtl:text-right text-primary">
-          <thead className="text-xl text-background font-bold">
+          <thead className="text-xl font-bold">
             <tr>
-              <th scope="col" className="px-6 py-3">Event ID</th>
-              <th scope="col" className="px-6 py-3">Event Name</th>
-              <th scope="col" className="px-6 py-3">Unit Price</th>
+              <th scope="col" className="px-6 py-3 text-accent">Event ID</th>
+              <th scope="col" className="px-6 py-3 text-primary">Event Name</th>
+              <th scope="col" className="px-6 py-3 text-accent">Unit Price</th>
             </tr>
           </thead>
           <tbody>
             {wishlist.map((item, index) => (
               <React.Fragment key={item._id}>
-                <tr className='bg-primary bg-opacity-40 sm:rounded-base pb-2 rounded'>
-                  <td className="px-6 py-4 text-secondary">{item.eventId}</td>
-                  <td className="px-6 py-4 text-background">{item.eventName}</td>
-                  <td className="px-6 py-4 text-secondary">{item.unitPrice}.00 LKR</td>
+                <tr className='bg-text bg-opacity-40 sm:rounded-base pb-2 rounded' style={{ transition: 'height 0.5s ease-in-out', height: index !== wishlist.length - 1 ? 'auto' : '4px' }}>
+                  <td className="px-6 py-4 text-accent">{item.eventId}</td>
+                  <td className="px-6 py-4 text-primary">{item.eventName}</td>
+                  <td className="px-6 py-4 text-accent">{item.unitPrice}.00 LKR</td>
                   <td className="px-6 py-4 items-center">
                     <button 
                       type="button" 
                       onClick={() => handleBuyClick(item)} // Pass item data to handleBuyClick
-                      className='bg-accent text-background h-[3rem] w-[10rem] rounded hover:scale-95 transition text-xl mr-1'
+                      className='bg-primary text-background h-[3rem] w-[10rem] rounded hover:scale-95 transition text-xl mr-1'
                     >
                       Buy
                     </button>
                     <button 
                       type="button" 
                       onClick={() => handleDeleteWish(item._id)} // Call handleDeleteWish with the wishId
-                      className="bg-secondary text-accent h-[2rem] w-[4rem] rounded hover:scale-95 transition text-xl ml-1"
+                      className="bg-accent text-secondary h-[2rem] w-[4rem] rounded hover:scale-95 transition text-xl ml-1"
                     >
                       <div className='ml-6'>
                         <ImBin/>
@@ -89,7 +95,6 @@ export default function Wishlist() {
                     </button>  
                   </td>  
                 </tr>
-                {index !== wishlist.length - 1 && <tr className="h-4" />}
               </React.Fragment>
             ))}
           </tbody>  
