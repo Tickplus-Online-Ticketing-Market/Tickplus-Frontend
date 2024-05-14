@@ -39,9 +39,9 @@ export default function MyTransactions() {
 
     return (
         <div className='font-Poppins'>
-            <div style={{ transition: 'transform 1 ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(0)' }}>
-                <div className={`bg-background h-[8rem] px-4 flex justify-between items-center`}>
-                    <div>
+            <div>
+                <div className={`bg-background h-[8rem] px-4 flex justify-between items-center`} >
+                    <div style={{ transition: 'transform 1 ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(0%)' }}>
                         <div className="text-accent text-4xl px-3 flex items-center">
                             <IoTicketSharp />
                         </div>
