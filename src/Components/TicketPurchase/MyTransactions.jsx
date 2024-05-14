@@ -39,7 +39,7 @@ export default function MyTransactions() {
 
     return (
         <div className='font-Poppins'>
-            <div style={{ transition: 'transform 0.5 ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(0)' }}>
+            <div style={{ transition: 'transform 1 ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(0)' }}>
                 <div className={`bg-background h-[8rem] px-4 flex justify-between items-center`}>
                     <div>
                         <div className="text-accent text-4xl px-3 flex items-center">
@@ -49,7 +49,7 @@ export default function MyTransactions() {
                     </div>
                 </div>
 
-                <div className="bg-accent font-bold relative overflow-x-auto shadow-md sm:rounded-lg px-5 py-5" style={{ transition: 'transform 1s ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(10%)' }}>
+                <div className="bg-accent font-bold relative overflow-x-auto shadow-md sm:rounded-lg px-5 py-5" style={{ transition: 'transform 1.5s ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(0%)' }}>
                     <table className="w-full text-xl text-center rtl:text-right text-primary">
                         <thead className="text-xl font-bold">
                             <tr>

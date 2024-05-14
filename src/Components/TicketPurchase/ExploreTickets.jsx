@@ -115,7 +115,7 @@ export default function ExploreTickets() {
 
   return (
     <div>
-      <div className={`bg-background h-[8rem] px-4 flex justify-between items-center ${loading ? 'translate-y-full' : 'translate-y-0'} transition-transform duration-500 ease-in-out`}>
+      <div className={`bg-background h-[8rem] px-4 flex justify-between items-center`} style={{ transition: 'transform 1s ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(0%)' }}>
         <div>
           <div className="text-primary text-4xl px-3 flex items-center">
             <MdOutlineTravelExplore />
@@ -133,7 +133,7 @@ export default function ExploreTickets() {
           />
         </div>
       </div>
-      <div className="flex flex-wrap justify-between">
+      <div className="flex flex-wrap justify-between" style={{ transition: 'transform 1.5s ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(0%)' }}>
         {filteredTickets.map((ticket) => (
           <TicketCard key={ticket._id} ticket={ticket} />
         ))}
