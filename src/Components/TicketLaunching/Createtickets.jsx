@@ -3,6 +3,7 @@ import ticket from "../../Assets/TicketLaunching/ticket.png";
 import promo from "../../Assets/TicketLaunching/promo.png";
 import { useNavigate } from "react-router-dom"; //Import use navigate
 import Customfoam from "../TicketLaunching/Customfoam";
+import axios from "axios";
 
 export default function Createtickets() {
   const [showCustomfoam, setshowCustomfoam] = useState(false);
@@ -11,8 +12,18 @@ export default function Createtickets() {
   const navigate = useNavigate(); // Initialize the navigate function
 
   //Function to handle button click
-  const handleSystemTemplateclick = () => {
+  const handleSystemTemplateclick = async () => {
+    await axios.put(
+      "http://localhost:3030/ticket-launching/click-count/system"
+    );
     navigate("/ticket-launching/create-tickets/create-tickets2");
+  };
+
+  const handleCustomTemplateclick = async () => {
+    await axios.put(
+      "http://localhost:3030/ticket-launching/click-count/custom"
+    );
+    setshowCustomfoam(true);
   };
   return (
     <div>
@@ -52,7 +63,7 @@ export default function Createtickets() {
         </button>
 
         <button
-          onClick={() => setshowCustomfoam(true)}
+          onClick={handleCustomTemplateclick}
           class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:shadow-2xl duration-300 "
         >
           <div className=" bg-secondary h-96 border border-primary rounded-lg shadow-2xl">

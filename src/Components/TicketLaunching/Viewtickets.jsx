@@ -53,7 +53,7 @@ const TicketItem = ({ event, number, onDelete, onPublish }) => {
       <div className="flex items-center">
         <span className="text-background font-bold mr-3">{number}.</span>
         <img src={ticket} alt="ticket" className="w-36 h-16 mr-4" />
-        <span className="text-background text-base">{eventname}</span>
+        <span className="text-background text-xl font-bold">{eventname}</span>
       </div>
       <div className="flex gap-4">
         <button

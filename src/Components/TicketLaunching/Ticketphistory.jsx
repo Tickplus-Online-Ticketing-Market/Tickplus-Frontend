@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import moment from "moment/moment";
+
+const generateTicketId = () => {
+  const randomDigits = Math.floor(Math.random() * 1000000000); // Generate random 4-digit number
+  return `TIK${randomDigits}`;
+};
 
 const Ticketphistory = () => {
   const [events, setEvents] = useState([]);
@@ -20,35 +26,52 @@ const Ticketphistory = () => {
   }, []);
 
   return (
-    <div className="p-2 bg-gray-900 min-h-screen">
-      <h1 className="text-3xl font-bold text-primary mb-4">
+    <div className="overflow-hidden rounded-2xl border-none shadow-md m-1">
+      <div className="text-3xl font-bold text-primary pl-4 pb-3">
         Your Ticket History is here...
-      </h1>
-      <div className="h-10">
-        {events.length > 0 ? (
-          events.map((record, index) => (
-            <div
-              key={index}
-              className="bg-box4 p-4 rounded-lg flex items-center justify-between mb-3"
-            >
-              <span className="text-background font-bold mr-3">
-                {index + 1}.
-              </span>
-              <span className="text-background text-base flex justify-center">
-                {record.eventname}
-              </span>
-              <span className="text-background text-base flex items-center">
-                {record.created_at}
-              </span>
-              <span className="text-background text-base">
-                {record.ticketStatus}
-              </span>
-            </div>
-          ))
-        ) : (
-          <p className="text-background">No history available</p>
-        )}
       </div>
+      <table className="w-full border-collapse bg-white text-left text-gray-500">
+        <thead className="bg-accent">
+          <tr>
+            <th className="px-6 py-4 font-bold text-primary">No.</th>
+            <th className="px-6 py-4 font-bold text-primary">Ticket ID</th>
+            <th className="px-6 py-4 font-bold text-primary">Event Name</th>
+            <th className="px-6 py-4 font-bold text-primary">Creation Date</th>
+            <th className="px-6 py-4 font-bold text-primary">Ticket Mode</th>
+            <th className="px-6 py-4 font-bold text-primary">Ticket Status</th>
+          </tr>
+        </thead>
+        <tbody className="divide-white divide-y-4 border-t-4 border-t-white">
+          {events.length > 0 ? (
+            events.map((record, index) => (
+              <tr key={index} className="bg-box4">
+                <td className="px-6 py-4 text-background">{index + 1}.</td>
+                <td className="px-6 py-4 text-background">
+                  {generateTicketId()}
+                </td>
+                <td className="px-6 py-4 text-background">
+                  {record.eventname}
+                </td>
+                <td className="px-6 py-4 text-background">
+                  {moment(record.created_at).format("MMMM Do YYYY, h:mm:ss a")}
+                </td>
+                <td className="px-6 py-4 text-background">
+                  {record.ticketMode}
+                </td>
+                <td className="px-6 py-4 text-background">
+                  {record.ticketStatus}
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="6" className="text-center px-6 py-4">
+                No history available
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
 };

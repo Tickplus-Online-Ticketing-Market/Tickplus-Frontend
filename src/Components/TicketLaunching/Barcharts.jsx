@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import {
   BarChart,
   Bar,
@@ -10,35 +11,24 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  {
-    name: "Event 01",
-    Normal: 270,
-    VIP: 100,
-  },
-  {
-    name: "Event 02",
-    Normal: 330,
-    VIP: 139,
-  },
-  {
-    name: "Event 03",
-    Normal: 420,
-    VIP: 50,
-  },
-  {
-    name: "Event 04",
-    Normal: 300,
-    VIP: 160,
-  },
-  {
-    name: "Event 05",
-    Normal: 280,
-    VIP: 102,
-  },
-];
+import { TicketCount } from "./TicketCount";
 
 export default function Barcharts() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const ticketCounts = await TicketCount();
+        setData(ticketCounts);
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching ticket counts:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <div className="h-[22rem] bg-background p-4 rounded-lg  shadow-xl flex flex-col flex-1">
       <strong className="text-text1 font-bold text-lg">Launched Tickets</strong>
@@ -56,12 +46,12 @@ export default function Barcharts() {
             }}
           >
             <CartesianGrid strokeDasharray="3 3 0 0" vertical={false} />
-            <XAxis dataKey="name" />
+            <XAxis dataKey="eventname" />
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="Normal" fill="#0ea5e9" />
-            <Bar dataKey="VIP" fill="#ea580c" />
+            <Bar dataKey="vip" fill="#0ea5e9" />
+            <Bar dataKey="normal" fill="#ed6c02" />
           </BarChart>
         </ResponsiveContainer>
       </div>
