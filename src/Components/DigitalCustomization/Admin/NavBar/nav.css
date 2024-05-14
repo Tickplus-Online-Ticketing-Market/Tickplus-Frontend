@@ -1,0 +1,22 @@
+.nav_bar_main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #bbdeee;
+  margin-left: auto;
+  width: 84%;
+  padding: 10px 30px;
+}
+.bell_nav {
+  font-size: 35px;
+  margin-right: 20px;
+}
+.user_icon_nav {
+  font-size: 35px;
+  color: #ff7738;
+}
+.topic_nav_bar{
+    color: #ff7738;
+    text-transform: capitalize;
+    font-weight: bold;
+}
