@@ -44,7 +44,7 @@ export function UpdateAuctionModal({ visible, onClose, auctionID }) {
 
     try {
       const res = await axios.put(
-        `http://localhost:3030/secondary-market/my-auction-listings/${auctionID}`,
+        `https://tickplus-backend.onrender.com/secondary-market/my-auction-listings/${auctionID}`,
         inputs
       );
 
