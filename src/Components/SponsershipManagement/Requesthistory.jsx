@@ -4,6 +4,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { MdEditSquare } from "react-icons/md";
 import MyModal3 from "./MyModal3";
 import { toast } from 'react-toastify';
+import Barcharts from './Barcharts'
 
 export default function RequestHistory() {
   const [requests, setRequests] = useState([]);
@@ -18,8 +19,9 @@ export default function RequestHistory() {
   const fetchRequests = async () => {
     try {
       const res = await axios.get('http://localhost:3030/sponsership-management/request');
-      const requests = res.data.requests;
-      setRequests(requests);
+      const req = res.data.requests;
+      setRequests(req);
+      console.log(requests);
     } catch (error) {
       console.error("Error fetching requests:", error);
       toast.error("Cannot Connect to Database");
@@ -49,9 +51,8 @@ export default function RequestHistory() {
             <tr>
               <th scope="col" className="px-6 py-4 font-bold text-primary">Event</th>
               <th scope="col" className="px-6 py-4 font-bold text-primary">Venue</th>
-              <th scope="col" className="px-6 py-4 font-bold text-primary">Date</th>
+              <th scope="col" className="px-6 py-4 font-bold text-primary">Date/Time</th>
               <th scope="col" className="px-6 py-4 font-bold text-primary">Artists</th>
-              <th scope="col" className="px-6 py-4 font-bold text-primary">Attendees</th>
               <th scope="col" className="px-6 py-4 font-bold text-primary">Status</th>
               <th scope="col" className="px-6 py-4 font-bold text-primary"></th>
             </tr>
@@ -72,6 +73,7 @@ export default function RequestHistory() {
         <div className="flex justify-center text-3xl text-primary font-bold mt-20">
           Here you can find out about events that you are interested in
         </div>
+        <Barcharts />
       </div>
       {showModal && (
         <MyModal3 
@@ -105,6 +107,7 @@ function TableRow({ item, setSelectedRequest, setShowModal, handleDeleteRequest 
         <div className="flex gap-2">
           <span className="inline-flex items-center gap-1 px-2 py-1 text-xl font-semibold text-black">
             {item.date}
+            {item.time}
           </span>
         </div>
       </td>
@@ -112,13 +115,6 @@ function TableRow({ item, setSelectedRequest, setShowModal, handleDeleteRequest 
         <div className="flex gap-2">
           <span className="inline-flex items-center gap-1 px-2 py-1 text-xl font-semibold text-black">
             {item.artists}
-          </span>
-        </div>
-      </td>
-      <td className="px-6 py-4">
-        <div className="flex gap-2">
-          <span className="inline-flex items-center gap-1 px-2 py-1 text-xl font-semibold text-black">
-            {item.attendees}
           </span>
         </div>
       </td>

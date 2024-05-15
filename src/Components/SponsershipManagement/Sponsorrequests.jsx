@@ -4,6 +4,8 @@ import axios from "axios";
 
 import { FaEye, FaTrashAlt } from "react-icons/fa";
 import { IoIosCheckmarkCircle, IoIosCloseCircle } from "react-icons/io";
+import Barcharts from './Barcharts';
+
 
 
 import MyModal from "./MyModal";
@@ -34,6 +36,8 @@ export default function Sponsorrequests({ requests: requestsData }) {
       setRequests([]);
     }
   };
+
+  
 
   const deleteRequest = async (id) => {
     try {
@@ -160,6 +164,8 @@ export default function Sponsorrequests({ requests: requestsData }) {
           )}
         </tbody>
       </table>
+      <Barcharts />
+      
     </div>
   );
 }
