@@ -39,8 +39,10 @@ function NotificationPopover() {
           </Popover.Button>
 
           <Popover.Panel className="absolute z-10 bg-background right-0 mt-2.5 w-80 p-4 rounded-lg shadow-md ring-text">
-            <strong className=" text-text">Notifications</strong>
-            <div className="mt-2">This is notification 1</div>
+            <strong className=" text-text">
+              New Auction Listing Available
+            </strong>
+            <div className="mt-2">Become the first person to bid!🎉</div>
           </Popover.Panel>
         </>
       )}

@@ -14,7 +14,7 @@ export default function Barcharts({ data }) {
   return (
     <div className=" overflow-hidden">
       <div className="text-gray-700 m-4 font-bold w-[800px]">
-        Our Secondary Market Auction Gave More Value to Our Customers
+        Impressive Performance Analytics of Tick+ Secondary Auction Market
       </div>
       <div className="h-[22rem] bg-[#eeeeee] rounded-2xl flex flex-col">
         <div className="w-full flex-1 text-xs p-4">

@@ -75,33 +75,25 @@ export default function Analytics() {
         <Piecharts2 data={bidStatuses} />
         <div className=" overflow-hidden">
           <div className="text-gray-700 m-4 font-bold w-[800px]">
-            Impressive Performance Analytics of Tick+ Secondary Auction Market
+            Our Secondary Market Auction Gave More Value to Our Customers
           </div>
-          <div className="h-[22rem] bg-[#eeeeee] rounded-2xl flex flex-col">
-            <div className="w-full flex-1 text-xs p-4">
-              <div className="grid grid-cols-3 gap-6">
-                <div className="bg-secondary p-4 rounded-2xl font-bold text-primary h-full">
-                  01
-                </div>
-                <div className="bg-secondary p-4 rounded-2xl font-bold text-primary  h-full">
-                  02
-                </div>
-                <div className="bg-secondary p-4 rounded-2xl font-bold text-primary  h-full">
-                  03
-                </div>
-                <div className="col-span-2 bg-secondary p-4 rounded-2xl font-bold text-primary h-full">
-                  04
-                </div>
-                <div className="bg-secondary p-4 rounded-2xl font-bold text-primary h-full">
-                  05
-                </div>
-                <div className="bg-secondary p-4 rounded-2xl font-bold text-primary h-full">
-                  06
-                </div>
-                <div className="col-span-2 bg-secondary p-4 rounded-2xl font-bold text-primary h-full">
-                  07
-                </div>
-              </div>
+          <div className="h-[22rem] bg-accent rounded-2xl max-w-[52rem]">
+            <div className="py-6 px-10 font-semibold text-primary text-[1.25rem]">
+              <p
+                style={{ whiteSpace: "normal" }}
+                className=" text-center w-full"
+              >
+                Introducing Tick+ – revolutionizing event ticket resales! Tick+
+                offers a seamless way to buy and sell pre-purchased tickets on a
+                vibrant secondary market. Sellers can analyze ticket prices, set
+                profitable resale prices, and easily manage their listings.
+                Buyers find specific event tickets effortlessly. Best of all,
+                artists earn a commission on each resale, ensuring they get the
+                recognition and compensation they deserve. Tick+ keeps ticket
+                sales within our platform, enhancing event quality and
+                benefiting everyone involved. Experience the future of ticket
+                resales with Tick+ – where everyone wins!
+              </p>
             </div>
           </div>
         </div>

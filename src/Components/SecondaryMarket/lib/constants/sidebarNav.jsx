@@ -26,12 +26,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     path: "/secondary-market/my-auction-listings",
     icon: <FaMoneyCheckAlt />,
   },
-  {
-    key: "transaction_history",
-    label: "Transaction History",
-    path: "/secondary-market/transaction-history",
-    icon: <FaMoneyBill />,
-  },
+  // {
+  //   key: "transaction_history",
+  //   label: "Transaction History",
+  //   path: "/secondary-market/transaction-history",
+  //   icon: <FaMoneyBill />,
+  // },
   {
     key: "analytics",
     label: "Analytics",
