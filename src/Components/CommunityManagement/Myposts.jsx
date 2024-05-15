@@ -12,7 +12,9 @@ export default function Myposts() {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch("http://localhost:5000/community-page/posts");
+      const response = await fetch(
+        "http://localhost:3030/community-page/posts"
+      );
       if (!response.ok) {
         throw new Error("Failed to fetch posts");
       }
@@ -25,7 +27,7 @@ export default function Myposts() {
 
   const deletePost = async (postId) => {
     try {
-      await axios.delete(`http://localhost:5000/community-page/post/${postId}`);
+      await axios.delete(`http://localhost:3030/community-page/post/${postId}`);
 
       toast.success("Post Deleted");
 
@@ -50,10 +52,10 @@ export default function Myposts() {
             {post.body}
           </p>
           <div className="flex gap-4">
-            <Link to={`update-post/${post._id}`}>
-            <button className="px-4 py-1 mt-4 bg-primary w-full rounded-md font-bold hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary-dark">
-              Edit post
-            </button>
+            <Link to={`/community-page/my-posts/update-post/${post._id}`}>
+              <button className="px-4 py-1 mt-4 bg-primary w-full rounded-md font-bold hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary-dark">
+                Edit post
+              </button>
             </Link>
             <button
               onClick={() => handleDelete(post._id)}
@@ -75,7 +77,6 @@ export default function Myposts() {
             Create Post
           </button>
         </Link>
-        
       </div>
       <div
         className="mt-4 ml-4 grid grid-cols-3 gap-4 "

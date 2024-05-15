@@ -16,7 +16,7 @@ export default function Community() {
   const fetchPosts = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/community-page/posts"
+        "http://localhost:3030/community-page/posts"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch posts");
@@ -70,7 +70,10 @@ export default function Community() {
       {/* Display filtered posts */}
       <div className="mt-4 ml-4 grid grid-cols-3 gap-4">
         {filteredPosts.map((post, index) => (
-          <div key={index} className="max-w-sm bg-accent text-background border border-gray-200 rounded-lg">
+          <div
+            key={index}
+            className="max-w-sm bg-accent text-background border border-gray-200 rounded-lg"
+          >
             <div className="p-5">
               <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {post.title}

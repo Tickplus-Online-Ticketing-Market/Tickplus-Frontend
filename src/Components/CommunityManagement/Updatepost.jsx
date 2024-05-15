@@ -1,98 +1,114 @@
-// import React, { useState, useEffect } from "react";
-// import { useHistory, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
-// export default function UpdatePostPage() {
-//   const { postId } = useParams();
-//   const history = useHistory();
-//   const [postData, setPostData] = useState({
-//     title: "",
-//     body: "",
-//   });
-//   const [error, setError] = useState("");
+export default function UpdatePost() {
+  const { postId } = useParams();
 
-//   useEffect(() => {
-//     fetchPostData();
-//   }, [postId]);
+  const [values, setValues] = useState({
+    title: "",
+    body: "",
+  });
 
-//   const fetchPostData = async () => {
-//     try {
-//       const response = await fetch(`http://localhost:5000/community-page/posts/${postId}`);
-//       if (!response.ok) {
-//         throw new Error("Failed to fetch post data");
-//       }
-//       const data = await response.json();
-//       setPostData(data.note);
-//     } catch (error) {
-//       console.error("Error fetching post data:", error);
-//       setError("Failed to fetch post data");
-//     }
-//   };
+  useEffect(() => {
+    const fetchPostData = async () => {
+      try {
+        console.log(postId);
+        const response = await axios.get(
+          `http://localhost:3030/community-page/posts/${postId}`
+        );
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
+        const postData = response.data.post;
+        setValues({
+          title: postData.title,
+          body: postData.body,
+        });
+      } catch (error) {
+        console.error("Error fetching post data:", error);
+        toast.error("Failed to fetch post data");
+      }
+    };
 
-//     try {
-//       const response = await fetch(`http://localhost:5000/notes/${postId}`, {
-//         method: "PUT",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(postData),
-//       });
-//       if (!response.ok) {
-//         throw new Error("Failed to update post");
-//       }
+    fetchPostData();
+  }, [postId]);
 
-//       history.push(`/post/${postId}`);
-//     } catch (error) {
-//       console.error("Error updating post:", error);
-//       setError("Failed to update post");
-//     }
-//   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(
+        `http://localhost:3030/community-page/posts/${postId}`,
+        values
+      );
+      toast.success("Post Updated");
+    } catch (error) {
+      console.error("Error updating post:", error);
+      toast.error("Error updating post");
+    }
+  };
 
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setPostData((prevData) => ({
-//       ...prevData,
-//       [name]: value,
-//     }));
-//   };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
 
-//   return (
-//     <div>
-//       <h1>Update Post</h1>
-//       {error && <div>{error}</div>}
-//       <form onSubmit={handleSubmit}>
-//         <div>
-//           <label htmlFor="title">Title:</label>
-//           <input
-//             type="text"
-//             id="title"
-//             name="title"
-//             value={postData.title}
-//             onChange={handleInputChange}
-//             placeholder="Enter title"
-//           />
-//         </div>
-//         <div>
-//           <label htmlFor="body">Description:</label>
-//           <textarea
-//             id="body"
-//             name="body"
-//             value={postData.body}
-//             onChange={handleInputChange}
-//             placeholder="Enter description"
-//             rows="4"
-//           ></textarea>
-//         </div>
-//         <button type="submit">Update</button>
-//       </form>
-//     </div>
-//   );
-// }
-
-import React from "react";
-
-export default function Updatepost() {
-  return <div>Updatepost</div>;
+  return (
+    <div className="max-w-lg mx-auto mt-8 p-6 bg-secondary shadow-md rounded-lg">
+      <h1 className="text-2xl font-semibold mb-4">Update the Post</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label htmlFor="title" className="block font-medium text-gray-700">
+            Title
+          </label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={values.title}
+            onChange={handleChange}
+            placeholder="Enter post title"
+            maxLength={30}
+            className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-primary"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="body" className="block font-medium text-gray-700">
+            Description
+          </label>
+          <textarea
+            id="body"
+            name="body"
+            value={values.body}
+            onChange={handleChange}
+            rows="4"
+            placeholder="Enter post description"
+            className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-primary"
+          ></textarea>
+        </div>
+        <div className="mb-4">
+          <label htmlFor="file" className="block font-medium text-gray-700">
+            Photos
+          </label>
+          <input
+            type="file"
+            id="file"
+            name="file"
+            accept="image/*"
+            onChange={handleChange}
+            multiple
+            className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-primary"
+          />
+        </div>
+        <button
+          type="submit"
+          className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary-dark"
+        >
+          Update
+        </button>
+      </form>
+    </div>
+  );
 }

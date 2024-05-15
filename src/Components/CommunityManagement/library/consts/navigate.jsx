@@ -1,4 +1,4 @@
-import { HiOutlineQuestionMarkCircle, HiOutlineCog } from "react-icons/hi";
+import { HiOutlineQuestionMarkCircle, HiOutlineCog,HiChartBar } from "react-icons/hi";
 import { FaPager } from "react-icons/fa";
 import { BsCheckSquareFill } from "react-icons/bs";
 
@@ -14,6 +14,12 @@ export const SIDEBAR_LINKS = [
     label: "My posts",
     path: "/community-page/my-posts",
     icon: <BsCheckSquareFill />,
+  },
+  {
+    key: "Reports",
+    label: "Reports",
+    path: "/community-page/reports",
+    icon:<HiChartBar />,
   },
 ];
 

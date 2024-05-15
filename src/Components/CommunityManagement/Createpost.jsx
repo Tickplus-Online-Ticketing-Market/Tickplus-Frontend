@@ -3,7 +3,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 export default function CreatePost() {
-  
   const [postData, setPostData] = useState({
     title: "",
     body: "",
@@ -37,12 +36,10 @@ export default function CreatePost() {
     // validation
     if (
       !postData.title.trim() ||
-      !postData.body.trim()
-      ||!postData.files.length
-      
+      !postData.body.trim() ||
+      !postData.files.length
     ) {
-      
-      toast.error("Fill all title,description and photo")
+      toast.error("Fill all title,description and photo");
       return;
     }
 
@@ -52,20 +49,21 @@ export default function CreatePost() {
     const badWords = ["bad", "inappropriate", "offensive"];
 
     const titleContainsBadWord = badWords.some((word) =>
-      postData.title.toLowerCase().includes(word),
+      postData.title.toLowerCase().includes(word)
     );
     const descriptionContainsBadWord = badWords.some((word) =>
-      postData.body.toLowerCase().includes(word),
+      postData.body.toLowerCase().includes(word)
     );
 
     if (titleContainsBadWord || descriptionContainsBadWord) {
-      
-      toast.error("contains inappropriate words")
+      toast.error("contains inappropriate words");
       return;
     } else {
       try {
-        
-        await axios.post("http://localhost:5000/community-page/posts", postData);
+        await axios.post(
+          "http://localhost:3030/community-page/posts",
+          postData
+        );
 
         // erase the form fields
         setPostData({
@@ -76,7 +74,6 @@ export default function CreatePost() {
 
         toast.success("Post Uploaded...");
         setError(""); // Clear error message
-
       } catch (error) {
         toast.error("Error occured!");
       }
@@ -94,7 +91,6 @@ export default function CreatePost() {
             Title
           </label>
           <input
-            
             type="text"
             id="title"
             name="title"
@@ -110,7 +106,6 @@ export default function CreatePost() {
             Description
           </label>
           <textarea
-            
             id="body"
             name="body"
             value={postData.body}
