@@ -58,18 +58,16 @@ export default function CreatePost() {
     if (titleContainsBadWord || descriptionContainsBadWord) {
       toast.error("contains inappropriate words");
       return;
+
     } else {
       try {
-        await axios.post(
-          "http://localhost:3030/community-page/posts",
-          postData
-        );
+        await axios.post("http://localhost:3030/community-page/posts",postData);
 
         // erase the form fields
         setPostData({
           title: "",
           body: "",
-          files: [],
+          //files: [],
         });
 
         toast.success("Post Uploaded...");

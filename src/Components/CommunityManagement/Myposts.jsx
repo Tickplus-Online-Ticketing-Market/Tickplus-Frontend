@@ -43,7 +43,7 @@ export default function Myposts() {
 
   function Card({ post }) {
     return (
-      <div className="max-w-sm bg-accent text-background border border-gray-200 rounded-lg">
+      <div className="max-w-sm bg-accent text-background border border-accent rounded-lg">
         <div className="p-5">
           <h5 className="mb-2 text-2xl font-bold tracking-tight ">
             {post.title}
@@ -51,16 +51,15 @@ export default function Myposts() {
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
             {post.body}
           </p>
+
           <div className="flex gap-4">
             <Link to={`/community-page/my-posts/update-post/${post._id}`}>
-              <button className="px-4 py-1 mt-4 bg-primary w-full rounded-md font-bold hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary-dark">
+              <button className="px-4 py-1 mt-4 bg-primary w-[10rem] rounded-md font-bold hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary-dark">
                 Edit post
               </button>
             </Link>
-            <button
-              onClick={() => handleDelete(post._id)}
-              className="px-4 py-1 mt-4 bg-primary w-full rounded-md font-bold hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary-dark"
-            >
+            <button className="px-4 py-1 mt-4 bg-primary w-[10rem] rounded-md font-bold hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary-dark"
+              onClick={() => handleDelete(post._id)}>
               Delete post
             </button>
           </div>
