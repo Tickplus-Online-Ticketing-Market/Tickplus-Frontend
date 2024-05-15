@@ -41,8 +41,8 @@ export default function MyTransactions() {
         <div className='font-Poppins'>
             <div>
                 <div className={`bg-background h-[8rem] px-4 flex justify-between items-center`} >
-                    <div style={{ transition: 'transform 1 ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(0%)' }}>
-                        <div className="text-accent text-4xl px-3 flex items-center">
+                    <div>
+                        <div className="text-accent text-4xl px-3 flex items-center" style={{ transition: 'transform 1s ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(0%)' }}>
                             <IoTicketSharp />
                             <div className="text-accent text-4xl font-bold ml-2">My Tickets</div>
                         </div>

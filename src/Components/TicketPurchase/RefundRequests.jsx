@@ -1,3 +1,4 @@
+// RefundRequests.jsx
 import React, { useState, useEffect } from 'react';
 import { HiReceiptRefund } from "react-icons/hi2";
 import UpdateRefund from './models/UpdateRefund';
@@ -62,7 +63,7 @@ export default function RefundRequests() {
                     </div>
                 </div>
 
-                <div className='bg-text px-1 py-1 rounded-lg md-2' style={{ transition: 'transform 2s ease', transform: loading ? 'translateY(100%)' : 'translateY(0)' }}>
+                <div className='bg-text px-1 py-1 rounded-lg md-2' style={{ transition: 'transform 1.5s ease', transform: loading ? 'translateY(100%)' : 'translateY(0)' }}>
                     <div className="bg-text relative overflow-x-auto shadow-md sm:rounded-lg px-5 py-5">
                         <table className="w-full text-xl text-center rtl:text-right text-primary dark:text-primary">
                             <thead className="text-xl text-primary uppercase bg-text">
@@ -109,7 +110,7 @@ export default function RefundRequests() {
                     </div>
                 </div>  
             </div>
-            <UpdateRefund refundId={selectedRefundId} onClose={handleOnClose25} visible={showMyModel25} refunds={refunds} />
+            <UpdateRefund refundId={selectedRefundId} onClose={handleOnClose25} visible={showMyModel25} refunds={refunds} setRefunds={setRefunds} />
         </div>
     );
 }

@@ -10,8 +10,14 @@ export default function ScatterChartComponent() {
   useEffect(() => {
     const fetchScatterData = async () => {
       try {
-        const response = await axios.get('http://localhost:3030/tpp/pays/scatter-chart-data'); // Adjust the URL as per your backend route
-        setScatterData(response.data.scatterChartData);
+        const response = await axios.get('http://localhost:3030/tpp/pays/counts-sum-by-event');
+        const countsData = response.data.countsSum;
+        const scatterChartData = countsData.map(item => ({
+          eventName: item.eventName,
+          count: item.totalCount,
+          date: item.date,
+        }));
+        setScatterData(scatterChartData);
       } catch (error) {
         console.error('Error fetching scatter chart data:', error);
       }

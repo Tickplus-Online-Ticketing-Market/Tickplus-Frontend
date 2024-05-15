@@ -1,3 +1,4 @@
+// PaymentModel.jsx
 import React, { useState, useEffect } from 'react';
 import visaImage from '../../../Assets/TicketPurchase/visa.png.png';
 import mastercardImage from '../../../Assets/TicketPurchase/mastercard.jpg.jpg';
@@ -111,13 +112,16 @@ export default function PaymentModel({ visible, onClose, selectedItem }) {
     const validateForm = () => {
         const errors = {};
         if (!customerName.trim()) {
-            errors.customerName = 'Customer name is required';
+            errors.customerName = '*Customer name is required';
         }
         if (!expireMonth || !expireYear || parseInt(expireMonth) > 12) {
-            errors.expireDate = 'Invalid expiration date';
+            errors.expireDate = '*Invalid expiration date';
         }
         if (!cvv.trim() || cvv.length !== 3 || isNaN(cvv)) {
-            errors.cvv = 'CVV must be 3 digits';
+            errors.cvv = '*CVV must be 3 digits';
+        }
+        if (!cardNumber.trim() || cardNumber.replace(/\s/g, '').length !== 16 || isNaN(cardNumber.replace(/\s/g, ''))) {
+            errors.cardNumber = '*Card number must be 16 digits';
         }
         return errors;
     };
@@ -180,7 +184,7 @@ export default function PaymentModel({ visible, onClose, selectedItem }) {
                         <p className="text-accent font-bold text-base flex flex-col justify-center items-center mt-10">Total cost</p>
                         <p className="text-primary font-bold text-2xl flex flex-col justify-center items-center">{totalCost} LKR</p>
                         {/* Payment */}
-                        <div className="flex justify-center items-center bg-background mt-[2rem]">
+                        <div className="flex justify-center items-center bg-background mt-[1rem]">
                             <form onSubmit={handleSubmit} className="bg-background rounded px-8 w-96">
                                 <div className="mb-4">
                                     <label htmlFor="customerName" className="block text-primary text-sm font-bold mb-2">Customer Name</label>
@@ -194,7 +198,7 @@ export default function PaymentModel({ visible, onClose, selectedItem }) {
                                         required
                                     />                                   
                                 </div>
-                                {errors.customerName && <p className="text-red text-sm">{errors.customerName}</p>}
+                                {errors.customerName && <p className="text-accent text-sm mb-2">{errors.customerName}</p>}
                                 <div className="mb-4 flex items-center">
                                     <label htmlFor="cardNumber" className="block text-primary text-sm font-bold mr-2">Card Number</label>
                                     <input
@@ -207,9 +211,9 @@ export default function PaymentModel({ visible, onClose, selectedItem }) {
                                         maxLength={19}
                                         required
                                     />
-                                    {cardImage && <img src={cardImage} alt="Card Type" className="w-10 h-6 ml-2" />}
-                                    {errors.cardNumber && <p className="text-red text-sm">{errors.cardNumber}</p>}
+                                    {cardImage && <img src={cardImage} alt="Card Type" className="w-10 h-6 ml-2" />}    
                                 </div>
+                                {errors.cardNumber && <p className="text-accent text-sm mb-2">{errors.cardNumber}</p>}
                                 <div className="mb-4 flex items-center">
                                     <label htmlFor="expireMonth" className="block text-primary text-sm font-bold mr-2">Expiration Month</label>
                                     <input
@@ -235,7 +239,7 @@ export default function PaymentModel({ visible, onClose, selectedItem }) {
                                         required
                                     />                                  
                                 </div>
-                                {errors.expireDate && <p className="text-red text-sm mb-2">{errors.expireDate}</p>}
+                                {errors.expireDate && <p className="text-accent text-sm mb-2">{errors.expireDate}</p>}
                                 <div className="mb-4 flex items-center">
                                     <label htmlFor="cvv" className="block text-primary text-sm font-bold mr-2">CVV</label>
                                     <input

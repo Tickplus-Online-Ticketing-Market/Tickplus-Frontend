@@ -10,7 +10,7 @@ module.exports = {
       secondary: "#d8e7ee",
       accent: "#122128",
       white: "#ffffff",
-      black: "#000000",
+      black: "#000000"
     },
     fontSize: {
       sm: "0.600rem",

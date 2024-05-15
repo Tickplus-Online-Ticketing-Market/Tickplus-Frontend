@@ -1,11 +1,16 @@
+// UpdateRefund.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function UpdateRefund({ visible, onClose, refundId, refunds }) {
+export default function UpdateRefund({ visible, onClose, refundId, refunds, setRefunds }) {
     const [formData, setFormData] = useState({
         email: '',
         mobile: '',
         reason: '',
+    });
+    const [errors, setErrors] = useState({
+        email: '',
+        mobile: '',
     });
 
     useEffect(() => {
@@ -30,10 +35,23 @@ export default function UpdateRefund({ visible, onClose, refundId, refunds }) {
     }, [visible, refundId, refunds]);
 
     const handleInputChange = (e) => {
+        const { name, value } = e.target;
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value
+            [name]: value
         });
+
+        // Validation
+        let errorMsg = '';
+        if (name === 'email') {
+            errorMsg = !value.includes('@') ? '*Please enter valid E-mail' : '';
+        } else if (name === 'mobile') {
+            errorMsg = value.length !== 10 ? '*Mobile number must be 10 digits' : '';
+        }
+        setErrors(prevErrors => ({
+            ...prevErrors,
+            [name]: errorMsg
+        }));
     };
 
     const handleUpdateRefund = async () => {
@@ -41,7 +59,20 @@ export default function UpdateRefund({ visible, onClose, refundId, refunds }) {
             const response = await axios.put(`http://localhost:3030/tpp/refs/${refundId}`, formData);
             if (response.status === 200) {
                 alert('Refund updated successfully!');
-                onClose(); // Close the modal after successful update
+                onClose(); 
+                
+                const updatedRefunds = refunds.map(refund => {
+                    if (refund._id === refundId) {
+                        return {
+                            ...refund,
+                            email: formData.email,
+                            mobile: formData.mobile,
+                            reason: formData.reason
+                        };
+                    }
+                    return refund;
+                });
+                setRefunds(updatedRefunds);
             }
         } catch (error) {
             console.error('Error updating refund:', error);
@@ -78,26 +109,26 @@ export default function UpdateRefund({ visible, onClose, refundId, refunds }) {
                         <input
                             type="email"
                             placeholder="Contact E-mail"
-                            className='text-xl text-text focus:outline-none active:outlines-none h-10 w-[20rem] border-2 border-accent rounded-lg pl-5 mb-5'
+                            className='text-xl text-text focus:outline-none active:outlines-none h-10 w-[20rem] border-2 border-accent rounded-lg pl-5 mb-1'
                             name="email"
                             value={formData.email}
                             onChange={handleInputChange}
-                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                             required
                         />
                     </div>
+                    {errors.email && <p className="text-primary text-sm flex justify-center mb-2">{errors.email}</p>}
                     <div className='flex justify-center pr-[2.5rem]'>
                         <input
                             type="text"
                             placeholder="Contact Number"
-                            className='text-xl text-text focus:outline-none active:outlines-none h-10 w-[20rem] border-2 border-accent rounded-lg pl-5 mb-5'
+                            className='text-xl text-text focus:outline-none active:outlines-none h-10 w-[20rem] border-2 border-accent rounded-lg pl-5 mb-1'
                             name="mobile"
                             value={formData.mobile}
                             onChange={handleInputChange}
-                            pattern="[0-9]{10}"
                             required
                         />
                     </div>
+                    {errors.mobile && <p className="text-primary text-sm flex justify-center mb-2">{errors.mobile}</p>}
                     <div className='flex justify-center pr-[2.5rem]'>
                         <input
                             type="text"

@@ -25,8 +25,8 @@ export default function Grid() {
   return (
     <div>
       <div className='mt-[2rem]  flex justify-center gap-4'>
-        <div className='bg-primary rounded-xl p-4 h-[6rem] w-full'>
-          <div className='flex justify-center text-background'>
+        <div className='rounded-xl p-4 h-[6rem] w-full'>
+          <div className='flex justify-center text-primary'>
             <FaMoneyBillTrendUp />
             <span className='ml-3 font-bold text-xl'>Most Sells</span>
           </div>
@@ -41,25 +41,6 @@ export default function Grid() {
             )}
           </div>
         </div>
-
-        <div className='bg-accent rounded-xl p-4 h-[6rem] w-full'>
-          <div className='flex justify-center text-background'>
-            <FaMoneyBillTrendUp />
-            <span className='ml-3 font-bold text-xl'>Most Refund</span>
-          </div>
-          <div className='flex justify-center'>
-            {mostSellsData ? (
-              <>
-                <span className='text-primary flex flex-col ml-3 font-bold text-3xl'>{mostSellsData.eventName}</span>
-                <span className='text-primary flex flex-col ml-3 font-bold text-3xl'>({mostSellsData.totalCost} LKR)</span>
-              </>
-            ) : (
-              <span>Loading...</span>
-            )}
-          </div>
-        </div>
-
-        
       </div>
     </div>
   );
