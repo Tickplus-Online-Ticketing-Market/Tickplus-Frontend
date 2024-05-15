@@ -4,10 +4,10 @@ import Barcharts from "./Chart01";
 import Piecharts from "./Chart02";
 import Piecharts2 from "./Chart03";
 import { ToastContainer } from "react-toastify";
-
 import { RetriveAuctionListingsByProfit } from "./RetriveAuctionListingsByProfit";
 import { RetriveAuctionListingsByStatus } from "./RetriveAuctionListingsByStatus";
 import { RetriveBidsByStatus } from "./RetriveBidsByStatus";
+import html2pdf from "html2pdf.js"; // Import html2pdf
 
 export default function Analytics() {
   const [loading, setLoading] = useState(true);
@@ -57,8 +57,43 @@ export default function Analytics() {
       });
   }, []);
 
+  const downloadPDF = () => {
+    const element = document.getElementById("SecondaryMarketReport");
+
+    // Apply scale transform to the element
+    element.style.transform = "scale(0.75)";
+    element.style.transformOrigin = "top left";
+
+    const opt = {
+      margin: 1,
+      filename: "SecondaryMarketReport.pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        scrollX: 0,
+        scrollY: -window.scrollY,
+      },
+      jsPDF: {
+        unit: "cm",
+        format: "a4",
+        orientation: "landscape",
+      },
+    };
+
+    html2pdf()
+      .from(element)
+      .set(opt)
+      .save()
+      .then(() => {
+        // Remove the scale transform after PDF is generated
+        element.style.transform = "scale(1)";
+        element.style.transformOrigin = "initial";
+      });
+  };
+
   return (
-    <div className=" overflow-y-visible">
+    <div className="overflow-y-visible" id="SecondaryMarketReport">
       <div
         id="loading-bg"
         className={`fixed inset-0 bg-white bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-[5000] ${
@@ -73,15 +108,15 @@ export default function Analytics() {
       </div>
       <div className="flex flex-row justify-evenly border-none m-2 overflow-auto">
         <Piecharts2 data={bidStatuses} />
-        <div className=" overflow-hidden">
+        <div className="overflow-hidden">
           <div className="text-gray-700 m-4 font-bold w-[800px]">
             Our Secondary Market Auction Gave More Value to Our Customers
           </div>
           <div className="h-[22rem] bg-accent rounded-2xl max-w-[52rem]">
-            <div className="py-6 px-10 font-semibold text-primary text-[1.25rem]">
+            <div className="py-6 px-10 font-semibold text-primary text-[1.2rem] items-center">
               <p
                 style={{ whiteSpace: "normal" }}
-                className=" text-center w-full"
+                className="text-center w-full"
               >
                 Introducing Tick+ – revolutionizing event ticket resales! Tick+
                 offers a seamless way to buy and sell pre-purchased tickets on a
@@ -94,6 +129,14 @@ export default function Analytics() {
                 benefiting everyone involved. Experience the future of ticket
                 resales with Tick+ – where everyone wins!
               </p>
+              <div className="flex">
+                <button
+                  className="bg-background p-4 rounded-2xl m-2"
+                  onClick={downloadPDF} // Add onClick handler
+                >
+                  Download Report
+                </button>
+              </div>
             </div>
           </div>
         </div>
