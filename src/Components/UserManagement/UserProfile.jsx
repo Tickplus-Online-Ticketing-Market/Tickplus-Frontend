@@ -5,11 +5,10 @@ import { Link } from "react-router-dom";
 import {
   HiOutlineCollection,
   HiOutlineTicket,
-  HiOutlineViewList,
+  //HiOutlineViewList,
 } from "react-icons/hi";
 import axios from "axios";
 import { toast } from "react-toastify";
-
 
 const UserProfile = () => {
   //get cokkie value
@@ -29,11 +28,12 @@ const UserProfile = () => {
     Cookies.remove("email");
   };
 
-  useEffect(() => {
-    handleSubmit();
-  }, 
-  //[cookieVal]
-);
+  useEffect(
+    () => {
+      handleSubmit();
+    }
+    //[cookieVal]
+  );
 
   //   const handleSubmit = async (e) => {
 
@@ -58,7 +58,7 @@ const UserProfile = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/userprofile", {
+      const response = await axios.get("http://localhost:3030/users", {
         cookieVal: cookieVal,
       });
 
@@ -104,7 +104,7 @@ const UserProfile = () => {
 
         <p className="sm:text-2xl text-xl mb-4 font-body text-background">
           {" "}
-          Date Of Birth : {dateofbirth} {" "}
+          Date Of Birth : {dateofbirth}{" "}
         </p>
 
         <p className="sm:text-2xl text-xl mb-4 font-body text-background">
@@ -139,18 +139,18 @@ const UserProfile = () => {
             </h2>
           </Link>
 
-          <Link
+          {/* <Link
             to="/dashboarduser"
             className="cursor-pointer  w-fit m-4 hover:shadow-lg border-2 item-center bg-background border-accent  hover:bg-secondary px-4 py-2 lg:py-6 lg:px-10 rounded-lg"
-          >
-            {/* <i className="fa-solid fa-box text-3xl lg:text-5xl"></i> */}
+          > */}
+          {/* <i className="fa-solid fa-box text-3xl lg:text-5xl"></i> */}
 
-            <HiOutlineViewList className="item-center text-3xl lg:text-5xl" />
+          {/* <HiOutlineViewList className="item-center text-3xl lg:text-5xl" />
 
             <h2 className="title-font font-medium text-lg lg:text-2xl mt-4 text-accent">
               User Menu
             </h2>
-          </Link>
+          </Link> */}
         </div>
 
         <div className="flex justify-center space-x-10 w-full">
