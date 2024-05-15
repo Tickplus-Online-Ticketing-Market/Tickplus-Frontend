@@ -3,10 +3,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 import "../../request.css";
-import Sidebar from "../SideBar/Sidebar";
-import NavBar from "../NavBar/NavBar";
+import Sidebar from "../../Admin/SideBar/Sidebar";
+import NavBar from "../../Admin/NavBar/NavBar";
 
-const URL = "http://localhost:3030/digital-customization";
+const URL = "http://localhost:3030/digital-customization/poster";
 
 const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);
@@ -93,7 +93,7 @@ function OnGoing() {
                     <td className="admin_tbl_td">{item.phone}</td>
                     <td className="admin_tbl_td">
                       <Link
-                        to={`/digital-customization/createpost/${item._id}`}
+                        to={`/digital-customization/poster/createpost/${item._id}`}
                         className="btn_dash_admin"
                       >
                         Create

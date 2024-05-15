@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router";
-import Sidebar from "../SideBar/Sidebar";
+import Sidebar from "../../Admin/SideBar/Sidebar";
 import Home from "./PostEdit/Home";
 import DataProvider from "./PostEdit/context/DataProvider";
-import NavBar from "../NavBar/NavBar";
+import NavBar from "../../Admin/NavBar/NavBar";
 function CreatePost() {
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState();
@@ -16,7 +16,7 @@ function CreatePost() {
     const fetchHandler = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3030/digital-customization/${id}`
+          `http://localhost:3030/digital-customization/poster/${id}`
         );
         setInputs(response.data.reques);
       } catch (error) {
@@ -31,7 +31,10 @@ function CreatePost() {
     formData.append("file", file);
 
     await axios
-      .post(`http://localhost:3030/digital-customization/${id}`, formData)
+      .post(
+        `http://localhost:3030/digital-customization/poster/${id}`,
+        formData
+      )
       .then((res) => {})
       .catch((err) => {
         console.log(err);
@@ -40,7 +43,7 @@ function CreatePost() {
 
   const sendRequest = async () => {
     await axios
-      .put(`http://localhost:3030/digital-customization/${id}`, {
+      .put(`http://localhost:3030/digital-customization/poster/${id}`, {
         name: String(inputs.name),
         phone: String(inputs.phone),
         code: String(inputs.code),
@@ -63,7 +66,7 @@ function CreatePost() {
 
     sendRequest().then(() => {
       window.alert("status Add successfully!");
-      history("/digital-customization/ongoing");
+      history("/digital-customization/poster/ongoing");
     });
   };
   return (

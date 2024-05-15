@@ -9,7 +9,6 @@ import { DataContext } from "./context/DataProvider";
 
 const Container = styled(Box)`
   background-color: #060606;
-
   width: 100%;
   position: relative;
   display: inline-flex;

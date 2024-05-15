@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./sidebar.css";
 import {
   HiHome,
@@ -9,58 +9,76 @@ import {
   HiOutlineCog,
 } from "react-icons/hi";
 import Logo from "./img/logo.png";
+
 const Sidebar = ({ children }) => {
+  const [showTicketDropdown, setShowTicketDropdown] = useState(false);
+  const [showPosterDropdown, setShowPosterDropdown] = useState(false);
+
+  const toggleTicketDropdown = () => {
+    setShowTicketDropdown(!showTicketDropdown);
+    setShowPosterDropdown(false); // Close poster dropdown when ticket dropdown is opened
+  };
+
+  const togglePosterDropdown = () => {
+    setShowPosterDropdown(!showPosterDropdown);
+    setShowTicketDropdown(false); // Close ticket dropdown when poster dropdown is opened
+  };
+
+  const handleMenuItemClick = (path) => {
+    window.location.href = path;
+  };
+
   return (
     <div className="container_nav">
-      <div style={{ width: "200px" }} className="sidebar">
+      <div className="sidebar">
         <div className="nav_item_main">
           <div>
-            <div>
-              <img src={Logo} alt="Logo" className="nav_logo" />
+            <img src={Logo} alt="Logo" className="nav_logo" />
+            <p className="nav_item" onClick={() => (window.location.href = "/digital-customization/home")}>
+              <HiHome /> Home
+            </p>
+            <div className="nav_item_dropdown">
+              <p className="nav_item" onClick={toggleTicketDropdown}>
+                <HiOutlineClipboardList /> Ticket
+              </p>
+              {showTicketDropdown && (
+                <div className="dropdown_menu">
+                  <p className="dropdown_item" onClick={() => handleMenuItemClick("/digital-customization/requestdetails")}>
+                    <span className="dropdown_text">New Jobs</span>
+                  </p>
+                  <p className="dropdown_item" onClick={() => handleMenuItemClick("/digital-customization/ongoing")}>
+                    <span className="dropdown_text">Ongoing Jobs</span>
+                  </p>
+                  <p className="dropdown_item" onClick={() => handleMenuItemClick("/digital-customization/compleatereq")}>
+                    <span className="dropdown_text">Complete Jobs</span>
+                  </p>
+                </div>
+              )}
             </div>
-            <p className="nav_item">
-              <HiHome />
-              Home
-            </p>
-            <p className="nav_item">
-              <HiOutlineClipboardList />
-              Ticket
-            </p>
-
-            <p
-              className="nav_item lft"
-              onClick={() => (window.location.href = "/digital-customization/requestdetails")}
-            >
-              New Jobs
-            </p>
-            <p
-              className="nav_item lft"
-              onClick={() => (window.location.href = "/digital-customization/ongoing")}
-            >
-              Ongoing Jobs
-            </p>
-            <p
-              className="nav_item lft"
-              onClick={() => (window.location.href = "/digital-customization/compleatereq")}
-            >
-              Complete Jobs
-            </p>
-            <p className="nav_item">
-              <HiOutlineFilm />
-              Posters
-            </p>
-            <p className="nav_item">
-              <HiUsers />
-              Trailers
-            </p>
-            <div className="botmcon">
+            <div className="nav_item_dropdown">
+              <p className="nav_item" onClick={togglePosterDropdown}>
+                <HiOutlineFilm /> Posters
+              </p>
+              {showPosterDropdown && (
+                <div className="dropdown_menu">
+                  <p className="dropdown_item" onClick={() => handleMenuItemClick("/digital-customization/poster/requestdetails")}>
+                    <span className="dropdown_text">New Jobs</span>
+                  </p>
+                  <p className="dropdown_item" onClick={() => handleMenuItemClick("/digital-customization/poster/ongoing")}>
+                    <span className="dropdown_text">Ongoing Jobs</span>
+                  </p>
+                  <p className="dropdown_item" onClick={() => handleMenuItemClick("/digital-customization/poster/compleatereq")}>
+                    <span className="dropdown_text">Complete Jobs</span>
+                  </p>
+                </div>
+              )}
+            </div>
+            <div className="botmcon mt-3">
               <p className="nav_item">
-                <HiOutlineQuestionMarkCircle />
-                Support
+                <HiOutlineQuestionMarkCircle /> Support
               </p>
               <p className="nav_item">
-                <HiOutlineCog />
-                Settings
+                <HiOutlineCog /> Settings
               </p>
             </div>
           </div>
@@ -71,5 +89,3 @@ const Sidebar = ({ children }) => {
 };
 
 export default Sidebar;
-
-

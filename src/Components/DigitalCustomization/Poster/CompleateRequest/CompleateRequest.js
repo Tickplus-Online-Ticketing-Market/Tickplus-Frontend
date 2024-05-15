@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 import { useNavigate } from "react-router-dom";
 import "../../request.css";
-import Sidebar from "../SideBar/Sidebar";
-import NavBar from "../NavBar/NavBar";
+import Sidebar from "../../Admin/SideBar/Sidebar";
+import NavBar from "../../Admin/NavBar/NavBar";
 
-const URL = "http://localhost:3030/digital-customization";
+const URL = "http://localhost:3030/digital-customization/poster";
 
 const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);
@@ -45,7 +45,7 @@ function CompleateRequest() {
       try {
         await axios.delete(`${URL}/${_id}`); // Correct URL construction
         window.alert("delete successfully!");
-        history("/digital-customization/compleatereq");
+        history("/digital-customization/poster/compleatereq");
         window.location.reload(); // Reload the page
       } catch (error) {
         // Handle deletion error if needed
@@ -93,7 +93,7 @@ function CompleateRequest() {
                       {/* Pass item._id to deleteHandler */}
 
                       <Link
-                        to={`/digital-customization/updatepost/${item._id}`}
+                        to={`/digital-customization/poster/updatepost/${item._id}`}
                         className="btn_dash_admin_updt"
                       >
                         Update

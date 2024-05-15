@@ -12,7 +12,9 @@ function AccceptRequest() {
   useEffect(() => {
     const fetchHandler = async () => {
       try {
-        const response = await axios.get(`http://localhost:3030/digital-customization/${id}`);
+        const response = await axios.get(
+          `http://localhost:3030/digital-customization/${id}`
+        );
         setInputs(response.data.reques);
       } catch (error) {
         console.error("Error fetching data:", error);

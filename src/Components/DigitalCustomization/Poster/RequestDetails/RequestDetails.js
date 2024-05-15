@@ -6,12 +6,12 @@ import { useReactToPrint } from "react-to-print";
 import "../../request.css";
 import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
-import Sidebar from "../SideBar/Sidebar";
-import NavBar from "../NavBar/NavBar";
+import Sidebar from "../../Admin/SideBar/Sidebar";
+import NavBar from "../../Admin/NavBar/NavBar";
 import Chart from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
 
-const URL = "http://localhost:3030/digital-customization";
+const URL = "http://localhost:3030/digital-customization/poster";
 
 const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);
@@ -158,7 +158,7 @@ function RequestDetails() {
       try {
         await axios.delete(`${URL}/${_id}`);
         window.alert("Decline successfully!");
-        history("/digital-customization/requestdetails");
+        history("/digital-customization/poster/requestdetails");
         window.location.reload(); // Reload the page
       } catch (error) {
         console.error("Error Decline details:", error);
@@ -238,7 +238,7 @@ function RequestDetails() {
                       <td className="admin_tbl_td">
                         <button className="spce_btnd">
                           <Link
-                            to={`/digital-customization/acceptrequest/${item._id}`}
+                            to={`/digital-customization/poster/acceptrequest/${item._id}`}
                             className="link_reoe"
                           >
                             <TiTick className="icon_detail_accept" />

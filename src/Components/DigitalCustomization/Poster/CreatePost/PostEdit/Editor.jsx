@@ -1,20 +1,16 @@
 import { useState } from 'react';
-
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 import 'codemirror/mode/xml/xml';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/css/css';
-
 import { Controlled as ControlledEditor } from 'react-codemirror2';
-
 import { Box, Typography, Button, styled } from '@mui/material';
 import { CloseFullscreen } from '@mui/icons-material';
 
-
 const Container = styled(Box)`
     flex-grow: 1;
-    flex-basic: 0;
+    flex-basis: 0;
     display: flex;
     flex-direction: column;
     padding: 0 8px 8px;

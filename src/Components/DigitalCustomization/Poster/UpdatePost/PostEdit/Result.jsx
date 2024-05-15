@@ -31,7 +31,7 @@ const Result = () => {
       const imgData = canvas.toDataURL("image/png");
       const link = document.createElement("a");
       link.href = imgData;
-      link.download = "ticket.png";
+      link.download = "poster.png";
       document.body.appendChild(link);
       link.click();
     });
@@ -51,3 +51,4 @@ const Result = () => {
 };
 
 export default Result;
+

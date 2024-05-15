@@ -11,7 +11,9 @@ function OngoingStatus() {
   useEffect(() => {
     const fetchHandler = async () => {
       try {
-        const response = await axios.get(`http://localhost:3030/digital-customization/${id}`);
+        const response = await axios.get(
+          `http://localhost:3030/digital-customization/${id}`
+        );
         setInputs(response.data.reques);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -41,17 +43,16 @@ function OngoingStatus() {
 
     sendRequest().then(() => {
       window.alert("Status Add successfully!");
-      history("/ongoing");
+      history("/digital-customization/ongoing");
     });
   };
   return (
     <div>
       <Sidebar />
-      <NavBar/>
+      <NavBar />
       <div className="child_clas">
-      <h1 className="topic_admin">Ongoin Status Update</h1>
+        <h1 className="topic_admin">Ongoin Status Update</h1>
         <div className="item_full_box">
-        
           <form className="item_form_admin" onSubmit={handleSubmit}>
             <label className="form_box_item_lable">name</label>
             <br></br>

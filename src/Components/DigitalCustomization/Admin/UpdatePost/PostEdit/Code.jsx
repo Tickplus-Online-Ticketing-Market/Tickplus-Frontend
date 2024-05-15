@@ -9,8 +9,10 @@ import { DataContext } from "./context/DataProvider";
 
 const Container = styled(Box)`
   background-color: #060606;
-  height: 50vh;
-  display: flex;
+
+  width: 100%;
+  position: relative;
+  display: inline-flex;
 `;
 
 const Code = () => {
@@ -34,17 +36,8 @@ const Code = () => {
         icon="*"
         color="#0EBEFF"
       />
-      <Editor
-        language="javascript"
-        heading="JS"
-        value={js}
-        onChange={setJs}
-        icon="( )"
-        color="#FCD000"
-      />
     </Container>
   );
 };
 
 export default Code;
-
