@@ -10,7 +10,7 @@ export default function Post({ visible, onClose, post }) {
     if (newComment.trim() !== "") {
       const newCommentObj = {
         id: comments.length + 1,
-        user: "New User",
+        user: "Artist",
         content: newComment.trim(),
       };
       setComments([...comments, newCommentObj]);
@@ -66,8 +66,8 @@ export default function Post({ visible, onClose, post }) {
           <div className="flex-1 flex flex-col justify-center items-center">
             <img src={tick} alt="logo" />
             {/* Render post content */}
-            <h2 className="text-2xl text-primary font-bold mb-2">{post.title}</h2>
-            <div className="text-background mb-6">{post.body}</div>
+            <h2 className="text-2xl text-background fontWeight-bold font-bold mb-2">{post.title}</h2>
+            <div className="text-text mb-6">{post.body}</div>
           </div>
 
           {/* Comments */}
