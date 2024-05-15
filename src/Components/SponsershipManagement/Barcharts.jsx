@@ -4,34 +4,30 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 const data = [
   {
     name: 'Event 01',
-    Accepted: 4,
-    Rejected: 10
+    budget: 4,
   },
   {
     name: 'Event 02',
-    Accepted: 5,
-    Rejected: 13
+    budget: 5,
   },
   {
 	name: 'Event 03',
-	Accepted: 4,
-	Rejected: 16
+	budget: 4,
 },
 {
 	name: 'Event 04',
-	Accepted: 4,
-	Rejected: 3
+	budget: 4,
 }
 ];
 
 export default function Barcharts() {
   return (
     <div className="h-[22rem] bg-background p-4 rounded-lg  shadow-xl flex flex-col flex-1">
-      <strong className="text-text1 font-bold text-lg">Request amount</strong>
+      <strong className="text-text1 font-bold text-lg">Sponsors</strong>
       <div className="mt-3 w-full flex-1 text-xs">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
-            width={500}
+            width={300}
             height={300}
             data={data}
             margin={{
@@ -46,8 +42,8 @@ export default function Barcharts() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="Accepted" fill="#57666f" />
-            <Bar dataKey="Rejected" fill="#ea580c" />
+            <Bar dataKey="budget" fill="#ff7637" />
+            
           </BarChart>
         </ResponsiveContainer>
       </div>

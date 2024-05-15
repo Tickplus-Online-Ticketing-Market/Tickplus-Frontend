@@ -1,20 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
+import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 import axios from "axios";
 
 import { FaEye, FaTrashAlt } from "react-icons/fa";
 import { IoIosCheckmarkCircle, IoIosCloseCircle } from "react-icons/io";
-import Barcharts from './Barcharts';
-
-
+import Barcharts from "./Barcharts";
 
 import MyModal from "./MyModal";
 
-export default function Sponsorrequests({ requests: requestsData }) {
-
+export default function Sponsorrequests() {
   const [requests, setRequests] = useState(null);
-  const [acceptedRequests, setAcceptedRequests] = useState(() => {
-    const storedAcceptedRequests = localStorage.getItem('acceptedRequests');
+  const [acceptedRequests] = useState(() => {
+    const storedAcceptedRequests = localStorage.getItem("acceptedRequests");
     return storedAcceptedRequests ? JSON.parse(storedAcceptedRequests) : [];
   });
 
@@ -23,12 +20,14 @@ export default function Sponsorrequests({ requests: requestsData }) {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('acceptedRequests', JSON.stringify(acceptedRequests));
+    localStorage.setItem("acceptedRequests", JSON.stringify(acceptedRequests));
   }, [acceptedRequests]);
 
   const fetchRequests = async () => {
     try {
-      const res = await axios.get('http://localhost:3030/sponsership-management/request');
+      const res = await axios.get(
+        "http://localhost:3030/sponsership-management/request"
+      );
       setRequests(res.data.requests);
       console.log(res);
     } catch (error) {
@@ -37,33 +36,42 @@ export default function Sponsorrequests({ requests: requestsData }) {
     }
   };
 
-  
 
-  const deleteRequest = async (id) => {
+  const handleAccept = async (id) => {
     try {
-      await axios.delete(`http://localhost:3030/sponsership-management/request/${id}`);
-      toast.success("Deleted");
+      await axios.get(
+        `http://localhost:3030/sponsership-management/request/update/accept/${id}`
+      );
+      toast.success("Request Accepted");
       fetchRequests();
     } catch (error) {
-      toast.error("Cannot delete");
+      toast.error("Cannot Accept");
       setRequests([]);
     }
   };
 
-  const handleDelete = async (id) => {
-    console.log("Deleting item with ID:", id);
-    deleteRequest(id);
-  };
-
-  const handleAccept = async (id) => {
-    console.log("Accepting item with ID:", id);
-    setAcceptedRequests(prev => [...prev, id]);
+  const handleReject = async (id) => {
+    try {
+      await axios.get(
+        `http://localhost:3030/sponsership-management/request/update/reject/${id}`
+      );
+      toast.success("Request Rejected");
+      fetchRequests();
+    } catch (error) {
+      toast.error("Cannot Reject");
+      setRequests([]);
+    }
   };
 
   function TableRowDraw({ item }) {
-
     const [showMyModal, setShowMyModal] = useState(false);
     const handleOnClose = () => setShowMyModal(false);
+    const [sponserRequest, setSponserRequest] = useState();
+
+    const handleUpdate = (item) => {
+      setShowMyModal(true);
+      setSponserRequest(item);
+    };
     if (!item || !item.addNote) {
       return null;
     }
@@ -99,29 +107,56 @@ export default function Sponsorrequests({ requests: requestsData }) {
         </td>
         <td className="px-6 py-4">
           <div className="flex justify-end gap-4 content-baseline">
-            <button onClick={() => setShowMyModal(true)} className="text-[1.55rem] text-accent" x-data="{ tooltip: 'View' }" >
+            <button
+              onClick={() => handleUpdate(item)}
+              className="text-[1.55rem] text-accent"
+              x-data="{ tooltip: 'View' }"
+            >
               <FaEye />
             </button>
 
-            {acceptedRequests.includes(item._id) ? (
+            {item.status === "Accepted" || item.status === "Rejected" ? (
               <span className="text-primary text-base font-bold bg-accent  border-primary border-[2.4px] focus:outline-none font-medium px-3 py-1 text-center inline-flex items-center">
-                <span className=" text-xl me-1">{<IoIosCheckmarkCircle />}</span>
-                Accepted
+                <span className=" text-xl me-1">
+                  {<IoIosCheckmarkCircle />}
+                </span>
+                {item.status}
               </span>
             ) : (
-              <button onClick={() => handleAccept(item._id)} type="button" className="text-primary text-base font-bold bg-accent hover:bg-accept hover:text-background border-primary border-[2.4px] focus:outline-none font-medium rounded-full px-3 py-1 text-center inline-flex items-center">
-                <span className=" text-xl me-1">{<IoIosCheckmarkCircle />}</span>
-                Accept
-              </button>
+              <div>
+                <button
+                  onClick={() => handleAccept(item._id)}
+                  type="button"
+                  className="text-primary text-base font-bold bg-accent hover:bg-accept hover:text-background border-primary border-[2.4px] focus:outline-none font-medium rounded-full px-3 py-1 text-center inline-flex items-center"
+                >
+                  <span className=" text-xl me-1">
+                    {<IoIosCheckmarkCircle />}
+                  </span>
+                  Accept
+                </button>
+
+                <button
+                  onClick={() => handleReject(item._id)}
+                  type="button"
+                  className="text-primary text-base font-bold bg-accent hover:bg-reject hover:text-background border-primary border-[2.4px] focus:outline-none font-medium rounded-full px-3 py-1 text-center inline-flex items-center"
+                >
+                  <span className=" text-xl me-1">
+                    {acceptedRequests.includes(item._id) ? (
+                      <FaTrashAlt />
+                    ) : (
+                      <IoIosCloseCircle />
+                    )}
+                  </span>
+                  Reject
+                </button>
+              </div>
             )}
-
-            <button onClick={() => handleDelete(item._id)} type="button" className="text-primary text-base font-bold bg-accent hover:bg-reject hover:text-background border-primary border-[2.4px] focus:outline-none font-medium rounded-full px-3 py-1 text-center inline-flex items-center">
-              <span className=" text-xl me-1">{acceptedRequests.includes(item._id) ? <FaTrashAlt /> : <IoIosCloseCircle />}</span>
-              {acceptedRequests.includes(item._id) ? "Delete" : "Reject"}
-            </button>
-
           </div>
-          <MyModal onClose={handleOnClose} visible={showMyModal} addNote={item.addNote} />
+          <MyModal
+            onClose={handleOnClose}
+            visible={showMyModal}
+            SponserRequest={sponserRequest}
+          />
         </td>
       </tr>
     );
@@ -165,7 +200,6 @@ export default function Sponsorrequests({ requests: requestsData }) {
         </tbody>
       </table>
       <Barcharts />
-      
     </div>
   );
 }

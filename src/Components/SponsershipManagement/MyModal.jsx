@@ -1,7 +1,7 @@
 import React from 'react';
 import { AiOutlineClose } from "react-icons/ai";
 
-export default function MyModal({ visible, onClose, addNote }) {
+export default function MyModal({ visible, onClose, SponserRequest }) {
 
 
 if(!visible) return null;
@@ -18,7 +18,7 @@ if(!visible) return null;
           Additional Note
         </div>
         <div className='text-black text-xl'>
-          {addNote}
+          {SponserRequest.addNote}
           </div>
         </div>
       </div>
