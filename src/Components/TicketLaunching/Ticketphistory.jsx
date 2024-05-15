@@ -3,7 +3,7 @@ import axios from "axios";
 import moment from "moment/moment";
 
 const generateTicketId = () => {
-  const randomDigits = Math.floor(Math.random() * 1000000000); // Generate random 4-digit number
+  const randomDigits = Math.floor(Math.random() * 10000000); // Generate random 4-digit number
   return `TIK${randomDigits}`;
 };
 
@@ -47,7 +47,8 @@ const Ticketphistory = () => {
               <tr key={index} className="bg-box4">
                 <td className="px-6 py-4 text-background">{index + 1}.</td>
                 <td className="px-6 py-4 text-background">
-                  {generateTicketId()}
+                  {record.ticketId || generateTicketId()}{" "}
+                  {/* Use record.ticketId if available, else generate a new one */}
                 </td>
                 <td className="px-6 py-4 text-background">
                   {record.eventname}

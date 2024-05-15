@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ticket from "../../Assets/TicketLaunching/ticket.png";
-import promo from "../../Assets/TicketLaunching/promo.png";
+import promo from "../../Assets/TicketLaunching/customTemplate.png";
 import { useNavigate } from "react-router-dom"; //Import use navigate
 import Customfoam from "../TicketLaunching/Customfoam";
 import axios from "axios";
@@ -31,18 +31,18 @@ export default function Createtickets() {
         {" "}
         Choose your preferred template
       </div>
-      <div className="grid grid-cols-2 gap-4 ">
+      <div className="grid grid-cols-2 gap-2 pl-8 ">
         <button
           class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:shadow-2xl duration-300 "
           onClick={handleSystemTemplateclick}
         >
-          <div className=" bg-secondary h-96 border border-primary rounded-lg shadow-2xl">
-            <div className="flex justify-center font-bold text-text1 text-2xl py-4">
-              System Template
+          <div className=" bg-secondary h-96 w-11/12 border border-primary rounded-lg shadow-2xl">
+            <div className="flex justify-center font-bold text-text text-2xl py-4">
+              Create Tickets
             </div>
-            <div className="bg-accent shadow-xl rounded-md gap-4 pl-20 h-36">
+            <div className="bg-accent shadow-xl rounded-md gap-4 pl-36 pb-2 h-36">
               <img
-                class="h-full w-full pr-20 py-4"
+                class=" aspect-video h-36 max-h-fit pr-20 py-4"
                 src={ticket}
                 alt="description"
               />
@@ -66,9 +66,9 @@ export default function Createtickets() {
           onClick={handleCustomTemplateclick}
           class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:shadow-2xl duration-300 "
         >
-          <div className=" bg-secondary h-96 border border-primary rounded-lg shadow-2xl">
-            <div className="flex justify-center font-bold text-text1 text-2xl py-4">
-              Custom Template
+          <div className=" bg-secondary h-96 w-11/12 border border-primary rounded-lg shadow-2xl">
+            <div className="flex justify-center font-bold text-text text-2xl py-4">
+              Design Tickets
             </div>
             <div className="bg-accent shadow-lg rounded-md gap-4 pl-20 h-36">
               <img

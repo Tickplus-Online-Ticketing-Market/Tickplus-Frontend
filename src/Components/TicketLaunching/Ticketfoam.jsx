@@ -15,6 +15,7 @@ const TicketForm = ({ visible, onClose }) => {
     ticketQuantity: "",
     ticketPrice: "",
   });
+  const [imagePreview, setImagePreview] = useState(""); // State to hold image preview URL
 
   const [submitted, setSubmitted] = useState(false); // State to track form submission
 
@@ -93,6 +94,7 @@ const TicketForm = ({ visible, onClose }) => {
         const ticketData = {
           ...createForm,
           eventid, // add generated eventid to the ticket data
+          imageUrl: createForm.imageUrl, // include imageUrl in the ticket data
         };
 
         const res = await axios.post(
@@ -124,13 +126,35 @@ const TicketForm = ({ visible, onClose }) => {
     }
   };
 
+  const handleImagePreview = () => {
+    // Function to handle image preview
+    setImagePreview(createForm.imageUrl);
+  };
+
   const updateCreateFormField = (e) => {
     const { name, value } = e.target;
 
-    setCreateForm({
-      ...createForm,
-      [name]: value,
-    });
+    // Check if the input field is the venue field and if the entered value contains only numbers
+    if (name === "venue" && /^\d+$/.test(value)) {
+      // If only numbers are entered, set an error message
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: "Venue cannot contain only numbers",
+      }));
+    } else {
+      // If the input is valid, update the form field value
+      setCreateForm((createForm) => ({
+        ...createForm,
+        [name]: value,
+        // Add imageUrl to the form state
+        imageUrl: name === "imageUrl" ? value : createForm.imageUrl,
+      }));
+      // Clear the error message if the input is valid
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: "",
+      }));
+    }
   };
 
   useEffect(() => {
@@ -143,14 +167,45 @@ const TicketForm = ({ visible, onClose }) => {
 
   return (
     <div>
-      <div className="fixed inset-0 bg-accent bg-opacity-0 backdrop-blur-sm flex justify-center shadow-2xl items-center">
+      <div className="fixed inset-0 bg-accent bg-opacity-0 backdrop-blur-base flex justify-center shadow-2xl items-center">
         <div className="bg-secondary shadow-2xl h-[36rem] w-[50rem] rounded-lg">
           <div className="flex">
             <div className="bg-accent h-[36rem] w-[25rem] rounded-lg">
               <div className="flex items-center gap-2 px-1 py-3">
                 <img src={image} alt="description" />
               </div>
+              <div className=" pl-2 pt-3">
+                <div className="bg-background aspect-video max-w-sm rounded-lg">
+                  {imagePreview && <img src={imagePreview} alt="Preview" />}
+                </div>
+              </div>
+              {/* Image URL */}
+              <div className="pl-2 pt-4">
+                <label className="block text-background text-base font-semibold">
+                  Image URL
+                </label>
+                <input
+                  type="text"
+                  name="imageUrl"
+                  value={createForm.imageUrl}
+                  onChange={updateCreateFormField}
+                  className="block w-96 p-2 border border-primary rounded-md shadow-lg text-base"
+                  placeholder="Enter image URL"
+                />
+              </div>
+
+              {/* Button to show image preview */}
+              <div className=" flex justify-center pt-3">
+                <button
+                  onClick={handleImagePreview}
+                  className="bg-primary h-10 w-72 font-bold rounded-full py-2 text-background 
+                    transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:shadow-2xl hover:bg-background hover:text-primary duration-300"
+                >
+                  Show Preview
+                </button>
+              </div>
             </div>
+
             <div className="bg-box3 shadow-2xl h-[36rem] w-[25rem] rounded-lg scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb scrollbar-track  overflow-y-scroll">
               <form onSubmit={handleSubmit} className="space-y-2 space-x-8">
                 <div className="font-bold text-primary flex justify-center text-3xl pt-2 pl-4 ">
@@ -159,7 +214,7 @@ const TicketForm = ({ visible, onClose }) => {
 
                 {/* Event Name */}
                 <div>
-                  <label className="block text-base font-medium">
+                  <label className="block text-base font-semibold">
                     Event Name
                   </label>
                   <input
@@ -172,13 +227,15 @@ const TicketForm = ({ visible, onClose }) => {
                     required
                   />
                   {errors.eventname && (
-                    <p className="text-red text-sm">{errors.eventname}</p>
+                    <p className="text-red font-semibold text-base">
+                      {errors.eventname}
+                    </p>
                   )}
                 </div>
 
                 {/* Date */}
                 <div>
-                  <label className="block text-base font-medium">Date</label>
+                  <label className="block text-base font-semibold">Date</label>
                   <input
                     type="date"
                     name="date"
@@ -188,13 +245,15 @@ const TicketForm = ({ visible, onClose }) => {
                     required
                   />
                   {errors.date && (
-                    <p className="text-red text-sm">{errors.date}</p>
+                    <p className="text-red font-semibold text-base">
+                      {errors.date}
+                    </p>
                   )}
                 </div>
 
                 {/* Venue */}
                 <div>
-                  <label className="block text-base font-medium">Venue</label>
+                  <label className="block text-base font-semibold">Venue</label>
                   <input
                     type="text"
                     name="venue"
@@ -205,13 +264,15 @@ const TicketForm = ({ visible, onClose }) => {
                     required
                   />
                   {errors.venue && (
-                    <p className="text-red text-sm">{errors.venue}</p>
+                    <p className="text-red font-semibold text-base">
+                      {errors.venue}
+                    </p>
                   )}
                 </div>
 
                 {/* Time */}
                 <div>
-                  <label className="block text-base font-medium">Time</label>
+                  <label className="block text-base font-semibold">Time</label>
                   <input
                     type="time"
                     name="time"
@@ -221,13 +282,15 @@ const TicketForm = ({ visible, onClose }) => {
                     required
                   />
                   {errors.time && (
-                    <p className="text-red text-sm">{errors.time}</p>
+                    <p className="text-red font-semibold text-base">
+                      {errors.time}
+                    </p>
                   )}
                 </div>
 
                 {/*Ticket Mode */}
                 <div className="flex items-center">
-                  <label className="block text-base font-medium mr-2">
+                  <label className="block text-base font-semibold mr-2">
                     Ticket Mode
                   </label>
                   <div className="flex items-center space-x-4">
@@ -255,13 +318,15 @@ const TicketForm = ({ visible, onClose }) => {
                     </label>
                   </div>
                   {errors.ticketMode && (
-                    <p className="text-red text-sm">{errors.ticketMode}</p>
+                    <p className="text-red font-semibold text-base">
+                      {errors.ticketMode}
+                    </p>
                   )}
                 </div>
 
                 {/* Ticket Quantity */}
                 <div>
-                  <label className="block text-base font-medium">
+                  <label className="block text-base font-semibold">
                     Ticket Quantity
                   </label>
                   <input
@@ -275,13 +340,15 @@ const TicketForm = ({ visible, onClose }) => {
                     required
                   />
                   {errors.ticketQuantity && (
-                    <p className="text-red text-sm">{errors.ticketQuantity}</p>
+                    <p className="text-red font-semibold text-base">
+                      {errors.ticketQuantity}
+                    </p>
                   )}
                 </div>
 
                 {/* Ticket Price */}
                 <div>
-                  <label className="block text-base font-medium">
+                  <label className="block text-base font-semibold">
                     Ticket Price
                   </label>
                   <input
@@ -289,13 +356,15 @@ const TicketForm = ({ visible, onClose }) => {
                     name="ticketPrice"
                     value={createForm.ticketPrice}
                     onChange={updateCreateFormField}
-                    className="block w-72 p-2 border border-primary rounded-md shadow-lg text-sm"
+                    className="block w-72 p-2 border border-primary rounded-md shadow-lg text-base"
                     placeholder="Enter ticket price"
                     min="0"
                     required
                   />
                   {errors.ticketPrice && (
-                    <p className="text-red text-sm">{errors.ticketPrice}</p>
+                    <p className="text-red font-semibold text-base">
+                      {errors.ticketPrice}
+                    </p>
                   )}
                 </div>
 
@@ -314,19 +383,6 @@ const TicketForm = ({ visible, onClose }) => {
                     Decline
                   </button>
                 </div>
-                {/* Error messages */}
-                {submitted && (
-                  <>
-                    {Object.keys(errors).length > 0 && (
-                      <div className="text-red text-sm">
-                        Please correct the following errors:
-                        {Object.values(errors).map((error, index) => (
-                          <p key={index}>{error}</p>
-                        ))}
-                      </div>
-                    )}
-                  </>
-                )}
               </form>
             </div>
           </div>

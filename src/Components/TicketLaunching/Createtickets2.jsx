@@ -15,7 +15,7 @@ export default function Createtickets2() {
         Create using system template
       </div>
       <div className="font-bold pl-4 text-text pb-6 text-2xl">
-        Choose a template
+        Choose a design
       </div>
       <div className="grid grid-cols-3 gap-4">
         <button
@@ -29,7 +29,7 @@ export default function Createtickets2() {
               alt="description"
             />
             <div className="font-bold text-3xl pt-10 text-background">
-              Template 01
+              Default
             </div>
           </div>
         </button>
