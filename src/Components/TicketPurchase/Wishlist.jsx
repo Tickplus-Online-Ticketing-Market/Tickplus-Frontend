@@ -54,9 +54,9 @@ export default function Wishlist() {
       <div className={`bg-background h-[8rem] px-4 flex justify-between items-center`} style={{ transition: 'transform 1s ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(0)' }}>
         <div>
           <div className="text-primary text-4xl px-3 flex items-center">
-            <ImHeart />
-          </div>
-          <div className="text-primary text-4xl font-bold">Wishlist</div>
+            <ImHeart /> 
+            <div className="text-primary text-4xl font-bold ml-2">Wishlist</div>
+          </div> 
         </div>
       </div>
         
@@ -95,6 +95,7 @@ export default function Wishlist() {
                     </button>  
                   </td>  
                 </tr>
+                {index !== wishlist.length - 1 && <tr key={`spacer-${index}`} className="h-4"></tr>}
               </React.Fragment>
             ))}
           </tbody>  

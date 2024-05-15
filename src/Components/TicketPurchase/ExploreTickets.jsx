@@ -119,8 +119,8 @@ export default function ExploreTickets() {
         <div>
           <div className="text-primary text-4xl px-3 flex items-center">
             <MdOutlineTravelExplore />
+            <div className="text-primary text-4xl font-bold ml-2">Explore Tickets</div>
           </div>
-          <div className="text-primary text-4xl font-bold">Explore Tickets</div>
         </div>
         <div className="relative">
           <HiOutlineSearch fontSize={20} className="text-primary absolute top-1/2 -translate-y-1/2 left-3" />

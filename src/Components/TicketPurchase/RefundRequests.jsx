@@ -57,8 +57,8 @@ export default function RefundRequests() {
             <div>
                 <div className={`bg-background h-[8rem] px-4 flex justify-between items-center`} style={{ transition: 'transform 1s ease', transform: loading ? 'translateY(100%)' : 'translateY(0)' }}>
                     <div className='flex items-center'>
-                        <div className='text-primary text-4xl px-3'><HiReceiptRefund/></div>
-                        <div className='text-primary text-4xl font-bold'>Refund Requests</div>
+                        <div className='text-text text-4xl px-3'><HiReceiptRefund/></div>
+                        <div className='text-text text-4xl font-bold'>Refund Requests</div>
                     </div>
                 </div>
 
