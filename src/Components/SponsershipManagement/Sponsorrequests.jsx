@@ -36,7 +36,6 @@ export default function Sponsorrequests() {
     }
   };
 
-
   const handleAccept = async (id) => {
     try {
       await axios.get(
@@ -162,6 +161,13 @@ export default function Sponsorrequests() {
     );
   }
 
+  const chartData = requests
+    ? requests.map((item) => ({
+        name: item.sponsorName,
+        budget: item.budget / 1000,
+      }))
+    : [];
+
   return (
     <div className="overflow-hidden rounded-2xl border-none shadow-md m-5">
       <table className="w-full border-collapse bg-tbg text-left text-black">
@@ -199,7 +205,10 @@ export default function Sponsorrequests() {
           )}
         </tbody>
       </table>
-      <Barcharts />
+      <div className="flex justify-center text-3xl text-primary font-bold mt-20">
+          Here you can find out about events that you are interested in
+        </div>
+      <Barcharts data={chartData} />
     </div>
   );
 }

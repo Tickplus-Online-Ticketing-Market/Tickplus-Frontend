@@ -1,35 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import React, { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function MyModal3({ visible, onClose, SponserRequest }) {
-  const [email, setEmail] = useState('');
-  const [additionalNote, setAdditionalNote] = useState('');
-
-  useEffect(() => {
-    if (SponserRequest && (email !== SponserRequest.email || additionalNote !== SponserRequest.addNote)) {
-      setEmail(SponserRequest.email || '');
-      setAdditionalNote(SponserRequest.addNote || '');
-    }
-  }, [SponserRequest, email, additionalNote]);
-  
+  const [formData, setFormData] = useState({
+    email: SponserRequest.email,
+    addNote: SponserRequest.addNote,
+  });
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'email') {
-      setEmail(value);
-    } else if (name === 'additionalNote') {
-      setAdditionalNote(value);
-    }
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3030/sponsership-management/request/${SponserRequest._id}`, {
-        email,
-        additionalNote,
-      });
+      await axios.put(
+        `http://localhost:3030/sponsership-management/request/${SponserRequest._id}`,
+        {
+          email: formData.email,
+          addNote: formData.addNote,
+        }
+      );
       toast.success("Request updated successfully");
       onClose();
     } catch (error) {
@@ -38,7 +34,7 @@ function MyModal3({ visible, onClose, SponserRequest }) {
   };
 
   const handleOnClose = (e) => {
-    if (e.target.id === 'close') onClose();
+    if (e.target.id === "close") onClose();
   };
 
   if (!visible) return null;
@@ -54,35 +50,51 @@ function MyModal3({ visible, onClose, SponserRequest }) {
           className="absolute top-2 right-2 text-primary hover:text-background transform hover:scale-150 transition duration-300 focus:outline-none"
           onClick={onClose}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-primary text-xl font-bold mb-2" htmlFor="email">
+            <label
+              className="block text-primary text-xl font-bold mb-2"
+              htmlFor="email"
+            >
               Email
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
+              id="email" // Make sure this matches the htmlFor of the label
               name="email"
               type="email"
               placeholder="Email"
-              value={email}
+              value={formData.email}
               onChange={handleOnChange}
             />
-          </div>
-          <div className="mb-4">
-            <label className="block text-primary text-xl font-bold mb-2" htmlFor="additionalNote">
+
+            <label
+              className="block text-primary text-xl font-bold mb-2"
+              htmlFor="addNote"
+            >
               Additional Note
             </label>
             <textarea
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="additionalNote"
-              name="additionalNote"
+              id="addNote" // Make sure this matches the htmlFor of the label
+              name="addNote"
               placeholder="Additional Note"
-              value={additionalNote}
+              value={formData.addNote}
               onChange={handleOnChange}
             />
           </div>
