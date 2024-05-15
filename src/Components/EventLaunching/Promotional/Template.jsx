@@ -68,10 +68,7 @@ function Template() {
   
   return (
     <div>
-      <div
-        ref={templateRef}
-        className="flex items-center bg-cyan-200 p-2 rounded-xl h-[30rem] w-[30rem] mb-4"
-      >
+     
         <div className="flex-1 py-4 flex flex-col gap-0.5">
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <input
@@ -90,11 +87,11 @@ function Template() {
               className="text-white bg-transparent border-b border-white focus:outline-none focus:border-blue-500"
               style={{ width: '300px' }}
             />
-            <input
+             <input
               type="text"
-              value={eventDate}
-              onChange={handleEventDateChange}
-              placeholder="Event Date"
+              value={eventVenue}
+              onChange={handleEventVenueChange}
+              placeholder="Event Venue"
               className="text-white bg-transparent border-b border-white focus:outline-none focus:border-blue-500"
               style={{ width: '300px' }}
             />
@@ -108,12 +105,14 @@ function Template() {
             />
             <input
               type="text"
-              value={eventVenue}
-              onChange={handleEventVenueChange}
-              placeholder="Event Venue"
+              value={eventDate}
+              onChange={handleEventDateChange}
+              placeholder="Event Date"
               className="text-white bg-transparent border-b border-white focus:outline-none focus:border-blue-500"
               style={{ width: '300px' }}
             />
+            
+           
             <input
               type="text"
               value={eventArtist}
@@ -134,10 +133,13 @@ function Template() {
         
 
         
-        
+          <div
+        ref={templateRef}
+        className="flex items-center bg-cyan-200 p-2 rounded-xl h-[30rem] w-[30rem] mb-4"
+      >
           <div className="flex items-center p-2 rounded-xl h-[30rem] mb-4" style={{ backgroundColor: '#ADD8E6', width: '310px' ,borderRadius:'10px'}}>
          <p>  </p>
-          <p style={{ fontSize: '16px', marginTop: '25px', color: 'Blue', marginLeft: '130px' }}>
+          <p style={{ fontSize: '16px', marginTop: '25px', color: 'Blue', marginLeft: '100px' }}>
            {eventName}
            </p>
 
@@ -169,16 +171,17 @@ function Template() {
 
          
 
-          <button
+         
+        </div>
+
+        <button
             onClick={downloadTemplate}
-            className="bg-gray-700 text-white px-4 py-2 rounded-md ml-4"
+            className="bg-gray-700 text-white px-4 py-2 rounded-md ml-4 "
             style={{ fontSize: '10px' }}
           >
             Download Template
           </button>
 
-         
-        </div>
       </div>
     </div>
   );
