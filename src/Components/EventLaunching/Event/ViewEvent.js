@@ -204,9 +204,11 @@ const ViewEvent = () => {
               <p className="card_details">Time: {time} </p>
               <p className="card_details">Price: Rs.{price}</p>
               <div className="btn_controlset">
+              <Link to={`/events`}>
                 <button className="btn_con_set" onClick={handleDelete}>
                   Delete
                 </button>
+                </Link>
                 <button className="btn_con_set" onClick={() => setEditMode(true)}>
                   Edit
                 </button>
