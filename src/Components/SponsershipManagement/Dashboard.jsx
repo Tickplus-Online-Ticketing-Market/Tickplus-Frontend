@@ -6,23 +6,24 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 
 export default function Dashboard() {
-  const [events, setEvents] = useState([]);
+  const [requests, setRequests] = useState([]);
   const [showMyModal, setShowMyModal] = useState(false);
+  const [selectedRequest, setSelectedRequest] = useState(null); // State to store the selected event details
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     // Fetch data from backend when component mounts
-    fetchEvents();
+    fetchRequests();
   }, []);
 
-  const fetchEvents = async () => {
+  const fetchRequests = async () => {
     try {
-      const res = await axios.get('http://localhost:3030/sponsorship/events');
-      setEvents(res.data.events);
+      const res = await axios.get('http://localhost:3030/sponsership-management/request');
+      setRequests(res.data.requests);
       console.log(res);
     } catch (error) {
       toast.error("Cannot Connect to Database");
-      setEvents([]);
+      setRequests([]);
     }
   };
 
@@ -32,11 +33,16 @@ export default function Dashboard() {
 
   const handleOnClose = () => setShowMyModal(false);
 
-  // Filter events based on search term
-const filteredEvents = events.filter((event) =>
-  event.eName && event.eName.toLowerCase().includes(searchTerm.toLowerCase())
-);
+  // Filter requests based on search term
+  const filteredRequests = requests.filter((request) =>
+    request.eventName && request.eventName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
+  // Function to handle when "Make A Request" button is clicked
+  const handleMakeRequest = (request) => {
+    setSelectedRequest(request); // Set the selected event details
+    setShowMyModal(true); // Open the modal
+  };
 
   return (
     <div className="overflow-y-visible">
@@ -59,48 +65,48 @@ const filteredEvents = events.filter((event) =>
 
       {/* Grid layout for event cards */}
       <div className="grid grid-cols-3 gap-4 p-6">
-        {filteredEvents.map((event) => (
-          <div key={event._id} className="bg-accent rounded-lg shadow-lg">
+        {filteredRequests.map((request) => (
+          <div key={request._id} className="bg-accent rounded-lg shadow-lg">
             <div className="overflow-hidden bg-cover bg-no-repeat aspect-video">
               <img className="rounded-t-lg" src={Eventcover} alt="" />
             </div>
             <div className="p-4 aspect-video">
               <button
-                onClick={() => setShowMyModal(true)}
+                onClick={() => handleMakeRequest(request)}
                 type="button"
                 className="m-3 rounded-lg px-3 py-1 font-bold bg-primary text-background hover:bg-background hover:text-primary transform hover:scale-110 transition duration-300"
               >
                 Make A Request
               </button>
               <h5 className="mb-2 text-2xl font-bold leading-tight text-primary">
-                {event.eName}
+                {request.eventName}
               </h5>
               <div className="flex justify-between items-center">
                 <div className="text-primary">
                   <div className="mb-2 text-base">
-                    Event ID: {event.eId}
+                    Event ID: {request.eventId}
                   </div>
                   <div className="mb-2 text-base">
-                    Date: {event.date}
+                    Date: {request.date}
                   </div>
                 </div>
                 <div className="text-primary">
                   <div className="mb-2 text-base">
-                    Venue: {event.venue}
+                    Venue: {request.venue}
                   </div>
                   <div className="mb-2 text-base ">
-                    Attendees: {event.attendees}
+                    Attendees: {request.attendees}
                   </div>
                 </div>
               </div>
-              <p className="text-primary">Artists: {event.artists}</p>
+              <p className="text-primary">Artists: {request.artists}</p>
             </div>
           </div>
         ))}
       </div>
 
       {/* Modal */}
-      <MyModal2 onClose={handleOnClose} visible={showMyModal} />
+      <MyModal2 onClose={handleOnClose} visible={showMyModal} request={selectedRequest} />
     </div>
   );
 }

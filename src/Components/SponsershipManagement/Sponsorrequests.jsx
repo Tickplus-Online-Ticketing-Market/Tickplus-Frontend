@@ -26,7 +26,7 @@ export default function Sponsorrequests({ requests: requestsData }) {
 
   const fetchRequests = async () => {
     try {
-      const res = await axios.get('http://localhost:3030/sponsorship/requests');
+      const res = await axios.get('http://localhost:3030/sponsership-management/request');
       setRequests(res.data.requests);
       console.log(res);
     } catch (error) {
@@ -37,7 +37,7 @@ export default function Sponsorrequests({ requests: requestsData }) {
 
   const deleteRequest = async (id) => {
     try {
-      await axios.delete(`http://localhost:3030/sponsorship/requests/${id}`);
+      await axios.delete(`http://localhost:3030/sponsership-management/request/${id}`);
       toast.success("Deleted");
       fetchRequests();
     } catch (error) {
@@ -60,13 +60,16 @@ export default function Sponsorrequests({ requests: requestsData }) {
 
     const [showMyModal, setShowMyModal] = useState(false);
     const handleOnClose = () => setShowMyModal(false);
+    if (!item || !item.addNote) {
+      return null;
+    }
 
     return (
       <tr className="bg-tbg hover:bg-secondary text-black">
         <td className="flex gap-3 px-6 py-4 font-normal text-black">
           <div className="text-base">
             <div className="font-bold text-xl ">{item.sponsorName}</div>
-            <div>{item.addNote.slice(0, 20) + " ..."}</div>
+            <div>{item.addNote && item.addNote.slice(0, 20) + " ..."}</div>
           </div>
         </td>
         <td className="px-6 py-4">

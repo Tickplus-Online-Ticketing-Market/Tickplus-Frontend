@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import Eventcover from "./../../Assets/SponsershipManagement/eventcover.jpg";
 
-export default function MyModal2({ visible, onClose, setRequests }) {
+export default function MyModal2({ visible, onClose, request, onRequestSubmitted }) {
+  
   const [formData, setFormData] = useState({
     sponsorName: '',
     brandName: '',
@@ -58,12 +60,12 @@ export default function MyModal2({ visible, onClose, setRequests }) {
     
     try {
       // Create the request
-      const response = await axios.post('http://localhost:3030/sponsorship/requests', formData);
-      const newRequest = response.data;
-
-      // Update the list of requests 
-      setRequests(prevRequests => [...prevRequests, newRequest]);
-
+      const response = await axios.post('http://localhost:3030/sponsership-management/request', formData);
+      console.log(response);
+      
+      // Notify parent component about the submitted request
+      onRequestSubmitted(formData);
+      
       // Clear the form data
       setFormData({
         sponsorName: '',
@@ -86,18 +88,33 @@ export default function MyModal2({ visible, onClose, setRequests }) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-  if (!visible) return null;
+  useEffect(() => {
+    // Populate form data with event details when request changes
+    if (request) {
+      setFormData({
+        sponsorName: request.sponsorName || '',
+        brandName: request.brandName || '',
+        sponsorId: request.sponsorId || '',
+        budget: '',
+        email: '',
+        addNote: ''
+      });
+    }
+  }, [request]);
+
+  if (!visible || !request) return null;
   
   return (
     <div id='close'
       onClick={handleOnClose}
       className='fixed inset-0 z-[101] bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center'>
-      <div className="bg-secondary p-5 w-1/3 rounded">
+      <div className="bg-secondary p-5 w-2/3 rounded">
+       <div className="flex justify-between items-center">
         <div className="container mx-auto p-6 max-w-lg">
-          <h1 className="text-3xl font-bold mb-6">Make A Request</h1>
+          <h1 className="text-3xl font-bold mb-6">Request Sponsorship</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex flex-col">
-              <label htmlFor="sponsorName" className="text-2xl text-accent mb-2">Sponsor Name:</label>
+              <label htmlFor="sponsorName" className="text-xl text-accent mb-2">Sponsor Name:</label>
               <input
                 type="text"
                 id="sponsorName"
@@ -111,7 +128,7 @@ export default function MyModal2({ visible, onClose, setRequests }) {
               {errors.sponsorName && <p className="text-reject text-500">{errors.sponsorName}</p>}
             </div>
             <div className="flex flex-col">
-              <label htmlFor="brandName" className="text-2xl text-accent mb-2">Brand Name:</label>
+              <label htmlFor="brandName" className="text-xl text-accent mb-2">Brand Name:</label>
               <input
                 type="text"
                 id="brandName"
@@ -125,7 +142,7 @@ export default function MyModal2({ visible, onClose, setRequests }) {
               {errors.brandName && <p className="text-reject text-500">{errors.brandName}</p>}
             </div>
             <div className="flex flex-col">
-              <label htmlFor="sponsorId" className="text-2xl text-accent mb-2">Sponsor ID:</label>
+              <label htmlFor="sponsorId" className="text-xl text-accent mb-2">Sponsor ID:</label>
               <input
                 type="text"
                 id="sponsorId"
@@ -139,7 +156,7 @@ export default function MyModal2({ visible, onClose, setRequests }) {
               {errors.sponsorId && <p className="text-reject text-500">{errors.sponsorId}</p>}
             </div>
             <div className="flex flex-col">
-              <label htmlFor="budget" className="text-2xl text-accent mb-2">Budget:</label>
+              <label htmlFor="budget" className="text-xl text-accent mb-2">Budget:</label>
               <input
                 type="text"
                 id="budget"
@@ -153,7 +170,7 @@ export default function MyModal2({ visible, onClose, setRequests }) {
               {errors.budget && <p className="text-reject text-500">{errors.budget}</p>}
             </div>
             <div className="flex flex-col">
-              <label htmlFor="email" className="text-2xl text-accent mb-2">Email:</label>
+              <label htmlFor="email" className="text-xl text-accent mb-2">Email:</label>
               <input
                 type="email"
                 id="email"
@@ -178,12 +195,43 @@ export default function MyModal2({ visible, onClose, setRequests }) {
               />
             </div>
             <div className='flex justify-between items-center'>
-              <button type="submit" className="btn bg-primary text-background py-2 px-4 rounded-md hover:bg-accent">Request</button>
+              <button type="submit" className="btn bg-primary text-background py-2 px-4 rounded-md hover:bg-accent">Submit Request</button>
               <button type="button" onClick={onClose} className="btn bg-background text-primary py-2 px-4 rounded-md hover:bg-accent">Cancel</button>
             </div>
           </form>
         </div>
+
+        <div className='bg-accent p-10 rounded'>
+               <div className="mb-2 text-3xl font-bold leading-tight text-primary">
+                {request.eventName}
+               </div>
+               <div className="overflow-hidden bg-cover bg-no-repeat aspect-video">
+               <img className="rounded-t-lg" src={Eventcover} alt="" />
+               </div>
+              <div className="flex justify-between items-center">
+                <div className="text-primary">
+                  <div className="mb-2 text-base">
+                    Event ID: {request.eventId}
+                  </div>
+                  <div className="mb-2 text-base">
+                    Date: {request.date}
+                  </div>
+                </div>
+                <div className="text-primary">
+                  <div className="mb-2 text-base">
+                    Venue: {request.venue}
+                  </div>
+                  <div className="mb-2 text-base ">
+                    Attendees: {request.attendees}
+                  </div>
+                  <p className="text-primary">Artists: {request.artists}</p>
+                </div>
+              </div>
+             </div>
+
+       </div>
       </div>
     </div>
   );
 }
+
