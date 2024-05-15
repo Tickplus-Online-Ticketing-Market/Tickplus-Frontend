@@ -48,7 +48,7 @@ const Events = () => {
             <p className="data_body">Artist: {event.artist}</p>
             <p className="data_body">About: {event.about}</p>
             <p className="data_body">Time: {event.time} </p>
-            <p className="data_body">Price: ${event.price}</p>
+            <p className="data_body">Price: Rs.{event.price}</p>
             {isEventExpired(event.date) ? (
               <p className="data_body exprd">Expired</p>
             ) : (

@@ -202,7 +202,7 @@ const ViewEvent = () => {
               </p>
               <p className="card_details">Artist: {artist}</p>
               <p className="card_details">Time: {time} </p>
-              <p className="card_details">Price: ${price}</p>
+              <p className="card_details">Price: Rs.{price}</p>
               <div className="btn_controlset">
                 <button className="btn_con_set" onClick={handleDelete}>
                   Delete

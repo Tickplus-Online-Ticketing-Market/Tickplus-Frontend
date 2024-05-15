@@ -42,7 +42,7 @@ const Event = ({ event }) => {
       <td>{new Date(date).toLocaleDateString()}</td>
       <td>{artist}</td>
       <td>{time} </td>
-      <td>${price}</td>
+      <td>Rs.{price}</td>
       <td>{isExpired ? "Expired" : remainingTime}</td>
       <td>
         <Link className="activebtn">
