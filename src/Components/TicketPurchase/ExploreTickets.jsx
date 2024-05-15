@@ -5,6 +5,7 @@ import { MdOutlineTravelExplore } from 'react-icons/md';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { IoHeartSharp } from 'react-icons/io5';
 import PaymentModel from './models/PaymentModel'; 
+import Trend from './status/Trend';
 
 export default function ExploreTickets() {
   const [tickets, setTickets] = useState([]);
@@ -122,6 +123,9 @@ export default function ExploreTickets() {
             <div className="text-primary text-4xl font-bold ml-2">Explore Tickets</div>
           </div>
         </div>
+        <div>
+          <Trend/>
+        </div>
         <div className="relative">
           <HiOutlineSearch fontSize={20} className="text-primary absolute top-1/2 -translate-y-1/2 left-3" />
           <input
@@ -131,7 +135,7 @@ export default function ExploreTickets() {
             value={searchTerm}
             onChange={handleSearch}
           />
-        </div>
+        </div>  
       </div>
       <div className="flex flex-wrap justify-between" style={{ transition: 'transform 1.5s ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(0%)' }}>
         {filteredTickets.map((ticket) => (

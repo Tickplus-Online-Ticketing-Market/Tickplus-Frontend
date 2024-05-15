@@ -179,7 +179,7 @@ export default function PaymentModel({ visible, onClose, selectedItem }) {
                     <div className='bg-background rounded-xl h-[30rem] w-[50%]'>
                         <p className="text-accent font-bold text-base flex flex-col justify-center items-center mt-10">Total cost</p>
                         <p className="text-primary font-bold text-2xl flex flex-col justify-center items-center">{totalCost} LKR</p>
-                        {/* Render PaymentGateway component */}
+                        {/* Payment */}
                         <div className="flex justify-center items-center bg-background mt-[2rem]">
                             <form onSubmit={handleSubmit} className="bg-background rounded px-8 w-96">
                                 <div className="mb-4">
