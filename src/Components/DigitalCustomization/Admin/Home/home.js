@@ -1,71 +1,125 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import NavBar from "../../Admin/NavBar/NavBar"; // Adjust the path as necessary
-import Sidebar from "../../Admin/SideBar/Sidebar"; // Adjust the path as necessary
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useReactToPrint } from "react-to-print";
+import "../../request.css";
+import { TiTick } from "react-icons/ti";
+import { RxCross2 } from "react-icons/rx";
+import Sidebar from "../SideBar/Sidebar";
+import NavBar from "../NavBar/NavBar";
+import Chart from "chart.js/auto";
+import { Bar } from "react-chartjs-2";
 
-import BarChart from "../../Admin/RequestDetails/BarChart"; // Assuming BarChart.js exports the bar chart component
 
-const fetchData = async (url) => {
-  try {
-    const response = await axios.get(url);
-    return response.data; // Assuming the API returns the array directly
-  } catch (error) {
-    console.error("Failed to fetch data:", error);
-  }
+const URL = "https://tickplus-backend.onrender.com/digital-customization";
+
+const fetchHandler = async () => {
+  return await axios.get(URL).then((res) => res.data);
 };
 
-const Home = () => {
-  const [dataRequestDetails, setDataRequestDetails] = useState([]);
-  const [dataPosterRequestDetails, setDataPosterRequestDetails] = useState([]);
+function RequestDetails() {
+  const [requests, setRequests] = useState([]);
+  const [dataset, setdataset] = useState({
+    labels: [
+      "Requests needing response",
+      "Total requests",
+      "Completed requests",
+    ],
+    datasets: [
+      {
+        label: "Number of Requests",
+        data: [],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  });
+  const chartRef = useRef();
+  // let dataset = {}
 
   useEffect(() => {
-    fetchData("http://localhost:3030/digital-customization").then((data) => {
-      console.log("Request Details Data:", data); // Check what data is being received
-      setDataRequestDetails(data); // Adjust this according to your actual data structure
-    });
-    fetchData("http://localhost:3030/digital-customization/poster").then(
-      (data) => {
-        console.log("Poster Request Details Data:", data); // Check what data is being received
-        setDataPosterRequestDetails(data); // Adjust this according to your actual data structure
-      }
-    );
+    fetchHandler().then((data) => setRequests(data.reques));
   }, []);
 
+  useEffect(() => {
+    if (requests.length > 0) {
+      // const ctx = chartRef.current.getContext("2d");
+      const totalRequests = requests.length;
+      const requestsNeedResponse = requests.filter(
+        (request) => request.status !== "Accept"
+      ).length;
+      const requestsDone = requests.filter(
+        (request) => request.status === "Accept"
+      ).length;
+
+      setdataset({
+        labels: [
+          "Requests needing response",
+          "Total requests",
+          "Completed requests",
+        ],
+        datasets: [
+          {
+            label: "Number of Requests",
+            data: [requestsNeedResponse, totalRequests, requestsDone],
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(54, 162, 235, 0.2)",
+              "rgba(255, 206, 86, 0.2)",
+            ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      });
+
+      
+    }
+  }, [requests]);
+    
+  if (requests.length === 0) {
+    return <div>Loading...</div>; // or any loading indicator you prefer
+  }
   return (
     <div>
       <Sidebar />
       <NavBar />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center", // This centers the children horizontally
-          width: "100%", // Ensures the container takes full width
-        }}
-      >
-        <h2 style={{ textAlign: "center" }}>Request Details Chart</h2>
-        <div
-          style={{
-            width: "400px", // Smaller fixed width for the chart
-            height: "300px", // Fixed height for the chart
-            marginBottom: "20px", // Adds bottom margin for spacing
-          }}
-        >
-          <BarChart data={dataRequestDetails} />
-        </div>
-        <h2 style={{ textAlign: "center" }}>Poster Request Details Chart</h2>
-        <div
-          style={{
-            width: "400px", // Smaller fixed width for the chart
-            height: "300px", // Fixed height for the chart
-            marginBottom: "20px", // Adds bottom margin for spacing
-          }}
-        >
-          <BarChart data={dataPosterRequestDetails} />
+      <div className="child_clas">
+        <h1 className="topic_admin">Ticket Detail Report</h1>
+        <div>
+          <div className="barchart">
+            {/* <canvas id="0"></canvas> */}
+            <Bar
+              data={dataset}
+              options={{
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                  },
+                },
+              }}
+            />
+          </div>
+                   
+                
         </div>
       </div>
     </div>
   );
-};
+}
 
-export default Home;
+export default RequestDetails;

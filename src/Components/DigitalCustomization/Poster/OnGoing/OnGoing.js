@@ -6,7 +6,7 @@ import "../../request.css";
 import Sidebar from "../../Admin/SideBar/Sidebar";
 import NavBar from "../../Admin/NavBar/NavBar";
 
-const URL = "http://localhost:3030/digital-customization/poster";
+const URL = "https://tickplus-backend.onrender.com/digital-customization/poster";
 
 const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);

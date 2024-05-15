@@ -13,7 +13,7 @@ function AccceptRequest() {
     const fetchHandler = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3030/digital-customization/${id}`
+          `https://tickplus-backend.onrender.com/digital-customization/${id}`
         );
         setInputs(response.data.reques);
       } catch (error) {
@@ -24,7 +24,7 @@ function AccceptRequest() {
   }, [id]);
   const sendRequest = async () => {
     await axios
-      .put(`http://localhost:3030/digital-customization/${id}`, {
+      .put(`https://tickplus-backend.onrender.com/digital-customization/${id}`, {
         name: String(inputs.name),
         phone: String(inputs.phone),
         message: String(inputs.message),

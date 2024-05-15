@@ -31,7 +31,7 @@ function AddRequest() {
   };
 //Axios returns promises //data fetching
   const sendRequest = async () => {
-    await axios.post("http://localhost:3030/digital-customization", { //routers in server-data sends to the server by POST
+    await axios.post("https://tickplus-backend.onrender.com/digital-customization", { //routers in server-data sends to the server by POST
       name: inputs.name,   //passing the object as parameter to the server
       phone: inputs.phone,
       message: inputs.message,

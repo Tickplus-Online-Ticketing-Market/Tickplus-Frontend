@@ -16,7 +16,7 @@ function UpdatePost() {
     const fetchHandler = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3030/digital-customization/poster/${id}`
+          `https://tickplus-backend.onrender.com/digital-customization/poster/${id}`
         );
         setInputs(response.data.reques);
       } catch (error) {
@@ -32,7 +32,7 @@ function UpdatePost() {
 
     await axios
       .post(
-        `http://localhost:3030/digital-customization/poster/${id}`,
+        `https://tickplus-backend.onrender.com/digital-customization/poster/${id}`,
         formData
       )
       .then((res) => {})
@@ -43,7 +43,7 @@ function UpdatePost() {
 
   const sendRequest = async () => {
     await axios
-      .put(`http://localhost:3030/digital-customization/poster/${id}`, {
+      .put(`https://tickplus-backend.onrender.com/digital-customization/poster/${id}`, {
         name: String(inputs.name),
         phone: String(inputs.phone),
         code: String(inputs.code),

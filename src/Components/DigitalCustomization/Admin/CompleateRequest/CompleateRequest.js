@@ -7,7 +7,7 @@ import "../../request.css";
 import Sidebar from "../SideBar/Sidebar";
 import NavBar from "../NavBar/NavBar";
 
-const URL = "http://localhost:3030/digital-customization";
+const URL = "https://tickplus-backend.onrender.com/digital-customization";
 
 const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);
@@ -84,7 +84,7 @@ function CompleateRequest() {
                     <td className="admin_tbl_td">{item.phone}</td>
                     <td className="admin_tbl_td">
                       <img
-                        src={`http://localhost:3030/${item.profilePicture}`}
+                        src={`https://tickplus-backend.onrender.com/${item.profilePicture}`}
                         alt="POSTER"
                         className="tblposte"
                       />

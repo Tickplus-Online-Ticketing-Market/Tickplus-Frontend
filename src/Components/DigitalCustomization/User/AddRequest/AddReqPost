@@ -32,7 +32,7 @@ function AddRequest() {
   };
   //Axios returns promises //data fetching
   const sendRequest = async () => {
-    await axios.post("http://localhost:3030/digital-customization/poster", {
+    await axios.post("", {
       //routers in server-data sends to the server by POST
       name: inputs.name, //passing the object as parameter to the server
       phone: inputs.phone,

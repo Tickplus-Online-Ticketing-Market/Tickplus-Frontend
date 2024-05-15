@@ -15,7 +15,7 @@ function UpdatePost() {
   useEffect(() => {
     const fetchHandler = async () => {
       try {
-        const response = await axios.get(`http://localhost:3030/digital-customization/${id}`);
+        const response = await axios.get(`https://tickplus-backend.onrender.com/digital-customization/${id}`);
         setInputs(response.data.reques);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -29,7 +29,7 @@ function UpdatePost() {
     formData.append("file", file);
 
     await axios
-      .post(`http://localhost:3030/digital-customization/${id}`, formData)
+      .post(`https://tickplus-backend.onrender.com/digital-customization/${id}`, formData)
       .then((res) => {
       })
       .catch((err) => {
@@ -39,7 +39,7 @@ function UpdatePost() {
 
   const sendRequest = async () => {
     await axios
-      .put(`http://localhost:3030/digital-customization/${id}`, {
+      .put(`https://tickplus-backend.onrender.com/digital-customization/${id}`, {
         name: String(inputs.name),
         phone: String(inputs.phone),
         code: String(inputs.code),
