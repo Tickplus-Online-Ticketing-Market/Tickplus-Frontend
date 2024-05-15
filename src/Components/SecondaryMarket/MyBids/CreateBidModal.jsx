@@ -45,7 +45,7 @@ export default function CreateBidModal({ visible, onClose, biddingAuction }) {
 
     try {
       const res = await axios.post(
-        "http://localhost:3030/secondary-market/my-bids",
+        "https://tickplus-backend.onrender.com/secondary-market/my-bids",
         createForm
       );
 

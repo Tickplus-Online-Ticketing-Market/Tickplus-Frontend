@@ -15,7 +15,7 @@ export function DeleteAuctionModal({ visible, onClose, auctionID }) {
   const deleteAuctionListing = async (e) => {
     try {
       const res = await axios.delete(
-        `http://localhost:3030/secondary-market/my-auction-listings/${auctionID}`
+        `https://tickplus-backend.onrender.com/secondary-market/my-auction-listings/${auctionID}`
       );
 
       toast.success("Auction Listing Deleted");

@@ -42,7 +42,7 @@ export function CreateAuctionModal({ visible, onClose }) {
 
     try {
       const res = await axios.post(
-        "http://localhost:3030/secondary-market/my-auction-listings",
+        "https://tickplus-backend.onrender.com/secondary-market/my-auction-listings",
         createForm
       );
 

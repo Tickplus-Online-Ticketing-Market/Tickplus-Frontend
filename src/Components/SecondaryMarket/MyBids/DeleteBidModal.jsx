@@ -15,7 +15,7 @@ export default function DeleteBidModal({ visible, onClose, bidID }) {
   const deleteBidListing = async (e) => {
     try {
       const res = await axios.delete(
-        `http://localhost:3030/secondary-market/my-bids/${bidID}`
+        `https://tickplus-backend.onrender.com/secondary-market/my-bids/${bidID}`
       );
 
       toast.success("Bid Deleted");
