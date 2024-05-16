@@ -26,13 +26,12 @@ export default function FinanceStatus() {
 
     fetchData();
 
-    // Cleanup function
+    
     return () => {
-      // Any cleanup needed can go here
     };
   }, []);
 
-  // Calculate sum of count and totalCost for each eventId
+  // Calculate sum of count and totalCost
   const calculateTicketSells = () => {
     const ticketSellMap = new Map();
     ticketSells.forEach(pay => {

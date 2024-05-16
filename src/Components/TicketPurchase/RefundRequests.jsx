@@ -8,7 +8,7 @@ export default function RefundRequests() {
     const [selectedRefundId, setSelectedRefundId] = useState(null);
     const [showMyModel25, setShowMyModel25] = useState(false);
     const [refunds, setRefunds] = useState([]);
-    const [loading, setLoading] = useState(true); // Add loading state
+    const [loading, setLoading] = useState(true); 
 
     const handleOnClose25 = () => setShowMyModel25(false);
 
@@ -22,13 +22,13 @@ export default function RefundRequests() {
             if (response.ok) {
                 const data = await response.json();
                 setRefunds(data.refunds);
-                setLoading(false); // Update loading state after data is fetched
+                setLoading(false); 
             } else {
                 throw new Error('error');
             }
         } catch (error) {
             console.error(error);
-            setLoading(false); // Update loading state in case of error
+            setLoading(false); 
         }
     };
 
@@ -53,8 +53,8 @@ export default function RefundRequests() {
     };
 
     const handleUpdateRefund = (refundId) => {
-        setSelectedRefundId(refundId); // Set the selected refundId when Update Refund button is clicked
-        setShowMyModel25(true); // Open the modal
+        setSelectedRefundId(refundId); // Read in Update
+        setShowMyModel25(true); 
     };
 
     return (

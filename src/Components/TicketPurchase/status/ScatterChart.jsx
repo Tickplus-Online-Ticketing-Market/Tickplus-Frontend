@@ -1,5 +1,3 @@
-// ScatterChart.jsx
-
 import React, { useState, useEffect } from 'react';
 import { ScatterChart, CartesianGrid, XAxis, YAxis, ZAxis, Tooltip, Legend, Scatter } from 'recharts';
 import axios from 'axios';

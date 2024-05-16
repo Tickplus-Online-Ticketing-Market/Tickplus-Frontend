@@ -10,7 +10,6 @@ export default function MyTransactions() {
     const handleOnClose08 = () => setShowMyModel08(false);
 
     useEffect(() => {
-        // Fetch transactions from the server
         const fetchTransactions = async () => {
             try {
                 const response = await fetch('http://localhost:3030/tpp/pays');
@@ -18,14 +17,14 @@ export default function MyTransactions() {
                     const data = await response.json();
                     // Reverse the order of transactions
                     setTransactions(data.pays.reverse());
-                    setLoading(false); // Update loading state when data is fetched
+                    setLoading(false); 
                 } else {
                     console.error('Failed to fetch transactions');
-                    setLoading(false); // Update loading state even if there's an error
+                    setLoading(false); 
                 }
             } catch (error) {
                 console.error('Error fetching transactions:', error);
-                setLoading(false); // Update loading state even if there's an error
+                setLoading(false); 
             }
         };
 

@@ -21,10 +21,10 @@ export default function ExploreTickets() {
     try {
       const res = await axios.get('http://localhost:3030/tpp/ticks');
       setTickets(res.data.Tickets);
-      setLoading(false); // Set loading to false after fetching tickets
+      setLoading(false); 
     } catch (error) {
       console.error('Error fetching tickets:', error);
-      setLoading(false); // Set loading to false in case of error
+      setLoading(false); 
     }
   };
 

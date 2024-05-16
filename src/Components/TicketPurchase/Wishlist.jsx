@@ -1,4 +1,3 @@
-// Wishlist.jsx
 import React, { useState, useEffect } from 'react';
 import { ImHeart } from "react-icons/im";
 import { ImBin } from "react-icons/im";
@@ -18,10 +17,10 @@ export default function Wishlist() {
       try {
         const response = await axios.get("http://localhost:3030/tpp/wishes");
         setWishlist(response.data.wishes);
-        setLoading(false); // Update loading state when data is fetched
+        setLoading(false); 
       } catch (error) {
         console.error("Error fetching wishlist:", error);
-        setLoading(false); // Update loading state even if there's an error
+        setLoading(false); 
       }
     };
 

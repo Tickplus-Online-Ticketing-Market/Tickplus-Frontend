@@ -1,4 +1,3 @@
-// Grid.jsx
 import React, { useState, useEffect } from 'react';
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
 
