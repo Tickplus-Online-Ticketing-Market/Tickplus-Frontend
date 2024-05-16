@@ -18,7 +18,7 @@ export default function RefundRequests() {
 
     const fetchRefunds = async () => {
         try {
-            const response = await fetch('http://localhost:3030/tpp/refs');
+            const response = await fetch('https://tickplus-backend.onrender.com/tpp/refs');
             if (response.ok) {
                 const data = await response.json();
                 setRefunds(data.refunds);
@@ -38,7 +38,7 @@ export default function RefundRequests() {
             const confirmDelete = window.confirm('Are you sure you want to delete this refund?');
             
             if (confirmDelete) {
-                const response = await fetch(`http://localhost:3030/tpp/refs/${id}`, {
+                const response = await fetch(`https://tickplus-backend.onrender.com/tpp/refs/${id}`, {
                     method: 'DELETE',
                 });
                 if (response.ok) {

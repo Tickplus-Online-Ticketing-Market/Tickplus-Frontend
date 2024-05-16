@@ -72,7 +72,7 @@ export default function PaymentModel({ visible, onClose, selectedItem }) {
         const validationErrors = validateForm();
         if (Object.keys(validationErrors).length === 0) {
             try {
-                const response = await fetch('http://localhost:3030/tpp/pays', {
+                const response = await fetch('https://tickplus-backend.onrender.com/tpp/pays', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

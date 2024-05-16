@@ -11,10 +11,10 @@ export default function FinanceStatus() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const refundResponse = await axios.get('http://localhost:3030/tpp/refs');
+        const refundResponse = await axios.get('https://tickplus-backend.onrender.com/tpp/refs');
         setRefundRequests(refundResponse.data.refunds);
 
-        const ticketSellsResponse = await axios.get('http://localhost:3030/tpp/pays');
+        const ticketSellsResponse = await axios.get('https://tickplus-backend.onrender.com/tpp/pays');
         setTicketSells(ticketSellsResponse.data.pays);
 
         setLoading(false);

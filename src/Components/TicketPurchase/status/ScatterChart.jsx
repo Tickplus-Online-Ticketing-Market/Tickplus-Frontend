@@ -8,7 +8,7 @@ export default function ScatterChartComponent() {
   useEffect(() => {
     const fetchScatterData = async () => {
       try {
-        const response = await axios.get('http://localhost:3030/tpp/pays/counts-sum-by-event');
+        const response = await axios.get('https://tickplus-backend.onrender.com/tpp/pays/counts-sum-by-event');
         const countsData = response.data.countsSum;
         const scatterChartData = countsData.map(item => ({
           eventname: item.eventname,

@@ -15,7 +15,7 @@ export default function Wishlist() {
   useEffect(() => {
     const fetchWishlist = async () => {
       try {
-        const response = await axios.get("http://localhost:3030/tpp/wishes");
+        const response = await axios.get("https://tickplus-backend.onrender.com/tpp/wishes");
         setWishlist(response.data.wishes);
         setLoading(false); 
       } catch (error) {
@@ -29,7 +29,7 @@ export default function Wishlist() {
 
   const handleDeleteWish = async (wishId) => {
     try {
-      const response = await axios.delete(`http://localhost:3030/tpp/wishes/${wishId}`);
+      const response = await axios.delete(`https://tickplus-backend.onrender.com/tpp/wishes/${wishId}`);
       if (response.status === 200) {
         // Remove the deleted wish from the local state
         setWishlist(prevWishlist => prevWishlist.filter(item => item._id !== wishId));

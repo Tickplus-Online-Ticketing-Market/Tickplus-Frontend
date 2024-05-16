@@ -33,7 +33,7 @@ export default function ApplyRefund({ visible, onClose, transaction }) {
         };
 
         try {
-            const response = await fetch('http://localhost:3030/tpp/refs', {
+            const response = await fetch('https://tickplus-backend.onrender.com/tpp/refs', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

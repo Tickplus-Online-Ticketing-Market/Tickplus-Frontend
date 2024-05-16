@@ -12,7 +12,7 @@ export default function MyTransactions() {
     useEffect(() => {
         const fetchTransactions = async () => {
             try {
-                const response = await fetch('http://localhost:3030/tpp/pays');
+                const response = await fetch('https://tickplus-backend.onrender.com/tpp/pays');
                 if (response.ok) {
                     const data = await response.json();
                     // Reverse the order of transactions

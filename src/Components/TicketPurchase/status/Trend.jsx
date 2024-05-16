@@ -6,7 +6,7 @@ export default function Trend() {
   useEffect(() => {
     async function fetchMostSellsData() {
       try {
-        const response = await fetch('http://localhost:3030/tpp/pays/highest-total-cost');
+        const response = await fetch('https://tickplus-backend.onrender.com/tpp/pays/highest-total-cost');
         if (response.ok) {
           const data = await response.json();
           setMostSellsData(data);

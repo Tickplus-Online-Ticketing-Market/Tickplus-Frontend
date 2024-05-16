@@ -19,7 +19,7 @@ export default function ExploreTickets() {
 
   const fetchAllTickets = async () => {
     try {
-      const res = await axios.get('http://localhost:3030/tpp/ticks');
+      const res = await axios.get('https://tickplus-backend.onrender.com/tpp/ticks');
       setTickets(res.data.Tickets);
       setLoading(false); 
     } catch (error) {
@@ -34,7 +34,7 @@ export default function ExploreTickets() {
 
   const handleAddToWishlist = async (ticket) => {
     try {
-      await axios.post('http://localhost:3030/tpp/wishes', ticket);
+      await axios.post('https://tickplus-backend.onrender.com/tpp/wishes', ticket);
       window.alert('Ticket added to wishlist successfully!');
     } catch (error) {
       console.error('Error adding to wishlist:', error);

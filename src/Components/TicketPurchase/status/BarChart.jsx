@@ -8,8 +8,8 @@ export default function TransactionChart() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const paymentsResponse = await axios.get('http://localhost:3030/tpp/pays/sum-by-event');
-                const refundsResponse = await axios.get('http://localhost:3030/tpp/refs/sum-by-event');
+                const paymentsResponse = await axios.get('https://tickplus-backend.onrender.com/tpp/pays/sum-by-event');
+                const refundsResponse = await axios.get('https://tickplus-backend.onrender.com/tpp/refs/sum-by-event');
                 const paymentsData = paymentsResponse.data.paymentsSum;
                 const refundsData = refundsResponse.data.refundsSum;
                 const mergedData = mergeData(paymentsData, refundsData);
