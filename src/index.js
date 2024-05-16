@@ -5,6 +5,7 @@ import "./index.css";
 
 import homePageRoutes from "./Routes/HomePageRoutes";
 import DigitalCustomizationRoutes from "./Routes/DigitalCustomizationRoutes";
+import SponsorshipManagementRoutes from "./Routes/SponsorshipManagementRoutes"
 
 const allRoutes = [...homePageRoutes, ...DigitalCustomizationRoutes];
 const router = createBrowserRouter(allRoutes);
