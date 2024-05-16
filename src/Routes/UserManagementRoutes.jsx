@@ -4,7 +4,7 @@ import Login from '../Components/UserManagement/Login';
 import Signup from '../Components/UserManagement/Signup';
 import UserProfile from "../Components/UserManagement/UserProfile";
 import ForgotPassword from "../Components/UserManagement/ForgotPassword";
-import AdminPage from "../Components/UserManagement/AdminPage";
+import UserEdit from "../Components/UserManagement/UserEdit";
 
 const UserManagementRoutes = [
   {
@@ -28,14 +28,15 @@ const UserManagementRoutes = [
         element: <UserProfile />,
       },
       {
-        path: "/user/admin-page",
-        element: <AdminPage />,
+        path: "/user/edit-profile",
+        element: <UserEdit />,
       },
       {
         path: "/user/forgot-password",
         element: <ForgotPassword />,
       },
     ],
+    
   },
 ];
 

@@ -16,35 +16,41 @@ export default function Login() {
   });
 
   useEffect(() => {
+    console.log("Removing email cookie on mount");
     Cookies.remove("email");
   }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log(`Input change: ${name} = ${value}`);
     setForm({ ...form, [name]: value });
   };
 
   const handleCaptchaChange = (value) => {
+    console.log("Captcha value:", value);
     setCaptchaVal(value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Form submitted:", form);
 
     try {
       if (!captchaVal) {
+        console.error("Captcha not filled");
         toast.error("Please fill the captcha.");
         return;
       }
 
+      console.log("Sending login request");
       const response = await axios.post("http://localhost:3030/users/login", form);
+
+      console.log("Login response:", response.data);
 
       if (response.data === "loginPass") {
         Cookies.set("email", form.email, { expires: 730 });
         toast.success("Login successful");
         navigate("/user/profile");
-
-        // Redirect or perform other actions after successful login
       } else if (response.data === "nouser") {
         toast.error("Email not registered.");
       } else if (response.data === "loginFail") {
@@ -65,7 +71,7 @@ export default function Login() {
         Login
       </h1>
       <form onSubmit={handleSubmit}>
-        <section className="text-text body-font relative grid place-items-center mt-10">
+        <section className="text-text body-font relative grid place-items-center mt-5">
           <div className="relative m4-4">
             <label htmlFor="email" className="leading-7 text-xl text-background w-9/12">
               Email
@@ -76,7 +82,8 @@ export default function Login() {
               type="email"
               id="email"
               name="email"
-              className="w-full bg-background rounded text-xl text-text py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              className="w-full bg-background rounded text-xl text-text py-1 px-3 
+              leading-8 transition-colors duration-200 ease-in-out"
             />
           </div>
 
@@ -90,7 +97,8 @@ export default function Login() {
               type="password"
               id="password"
               name="password"
-              className="w-full bg-background rounded text-xl text-text py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              className="w-full bg-background rounded text-xl text-text py-1 px-3 
+              leading-8 transition-colors duration-200 ease-in-out"
             />
           </div>
 
@@ -101,22 +109,24 @@ export default function Login() {
           />
 
           <input
-            className="text-background bg-accent border-0 ml-12 mr-12 py-2 px-6 focus:outline-none hover:bg-secondary rounded text-lg"
+            className="text-background bg-accent border-0 ml-10 mr-10 py-2 px-6 
+            focus:outline-none hover:bg-secondary rounded text-lg"
             type="submit"
             value="Login"
           />
 
-          <p className="text-base text-accent mt-3 font-bold">
+          {/* <p className="text-xl text-accent mt-3 font-bold hover:underline">
             <Link to={"/user/forgot-password"}> Forgot Password </Link>
-          </p>
+          </p> */}
 
-          <p className="text-base text-background mt-3">
+          <p className="text-xl text-background mt-3">
             Don't have an account?
           </p>
 
-          <div className="text-base text-accent mt-3 font-bold">
+          <div className="text-xl text-accent mt-3 font-bold hover:underline">
             <Link to={"/user/signup"}> Create an account </Link>
           </div>
+
         </section>
       </form>
     </div>
