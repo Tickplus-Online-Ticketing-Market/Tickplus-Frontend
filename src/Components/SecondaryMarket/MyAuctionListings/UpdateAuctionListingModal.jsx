@@ -16,7 +16,7 @@ export function UpdateAuctionModal({ visible, onClose, auctionID }) {
     const fetchHandler = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3030/secondary-market/my-auction-listings/${auctionID}`
+          `https://tickplus-backend.onrender.com/secondary-market/my-auction-listings/${auctionID}`
         );
         setInputs(res.data.auctionListing);
       } catch (error) {

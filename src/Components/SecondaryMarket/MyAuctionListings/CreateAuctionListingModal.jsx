@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { HiSearch } from "react-icons/hi";
 import { FaRupeeSign, FaClock, FaTicket } from "react-icons/fa6";
@@ -8,9 +8,12 @@ import { toast } from "react-toastify";
 import currentLoggedinUser from "../lib/helpers/getCurrentLoggedinUser";
 import ticketDesign from "../../../Assets/SecondaryMarket/img/Ticket Design Size Example.png";
 import ExampleQRcode from "../../../Assets/SecondaryMarket/img/Example-QR-code.jpg";
+import RetriveTicketData from "./RetriveTicketData";
+import { Select } from "@mui/material";
 
 export function CreateAuctionModal({ visible, onClose }) {
-  if (!visible) return null;
+  const [ticketData, setTicketData] = useState([]);
+  const [selectedTicket, setSelectedTicket] = useState("");
 
   const handleOnClose = (e) => {
     if (e.target.id === "container") onClose();
@@ -25,6 +28,7 @@ export function CreateAuctionModal({ visible, onClose }) {
     auctionDays: 2,
     remainingDays: 2,
     winningBid: "No Bids Placed",
+    imageUrl: "",
     auctionStatus: "Active",
   });
 
@@ -36,6 +40,17 @@ export function CreateAuctionModal({ visible, onClose }) {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    RetriveTicketData()
+      .then((data) => {
+        setTicketData(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {});
+  }, []);
 
   const createAuctionListing = async (e) => {
     e.preventDefault();
@@ -54,6 +69,7 @@ export function CreateAuctionModal({ visible, onClose }) {
         auctionDays: 2,
         remainingDays: 2,
         winningBid: "No Bids Placed",
+        imageUrl: "",
         auctionStatus: "Active",
       });
 
@@ -64,6 +80,7 @@ export function CreateAuctionModal({ visible, onClose }) {
       toast.error("Auction Listing Not Created");
     }
   };
+  if (!visible) return null;
 
   return (
     <div
@@ -124,6 +141,7 @@ export function CreateAuctionModal({ visible, onClose }) {
               name="remainingDays"
               value={createForm.auctionDays}
             />
+            <input type="hidden" name="imageUrl" value={createForm.imageUrl} />
 
             <div className="grid grid-cols-3 gap-y-10 my-20 justify-around">
               <div>
@@ -159,12 +177,13 @@ export function CreateAuctionModal({ visible, onClose }) {
                 </span>
                 <input
                   name="startingPrice"
-                  type="text"
+                  type="number"
                   required
                   placeholder="Starting Price"
                   className="text-start bg-background focus:outline-none active:outline-none h-8 w-96 text-text placeholder-primary border-none bg-none pb-0.5"
                   value={createForm.startingPrice}
                   onChange={updateCreateFormField}
+                  step="0.01"
                 />
               </div>
 
