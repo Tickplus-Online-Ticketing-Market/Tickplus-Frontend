@@ -7,7 +7,9 @@ import homePageRoutes from "./Routes/HomePageRoutes";
 import DigitalCustomizationRoutes from "./Routes/DigitalCustomizationRoutes";
 import SponsorshipManagementRoutes from "./Routes/SponsorshipManagementRoutes"
 
-const allRoutes = [...homePageRoutes, ...DigitalCustomizationRoutes];
+import ticketLaunchingRoutes from "./Routes/TicketLaunchingRoutes";
+
+const allRoutes = [...homePageRoutes, ...DigitalCustomizationRoutes, ...ticketLaunchingRoutes];
 const router = createBrowserRouter(allRoutes);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

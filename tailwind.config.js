@@ -15,6 +15,8 @@ module.exports = {
       secondary: '#a9c1c1',
       accent: '#122128',
       gray: '#808080',
+      box4: "#48525B",
+      red: "#DE1E1E",
     },
     
     fontSize: {
