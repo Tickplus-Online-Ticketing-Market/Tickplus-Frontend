@@ -18,32 +18,36 @@ export default function Signup() {
   });
 
   // Function to handle form submission
-const handleRegister = async (e) => {
-  e.preventDefault();
-  try {
-    console.log("Form data:", form); // Debug line: Print form data
-    if (form.password.length < 6) {
-      toast.error("Password should be at least 6 characters");
-    } else if (form.password !== form.cpassword) {
-      toast.error("Passwords do not match");
-    } else if (form.dateOfBirth < new Date()) {
-      toast.error("Date of birth cannot be in the past");
-    }
-     else {
-      const res = await axios.post("http://localhost:3030/users/create", form);
-      console.log("API response:", res.data); // Debug line: Print API response
-      if (res.data.error === "exist") {
-        toast.error("Email already exists");
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      console.log("Form data:", form); // Debug line: Print form data
+      if (form.password.length < 6) {
+        toast.error("Password should be at least 6 characters");
+        
+      } else if (form.password !== form.cpassword) {
+        toast.error("Passwords do not match");
+
+      } else if (form.dateOfBirth < new Date()) {
+        toast.error("Date of birth cannot be in the past");
       } else {
-        toast.success("Successfully registered");
-        navigate("/user/login");
+        const res = await axios.post(
+          "https://tickplus-backend.onrender.com/users/create",
+          form
+        );
+        console.log("API response:", res.data); // Debug line: Print API response
+        if (res.data.error === "exist") {
+          toast.error("Email already exists");
+        } else {
+          toast.success("Successfully registered");
+          navigate("/user/login");
+        }
       }
+    } catch (e) {
+      console.error(e);
+      toast.error("Something went wrong!");
     }
-  } catch (e) {
-    console.error(e);
-    toast.error("Something went wrong!");
-  }
-};
+  };
 
   return (
     <div className="mb-6 bg-primary bg-opacity-100 w-2/3 rounded-2xl p-8 h-3/4">
@@ -52,7 +56,7 @@ const handleRegister = async (e) => {
       </h1>
       <form onSubmit={handleRegister}>
         <div className="grid grid-cols-6 gap-4 px-8 py-4 w-full">
-        <div className="col-span-3">
+          <div className="col-span-3">
             <label
               htmlFor="username"
               className="leading-7 text-xl font-bold text-accent"
@@ -234,4 +238,3 @@ const handleRegister = async (e) => {
     </div>
   );
 }
-

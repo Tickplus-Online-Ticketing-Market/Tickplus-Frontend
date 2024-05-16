@@ -43,7 +43,10 @@ export default function Login() {
       }
 
       console.log("Sending login request");
-      const response = await axios.post("http://localhost:3030/users/login", form);
+      const response = await axios.post(
+        "https://tickplus-backend.onrender.com/users/login",
+        form
+      );
 
       console.log("Login response:", response.data);
 
@@ -58,10 +61,15 @@ export default function Login() {
       } else {
         toast.error("Unexpected response from server.");
       }
-
     } catch (error) {
-      console.error("Login error:", error.response ? error.response.data : error.message);
-      toast.error("Server error: " + (error.response ? error.response.data : error.message));
+      console.error(
+        "Login error:",
+        error.response ? error.response.data : error.message
+      );
+      toast.error(
+        "Server error: " +
+          (error.response ? error.response.data : error.message)
+      );
     }
   };
 
@@ -73,7 +81,10 @@ export default function Login() {
       <form onSubmit={handleSubmit}>
         <section className="text-text body-font relative grid place-items-center mt-5">
           <div className="relative m4-4">
-            <label htmlFor="email" className="leading-7 text-xl text-background w-9/12">
+            <label
+              htmlFor="email"
+              className="leading-7 text-xl text-background w-9/12"
+            >
               Email
             </label>
             <input
@@ -88,7 +99,10 @@ export default function Login() {
           </div>
 
           <div className="relative m-4">
-            <label htmlFor="password" className="leading-7 text-xl text-background w-9/12">
+            <label
+              htmlFor="password"
+              className="leading-7 text-xl text-background w-9/12"
+            >
               Password
             </label>
             <input
@@ -115,18 +129,11 @@ export default function Login() {
             value="Login"
           />
 
-          {/* <p className="text-xl text-accent mt-3 font-bold hover:underline">
-            <Link to={"/user/forgot-password"}> Forgot Password </Link>
-          </p> */}
-
-          <p className="text-xl text-background mt-3">
-            Don't have an account?
-          </p>
+          <p className="text-xl text-background mt-3">Don't have an account?</p>
 
           <div className="text-xl text-accent mt-3 font-bold hover:underline">
             <Link to={"/user/signup"}> Create an account </Link>
           </div>
-
         </section>
       </form>
     </div>

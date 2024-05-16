@@ -29,12 +29,13 @@ export default function UserEdit() {
   const fetchUserProfile = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3030/users/get-profile",
+        "https://tickplus-backend.onrender.com/users/get-profile",
         { email: cookieVal }
       );
 
       setUserData(response.data.user);
-      setForm({...form,
+      setForm({
+        ...form,
         username: response.data.user.username,
         email: response.data.user.email,
         address: response.data.user.address,
@@ -66,7 +67,7 @@ export default function UserEdit() {
           delete updateForm.password;
         }
         const res = await axios.put(
-          "http://localhost:3030/users/edit-profile",
+          "https://tickplus-backend.onrender.com/users/edit-profile",
           updateForm
         );
         console.log("API response:", res.data); // Debug line: Print API response

@@ -20,7 +20,7 @@ const UserProfile = () => {
         email: cookieVal,
       };
       const response = await axios.post(
-        "http://localhost:3030/users/get-profile",
+        "https://tickplus-backend.onrender.com/users/get-profile",
         form
       );
 
@@ -42,14 +42,17 @@ const UserProfile = () => {
         email: cookieVal,
       };
       // Correctly send the data in the DELETE request using `data` key
-      await axios.delete("http://localhost:3030/users/delete-profile", {
-        data: form,
-      });
+      await axios.delete(
+        "https://tickplus-backend.onrender.com/users/delete-profile",
+        {
+          data: form,
+        }
+      );
       toast.success("Account deleted successfully");
       logOut();
-      setTimeout(()=>{
-        window.location.href = '/'
-      },3000)
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 3000);
     } catch (error) {
       // Log error for debugging
       console.error("Error deleting account:", error);
