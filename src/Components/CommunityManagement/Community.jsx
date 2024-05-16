@@ -16,7 +16,7 @@ export default function Community() {
   const fetchPosts = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3030/community-page/posts"
+        "https://tickplus-backend.onrender.com/community-page/posts"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch posts");

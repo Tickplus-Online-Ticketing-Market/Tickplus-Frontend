@@ -13,7 +13,7 @@ export default function Myposts() {
   const fetchPosts = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3030/community-page/posts"
+        "https://tickplus-backend.onrender.com/community-page/posts"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch posts");
@@ -27,7 +27,7 @@ export default function Myposts() {
 
   const deletePost = async (postId) => {
     try {
-      await axios.delete(`http://localhost:3030/community-page/post/${postId}`);
+      await axios.delete(`https://tickplus-backend.onrender.com/community-page/post/${postId}`);
 
       toast.success("Post Deleted");
 

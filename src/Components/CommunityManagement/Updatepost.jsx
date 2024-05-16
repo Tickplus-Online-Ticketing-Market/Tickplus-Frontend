@@ -16,7 +16,8 @@ export default function UpdatePost() {
       try {
         console.log(postId);
         const response = await axios.get(
-          `http://localhost:3030/community-page/posts/${postId}`
+          `https://tickplus-backend.onrender.com
+/community-page/posts/${postId}`
         );
 
         const postData = response.data.post;
@@ -37,7 +38,7 @@ export default function UpdatePost() {
     e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:3030/community-page/posts/${postId}`,
+        `https://tickplus-backend.onrender.com/community-page/posts/${postId}`,
         values
       );
       toast.success("Post Updated");
