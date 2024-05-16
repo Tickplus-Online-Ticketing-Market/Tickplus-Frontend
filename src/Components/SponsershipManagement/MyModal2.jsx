@@ -61,7 +61,7 @@ export default function MyModal2({ onClose, visible, event }) {
      
      try {
        // Create the request
-       const response = await axios.post('http://localhost:3030/sponsership-management/request', formData);
+       const response = await axios.post('https://tickplus-backend.onrender.com/sponsership-management/request', formData);
        console.log(response);
        
        

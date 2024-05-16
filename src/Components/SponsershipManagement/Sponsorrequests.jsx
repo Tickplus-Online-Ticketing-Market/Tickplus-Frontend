@@ -26,7 +26,7 @@ export default function Sponsorrequests() {
   const fetchRequests = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3030/sponsership-management/request"
+        "https://tickplus-backend.onrender.com/sponsership-management/request"
       );
       setRequests(res.data.requests);
       console.log(res);
@@ -39,7 +39,7 @@ export default function Sponsorrequests() {
   const handleAccept = async (id) => {
     try {
       await axios.get(
-        `http://localhost:3030/sponsership-management/request/update/accept/${id}`
+        `https://tickplus-backend.onrender.com/sponsership-management/request/update/accept/${id}`
       );
       toast.success("Request Accepted");
       fetchRequests();
@@ -52,7 +52,7 @@ export default function Sponsorrequests() {
   const handleReject = async (id) => {
     try {
       await axios.get(
-        `http://localhost:3030/sponsership-management/request/update/reject/${id}`
+        `https://tickplus-backend.onrender.com/sponsership-management/request/update/reject/${id}`
       );
       toast.success("Request Rejected");
       fetchRequests();
@@ -117,7 +117,11 @@ export default function Sponsorrequests() {
             {item.status === "Accepted" || item.status === "Rejected" ? (
               <span className="text-primary text-base font-bold bg-accent  border-primary border-[2.4px] focus:outline-none font-medium px-3 py-1 text-center inline-flex items-center">
                 <span className=" text-xl me-1">
-                {item.status === "Accepted" ? <IoIosCheckmarkCircle /> : <IoIosCloseCircle />}
+                  {item.status === "Accepted" ? (
+                    <IoIosCheckmarkCircle />
+                  ) : (
+                    <IoIosCloseCircle />
+                  )}
                 </span>
                 {item.status}
               </span>
@@ -140,10 +144,7 @@ export default function Sponsorrequests() {
                   className="text-primary text-base font-bold bg-accent hover:bg-reject hover:text-background border-primary border-[2.4px] focus:outline-none font-medium rounded-full px-3 py-1 text-center inline-flex items-center"
                 >
                   <span className=" text-xl me-1">
-                    
-          
-                      <IoIosCloseCircle />
-                    
+                    <IoIosCloseCircle />
                   </span>
                   Reject
                 </button>
@@ -205,8 +206,8 @@ export default function Sponsorrequests() {
         </tbody>
       </table>
       <div className="flex justify-center text-3xl text-primary font-bold mt-20">
-          Here you can find out about events that you are interested in
-        </div>
+        Here you can find out about events that you are interested in
+      </div>
       <Barcharts data={chartData} />
     </div>
   );

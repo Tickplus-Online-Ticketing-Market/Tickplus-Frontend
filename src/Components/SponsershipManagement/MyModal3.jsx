@@ -20,7 +20,7 @@ function MyModal3({ visible, onClose, SponserRequest }) {
     e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:3030/sponsership-management/request/${SponserRequest._id}`,
+        `https://tickplus-backend.onrender.com/sponsership-management/request/${SponserRequest._id}`,
         {
           email: formData.email,
           addNote: formData.addNote,

@@ -17,7 +17,7 @@ export default function Dashboard() {
 
   const getAllEvents = async () => {
     try {
-      const res = await axios.get('http://localhost:3030/sponsership-management/event');
+      const res = await axios.get('https://tickplus-backend.onrender.com/sponsership-management/event');
       setEvents(res.data.events);
       console.log(res);
     } catch (error) {

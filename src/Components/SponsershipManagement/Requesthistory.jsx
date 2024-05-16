@@ -19,7 +19,7 @@ export default function RequestHistory() {
   const fetchRequests = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3030/sponsership-management/request"
+        "https://tickplus-backend.onrender.com/sponsership-management/request"
       );
       const req = res.data.requests;
       setRequests(req);
@@ -37,7 +37,7 @@ export default function RequestHistory() {
   const handleDeleteRequest = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:3030/sponsership-management/request/${id}`
+        `https://tickplus-backend.onrender.com/sponsership-management/request/${id}`
       );
       toast.success("Request deleted successfully");
       fetchRequests(); // Refresh the list of requests
