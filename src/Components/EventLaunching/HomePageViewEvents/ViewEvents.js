@@ -4,7 +4,6 @@ import axios from "axios";
 import Sidebar from "../SideBar/Sidebar";
 import NavBar from "../NavBar/NavBar";
 
-
 const Events = () => {
   const [events, setEvents] = useState([]);
   const [alertMessage, setAlertMessage] = useState("");
@@ -12,7 +11,9 @@ const Events = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("http://localhost:3030/events");
+        const response = await axios.get(
+          "https://tickplus-backend.onrender.com/events"
+        );
         setEvents(response.data.events);
       } catch (error) {
         setAlertMessage("Error fetching events."); // Display error message to the user
@@ -23,44 +24,38 @@ const Events = () => {
   }, []);
 
   return (
-
-
     <div>
-       <Sidebar />
-       <NavBar />
+      <Sidebar />
+      <NavBar />
       <br /> <br />
       <h1 className="topic"> Launched Events </h1>
       <br /> <br />
-      
       {alertMessage && <div style={{ color: "red" }}>{alertMessage}</div>}
-
       <div className="box ">
-            
-      <div className="fulcard">
-        {events.map((event) => (
-          <div key={event._id} className="ewn_card">
-            <h3 className="topic_name">{event.name}</h3>
-            <img src={event.image} alt={event.name} className="img" />
-            <p className="data_body">Venue: {event.venue}</p>
-            <p className="data_body">
-              Date: {new Date(event.date).toLocaleDateString()}
-            </p>
-            <p className="data_body">Artist: {event.artist}</p>
-            <p className="data_body">About: {event.about}</p>
-            <p className="data_body">Time: {event.time} </p>
-            <p className="data_body">Price: Rs.{event.price}</p>
-            {isEventExpired(event.date) ? (
-              <p className="data_body exprd">Expired</p>
-            ) : (
+        <div className="fulcard">
+          {events.map((event) => (
+            <div key={event._id} className="ewn_card">
+              <h3 className="topic_name">{event.name}</h3>
+              <img src={event.image} alt={event.name} className="img" />
+              <p className="data_body">Venue: {event.venue}</p>
               <p className="data_body">
-                Remaining Time: {calculateRemainingTime(event.date)}
+                Date: {new Date(event.date).toLocaleDateString()}
               </p>
-            )}
-          </div>
-        ))}
+              <p className="data_body">Artist: {event.artist}</p>
+              <p className="data_body">About: {event.about}</p>
+              <p className="data_body">Time: {event.time} </p>
+              <p className="data_body">Price: Rs.{event.price}</p>
+              {isEventExpired(event.date) ? (
+                <p className="data_body exprd">Expired</p>
+              ) : (
+                <p className="data_body">
+                  Remaining Time: {calculateRemainingTime(event.date)}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-      </div>
-      
     </div>
   );
 };

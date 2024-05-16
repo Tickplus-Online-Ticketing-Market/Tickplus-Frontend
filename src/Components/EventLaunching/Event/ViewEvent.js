@@ -21,15 +21,13 @@ const ViewEvent = () => {
     time: "",
     price: "",
   });
- 
-
-
-
 
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const response = await axios.get(`http://localhost:3030/events/${id}`);
+        const response = await axios.get(
+          `https://tickplus-backend.onrender.com/events/${id}`
+        );
         setEvent(response.data.event);
         setFormData(response.data.event);
         setLoading(false);
@@ -49,7 +47,10 @@ const ViewEvent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3030/events/${id}`, formData);
+      await axios.put(
+        `https://tickplus-backend.onrender.com/events/${id}`,
+        formData
+      );
       alert("Event updated successfully.");
       setEditMode(false);
     } catch (error) {
@@ -63,9 +64,11 @@ const ViewEvent = () => {
     );
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:3030/events/${id}`);
+        await axios.delete(
+          `https://tickplus-backend.onrender.com/events/${id}`
+        );
         alert("Event deleted successfully.");
-        
+
         window.location.replace("/");
       } catch (error) {
         // Handle error
@@ -183,19 +186,18 @@ const ViewEvent = () => {
           </div>
         ) : (
           <div className="view_post">
-            <div >
-
+            <div>
               <br></br>
               <div>
-                
-               
-              <img
-                src={image}
-                alt={name}
-                style={{ width: "100%", height: "300px" }}
-              />
-              </div>  
-              <p className="card_details" style={{ color: 'blue' }}>{about}</p>
+                <img
+                  src={image}
+                  alt={name}
+                  style={{ width: "100%", height: "300px" }}
+                />
+              </div>
+              <p className="card_details" style={{ color: "blue" }}>
+                {about}
+              </p>
               <p className="card_details">Venue: {venue}</p>
               <p className="card_details">
                 Date: {new Date(date).toLocaleDateString()}
@@ -204,12 +206,15 @@ const ViewEvent = () => {
               <p className="card_details">Time: {time} </p>
               <p className="card_details">Price: Rs.{price}</p>
               <div className="btn_controlset">
-              <Link to={`/events`}>
-                <button className="btn_con_set" onClick={handleDelete}>
-                  Delete
-                </button>
+                <Link to={`/events`}>
+                  <button className="btn_con_set" onClick={handleDelete}>
+                    Delete
+                  </button>
                 </Link>
-                <button className="btn_con_set" onClick={() => setEditMode(true)}>
+                <button
+                  className="btn_con_set"
+                  onClick={() => setEditMode(true)}
+                >
                   Edit
                 </button>
                 <Link to={`/events`}>

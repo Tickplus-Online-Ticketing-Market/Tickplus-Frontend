@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Sidebar from "../SideBar/Sidebar";
 import NavBar from "../NavBar/NavBar";
-import '../Promotional/events.css'
+import "../Promotional/events.css";
 
 const Event = ({ event }) => {
   const { _id, name, date, artist, time, price } = event;
@@ -63,7 +63,9 @@ const Events = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("http://localhost:3030/events");
+        const response = await axios.get(
+          "https://tickplus-backend.onrender.com/events"
+        );
         setEvents(response.data.events);
         setEventCount(response.data.events.length);
       } catch (error) {
