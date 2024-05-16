@@ -54,7 +54,7 @@ export default function MyTransactions() {
                         <thead className="text-xl font-bold">
                             <tr>
                                 <th scope="col" className="px-6 py-3 text-background">Payment Done by</th>
-                                <th scope="col" className="px-6 py-3 text-primary">Event (EventID)</th>
+                                <th scope="col" className="px-6 py-3 text-primary">Event</th>
                                 <th scope="col" className="px-6 py-3 text-background">Date/Time</th>
                                 <th scope="col" className="px-6 py-3 text-primary">Quantity</th>
                                 <th scope="col" className="px-6 py-3 text-background">Total Cost</th>
@@ -68,14 +68,14 @@ export default function MyTransactions() {
                                             {transaction.customerName}
                                         </th>
                                         <th scope="row" className="px-6 py-4 font-xl text-primary">
-                                            {transaction.eventName}<div className='text-sm'>({transaction.eventId})</div> 
+                                            {transaction.eventname}
                                         </th>
                                         <td className="px-6 py-3 text-background">
                                             <div>{transaction.date}</div>
                                             {transaction.time}h  
                                         </td>
                                         <td className="px-6 py-4 text-primary">
-                                            {transaction.unitPrice} x {transaction.count}
+                                            {transaction.ticketPrice} x {transaction.count}
                                         </td>
                                         <td className="px-6 py-4 text-background">
                                             {transaction.totalCost} LKR

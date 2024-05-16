@@ -1,11 +1,10 @@
-// PaymentModel.jsx
 import React, { useState, useEffect } from 'react';
 import visaImage from '../../../Assets/TicketPurchase/visa.png.png';
 import mastercardImage from '../../../Assets/TicketPurchase/mastercard.jpg.jpg';
 import PaymentConfirm from './PaymentConfirm';
 
 export default function PaymentModel({ visible, onClose, selectedItem }) {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(1); // Default count is 1
     const [totalCost, setTotalCost] = useState(0);
 
     const [showMyModel06, setShowMyModel06] = useState(false)
@@ -23,7 +22,7 @@ export default function PaymentModel({ visible, onClose, selectedItem }) {
 
     useEffect(() => {
         if (visible) {
-            setCount(0);
+            setCount(1); // Reset count to 1 when the model is opened
             setTotalCost(0);
             setCustomerName('');
             setCardNumber('');
@@ -39,14 +38,14 @@ export default function PaymentModel({ visible, onClose, selectedItem }) {
     const handleOnClose02 = (e) => {
         if (e.target.id === 'container') {
             onClose();
-            setCount(0);
+            setCount(1); // Reset count to 1 when the model is closed
         }
     };
 
     // Cal Total Cost
     useEffect(() => {
         if (selectedItem !== null) {
-            setTotalCost(selectedItem.unitPrice * count);
+            setTotalCost(selectedItem.ticketPrice * count);
         } else {
             console.log("No item data");
         }
@@ -79,9 +78,8 @@ export default function PaymentModel({ visible, onClose, selectedItem }) {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        eventId: selectedItem.eventId,
-                        eventName: selectedItem.eventName,
-                        unitPrice: selectedItem.unitPrice,
+                        eventname: selectedItem.eventname,
+                        ticketPrice: selectedItem.ticketPrice,
                         count,
                         totalCost,
                         customerName,
@@ -153,18 +151,15 @@ export default function PaymentModel({ visible, onClose, selectedItem }) {
                 <div className='bg-background h-[30rem] w-[50rem] rounded-xl flex justify-between items-center'>
                     {/* Data read from Mother Component */}
                     <div className='bg-accent rounded-xl h-[30rem] w-[50%]'>
-                        <div className='mt-[2rem] mr-[2rem] ml-[2rem] mb-[2rem]'>
-                            <img src="./images/tick+1.png" alt="" />
+                        <div className='mt-[4.5rem] mr-[2rem] ml-[2rem] mb-[2rem]'>
+                            <img src={selectedItem.imageUrl} alt="" />
                         </div>
                         <div className='font-bold mt-[5rem] mr-[2rem] ml-[2rem] flex flex-col h-full'>
-                            <div className="flex text-secondary items-center mb-2 text-sm">
-                                <p>Event ID - {selectedItem.eventId}</p>
-                            </div>
                             <div className="flex text-secondary items-center mb-2 text-2xl">
-                                <p>{selectedItem.eventName}</p>
+                                <p>{selectedItem.eventname}</p>
                             </div>
                             <div className="flex text-primary items-center mb-2 text-2xl">
-                                <p>{selectedItem.unitPrice} LKR</p>
+                                <p>{selectedItem.ticketPrice} LKR</p>
                             </div>
                             <div className="flex text-primary justify-center mb-2 text-2xl">
                                 <p>Quantity

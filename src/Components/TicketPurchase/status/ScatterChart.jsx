@@ -13,7 +13,7 @@ export default function ScatterChartComponent() {
         const response = await axios.get('http://localhost:3030/tpp/pays/counts-sum-by-event');
         const countsData = response.data.countsSum;
         const scatterChartData = countsData.map(item => ({
-          eventName: item.eventName,
+          eventname: item.eventname,
           count: item.totalCount,
           date: item.date,
         }));
@@ -41,11 +41,11 @@ export default function ScatterChartComponent() {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" type="category" name="Date" />
         <YAxis dataKey="count" type="number" name="Count" />
-        <ZAxis dataKey="eventName" type="category" name="Event Name" />
+        <ZAxis dataKey="eventname" type="category" name="Event Name" />
         <Tooltip cursor={{ strokeDasharray: '3 3' }} />
         <Legend />
         {scatterData.map((entry, index) => (
-            <Scatter key={index} name={entry.eventName} data={[entry]} fill={`#${Math.floor(Math.random()*16777215).toString(16)}`} />
+            <Scatter key={index} name={entry.eventname} data={[entry]} fill={`#${Math.floor(Math.random()*16777215).toString(16)}`} />
         ))}
       </ScatterChart>
     </div>

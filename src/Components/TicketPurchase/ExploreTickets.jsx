@@ -1,11 +1,10 @@
-// ExploreTickets.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MdOutlineTravelExplore } from 'react-icons/md';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { IoHeartSharp } from 'react-icons/io5';
 import PaymentModel from './models/PaymentModel'; 
-import Trend from './status/Trend';
+
 
 export default function ExploreTickets() {
   const [tickets, setTickets] = useState([]);
@@ -68,19 +67,18 @@ export default function ExploreTickets() {
       >
         {/* Image div */}
         <div className="bg-accent rounded-xl h-[12rem] w-[60%]">
-          <img src="./images/tick+1.png" alt="" />
+          <div className='flex mt-10'>
+            <img src={ticket.imageUrl} alt="" />
+          </div>
         </div>
 
         {/* Details div */}
         <div div={ticket._id} className="pl-[2rem] mr-[5rem] mb-[2.5rem] mt-[2.5rem] w-[25%]">
-          <div className="flex items-center mb-2 text-accent text-sm font-bold">
-            <p>Event ID - {ticket.eventId}</p>
-          </div>
           <div className="flex items-center mb-2 text-accent text-2xl font-bold">
-            <p>{ticket.eventName}</p>
+            <p>{ticket.eventname}</p>
           </div>
           <div className="flex items-center mb-2 text-primary text-2xl font-bold">
-            <p>{ticket.unitPrice} LKR</p>
+            <p>{ticket.ticketPrice} LKR</p>
           </div>
           <div className="flex justify-center">
             <button
@@ -111,7 +109,7 @@ export default function ExploreTickets() {
 
   // Search
   const filteredTickets = tickets.filter((ticket) =>
-    ticket.eventName.toLowerCase().includes(searchTerm.toLowerCase())
+    ticket.eventname.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -123,9 +121,7 @@ export default function ExploreTickets() {
             <div className="text-primary text-4xl font-bold ml-2">Explore Tickets</div>
           </div>
         </div>
-        <div>
-          <Trend/>
-        </div>
+        
         <div className="relative">
           <HiOutlineSearch fontSize={20} className="text-primary absolute top-1/2 -translate-y-1/2 left-3" />
           <input

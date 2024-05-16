@@ -1,4 +1,3 @@
-// RefundRequests.jsx
 import React, { useState, useEffect } from 'react';
 import { HiReceiptRefund } from "react-icons/hi2";
 import UpdateRefund from './models/UpdateRefund';
@@ -35,13 +34,18 @@ export default function RefundRequests() {
 
     const deleteRefund = async (id) => {
         try {
-            const response = await fetch(`http://localhost:3030/tpp/refs/${id}`, {
-                method: 'DELETE',
-            });
-            if (response.ok) {
-                fetchRefunds(); // Fetch again to update
-            } else {
-                throw new Error('error');
+            // Ask for confirmation before deleting
+            const confirmDelete = window.confirm('Are you sure you want to delete this refund?');
+            
+            if (confirmDelete) {
+                const response = await fetch(`http://localhost:3030/tpp/refs/${id}`, {
+                    method: 'DELETE',
+                });
+                if (response.ok) {
+                    fetchRefunds(); // Fetch again to update
+                } else {
+                    throw new Error('error');
+                }
             }
         } catch (error) {
             console.error(error);
@@ -65,22 +69,22 @@ export default function RefundRequests() {
 
                 <div className='bg-text px-1 py-1 rounded-lg md-2' style={{ transition: 'transform 1.5s ease', transform: loading ? 'translateY(100%)' : 'translateY(0)' }}>
                     <div className="bg-text relative overflow-x-auto shadow-md sm:rounded-lg px-5 py-5">
-                        <table className="w-full text-xl text-center rtl:text-right text-primary dark:text-primary">
-                            <thead className="text-xl text-primary uppercase bg-text">
+                        <table className="w-full text-xl text-center rtl:text-right">
+                            <thead className="text-xl uppercase bg-text">
                                 <tr>
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope="col" className="px-6 py-3 text-primary">
                                         Customer name
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Event Name(ID)
+                                    <th scope="col" className="px-6 py-3 text-background">
+                                        Event Name
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope="col" className="px-6 py-3 text-primary">
                                         Contact E-mail 
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope="col" className="px-6 py-3 text-background">
                                         Contact Number
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope="col" className="px-6 py-3 text-primary">
                                         Reason
                                     </th>
                                     <th scope="col" className="px-6 py-3">
@@ -92,11 +96,11 @@ export default function RefundRequests() {
                                 {refunds.map((refund, index) => (
                                     <React.Fragment key={index}>
                                         <tr className={`bg-accent font-bold ${index !== refunds.length - 1 && 'h-4'}`}>
-                                            <td className="px-6 py-4 bg-accenttext-background">{refund.customerName}</td>
-                                            <td className="px-6 py-4 text-background">{refund.eventName}({refund.eventId})</td>
-                                            <td className="px-6 py-4 text-background">{refund.email}</td>
+                                            <td className="px-6 py-4 text-primary">{refund.customerName}</td>
+                                            <td className="px-6 py-4 text-background">{refund.eventname}</td>
+                                            <td className="px-6 py-4 text-primary">{refund.email}</td>
                                             <td className="px-6 py-4 text-background">{refund.mobile}</td>
-                                            <td className="px-6 py-4 text-background">{refund.reason}</td>
+                                            <td className="px-6 py-4 text-primary">{refund.reason}</td>
                                             <td className="px-6 py-4 items-center">
                                                 <button type="button" onClick={() => handleUpdateRefund(refund._id) } className="bg-secondary text-accent px-3 py-2 rounded hover:scale-95 transition text-xl mr-2"><FaPencil /></button>
                                                 <button type="button" onClick={() => deleteRefund(refund._id)} className="bg-primary text-background px-3 py-2 rounded hover:scale-95 transition text-xl"><ImBin/></button>

@@ -60,22 +60,20 @@ export default function Wishlist() {
         </div>
       </div>
         
-      <div className="bg-secondary font-bold relative overflow-x-auto shadow-md sm:rounded-lg px-5 py-5" style={{ transition: 'transform 1.5s ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(0)' }}>
-        <table className="w-full text-xl text-center rtl:text-right text-primary">
+      <div className="bg-text font-bold relative overflow-x-auto shadow-md sm:rounded-lg px-5 py-5" style={{ transition: 'transform 1.5s ease-in-out', transform: loading ? 'translateY(100%)' : 'translateY(0)' }}>
+        <table className="w-full text-xl text-center rtl:text-right">
           <thead className="text-xl font-bold">
             <tr>
-              <th scope="col" className="px-6 py-3 text-accent">Event ID</th>
-              <th scope="col" className="px-6 py-3 text-primary">Event Name</th>
+              <th scope="col" className="px-6 py-3 text-background">Event Name</th>
               <th scope="col" className="px-6 py-3 text-accent">Unit Price</th>
             </tr>
           </thead>
           <tbody>
             {wishlist.map((item, index) => (
               <React.Fragment key={item._id}>
-                <tr className='bg-text bg-opacity-40 sm:rounded-base pb-2 rounded' style={{ transition: 'height 0.5s ease-in-out', height: index !== wishlist.length - 1 ? 'auto' : '4px' }}>
-                  <td className="px-6 py-4 text-accent">{item.eventId}</td>
-                  <td className="px-6 py-4 text-primary">{item.eventName}</td>
-                  <td className="px-6 py-4 text-accent">{item.unitPrice}.00 LKR</td>
+                <tr className='bg-secondary bg-opacity-40 sm:rounded-base pb-2 rounded' style={{ transition: 'height 0.5s ease-in-out', height: index !== wishlist.length - 1 ? 'auto' : '4px' }}>
+                  <td className="px-6 py-4 text-background">{item.eventname}</td>
+                  <td className="px-6 py-4 text-accent">{item.ticketPrice}.00 LKR</td>
                   <td className="px-6 py-4 items-center">
                     <button 
                       type="button" 
@@ -101,7 +99,6 @@ export default function Wishlist() {
           </tbody>  
         </table>  
       </div>  
-      
       <WishlistBuy onClose={handleOnClose02} visible={showMyModel02} selectedItem={selectedItem}/>
     </div>
   );

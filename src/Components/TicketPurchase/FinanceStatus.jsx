@@ -1,9 +1,6 @@
-// FinanceStatus.jsx
-
 import React, { useState, useEffect } from 'react';
-import Grid from './status/Grid';
 import axios from 'axios';
-import TransactionChart from './status/BarChart';
+import BarChart from './status/BarChart';
 import ScatterChart from './status/ScatterChart';
 
 export default function FinanceStatus() {
@@ -39,39 +36,36 @@ export default function FinanceStatus() {
   const calculateTicketSells = () => {
     const ticketSellMap = new Map();
     ticketSells.forEach(pay => {
-      if (ticketSellMap.has(pay.eventId)) {
-        const existingData = ticketSellMap.get(pay.eventId);
+      if (ticketSellMap.has(pay.eventname)) {
+        const existingData = ticketSellMap.get(pay.eventname);
         existingData.count += pay.count;
         existingData.totalCost += pay.totalCost;
-        ticketSellMap.set(pay.eventId, existingData);
+        ticketSellMap.set(pay.eventname, existingData);
       } else {
-        ticketSellMap.set(pay.eventId, {
-          eventId: pay.eventId,
-          eventName: pay.eventName,
+        ticketSellMap.set(pay.eventname, {
+          eventname: pay.eventname,
           count: pay.count,
           totalCost: pay.totalCost
         });
       }
     });
-    return Array.from(ticketSellMap.values());
+    // Sort the data in descending order of totalCost
+    return Array.from(ticketSellMap.values()).sort((a, b) => b.totalCost - a.totalCost);
   };
 
   return (
     <div className=''>
-      <div style={{ transform: loading ? 'translateY(100%)' : 'translateY(0)', transition: 'transform 1s ease-in-out' }}>
+      <div style={{ transform: loading ? 'translateY(100%)' : 'translateY(0)', transition: 'transform 0.6s ease-in-out' }}>
         <div className='relative'>
           <span className='text-3xl text-text flex justify-center mt-[5rem] mb-[2rem] font-bold'>Total Ticket Sells</span>
           <div>
-            <Grid />
+            
           </div>
           
           <div className="bg-accent relative overflow-x-auto shadow-md sm:rounded-lg px-5 py-5 font-bold">
             <table className="w-full text-xl text-center rtl:text-right text-primary dark:text-primary">
               <thead className="text-xl text-primary uppercase bg-accent">
                 <tr>
-                  <th scope="col" className="px-6 py-3">
-                    Event ID
-                  </th>
                   <th scope="col" className="px-6 py-3">
                     Event Name
                   </th>
@@ -87,11 +81,8 @@ export default function FinanceStatus() {
                 {calculateTicketSells().map((sell, index) => (
                   <React.Fragment key={index}>
                     <tr className="bg-text" style={{ height: '1.5rem' }}>
-                      <th scope="row" className="px-6 py-4 font-xl text-background">
-                        {sell.eventId}
-                      </th>
                       <td className="px-6 py-3 text-background">
-                        {sell.eventName}
+                        {sell.eventname}
                       </td>
                       <td className="px-6 py-4 text-background">
                         {sell.count}
@@ -115,7 +106,7 @@ export default function FinanceStatus() {
 
         <div>
           <span className='text-3xl text-text flex justify-center mt-[5rem] mb-[2rem] font-bold'>Purchases and Refunds</span>
-          <TransactionChart/>
+          <BarChart/>
         </div>
 
         <span className='text-3xl bg-background text-text flex justify-center mt-[5rem] mb-[2rem] font-bold'>Refund Requests</span>
@@ -124,7 +115,7 @@ export default function FinanceStatus() {
             <thead className="text-xl text-primary uppercase bg-accent ">
               <tr>
                 <th scope="col" className="px-6 py-3">
-                  Event / Ticket Code
+                  Event
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Customer Name
@@ -145,8 +136,7 @@ export default function FinanceStatus() {
                 <React.Fragment key={index}>
                   <tr className="bg-text font-bold" style={{ height: '1.5rem' }}>
                     <th scope="row" className="px-6 py-4 font-xl text-background">
-                      {request.eventName}
-                      <div className='text-sm'>({request.eventId})</div>
+                      {request.eventname}
                     </th>
                     <td className="px-6 py-3 text-background">
                       {request.customerName}

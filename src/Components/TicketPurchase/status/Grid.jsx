@@ -1,3 +1,4 @@
+// Grid.jsx
 import React, { useState, useEffect } from 'react';
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
 
@@ -33,8 +34,8 @@ export default function Grid() {
           <div className='flex justify-center'>
             {mostSellsData ? (
               <>
-                <span className='text-accent flex flex-col ml-3 font-bold text-3xl'>{mostSellsData.eventName}</span>
-                <span className='text-accent flex flex-col ml-3 font-bold text-3xl'>({mostSellsData.totalCost} LKR)</span>
+                <span className='text-accent flex flex-col ml-3 font-bold text-3xl'>{mostSellsData.eventname}</span>
+                <span className='text-primary flex flex-col ml-3 font-bold text-2xl'>Total Cost: {mostSellsData.totalCost}</span>
               </>
             ) : (
               <span>Loading...</span>

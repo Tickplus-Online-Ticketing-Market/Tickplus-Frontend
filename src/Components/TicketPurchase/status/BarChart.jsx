@@ -22,7 +22,7 @@ export default function TransactionChart() {
         fetchData();
     }, []);
 
-    // Merge payments and refunds data based on eventName
+    // Merge payments and refunds data based on eventname
     const mergeData = (paymentsData, refundsData) => {
         const mergedData = [];
         const mergedKeys = new Set([...paymentsData.map(item => item._id), ...refundsData.map(item => item._id)]);
@@ -30,7 +30,7 @@ export default function TransactionChart() {
             const payment = paymentsData.find(item => item._id === key);
             const refund = refundsData.find(item => item._id === key);
             mergedData.push({
-                eventName: key,
+                eventname: key,
                 Payments: payment ? payment.count : 0,
                 Refunds: refund ? refund.count : 0
             });
@@ -54,7 +54,7 @@ export default function TransactionChart() {
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3 0 0" vertical={false} />
-                        <XAxis dataKey="eventName" />
+                        <XAxis dataKey="eventname" />
                         <YAxis />
                         <Tooltip />
                         <Legend />

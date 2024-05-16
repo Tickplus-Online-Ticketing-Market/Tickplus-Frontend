@@ -69,8 +69,8 @@ export default function ApplyRefund({ visible, onClose, transaction }) {
                     <img src="./images/tick+1.png" alt="" />
                     <div className='font-bold mt-[5rem] mr-[2rem] ml-[2rem] flex flex-col h-full'>
                         <div className="flex text-secondary items-center mb-2 text-xl">Purchase by Mr/Ms- {transaction.customerName}</div>
-                        <div className="flex text-secondary items-center mb-2 text-xl">Event Name/Event ID - {transaction.eventName}/({transaction.eventId})</div>
-                        <div className="flex text-secondary items-center mb-2 text-xl">UnitPrice x Count - {transaction.unitPrice} x {transaction.count}</div>
+                        <div className="flex text-secondary items-center mb-2 text-xl">Event - {transaction.eventname}</div>
+                        <div className="flex text-secondary items-center mb-2 text-xl">UnitPrice x Count - {transaction.ticketPrice} x {transaction.count}</div>
                         <div className="flex text-secondary items-center mb-2 text-xl">Total Cost - {transaction.totalCost} LKR</div>
                     </div>
                 </div>

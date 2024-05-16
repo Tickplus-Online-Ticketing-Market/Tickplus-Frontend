@@ -31,7 +31,7 @@ export default function Trend() {
           <div className='flex justify-center'>
             {mostSellsData ? (
               <>
-                <span className='text-primary flex flex-col font-bold text-base'>{mostSellsData.eventName}</span>
+                <span className='text-primary flex flex-col font-bold text-base'>{mostSellsData.eventname}</span>
               </>
             ) : (
               <span>Loading...</span>
