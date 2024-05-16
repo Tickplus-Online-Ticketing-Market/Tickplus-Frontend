@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-import { FaEye, FaTrashAlt } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import { IoIosCheckmarkCircle, IoIosCloseCircle } from "react-icons/io";
 import Barcharts from "./Barcharts";
 
@@ -117,7 +117,7 @@ export default function Sponsorrequests() {
             {item.status === "Accepted" || item.status === "Rejected" ? (
               <span className="text-primary text-base font-bold bg-accent  border-primary border-[2.4px] focus:outline-none font-medium px-3 py-1 text-center inline-flex items-center">
                 <span className=" text-xl me-1">
-                  {<IoIosCheckmarkCircle />}
+                {item.status === "Accepted" ? <IoIosCheckmarkCircle /> : <IoIosCloseCircle />}
                 </span>
                 {item.status}
               </span>
@@ -140,11 +140,10 @@ export default function Sponsorrequests() {
                   className="text-primary text-base font-bold bg-accent hover:bg-reject hover:text-background border-primary border-[2.4px] focus:outline-none font-medium rounded-full px-3 py-1 text-center inline-flex items-center"
                 >
                   <span className=" text-xl me-1">
-                    {acceptedRequests.includes(item._id) ? (
-                      <FaTrashAlt />
-                    ) : (
+                    
+          
                       <IoIosCloseCircle />
-                    )}
+                    
                   </span>
                   Reject
                 </button>
