@@ -8,14 +8,14 @@ import { RetriveAuctionListingsDataById } from "./RetriveAuctionListingDataById"
 import ExampleQRcode from "../../../Assets/SecondaryMarket/img/Example-QR-code.jpg";
 
 export function ViewAuctionModal({ visible, onClose, auctionID }) {
-  if (!visible) return null;
-
   const data = RetriveAuctionListingsDataById(auctionID);
 
   const handleOnClose = (e) => {
     if (e.target.id === "container") onClose();
     if (e.target.id === "cancel-btn") onClose();
   };
+
+  if (!visible) return null;
 
   return (
     <div

@@ -5,8 +5,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export function DeleteAuctionModal({ visible, onClose, auctionID }) {
-  if (!visible) return null;
-
   const handleOnClose = (e) => {
     if (e.target.id === "container") onClose();
     if (e.target.id === "cancel-btn") onClose();
@@ -25,6 +23,8 @@ export function DeleteAuctionModal({ visible, onClose, auctionID }) {
       toast.error("Auction Listing Not Deleted");
     }
   };
+
+  if (!visible) return null;
 
   return (
     <div

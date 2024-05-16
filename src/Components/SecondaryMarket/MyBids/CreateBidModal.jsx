@@ -6,8 +6,6 @@ import currentLoggedinUser from "../lib/helpers/getCurrentLoggedinUser";
 import ticketDesign from "../../../Assets/SecondaryMarket/img/Ticket Design Size Example.png";
 
 export default function CreateBidModal({ visible, onClose, biddingAuction }) {
-  if (!visible) return null;
-
   const handleOnClose = (e) => {
     if (e.target.id === "container") onClose();
     if (e.target.id === "cancel-btn") onClose();
@@ -65,6 +63,8 @@ export default function CreateBidModal({ visible, onClose, biddingAuction }) {
       toast.error("Bid Not Placed");
     }
   };
+
+  if (!visible) return null;
 
   return (
     <div

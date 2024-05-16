@@ -4,7 +4,7 @@ import axios from "axios";
 export async function RetriveCompletedAuctionListingsData() {
   try {
     const res = await axios.get(
-      "https://tickplus-backend.onrender.com/secondary-market/my-auction-listings/completed"
+      "http://localhost:3030/secondary-market/my-auction-listings/completed"
     );
     return res.data.auctionListings;
   } catch (error) {

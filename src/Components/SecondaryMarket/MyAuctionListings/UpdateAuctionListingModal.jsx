@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaRupeeSign, FaClock, FaTicket } from "react-icons/fa6";
-import { FaCheck } from "react-icons/fa";
-import { MdDateRange } from "react-icons/md";
 import { toast } from "react-toastify";
 import ticketDesign from "../../../Assets/SecondaryMarket/img/Ticket Design Size Example.png";
 import ExampleQRcode from "../../../Assets/SecondaryMarket/img/Example-QR-code.jpg";
 
 export function UpdateAuctionModal({ visible, onClose, auctionID }) {
-  if (!visible) return null;
-
   const [inputs, setInputs] = useState({});
 
   useEffect(() => {
@@ -55,6 +51,8 @@ export function UpdateAuctionModal({ visible, onClose, auctionID }) {
       toast.error("Auction Listing Not Updated");
     }
   };
+
+  if (!visible) return null;
 
   return (
     <div

@@ -5,8 +5,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function DeleteBidModal({ visible, onClose, bidID }) {
-  if (!visible) return null;
-
   const handleOnClose = (e) => {
     if (e.target.id === "container") onClose();
     if (e.target.id === "cancel-btn") onClose();
@@ -25,6 +23,8 @@ export default function DeleteBidModal({ visible, onClose, bidID }) {
       toast.error("Bid Not Deleted");
     }
   };
+
+  if (!visible) return null;
 
   return (
     <div

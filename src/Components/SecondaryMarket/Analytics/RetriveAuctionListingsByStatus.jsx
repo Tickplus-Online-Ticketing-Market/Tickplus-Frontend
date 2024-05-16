@@ -4,7 +4,7 @@ import axios from "axios";
 export async function RetriveAuctionListingsByStatus() {
   try {
     const res = await axios.get(
-      "https://tickplus-backend.onrender.com/secondary-market/analytics/auctions-bystatus"
+      "http://localhost:3030/secondary-market/analytics/auctions-bystatus"
     );
     console.log(res);
     return res.data.auctionStatusCounts;
