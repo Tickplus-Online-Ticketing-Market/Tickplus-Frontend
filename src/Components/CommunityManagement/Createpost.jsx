@@ -67,6 +67,7 @@ export default function CreatePost() {
         setPostData({
           title: "",
           body: "",
+          photo:"",
           //files: [],
         });
 
@@ -117,12 +118,13 @@ export default function CreatePost() {
           <label htmlFor="file" className="block font-medium text-gray-700">
             Photos
           </label>
-          <input
-            type="file"
-            id="file"
-            name="file"
-            accept="image/*"
-            onChange={handleFileChange}
+          <textarea
+            type="photo"
+            id="photo"
+            name="photo"
+            placeholder="Enter post photo link"
+            //accept="image/*"
+            onChange={handleInputChange}
             multiple
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-primary"
           />
