@@ -55,7 +55,7 @@ const UpdateTicketModal = ({ event, onClose, visible, imageURL, buttonState }) =
     if (Object.keys(newErrors).length === 0) {
       try {
         await axios.put(
-          `http://localhost:3030/ticket-launching/ticketfoam/${event._id}`,
+          `https://tickplus-backend.onrender.com/ticket-launching/ticketfoam/${event._id}`,
           updatedEvent
         );
 

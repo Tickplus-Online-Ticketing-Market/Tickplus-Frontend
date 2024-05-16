@@ -41,7 +41,7 @@ export default function Piecharts() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3030/ticket-launching/clickCounts"
+        "https://tickplus-backend.onrender.com/ticket-launching/clickCounts"
       );
       const { systemClickCount, customClickCount } = response.data;
       setData([

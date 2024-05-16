@@ -14,7 +14,7 @@ const Ticketphistory = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3030/ticket-launching/ticketfoam/published"
+          "https://tickplus-backend.onrender.com/ticket-launching/ticketfoam/published"
         );
         setEvents(res.data.ticketfoam.reverse());
       } catch (error) {
