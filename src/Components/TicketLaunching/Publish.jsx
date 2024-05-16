@@ -7,7 +7,7 @@ export default function Publish({ visible, onClose, onConfirm, event }) {
 
     try {
       const res = await axios.put(
-        `http://localhost:3030/ticket-launching/ticketfoam/publish/${eventid}`
+        `https://tickplus-backend.onrender.com/ticket-launching/ticketfoam/publish/${eventid}`
       );
 
       toast.success("Event published successfully");

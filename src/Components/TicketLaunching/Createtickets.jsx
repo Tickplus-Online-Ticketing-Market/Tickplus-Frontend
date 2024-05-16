@@ -14,14 +14,14 @@ export default function Createtickets() {
   //Function to handle button click
   const handleSystemTemplateclick = async () => {
     await axios.put(
-      "http://localhost:3030/ticket-launching/click-count/system"
+      "https://tickplus-backend.onrender.com/ticket-launching/click-count/system"
     );
     navigate("/ticket-launching/create-tickets/create-tickets2");
   };
 
   const handleCustomTemplateclick = async () => {
     await axios.put(
-      "http://localhost:3030/ticket-launching/click-count/custom"
+      "https://tickplus-backend.onrender.com/ticket-launching/click-count/custom"
     );
     setshowCustomfoam(true);
   };

@@ -33,7 +33,7 @@ const AddEvent = () => {
   const handleSubmit = async (e) => {                    //handles form submission
     e.preventDefault();                                  // Prevent the default form submission behavior
     try {
-     await axios.post("http://localhost:3030/events", inputs);      //  add a new event using the 'inputs'
+     await axios.post("https://tickplus-backend.onrender.com/events", inputs);      //  add a new event using the 'inputs'
       alert("Event added successfully.");                             
 
       window.location.reload(); // Navigate to events page after successful submission

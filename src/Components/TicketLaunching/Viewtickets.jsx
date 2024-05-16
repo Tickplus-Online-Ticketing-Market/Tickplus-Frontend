@@ -19,7 +19,7 @@ const TicketItem = ({ event, number, onDelete, onPublish }) => {
     try {
       // Delete the ticket
       await axios.delete(
-        `http://localhost:3030/ticket-launching/ticketfoam/${_id}`
+        `https://tickplus-backend.onrender.com/ticket-launching/ticketfoam/${_id}`
       );
 
       // Update the state in the parent component after successful deletion
@@ -37,7 +37,7 @@ const TicketItem = ({ event, number, onDelete, onPublish }) => {
     console.log("Attempting to publish event:", _id);
     try {
       await axios.put(
-        `http://localhost:3030/ticket-launching/ticketfoam/publish/${_id}`
+        `https://tickplus-backend.onrender.com/ticket-launching/ticketfoam/publish/${_id}`
       );
       toast.success("Event published successfully");
       onPublish(event);
@@ -105,7 +105,7 @@ const TicketList = ({ searchTerm }) => {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3030/ticket-launching/ticketfoam"
+          "https://tickplus-backend.onrender.com/ticket-launching/ticketfoam"
         );
         setEvents(res.data.ticketfoam.reverse());
       } catch (error) {

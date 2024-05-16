@@ -74,7 +74,7 @@ export default function Customfoam({ visible, onClose }) {
   const handleCreate = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3030/ticket-launching/customfoam",
+        "https://tickplus-backend.onrender.com/ticket-launching/customfoam",
         {
           fullname,
           phoneNumber,
