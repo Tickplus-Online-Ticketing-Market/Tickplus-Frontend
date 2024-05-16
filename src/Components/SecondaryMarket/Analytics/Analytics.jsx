@@ -129,10 +129,10 @@ export default function Analytics() {
                 benefiting everyone involved. Experience the future of ticket
                 resales with Tick+ – where everyone wins!
               </p>
-              <div className="flex">
+              <div className="flex justify-end">
                 <button
-                  className="bg-background p-4 rounded-2xl m-2"
-                  onClick={downloadPDF} // Add onClick handler
+                  className="bg-background p-2 rounded-2xl m-8 text-base"
+                  onClick={downloadPDF} 
                 >
                   Download Report
                 </button>

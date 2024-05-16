@@ -12,7 +12,7 @@ export function RetriveAuctionListingsDataById(auctionID) {
   const fetchAuctionListings = async () => {
     try {
       const res = await axios.get(
-        `https://tickplus-backend.onrender.com/secondary-market/my-auction-listings/${auctionID}`
+        `http://localhost:3030/secondary-market/my-auction-listings/${auctionID}`
       );
       setAuctionListings(res.data.auctionListing);
     } catch (error) {

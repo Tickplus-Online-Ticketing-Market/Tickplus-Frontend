@@ -3,12 +3,17 @@ import moment from "moment";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import ticketDesign from "../../../Assets/SecondaryMarket/img/Ticket Design Size Example.png";
 import { FaRupeeSign, FaClock, FaCrown } from "react-icons/fa6";
+import getTicketImage from "../lib/helpers/getTicketImage";
 
 const TicketCard = (props) => {
   return (
     <div className=" mx-2 my-5 bg-background block rounded-lg shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
       <div class="relative overflow-hidden bg-cover bg-no-repeat aspect-video">
-        <img class="rounded-t-lg" src={ticketDesign} alt="" />
+        <img
+          class="rounded-t-lg object-cover w-full h-full"
+          src={getTicketImage()}
+          alt=""
+        />
       </div>
 
       <div className="p-4 aspect-video">

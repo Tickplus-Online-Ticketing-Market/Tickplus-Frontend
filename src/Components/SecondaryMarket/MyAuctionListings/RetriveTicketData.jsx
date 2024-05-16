@@ -1,13 +1,12 @@
 import { toast } from "react-toastify";
 import axios from "axios";
 
-export async function RetriveAuctionListingsByProfit() {
+export default async function RetriveTicketData() {
   try {
     const res = await axios.get(
-      "http://localhost:3030/secondary-market/analytics/auctions-byprofit"
+      "https://tickplus-backend.onrender.com/secondary-market/my-auction-listings/get-tickets"
     );
-    console.log(res);
-    return res.data.auctionListings;
+    return res.data.ticketfoam;
   } catch (error) {
     toast.error("Cannot Connect to Database");
     return [];
