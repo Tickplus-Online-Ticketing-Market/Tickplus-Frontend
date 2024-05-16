@@ -3,14 +3,21 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import Delete from "./Delete";
 import Publish from "./Publish";
-import ticket from "../../Assets/TicketLaunching/ticket.png";
 import { HiOutlineSearch } from "react-icons/hi";
 import Ticketphistory from "./Ticketphistory";
+import UpdateTicketModal from "./UpdateTicketModal";
 
 const TicketItem = ({ event, number, onDelete, onPublish }) => {
   const { _id, eventname } = event;
 
+
   const [showPublish, setShowPublish] = useState(false);
+
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+
+  const handleUpdateFormOpen = () => {
+    setShowUpdateForm(true);
+  };
 
   const [showDelete, setShowDelete] = useState(false);
   const handleOnClose = () => setShowDelete(false);
@@ -52,19 +59,28 @@ const TicketItem = ({ event, number, onDelete, onPublish }) => {
     <div className="bg-box4 p-4 rounded-lg flex items-center justify-between mb-3">
       <div className="flex items-center">
         <span className="text-background font-bold mr-3">{number}.</span>
-        <img src={ticket} alt="ticket" className="w-36 h-16 mr-4" />
+        <img src={event.imageUrl} alt="ticket" className="w-36 h-16 mr-4" />
         <span className="text-background text-xl font-bold">{eventname}</span>
       </div>
       <div className="flex gap-4">
-        <button
-          className="bg-primary text-background rounded-xl font-bold px-10 py-2 shadow-xl transition ease-in-out delay-150 hover:-translate-y-1 
-           hover:scale-110 hover:shadow-2xl hover:bg-background hover:text-primary  duration-300 mr-2"
-        >
-          Update
-        </button>
+      {showPublish || event.ticketStatus === "Published" ? (
+          <button
+            disabled
+            className="bg-accent text-background rounded-xl font-bold px-4 py-2 shadow-xl transition ease-in-out delay-150 hover:-translate-y-1 duration-300"
+          >
+            " "
+          </button>
+        ) : (
+          <button
+            onClick={handleUpdateFormOpen}
+            className="bg-primary text-background rounded-xl font-bold px-4 py-2 shadow-xl transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:shadow-2xl hover:bg-background hover:text-primary duration-300"
+          >
+            Update
+          </button>
+        )}
         <button
           onClick={() => setShowDelete(true)}
-          className="bg-primary text-background rounded-xl font-bold px-10 py-2 shadow-xl transition ease-in-out delay-150 hover:-translate-y-1 
+          className="bg-primary text-background rounded-xl font-bold px-4 py-2 shadow-xl transition ease-in-out delay-150 hover:-translate-y-1 
            hover:scale-110 hover:shadow-2xl hover:bg-background hover:text-primary  duration-300 mr-2"
         >
           Delete
@@ -72,14 +88,14 @@ const TicketItem = ({ event, number, onDelete, onPublish }) => {
         {showPublish || event.ticketStatus === "Published" ? (
           <button
             disabled
-            className="bg-[#33a033] text-background rounded-xl font-bold px-10 py-2 shadow-xl transition ease-in-out delay-150 hover:-translate-y-1 duration-300"
+            className="bg-[#33a033] text-background rounded-xl font-bold px-4 py-2 shadow-xl transition ease-in-out delay-150 hover:-translate-y-1 duration-300"
           >
             Published
           </button>
         ) : (
           <button
             onClick={handlePublish}
-            className="bg-primary text-background rounded-xl font-bold px-10 py-2 shadow-xl transition ease-in-out delay-150 hover:-translate-y-1 
+            className="bg-primary text-background rounded-xl font-bold px-4 py-2 shadow-xl transition ease-in-out delay-150 hover:-translate-y-1 
   hover:scale-110 hover:shadow-2xl hover:bg-background hover:text-primary  duration-300"
           >
             Publish
@@ -87,12 +103,16 @@ const TicketItem = ({ event, number, onDelete, onPublish }) => {
         )}
       </div>
       <Publish visible={showPublish} onConfirm={handlePublish} event={event} />
-
       <Delete
         onDelete={handleDelete}
         onClose={handleOnClose}
         visible={showDelete}
         event={event}
+      />
+      <UpdateTicketModal
+        event={event}
+        onClose={() => setShowUpdateForm(false)}
+        visible={showUpdateForm}
       />
     </div>
   );
@@ -153,7 +173,7 @@ const TicketList = ({ searchTerm }) => {
   );
 };
 
-export default function Viewtickets() {
+export default function Viewtickets({ handleCloseModal }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (e) => {

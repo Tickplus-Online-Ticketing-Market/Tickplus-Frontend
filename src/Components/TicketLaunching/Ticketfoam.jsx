@@ -167,7 +167,7 @@ const TicketForm = ({ visible, onClose }) => {
 
   return (
     <div>
-      <div className="fixed inset-0 bg-accent bg-opacity-0 backdrop-blur-base flex justify-center shadow-2xl items-center">
+      <div className="fixed inset-0 bg-accent bg-opacity-0 backdrop-blur-sm flex justify-center items-center shadow-2xl">
         <div className="bg-secondary shadow-2xl h-[36rem] w-[50rem] rounded-lg">
           <div className="flex">
             <div className="bg-accent h-[36rem] w-[25rem] rounded-lg">

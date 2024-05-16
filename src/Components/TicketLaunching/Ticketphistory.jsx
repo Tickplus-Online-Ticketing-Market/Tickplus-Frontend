@@ -27,6 +27,7 @@ const Ticketphistory = () => {
 
   return (
     <div className="overflow-hidden rounded-2xl border-none shadow-md m-1">
+      <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb scrollbar-track h-[33rem] overflow-y-scroll">
       <div className="text-3xl font-bold text-primary pl-4 pb-3">
         Your Ticket History is here...
       </div>
@@ -73,6 +74,7 @@ const Ticketphistory = () => {
           )}
         </tbody>
       </table>
+      </div>
     </div>
   );
 };

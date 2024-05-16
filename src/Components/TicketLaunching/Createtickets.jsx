@@ -33,10 +33,10 @@ export default function Createtickets() {
       </div>
       <div className="grid grid-cols-2 gap-2 pl-8 ">
         <button
-          class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:shadow-2xl duration-300 "
+          class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-104 hover:shadow-2xl duration-300 "
           onClick={handleSystemTemplateclick}
         >
-          <div className=" bg-secondary h-96 w-11/12 border border-primary rounded-lg shadow-2xl">
+          <div className=" bg-secondary h-96 w-11/12  rounded-lg shadow-2xl">
             <div className="flex justify-center font-bold text-text text-2xl py-4">
               Create Tickets
             </div>
@@ -64,9 +64,9 @@ export default function Createtickets() {
 
         <button
           onClick={handleCustomTemplateclick}
-          class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:shadow-2xl duration-300 "
+          class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-104 hover:shadow-2xl duration-300 "
         >
-          <div className=" bg-secondary h-96 w-11/12 border border-primary rounded-lg shadow-2xl">
+          <div className=" bg-secondary h-96 w-11/12 rounded-lg shadow-2xl">
             <div className="flex justify-center font-bold text-text text-2xl py-4">
               Design Tickets
             </div>
