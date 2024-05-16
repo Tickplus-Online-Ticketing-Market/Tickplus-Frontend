@@ -15,10 +15,7 @@
     "axios": "^1.6.8",
     "chart.js": "^4.4.2",
     "codemirror": "^5.65.16",
-    "html2canvas": "^1.4.1",
-    "axios": "^1.6.8",
-    "classnames": "^2.5.1",
-    "axios": "^1.6.8",
+    "html2canvas": "^1.4.1",,
     "classnames": "^2.5.1",
     "data-fns": "^1.1.0",
     "jodit": "^4.2.10",
@@ -40,6 +37,7 @@
     "react-toastify": "^10.0.5",
     "recharts": "^2.12.6",
     "toastify": "^2.0.1",
+    "sort-by": "^1.2.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
