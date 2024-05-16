@@ -11,7 +11,6 @@ export default function CompletedAuctionListings() {
     RetriveCompletedAuctionListingsData()
       .then((data) => {
         setAuctionData(data);
-        setTableUpdate(false);
       })
       .catch((error) => {
         console.error(error);
