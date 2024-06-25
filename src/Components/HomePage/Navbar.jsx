@@ -18,6 +18,7 @@ const Navbar = () => {
         <Link to="#">SecMarket</Link>
         <Link to="/sponsorship-management">Sponsorship Management</Link>
         <Link to="/digital-customization">Customize</Link>
+        <Link to="/ticket-purchase">Purchase</Link>
         <Link to="#">
           <button className="primary-button">Sign In</button>
         </Link>

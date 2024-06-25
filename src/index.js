@@ -9,8 +9,9 @@ import SponsorshipManagementRoutes from "./Routes/SponsorshipManagementRoutes"
 import ticketLaunchingRoutes from "./Routes/TicketLaunchingRoutes";
 import CommunityPageRoutes from "./Routes/CommunityPageRoutes";
 import EventLaunchingRoutes from "./Routes/EventLaunchingRoutes";
+import ticketPurchaseRoutes from "./Routes/TicketPurchaseRoutes";
 
-const allRoutes = [...homePageRoutes, ...DigitalCustomizationRoutes, ...ticketLaunchingRoutes,  ...CommunityPageRoutes, ...EventLaunchingRoutes];
+const allRoutes = [...homePageRoutes, ...DigitalCustomizationRoutes, ...ticketLaunchingRoutes,  ...CommunityPageRoutes, ...EventLaunchingRoutes, ...ticketPurchaseRoutes];
 const router = createBrowserRouter(allRoutes);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
