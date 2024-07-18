@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Logo from "../../Assets/HomePage/img/Logo.svg";
 import { Link } from "react-router-dom";
 
@@ -16,6 +16,7 @@ const Navbar = () => {
         <Link to="#">Community</Link>
         <Link to="/secondary-market">Secondary Market</Link>
         <Link to="#">Sponsors</Link>
+        <Link to="/ticket-purchase">Purchase</Link>
         <Link to="#">
           <button className="primary-button">Sign In</button>
         </Link>
